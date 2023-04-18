@@ -1,0 +1,36 @@
+{% extends "account.html" %}
+
+{% block account %}
+
+<h5>Tableau de bord</h5>
+{% if user.username %}
+<p>Bonjour {{ user.username }}, vous pouvez nous expliquer pourquoi vous élevez des fourmis ?</p>
+{% else %}
+<p>Nous sommes ravis de vous voir vous intéresser à l'élevage de fourmis et nous aimerions en apprendre davantage sur
+    vos préférences et motivations. Ce formulaire vous permet de partager vos espèces de fourmis favorites et les
+    raisons pour lesquelles vous vous passionnez pour l'élevage de ces incroyables créatures. Vos réponses nous
+    aideront à mieux comprendre les intérêts de notre communauté et à améliorer nos produits et services pour répondre
+    au mieux à vos besoins. Prenez un moment pour remplir le formulaire ci-dessous, et n'hésitez pas à nous faire part
+    de vos commentaires et suggestions. Merci de faire partie de notre communauté d'amateurs de fourmis !</p>
+{% endif %}
+
+
+
+<form action="" method="post">
+    {% csrf_token %}
+{% if not user.why_ant %}
+    <div>
+        {{ form }}
+    </div>
+    <input class="btn btn-primary" type="submit">
+{% else %}
+    <p>Vous élevez des fourmis parce que : {{ user.why_ant }}</p>
+    <h5>Modifier</h5>
+    <div class="form-group">
+        {{ form }}
+    </div>
+    <input class="btn btn-primary" type="submit">
+{% endif %}
+</form>
+
+{% endblock %}

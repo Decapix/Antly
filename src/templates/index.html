@@ -1,0 +1,265 @@
+{% load static %}
+
+<!--
+     block head
+     endblock
+
+     block home
+     endblock home
+
+     block content
+     endblock content
+
+     block script
+     endblock script
+-->
+
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="author" content="Antly" />
+    {% if meta %}
+    <meta
+      name="description"
+      content="{{ meta.des }}"
+    />
+    <title>{{ meta.title }}</title>
+    {% else %}
+    <meta
+      name="description"
+      content="Bienvenue sur notre boutique en ligne de fourmis pour débutants ! Découvrez notre sélection de fondations, packs, nids et accessoires pour commencer votre élevage de fourmis. Profitez de conseils d'experts et rejoignez la communauté des passionnés de Myrmécologie."
+    />
+    <title>Boutique en Ligne de Fourmis pour Débutants - Fondations, Packs, Nids et Accessoires | Myrmécologie</title>
+    {% endif %}
+    <!-- font icons -->
+    <link
+      rel="stylesheet"
+      href="{% static 'vendors/themify-icons/css/themify-icons.css' %}"
+    />
+    <link
+      rel="shortcut icon"
+      type="image/icon"
+      href="{% static 'imgs/logo.png' %}"
+    />
+
+    <!-- Bootstrap + LeadMark main styles -->
+    <link rel="stylesheet" href="{% static 'css/leadmark.css' %}" />
+    {% block head %} {% endblock %}
+  </head>
+  <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
+
+
+    <!-- page Navigation -->
+    <nav
+      class="navbar custom-navbar navbar-expand-md navbar-light fixed-top"
+      data-spy="affix"
+      data-offset-top="10"
+    >
+      <div class="container">
+        <a class="navbar-brand" href="{% url 'homepage_n' %}">
+          <img src="{% static 'imgs/logo.png' %}" alt="Antly - logo" />
+        </a>
+        <button
+          class="navbar-toggler ml-auto"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'ant_product_n' %}"
+                >Les fourmis</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'pack_product_n' %}"
+                >Les packs</a
+              >
+            </li>
+
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'dashboard_n' user.id %}"
+                >Mon compte</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'cart_n' %}">Panier</a>
+            </li>
+            <li class="nav-item">
+              <a
+                href="{% url 'logout_n' %}"
+                class="ml-4 nav-link btn btn-primary btn-sm rounded"
+                >déconnexion</a
+              >
+            </li>
+            {% elif not user.is_authenticated %}
+            <li class="nav-item">
+              <a
+                href="{% url 'login_n' %}"
+                class="ml-4 nav-link btn btn-primary btn-sm rounded"
+                >Connexion</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="{% url 'signup_n' %}"
+                class="ml-4 nav-link btn btn-primary btn-sm rounded"
+                >Inscription</a
+              >
+            </li>
+
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+    {% include 'messages.html' %}
+    {% include 'offers.html' %}
+    <!-- End Of Second Navigation -->
+    {% block home %} {% endblock home %}
+
+    <!-- Blog content -->
+
+    {% block content %} {% endblock content %}
+
+    <!-- End of Blog content -->
+
+    <!-- Contact Section -->
+    <section id="contact" class="section has-img-bg pb-0">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-5 my-3">
+            <h6 class="mb-0">Télephone</h6>
+            <p class="mb-4">+33 (0)6 51 33 61 58</p>
+
+            <h6 class="mb-0">Email</h6>
+            <p class="mb-0">antly.fourmis@gmail.com</p>
+            <p></p>
+          </div>
+          <div class="col-md-7">
+            <div class=" ">
+              <div class="row">
+                <div class="col-md-6">
+                  <ul>
+                    <li>
+                      <a
+                        class="adownn mb-0"
+                        href="{% url 'information_n'%}#send"
+                        >Livraison</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        class="adownn mb-0"
+                        href="{% url 'information_n' %}#paymentmethod"
+                        >Modes de paiement</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        class="adownn mb-0"
+                        href="{% url 'information_n' %}#termsofuse"
+                        >Conditions d'utilisation</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        class="adownn mb-0"
+                        href="{% url 'information_n' %}#privacy"
+                        >Confidentialité</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        class="adownn mb-0"
+                        href="{% url 'information_n' %}#cookies"
+                        >cookies</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-md-6">
+                  <ul>
+                    <li>
+                      <a
+                        class="adownn"
+                        href="{% url 'information_n' %}#shipping"
+                        >Expédition et retours</a
+                      >
+                    </li>
+                    <li>
+                      <a class="adownn" href="{% url 'information_n' %}#who"
+                        >Qui sommes nous</a
+                      >
+                    </li>
+                    <li>
+                      <a class="adownn" href="{% url 'information_n' %}#contact"
+                        >Contact</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        class="adownn mb-0"
+                        href="{% url 'information_n' %}#mention"
+                        >Mention légale</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        class="adownn mb-0"
+                        href="{% url 'information_n' %}#offers"
+                        >Nos offres</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Page Footer -->
+        <footer class="mt-5 py-4 border-top border-secondary">
+          <p class="mb-0 small">
+            &copy;
+            <script>
+              document.write(new Date().getFullYear());
+            </script>
+            , Created By
+            <a href="{% url 'homepage_n' %}" target="_blank" class="adown"
+              >Antly.</a
+            >
+            All rights reserved
+          </p>
+        </footer>
+        <!-- End of Page Footer -->
+      </div>
+    </section>
+    <!-- core  -->
+    <script src="{% static 'vendors/jquery/jquery-3.4.1.js' %}"></script>
+    <script src="{% static 'vendors/bootstrap/bootstrap.bundle.js' %}"></script>
+
+    <!-- bootstrap 3 affix -->
+    <script src="{% static 'vendors/bootstrap/bootstrap.affix.js' %}"></script>
+
+    <!-- Isotope -->
+    <script src="{% static 'vendors/isotope/isotope.pkgd.js' %}"></script>
+
+    <!-- LeadMark js -->
+    <script src="{% static 'js/leadmark.js' %}"></script>
+    {% block script %} {% endblock script %}
+
+  </body>
+</html>

@@ -1,0 +1,195 @@
+{% extends "index.html" %} {% load custom_filters %} {% load static %} {% block content %}
+{% include "space.html" %}
+<section class="section mt-4" id="blog">
+  <div class="container">
+    <div class="mb-10">
+      <div class="row justify-content-between">
+        <div class="col-md-6 pr-md-5 mb-4 mb-md-0">
+          <!-- image -->
+          <div id="large-image" class="mb-3 big">
+            <img
+              src="{{ ant.thumbnail.url }}"
+              class="card-img-top w-100 default-image"
+              id="large-image-img"
+            />
+            {% if ant.video %}
+            <video
+              src="{{ ant.video.url }}"
+              class="card-img-top w-100"
+              id="large-image-video"
+              controls
+            ></video>
+            {% endif %}
+          </div>
+
+          <div id="small-images">
+            <img
+              class="card-img-top mb-1"
+              src="{{ ant.thumbnail.url }}"
+              alt="Image 1"
+              onmouseover="changeLargeImage(this)"
+            />
+            {% if ant.thumbnail_1 %}
+            <img
+              class="card-img-top mb-1"
+              src="{{ ant.thumbnail_1.url }}"
+              alt="Image 2"
+              onmouseover="changeLargeImage(this)"
+            />
+            {% endif %} {% if ant.thumbnail_2 %}
+            <img
+              class="card-img-top mb-1"
+              src="{{ ant.thumbnail_2.url }}"
+              alt="Image 3"
+              onmouseover="changeLargeImage(this)"
+            />
+            {% endif %} {% if ant.thumbnail_3 %}
+            <img
+              class="card-img-top mb-1"
+              src="{{ ant.thumbnail_3.url }}"
+              alt="Image 4"
+              onmouseover="changeLargeImage(this)"
+            />
+            {% endif %} {% if ant.thumbnail_4 %}
+            <img
+              class="card-img-top mb-1"
+              src="{{ ant.thumbnail_4.url }}"
+              alt="Image 5"
+              onmouseover="changeLargeImage(this)"
+            />
+            {% endif %} {% if ant.video %}
+            <video src="{{ ant.video.url }}" class="card-img-top mb-1" onmouseover="changeLargeImage(this)"></video>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="col-md-6 pl-md-5">
+          <h1 class="display-5 fw-bolder mb-4">{{ ant.name }}</h1>
+          <hr />
+          <div class="row mt-3">
+            <div class="col-md-4">
+              <div class="fs-5 mb-2">
+                <h5 class="col-sm-6" id="price-display">x</h5>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <form method="POST" action="">
+                {% csrf_token %}
+                <div class="form-group">
+                  <select
+                    class="form-control"
+                    id="size"
+                    name="size"
+                    onchange="updateSizeId()"
+                  >
+                    {% for an in ant.get_sizes_wiq %}
+                    <option value="{{ an.id }}">
+                      {{ an.gyne }} gyne {{ an.worker }} ouvrière {{ an.price }}
+                    </option>
+                    {% endfor %}
+                  </select>
+                  <input type="hidden" name="size_id" value="" />
+                </div>
+
+                <div class="">
+                  <td>
+                    <ul>
+                      {% if ant.spece %}
+                      <li>Espèce : {{ ant.spece }} {{ ant.under_spece }}</li>
+                      {% endif %} {% if ant.localisation %}
+                      <li>Localisation : {{ ant.localisation }}</li>
+                      {% endif %}
+                    </ul>
+                  </td>
+                </div>
+                <div>
+                  <p>{{ ant.description|format_description|safe }}</p>
+
+                </div>
+                <div class="d-flex mt-5">
+                  <div class="form-group mr-3">
+                    <label for="quantity"></label>
+                    <select class="form-control" id="quantity" name="quantity">
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                      <option>6</option>
+                      <option>7</option>
+                      <option>8</option>
+                      <option>9</option>
+                      <option>10</option>
+                      <option>11</option>
+                      <option>12</option>
+                      <option>13</option>
+                      <option>14</option>
+                      <option>15</option>
+                    </select>
+                  </div>
+
+                </div>
+
+                <input type="submit" value="Ajouter au panier" class="btn btn-dark mr-4">
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% include "space.html" %}
+
+      <div id="offer_ant">
+        <div class="row">
+          {% for ant in offer_ant %}
+          <div class="col-md-4">
+            <div class="card border-0 mb-4">
+              <a href="{{ ant.get_absolute_url }}">
+                <img
+                  src="{{ ant.thumbnail_url }}"
+                  alt=""
+                  class="card-img-top w-100 limite-height"
+                />
+                <div class="card-body">
+                  <h6 class="card-title">{{ ant.name }}</h6>
+                  <p>{{ ant.get_price }} €</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %} {% block script %}
+
+<script>
+// Récupération des éléments HTML
+let select = document.getElementById("size");
+
+// Fonction pour mettre à jour le prix affiché et modifier le texte de l'option sélectionnée
+function updatePriceDisplay() {
+  var option = select.options[select.selectedIndex];
+  var text = option.text;
+  var priceDisplay = document.getElementById("price-display");
+  var price = text.split(" ouvrière ")[0] + " ouvrière ";
+  priceDisplay.textContent = text.replace( price, "") + "€";
+}
+
+// Écouteur d'événement pour mettre à jour le prix affiché lorsque la sélection change
+select.addEventListener("change", updatePriceDisplay);
+
+// Appel initial de la fonction pour afficher le prix de la première option
+updatePriceDisplay();
+
+function updateSizeId() {
+  var selectBox = document.getElementById("size");
+  var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+  document.getElementsByName("size_id")[0].value = selectedValue;
+}
+updateSizeId();
+
+</script>
+
+{% endblock script %}

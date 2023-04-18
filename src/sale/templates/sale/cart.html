@@ -1,0 +1,62 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block content %}
+
+{% include "space.html" %}
+
+<section class="section" id="about">
+        <div class="container">
+            <div class="if_hidden">
+                <h5 class="mb-3" >Panier</h5>
+            </div>
+        </div>
+</section>
+
+    <!-- Ant Section -->
+<section class="section" id="blog">
+    <div class="container">
+
+        <div class="row">
+            {% for item in items %}
+            <div class="col-md-4">
+                <div class="card border-0 mb-4">
+                    <a href="{{ item.get_absolute_url }}">
+                    <img src="{{ item.product.thumbnail.url }}" alt="{{ item.name }}" class="card-img-top w-100 limite-height">
+                    <div class="card-body card-body-trash">
+                        <div class="row justify-content-between">
+                            <div class="ml-2">
+
+                                <h6 class="card-title card-title-limit">{{ item.name }}</h6>
+                                {% for size in item.size.all %}
+                                <p class="card-text mb-1">{{ size.gyne }} gyne - {{ size.worker }} ouvrières</p>
+                                <p class="card-text mb-1">{{ item.price }}€</p>
+                                {% endfor %}
+                                <p class="card-text">
+                                    <form method="POST" action="{% url 'update_quantity' %}" class="d-inline">
+                                        {% csrf_token %}
+                                        {{ item.quantity }} unitées
+                                        <input type="hidden" name="item_id" value="{{ item.id }}">
+                                        <button type="submit" name="new_quantity" value="{{ item.quantity|add:'-1' }}" class="btn btn-sm btn-outline-secondary">-</button>
+                                        <button type="submit" name="new_quantity" value="{{ item.quantity|add:'1' }}" class="btn btn-sm btn-outline-secondary">+</button>
+                                    </form>
+                                </p>
+                            </div>
+                            <div class="trash">
+                                <a class="ti-trash " href="{% url 'delete_cart_item_n' item.id %}"></a>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+
+            </div>
+
+            {% endfor %}
+        </div>
+        <button class="btn btn-primary" type="button"><a class="adownn" href="{% url 'checkout_n' %}">Commander</a></button>
+    </div>
+</section>
+
+
+{% endblock %}

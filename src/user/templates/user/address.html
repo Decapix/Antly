@@ -1,0 +1,36 @@
+{% extends "account.html" %}
+
+
+{% block account %}
+<h5 class="mb-3">Adresse</h5>
+<h6 class="mb-2">Mes adresses :</h6>
+{% for ad in user.address_m_set.all %}
+    <div class="ml-4 mb-3">
+        <p class="mb-0">pays/Région : {{ ad.country }}</p>
+        <p class="mb-0">Nom complet : {{ ad.complete_name }}</p>
+        <p class="mb-0">Numéro de téléphone : {{ ad.phone_number }}</p>
+        <p class="mb-0">Adresse : {{ ad.adress }}</p>
+        {% if ad.detail %}
+        <p class="mb-0">Détail : {{ ad.detail }}</p>
+        {% endif %}
+        <p class="mb-0">Code postal : {{ ad.postal_code }}</p>
+        <p class="mb-0">Ville : {{ ad.city }}</p>
+    </div>
+    {% endfor %}
+
+<h6 class="mb-2">Ajouter une nouvelle addresse:</h6>
+<form action="" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <div>{{form.country}}</div>
+        <div>{{form.complete_name}}</div>
+        <div>{{form.phone_number}}</div>
+        <div>{{form.adress}}</div>
+        <div>{{form.detail}}</div>
+        <div>{{form.postal_code}}</div>
+        <div>{{form.city}}</div>
+    </div>
+
+    <input class="btn btn-primary" type="submit">
+</form>
+{% endblock %}

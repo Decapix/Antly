@@ -1,0 +1,57 @@
+{% extends "product.html" %}
+{% load static %}
+
+{% block start %}
+
+            <div class="row justify-content-between">
+                <div class="col-md-6 pr-md-5 mb-4 mb-md-0">
+                    <h6 class="section-title mb-0">Les fourmis</h6>
+                    <h6 class="section-subtitle mb-4">Les fourmis d'europe</h6>
+                    <p>Crée votre univers minuscule chez vous. Optez pour une fondation et introduisez les dans un environnement qui vous inspire, vous être libres de votre imagination !</p>
+                </div>
+                <div class="col-md-6 pl-md-5">
+                    <img src="{% static 'sale/imgs/about-ant.jpg' %}" alt="egor-kamelev" class="w-100 shadow-sm">
+                </div>
+            </div>
+{% endblock %}
+
+{% block product %}
+
+<div class="portfolio-container">
+        <div class="row new">
+            {% for ant in ant_product %}
+            <div class="col-md-4">
+                <div class="card border-0 mb-4">
+                    <a href="{{ ant.get_absolute_url }}">
+                    <img src="{{ ant.thumbnail.url }}" alt="" class="card-img-top w-100 limite-height">
+                    <div class="card-body">
+                        <h6 class="card-title">{{ ant.name }}</h6>
+                        <p>{{ ant.get_price }} €</p>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        {% for co in country %}
+        <div class="row card-product-tri {{ co }} ">
+            {% for ant in ant_product %}
+            {% if ant.get_location == co %}
+            <div class="" id="card-ele">
+                <div class="card border-0 mb-4">
+                    <a href="{{ ant.get_absolute_url }}">
+                    <img src="{{ ant.thumbnail.url }}" alt="" class="card-img-top w-100 limite-height">
+                    <div class="card-body">
+                        <h6 class="card-title">{{ ant.name }}</h6>
+                        <p>{{ ant.get_price }} €</p>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+ {% endblock %}

@@ -1,0 +1,18 @@
+Bonjour {{ user.first_name }},
+
+Merci d'avoir passé commande chez Antly.
+
+Vous recevrez bientôt un e-mail avec le numéro de suivi de votre commande.
+
+Résumé de la commande :
+
+{% for line in items_list.splitlines %}
+{{ line }}
+{% endfor %}
+
+Adresse de livraison :
+
+{{ address_info }}
+
+Cordialement,
+L'équipe Antly

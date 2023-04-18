@@ -1,0 +1,25 @@
+{% extends "index.html" %} {% load static %} {% block content %}
+
+<section class="section mt-10 if_hidden" id="about">
+  <div class="container">
+    <div >{% block start %} {% endblock %}</div>
+  </div>
+</section>
+
+<!-- Ant Section -->
+<section class="section portfolio-section" id="blog">
+              <div class="filters mb-5">
+                <a href="#" data-filter=".new" class="active">
+                    tout
+                </a>
+                {% for cou in country%}
+                <a href="#" data-filter=".{{cou}}">
+                    {{cou}}
+                </a>
+                  {% endfor %}
+            </div>
+  <div class="container">{% block product %} {% endblock %}</div>
+</section>
+<!-- End of Ant Section -->
+
+{% endblock %}

@@ -1,0 +1,293 @@
+{% extends "index.html" %} {% load custom_filters_super %} {% block content %}
+{%include "space.html" %}
+
+<section class="section" id="about">
+  <div class="container">
+    <div class="row justify-content-between">
+      <div class="col-md-4 pr-md-5 mb-4 mb-md-0">
+        <h6 class="section-title mb-0">Information</h6>
+        <h6 class="section-subtitle mb-4">
+          Toutes les informations de la boutique
+        </h6>
+
+        <ul class="">
+          <li>
+            <a class="" href="{% url 'information_n'%}#send">Livraison</a>
+          </li>
+          <li>
+            <a class="" href="{% url 'information_n' %}#paymentmethod"
+              >Modes de paiement</a
+            >
+          </li>
+          <li>
+            <a class="" href="{% url 'information_n' %}#termsofuse"
+              >Conditions d'utilisation</a
+            >
+          </li>
+          <li>
+            <a class="" href="{% url 'information_n' %}#privacy"
+              >Confidentialité</a
+            >
+          </li>
+          <li>
+            <a class="" href="{% url 'information_n' %}#cookies">Cookies</a>
+          </li>
+          <li>
+            <a class="" href="{% url 'information_n' %}#privacy"
+              >Mention légale</a
+            >
+          </li>
+          <li>
+            <a class="" href="{% url 'information_n' %}#shipping"
+              >Expédition et retours</a
+            >
+          </li>
+          <li>
+            <a class="" href="{% url 'information_n' %}#who">Qui sommes nous</a>
+          </li>
+          <li>
+            <a class="" href="{% url 'information_n' %}#offers">Nos offres</a>
+          </li>
+          <li>
+            <a class="" href="{% url 'information_n' %}#contact">Contact</a>
+          </li>
+        </ul>
+
+        <img src="assets/imgs/about.jpg" alt="" class="w-100 mt-3 shadow-sm" />
+      </div>
+
+      <div class="col-md-8 pl-md-5">
+        <div class="row">
+          <div class="col-12 mt-4">
+            <a name="send"></a>
+            {% include "space.html" %}
+            <div class="">
+              <h5>La livraison</h5>
+              <p class="mb-2">
+                Nous sommes heureux de vous informer que tous les articles
+                commandés sur notre boutique seront envoyés avec soin et
+                rapidité. Pour assurer une livraison sûre et rapide, nous
+                proposons deux options d'envoi : UPS ou La Poste.
+              </p>
+              <p class="mb-2">
+                Selon votre préférence, vous pouvez choisir l'option qui vous
+                convient le mieux lors de votre commande. Si vous habitez dans
+                une zone où il fait froid, nous vous proposons également
+                l'option de l'envoi avec une chaufferette pour protéger vos
+                fourmis durant le voyage.
+              </p>
+              <p>
+                Nous espérons que ces informations vous seront utiles et nous
+                sommes impatients de vous envoyer votre commande dès que
+                possible. Si vous avez des questions supplémentaires, n'hésitez
+                pas à nous contacter. Nous sommes là pour vous aider.
+              </p>
+            </div>
+            <a name="paymentmethod"></a>
+            {% include "space.html" %}
+            <div class="">
+              <h5>Modes de paiement</h5>
+              <p>
+                Notre boutique accepte plusieurs méthodes de paiement afin de
+                vous offrir un maximum de flexibilité et de convenance. Vous
+                pouvez régler vos achats par carte de crédit ou de débit, par
+                virement bancaire ou encore par portefeuille électronique. Nous
+                acceptons toutes les cartes de crédit et de débit courantes, y
+                compris Visa, Mastercard et American Express. Si vous préférez
+                utiliser un portefeuille électronique, nous acceptons également
+                les paiements par PayPal et Apple Pay. Nous offrons également la
+                possibilité de régler par virement bancaire pour ceux qui
+                préfèrent cette méthode de paiement. N'hésitez pas à nous
+                contacter si vous avez des questions sur les méthodes de
+                paiement acceptées dans notre boutique.
+              </p>
+            </div>
+            <a name="termsofuse"></a>
+            {% include "space.html" %}
+            <div class="">
+              <h5>Conditions d'utilisation</h5>
+              <p>
+                En accédant à notre site et en utilisant nos services, vous
+                acceptez les conditions d'utilisation suivantes. Nous nous
+                réservons le droit de modifier ces conditions à tout moment et
+                vous encourageons à les consulter régulièrement. En utilisant
+                notre site, vous acceptez de respecter toutes les lois et
+                réglementations en vigueur. Vous n'avez pas le droit de diffuser
+                du contenu illégal ou offensant sur notre site. Nous nous
+                réservons le droit de retirer tout contenu que nous jugeons
+                inapproprié sans préavis. Si vous avez des questions sur les
+                conditions d'utilisation de notre site, n'hésitez pas à nous
+                contacter.
+              </p>
+            </div>
+            <a name="privacy"></a>
+            {% include "space.html" %}
+            <div class="">
+              <h5>Confidentialité</h5>
+              <p>
+                Nous sommes conscients de l'importance de la confidentialité
+                pour nos clients et c'est pour cette raison que nous prenons
+                toutes les mesures nécessaires pour protéger vos données
+                personnelles. Nous ne partagerons jamais vos informations avec
+                des tiers sans votre consentement explicite et nous utilisons
+                des méthodes de chiffrement pour protéger vos données pendant
+                leur transmission. Nous vous demandons seulement les
+                informations nécessaires pour traiter votre commande et vous
+                offrir un service de qualité. Si vous avez des questions sur la
+                façon dont nous traitons vos données, n'hésitez pas à nous
+                contacter. Nous sommes toujours à votre disposition pour
+                répondre à vos préoccupations en matière de confidentialité.
+              </p>
+            </div>
+            <a name="cookies"></a>
+            {% include "space.html" %}
+            <div class="">
+              <h5>Cookies</h5>
+              <p>
+                Nous ne récoltons aucune de vos données sans votre accord. Nous
+                guarentissons la protection de vos appareils en ne mettant aucun
+                cookie su notre site.
+              </p>
+            </div>
+            <a name="mention"></a>
+            {% include "space.html" %}
+            <div class="">
+              <h5>Mention légale</h5>
+              <h6>Identité de l'entreprise :</h6>
+              <ul>
+                <li>Nom de l'entreprise : Antly</li>
+                <li>Forme juridique : Micro entreprise</li>
+                <li>
+                  Adresse du siège social : 8 chemin des maraîchers Tresserve
+                  73100 France
+                </li>
+                <li>Numéro de téléphone : 06 51 33 61 58</li>
+                <li>Adresse e-mail : antly.fourmis@gmail.com</li>
+                <li>Numéro d'immatriculation : 914 939 004 00018</li>
+              </ul>
+
+              <h6>Responsable de la publication :</h6>
+              <p>Nom et prénom du responsable : Louka Pesic</p>
+
+              <h6>Hébergement du site :</h6>
+              <ul>
+                <li>Nom de l'hébergeur : Google cloud</li>
+              </ul>
+              <h6>Propriété intellectuelle :</h6>
+              <p>
+                Le contenu de ce site internet (textes, images, vidéos, etc.)
+                est la propriété exclusive de Antly et est protégé par les lois
+                françaises sur la propriété intellectuelle. Toute reproduction,
+                distribution, modification ou exploitation de ce contenu sans
+                autorisation écrite de Antly est strictement interdite.
+              </p>
+
+              <h6>TVA :</h6>
+              <p>Numéro de TVA intracommunautaire : FR70914939004</p>
+
+              <h6>SIRET :</h6>
+              <p>Numéro SIRET : 914 939 004</p>
+
+              <h6>Conditions générales de vente :</h6>
+              <p>
+                Les conditions générales de vente de Antly sont consultables sur
+                la page suivante : <a href="{%url 'cgv_n'%}">CGV</a>. En passant commande sur ce site internet,
+                vous acceptez ces conditions générales de vente.
+              </p>
+            </div>
+            <a name="shipping"></a>
+            {% include "space.html" %}
+            <div class="">
+              <h5>Expédition et retours</h5>
+              <p class="mb-2">
+                Pour les expéditions, nous travaillons avec plusieurs
+                transporteurs afin de vous offrir le meilleur service possible.
+                Nous mettons un soin particulier à l'emballage de nos produits
+                pour assurer leur sécurité pendant le transport. Cependant, nous
+                ne sommes pas responsables des dommages causés par le
+                transporteur durant le voyage. Si vous recevez un produit
+                endommagé, veuillez nous le signaler dans les plus brefs délais
+                et nous ferons le nécessaire pour vous rembourser ou vous
+                envoyer un nouveau produit.
+              </p>
+
+              <p>
+                Malheureusement, nous ne faisons pas de retours pour des raisons
+                éthiques. En effet, nos fourmis sont des êtres vivants et il
+                serait trop dangereux pour elles de les renvoyer en arrière.
+                Cependant, si votre colonie de fourmis vient à décéder pendant
+                le transport, nous vous rembourserons la moitié de sa valeur.
+                Pour cela, vous devrez nous fournir des preuves (photos) de la
+                mortalité de la colonie. Pour les produits matériels, si vous ne
+                recevez pas votre commande en raison d'un problème avec le
+                transporteur, nous vous rembourserons la totalité de la valeur
+                de votre commande. Si vous avez des questions ou des inquiétudes
+                concernant l'expédition ou les retours, n'hésitez pas à nous
+                contacter. Nous serons heureux de vous aider.
+              </p>
+            </div>
+            <a name="who"></a>
+            {% include "space.html" %}
+            <div class="">
+              <h5>Qui sommes nous</h5>
+              <p>
+                Notre boutique en ligne est spécialisée dans les fourmis pour
+                débutants. Nous sommes une équipe passionnée par ces petits
+                êtres et soucieuse de leur bien-être. C'est pour cette raison
+                que nous faisons tout notre possible pour leur offrir les
+                meilleures conditions de vie possibles. Nous sommes également là
+                pour vous aider, débutants ou non, à découvrir le monde
+                fascinant des fourmis et à en prendre soin au mieux. N'hésitez
+                pas à nous contacter si vous avez des questions ou si vous
+                souhaitez plus d'informations sur nos produits et services. Nous
+                sommes impatients de vous accueillir dans notre boutique en
+                ligne !
+              </p>
+            </div>
+            <a name="offers"></a>
+            {% include "space.html" %}
+            <div class="">
+              <h5>Nos offres</h5>
+              {% if offers.exists %}
+              <p class="mb-5">Voici nos offres du moment :</p>
+              {% for of in offers %}
+              <div class="mb-4">
+                <h6>• {{ of.message}}</h6>
+                <p>{{of.text|format_description|safe}}</p>
+              </div>
+              {% endfor %} {% else %}
+              <p>Nous n'avons pas d'offre disponible pour le moment</p>
+              {% endif %}
+            </div>
+            <a name="contact"></a>
+            {% include "space.html" %}
+            <div class="">
+              <h5>Contact</h5>
+              <p>
+                Vous pouvez nous contacter en utilisant les informations
+                suivantes :
+              </p>
+              <ul>
+                <li>Numéro de téléphone : 06 51 33 61 58</li>
+                <li>Adresse email : antly.fourmis@gmail.com</li>
+                <li>Instagram : @antly</li>
+                <li>TikTok : @antly</li>
+                <li>Facebook : @antly</li>
+                <li>Twitter : @antly</li>
+              </ul>
+              <p>
+                Nous sommes actifs sur tous ces réseaux et vous pouvez nous
+                suivre pour rester informé de nos dernières vidéos et
+                publications. N'hésitez pas à nous envoyer un message si vous
+                avez des questions ou besoin d'aide. Nous sommes là pour vous
+                aider à trouver la colonie de fourmis parfaite pour vous.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block content %}
+    <section id="portfolio" class="section portfolio-section">
+        <div class="container">
+        </div>
+    </section>
+
+<section  class="section" id="blog">
+    <div class="container">
+
+      <div class="row mt-5">
+         <div class="col-md-6">
+             <form action="" method="post">
+                 {% csrf_token %}
+                <h6 class="section-secondary-title">Connexion</h6>
+                <div class="form-group">
+                    <div>
+                        <p>
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" placeholder="Email address" name="email">
+                        </p>
+                    </div>
+                    <div class="passimg-login">
+                        <img src="{% static 'imgs/oeil-cache.png' %}" id="eye" onclick="changer()">
+                        <input type="password" class="form-control" id="password" placeholder="Mot de passe" name="password">
+                    </div>
+                </div>
+
+                 {% if request.GET.next %}
+                    <input type="hidden" name="next" value="{{request.GET.next}}">
+                 {% endif %}
+                 <button class="btn btn-primary" type="submit">Connexion</button>
+                 <a href="{% url 'password_reset_request_n' %}" class="btn btn-info btn-sm ml-5">mot de passe oublié</a>
+             </form>
+      </div>
+    </div>
+    </div>
+</section>
+{% endblock %}
+{% block script %}
+<script>
+e = true;
+function changer() {
+  if (e) {
+    document.getElementById("password").setAttribute("type", "text");
+    document.getElementById("eye").src = "{% static 'imgs/oeil-visible.png' %}";
+    e = false;
+  } else {
+    document.getElementById("password").setAttribute("type", "password");
+    document.getElementById("eye").src = "{% static 'imgs/oeil-cache.png' %}";
+    e = true;
+  }
+}
+</script>
+{% endblock %}

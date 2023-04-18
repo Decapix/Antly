@@ -1,0 +1,46 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+<div class="if_hidden">{% include "space.html" %}</div>
+<section class="section" id="about">
+  <div class="container">
+        <div class="if_hidden">
+          <h2 class="mb-3">Merci pour votre commande !</h2>
+        </div>
+      </div>
+</section>
+
+<section class="section" id="blog">
+  <div class="container">
+  <p>Cher(e) {{user.username}},</p>
+<p>Toute l'équipe d'Antly vous remercie sincèrement pour votre commande (numéro de commande : {{ order.ref_code }}). Nous sommes ravis de vous compter parmi nos clients et nous sommes impatients de vous aider à démarrer ou à agrandir votre élevage de fourmis.
+</p>
+  <h5>Voici un récapitulatif de votre commande :
+</h5>
+  <ul>
+    {% for item in order.get_cart_items %}
+      <li>{{ item.name }} x {{ item.quantity }} ({{ item.price }}€)</li>
+    {% endfor %}
+  </ul>
+  <p>Total : {{ order.get_order_total }}€</p>
+
+  <p>Adresse de livraison :</p>
+  <address>
+    {{ order.address.complete_name }}<br>
+    {{ order.address.adress }}<br>
+    {% if order.address.detail %}{{ order.address.detail }}<br>{% endif %}
+    {{ order.address.postal_code }} {{ order.address.city }}<br>
+    {{ order.address.country }}
+  </address>
+
+  <p>Nous nous engageons à expédier votre commande dans les plus brefs délais. Vous recevrez un e-mail de confirmation avec les informations de suivi dès que votre colis sera en route.</p>
+ <p>Si vous avez des questions concernant votre commande ou si vous avez besoin d'aide pour votre élevage de fourmis, n'hésitez pas à nous contacter à antly.fourmis@gmail.com ou via les réseau sociaux de contact sur notre site web. Notre équipe de spécialistes est à votre disposition pour vous assister et vous fournir des conseils personnalisés.</p>
+  <p>Nous espérons que vous serez pleinement satisfait(e) de votre achat et que votre expérience avec Antly sera agréable et enrichissante. N'hésitez pas à partager vos découvertes et vos réussites avec notre communauté sur les réseaux sociaux en utilisant le hashtag #Antly.</p>
+     <p>Encore merci de votre confiance et bonne découverte du monde fascinant des fourmis !</p>
+     <p>Cordialement,</p>
+    <p>L'équipe Antly</p>
+
+<a href="{% url 'facture_pdf' order.id %}" class="btn btn-primary mt-4">Récupérer ma facture</a>
+  </div>
+</section>
+{% endblock %}

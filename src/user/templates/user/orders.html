@@ -1,0 +1,38 @@
+{% extends "account.html" %}
+
+{% block account %}
+<h5 class="mb-3">Mes commandes</h5>
+<h6 class="mb-2">{{ user}}</h6>
+
+<table class="table table-striped">
+         <thead>
+            <tr>
+               <th scope="col">Date</th>
+               <th scope="col">espèce</th>
+                <th scope="col">total</th>
+            </tr>
+         </thead>
+         <tbody>
+         {% for r in orders %}
+            <tr>
+               <td>{{r.date_ordered}}</td>
+               <td>
+
+                   <ul>
+                       {% for i in r.items.all %}
+                       <li>
+                           {{i.name}}
+                       </li>
+                       {% endfor %}
+                   </ul>
+
+               </td>
+               <td>{{r.get_order_total}}€</td>
+                <td><a href="{% url 'facture_pdf' r.id %}" class="btn btn-primary mt-4">Récupérer ma facture</a></td>
+            </tr>
+         {% endfor %}
+         </tbody>
+      </table>
+
+
+{% endblock %}

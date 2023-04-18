@@ -1,0 +1,78 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block content %}
+    <section id="portfolio" class="section portfolio-section">
+        <div class="container">
+        </div>
+    </section>
+
+<section  class="section" id="blog">
+    <div class="container">
+        <div class="row mt-5">
+         <div class="col-md-6">
+            <h6 class="section-secondary-title">Inscription</h6>
+        <form action="" method="post">
+        {% csrf_token %}
+            <div class="mb-4 mt-2">
+                <div class="mb-1">
+                    {{ form.username }}
+                </div>
+                <div class="mb-1">
+                    {{ form.email }}
+                </div>
+                <div class="passimg-signup mb-1">
+                    <img src="{% static 'imgs/oeil-cache.png' %}" id="eye1" onclick="changer1()" class="img-eye1">
+                    {{ form.password1 }}
+                </div>
+                <div class="passimg-signup mb-1">
+                    <img src="{% static 'imgs/oeil-cache.png' %}" id="eye2" onclick="changer2()" class="img-eye2">
+                    {{ form.password2 }}
+                </div>
+                <div>
+                    {{ form.errors }}
+                </div>
+            </div>
+            {% if request.GET.next %}
+                <input type="hidden" name="next" value="{{request.GET.next}}">
+            {% endif %}
+            <input class="btn btn-primary" type="submit">
+        </form>
+      </div> <!-- end of inputs -->
+
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block script %}
+<script>
+e = true;
+function changer1() {
+  if (e) {
+    document.getElementById("password1").setAttribute("type", "text");
+    document.getElementById("eye1").src =
+      "{% static 'imgs/oeil-visible.png' %}";
+    e = false;
+  } else {
+    document.getElementById("password1").setAttribute("type", "password");
+    document.getElementById("eye1").src = "{% static 'imgs/oeil-cache.png' %}";
+    e = true;
+  }
+}
+
+e = true;
+function changer2() {
+  if (e) {
+    document.getElementById("password2").setAttribute("type", "text");
+    document.getElementById("eye2").src =
+      "{% static 'imgs/oeil-visible.png' %}";
+    e = false;
+  } else {
+    document.getElementById("password2").setAttribute("type", "password");
+    document.getElementById("eye2").src = "{% static 'imgs/oeil-cache.png' %}";
+    e = true;
+  }
+}
+
+</script>
+{% endblock %}

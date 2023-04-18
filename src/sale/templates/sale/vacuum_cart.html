@@ -1,0 +1,27 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block content %}
+
+{% include "space.html" %}
+
+<section class="section" id="about">
+        <div class="container">
+            <div class="if_hidden">
+                <h5 class="mb-3" >Panier</h5>
+            </div>
+        </div>
+</section>
+
+    <!-- Ant Section -->
+<section class="section" id="blog">
+    <div class="container">
+        <div class="mb-5">
+            <h4>Votre panier est vide</h4>
+        </div>
+        <button class="btn btn-primary" type="button"><a class="adownn" href="{% url 'homepage_n' %}">voir les fourmis</a></button>
+    </div>
+</section>
+
+
+{% endblock %}

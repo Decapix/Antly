@@ -1,0 +1,138 @@
+{% extends "account.html" %}
+{% load static %}
+
+
+
+
+{% block account %}
+<h5>Information personnel</h5>
+
+<div class="mt-2 ml-2">
+    <h6 class="mt-4 ml-7">Email</h6>
+    {{user.email}}
+
+    {% if user.username %}
+    <h6 class="mt-4 ml-7">Nom d'utilisateur</h6>
+    {{user.username}}
+    {% endif %}
+
+    <div class="row">
+        <div class="col-md-6">
+            {% if user.last_name %}
+            <h6 class="mt-4 ml-7">Nom</h6>
+            {{user.last_name}}
+            {% endif %}
+        </div>
+        <div class="col-md-6">
+            {% if user.first_name %}
+            <h6 class="mt-4 ml-7">Prénom</h6>
+            {{user.first_name}}
+            {% endif %}
+        </div>
+     </div>
+
+</div>
+
+<form action="{% url 'detail_n' user.id %}" method="post" id="">
+    {% csrf_token %}
+    <input type="hidden" name="form_type" value="detail">
+
+    <h5 class="mt-4" >Modifier</h5>
+    <div class="form-group">
+        <div id="form-section-1">
+            <div class="row mt-5">
+                <div class="col-md-6">{{form.last_name}}</div>
+                <div class="col-md-6">{{form.first_name}}</div>
+            </div>
+            <div>{{form.username}}</div>
+        </div>
+        <button class="btn btn-primary mt-3" type="submit" >Envoyer</button>
+</div>
+</form>
+
+<form action="{% url 'detail_n' user.id %}" method="post" id="my-form">
+    {% csrf_token %}
+    <input type="hidden" name="form_type" value="password">
+     <div class="form-group">
+
+        <div class="mt-5 ml-2" id="form-section-2">
+
+            <h6 class="mt-5 ml-7">Mot de passe</h6>
+
+            <div class="passimg-perso">
+                <p class="mb-1 mt-3">Encien mot de passe :</p>
+                <img src="{% static 'imgs/oeil-cache.png' %}" id="eye1" onclick="changer1()">
+                {{ password_form.old_password }}
+            </div>
+
+
+            <div class="passimg-perso">
+                <p class="mb-0">Nouveau mot de passe :</p>
+                <img src="{% static 'imgs/oeil-cache.png' %}" id="eye2" onclick="changer2()">
+                {{ password_form.new_password1 }}
+            </div>
+
+            <div class="passimg-perso">
+                <p>Nouveau mot de passe :</p>
+                <img src="{% static 'imgs/oeil-cache.png' %}" id="eye3" onclick="changer3()">
+                {{ password_form.new_password2 }}
+
+                {% if password_form.error_messages %}
+                {{ password_form.error_messages.as_p }}
+                {% endif %}
+            </div>
+
+        </div>
+        <button class="btn btn-primary mt-3" type="submit" >Envoyer</button>
+    </div>
+
+</form>
+
+
+{% endblock %}
+
+{% block script %}
+<script>
+e = true;
+function changer1() {
+  if (e) {
+    document.getElementById("password1").setAttribute("type", "text");
+    document.getElementById("eye1").src =
+      "{% static 'imgs/oeil-visible.png' %}";
+    e = false;
+  } else {
+    document.getElementById("password1").setAttribute("type", "password");
+    document.getElementById("eye1").src = "{% static 'imgs/oeil-cache.png' %}";
+    e = true;
+  }
+}
+
+e = true;
+function changer2() {
+  if (e) {
+    document.getElementById("password2").setAttribute("type", "text");
+    document.getElementById("eye2").src =
+      "{% static 'imgs/oeil-visible.png' %}";
+    e = false;
+  } else {
+    document.getElementById("password2").setAttribute("type", "password");
+    document.getElementById("eye2").src = "{% static 'imgs/oeil-cache.png' %}";
+    e = true;
+  }
+}
+
+e = true;
+function changer3() {
+  if (e) {
+    document.getElementById("password3").setAttribute("type", "text");
+    document.getElementById("eye3").src =
+      "{% static 'imgs/oeil-visible.png' %}";
+    e = false;
+  } else {
+    document.getElementById("password3").setAttribute("type", "password");
+    document.getElementById("eye3").src = "{% static 'imgs/oeil-cache.png' %}";
+    e = true;
+  }
+}
+</script>
+{% endblock %}
