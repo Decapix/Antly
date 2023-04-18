@@ -43,7 +43,7 @@ def activateEmail(request, user, to_email):
     message = render_to_string("user/template_activate_account.html", {
         'user': user.username,
         # 'domain': get_current_site(request).domain,
-        'domain': "localhost:8000",
+        'domain': "antly.fr",
         'uid': urlsafe_base64_encode(force_bytes(user.pk)),
         'token': account_activation_token.make_token(user),
         "protocol": 'https' if request.is_secure() else 'http'
@@ -62,7 +62,7 @@ def changepasswordEmail(request, user, to_email):
     message = render_to_string("user/template_change_password.html", {
         'user': user.username,
         # 'domain': get_current_site(request).domain,
-        'domain': "localhost:8000",
+        'domain': "antly.fr",
         'uid': urlsafe_base64_encode(force_bytes(user.pk)),
         'token': account_activation_token.make_token(user),
         "protocol": 'https' if request.is_secure() else 'http'
