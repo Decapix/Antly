@@ -28,7 +28,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-4o949ijfccf)w8ll%(hgb#b%h29p#g69dljf*)af9pkd1f_iw5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('ENV') != 'PRODUCTION'
+# DEBUG = os.environ.get('ENV') != 'PRODUCTION'
+DEBU = True
 ALLOWED_HOSTS = ['antly.herokuapp.com', 'localhost', '127.0.0.1', 'antly.fr', 'www.antly.fr']
 
 
@@ -187,7 +188,7 @@ API_GOOGLE = "AIzaSyDzfwJz7M-oLbSFZwXoiXLL9kKblo_SSIE"
 # SESSION_EXPIRE_AT_BR0WSER_CL0SE = True  # cookies delete themselves when the window is closed
 
 # Stripe and Braintree Settings
-STRIPE_WEBHOOK_SECRET = "whsec_75dce4f3c1ea6bcdfe9df103fdcf7466aed021017e79b6670cad85f0e6abe82e"
+STRIPE_WEBHOOK_SECRET = "we_1MyaJ3KUGNzb4QbIqF0Thj1d"
 
 STRIPE_SECRET_KEY = ''
 # test keys
