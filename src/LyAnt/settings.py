@@ -28,8 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-4o949ijfccf)w8ll%(hgb#b%h29p#g69dljf*)af9pkd1f_iw5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = os.environ.get('ENV') != 'PRODUCTION'
-DEBU = True
+DEBUG = os.environ.get('ENV') != 'PRODUCTION'
 ALLOWED_HOSTS = ['antly.herokuapp.com', 'localhost', '127.0.0.1', 'antly.fr', 'www.antly.fr']
 
 
@@ -190,9 +189,9 @@ API_GOOGLE = "AIzaSyDzfwJz7M-oLbSFZwXoiXLL9kKblo_SSIE"
 # Stripe and Braintree Settings
 STRIPE_WEBHOOK_SECRET = "we_1MyaJ3KUGNzb4QbIqF0Thj1d"
 
-STRIPE_SECRET_KEY = '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'
+STRIPE_SECRET_KEY = ''
 # test keys
-STRIPE_PUBLISHABLE_KEY = 'pk_live_51MJcPhKUGNzb4QbIXqF0nebRj30sPsrS3qzZpN8O5OnlQokSbOyTfhJEM91vowwNaWCBAhFwut8sVq7L7WPgYHqJ00evBRspqS'
+STRIPE_PUBLISHABLE_KEY = ''
 
 
 # company
