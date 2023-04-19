@@ -189,9 +189,8 @@ API_GOOGLE = "AIzaSyDzfwJz7M-oLbSFZwXoiXLL9kKblo_SSIE"
 # Stripe and Braintree Settings
 STRIPE_WEBHOOK_SECRET = "we_1MyaJ3KUGNzb4QbIqF0Thj1d"
 
-STRIPE_SECRET_KEY = ''
-# test keys
-STRIPE_PUBLISHABLE_KEY = ''
+STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY')
+STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
 
 
 # company
