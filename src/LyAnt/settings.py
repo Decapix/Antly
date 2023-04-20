@@ -187,7 +187,7 @@ API_GOOGLE = "AIzaSyDzfwJz7M-oLbSFZwXoiXLL9kKblo_SSIE"
 # SESSION_EXPIRE_AT_BR0WSER_CL0SE = True  # cookies delete themselves when the window is closed
 
 # Stripe and Braintree Settings
-STRIPE_WEBHOOK_SECRET = "we_1MyaJ3KUGNzb4QbIqF0Thj1d"
+STRIPE_WEBHOOK_SECRET = os.environ.get('STRIPE_WEBHOOK_SECRET')
 
 STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY')
 STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
