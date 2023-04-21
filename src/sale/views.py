@@ -291,7 +291,7 @@ def delete_cart_item_vi(request, item_id):
     item_to_delete = OrderItem_m.objects.filter(pk=item_id)
     if item_to_delete.exists():
         item_to_delete[0].delete()
-        messages.info(request, "The item has been removed from the cart.")
+        messages.info(request, "L'article a été retiré du panier.")
     return redirect(reverse('cart_n'))
 
 
