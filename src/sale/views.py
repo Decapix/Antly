@@ -21,6 +21,7 @@ from django.views.decorators.csrf import csrf_exempt
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 import io
+import os
 from django.http import FileResponse
 from reportlab.pdfgen import canvas
 from django.templatetags.static import static as stat
@@ -336,7 +337,7 @@ def checkout_vi(request):
     context = {
         'order': existing_order,
         "form": form,
-        "STRIPE_PUBLIC_KEY": settings.STRIPE_PUBLISHABLE_KEY,
+        "STRIPE_PUBLIC_KEY": os.environ.get('STRIPE_PUBLIC_KEY'),
         "user": request.user
     }
 
