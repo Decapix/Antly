@@ -336,6 +336,7 @@ def checkout_vi(request):
     context = {
         'order': existing_order,
         "form": form,
+        "STRIPE_PUBLIC_KEY": settings.STRIPE_PUBLISHABLE_KEY,
         "user": request.user
     }
 
