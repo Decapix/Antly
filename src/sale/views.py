@@ -493,6 +493,7 @@ def createpayment(request):
             # Return an error message in case of an exception
             return JsonResponse({"error": str(e)})
 
+
 @csrf_exempt
 def webhook_vi(request):
     """
@@ -636,7 +637,7 @@ def generate_invoice_pdf(request, order_id):
     # Affichez le total de la commande
     p.setFont("Helvetica-Bold", 12)
     p.drawString(x, y, "Total de la commande")
-    p.drawString(x + 300, y, f"{order.get_cart_total()} €")
+    p.drawString(x + 300, y, f"{order.get_order_total()} €")
 
     # 7. Conditions générales et politique de retour
     p.setFont("Helvetica-Bold", 12)
