@@ -49,7 +49,6 @@
             </tfoot>
           </table>
         </div>
-
         
         <div class="col-md-4 pl-md-5">
           <!-- adress-->
@@ -86,6 +85,7 @@
 {% endblock %} {% block script %}
 <script>
  
+
 
 
 
@@ -139,42 +139,45 @@
     cardButton.disabled = false;
   }
 
-  // address choice
+   // address choice
+
+   const chosenAddressDiv = document.getElementById("chosen-address");
+
+// Gestion des boutons "Choisir" (code précédent)
 
 
+  const newAddressForm = document.getElementById("new-address-form");
+  const csrfToken = document.querySelector(
+    "[name=csrfmiddlewaretoken]"
+  ).value;
 
-    const newAddressForm = document.getElementById("new-address-form");
-    const csrfToken = document.querySelector(
-      "[name=csrfmiddlewaretoken]"
-    ).value;
+  newAddressForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-    newAddressForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
-
-      const formData = new FormData(newAddressForm);
-      const response = await fetch("{% url 'checkout_n' %}", {
-        method: "POST",
-        headers: {
-          "X-CSRFToken": csrfToken,
-        },
-        body: formData,
-      });
-
-      if (response.ok) {
-        const address = await response.json();
-        chosenAddressDiv.innerHTML = `<h5 class="mb-2">Adresse choisie :</h5>${address.html}`;
-        // Ajoutez cette ligne pour stocker l'ID de l'adresse dans un attribut data
-        chosenAddressDiv.dataset.addressId = address.address_id;
-        newAddressForm.reset();
-        enablePaymentButton();
-      } else {
-        // Gérer les erreurs de soumission du formulaire ici
-        alert(
-          "Erreur lors de la soumission de la nouvelle adresse. Veuillez réessayer."
-        );
-      }
+    const formData = new FormData(newAddressForm);
+    const response = await fetch("{% url 'checkout_n' %}", {
+      method: "POST",
+      headers: {
+        "X-CSRFToken": csrfToken,
+      },
+      body: formData,
     });
-  ;
+
+    if (response.ok) {
+      const address = await response.json();
+      chosenAddressDiv.innerHTML = `<h5 class="mb-2">Adresse choisie :</h5>${address.html}`;
+      // Ajoutez cette ligne pour stocker l'ID de l'adresse dans un attribut data
+      chosenAddressDiv.dataset.addressId = address.address_id;
+      newAddressForm.reset();
+      enablePaymentButton();
+    } else {
+      // Gérer les erreurs de soumission du formulaire ici
+      alert(
+        "Erreur lors de la soumission de la nouvelle adresse. Veuillez réessayer."
+      );
+    }
+  });
+;
 </script>
 
 <script src="https://js.stripe.com/v3/"></script>
