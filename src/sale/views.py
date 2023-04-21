@@ -472,7 +472,6 @@ def createpayment(request):
         return HttpResponse("The total order amount must be greater than zero.", status=400)
 
     # Set the Stripe API key
-    stripe.api_key = settings.STRIPE_SECRET_KEY
 
     # Process the POST request
     if request.method == "POST":
