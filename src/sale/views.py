@@ -295,7 +295,6 @@ def delete_cart_item_vi(request, item_id):
     return redirect(reverse('cart_n'))
 
 
-stripe.api_key = settings.STRIPE_SECRET_KEY
 
 @login_required()
 def checkout_vi(request):
