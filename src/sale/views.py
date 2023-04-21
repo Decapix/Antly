@@ -308,35 +308,10 @@ def checkout_vi(request):
         The rendered checkout view with context data or a JSON response with new address data.
     """
     existing_order = get_user_pending_order(request)
-    if request.method == "POST":
-        form = Address_fo(request.POST)
-        if form.is_valid():
-            new_address = form.save(commit=False)
-            new_address.save()  # Always save the address without associating it with a user
-
-            existing_order.address = new_address
-            existing_order.save()
-
-            # Create a JSON response with the new address data
-            address_html = f"""
-                        Country/Region : {new_address.country}<br>
-                        Full name : {new_address.complete_name}<br>
-                        Phone number : {new_address.phone_number}<br>
-                        Address : {new_address.adress}<br>
-                        Detail : {new_address.detail or ''}<br>
-                        Postal code : {new_address.postal_code}<br>
-                        City : {new_address.city}<br>
-                        """
-            return JsonResponse({"html": address_html})
-        else:
-            messages.error(request, "The address form is invalid.")
-    else:
-        form = Address_fo()
+   
 
     context = {
         'order': existing_order,
-        "form": form,
-        "STRIPE_PUBLIC_KEY": settings.STRIPE_PUBLISHABLE_KEY,
         "user": request.user
     }
 
