@@ -511,7 +511,7 @@ def webhook_vi(request):
 
     try:
         # Construct the webhook event
-        event = stripe.Webhook.construct_event(payload, sig_header, settings.STRIPE_WEBHOOK_SECRET)
+        event = stripe.Webhook.construct_event(payload, sig_header, os.environ.get('STRIPE_WEBHOOK_SECRET'))
     except ValueError as e:
         # Invalid payload
         return HttpResponse(status=400)
