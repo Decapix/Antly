@@ -49,7 +49,33 @@
             </tfoot>
           </table>
         </div>
-        <!-- strip-->
+
+        
+        <div class="col-md-4 pl-md-5">
+          <!-- adress-->
+          <h4>Adresse de livraison</h4>
+  
+          <div class="">
+            <div class="">
+              <form id="new-address-form" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                  <div>{{form.country}}</div>
+                  <div>{{form.complete_name}}</div>
+                  <div>{{form.phone_number}}</div>
+                  <div>{{form.adress}}</div>
+                  <div>{{form.detail}}</div>
+                  <div>{{form.postal_code}}</div>
+                  <div>{{form.city}}</div>
+                </div>
+                <input class="btn btn-primary ml-3" type="submit" />
+              </form>
+            </div>
+          </div>
+          <div id="chosen-address" class="mt-4">
+            <!-- afficher l'adresse choisie-->
+          </div>
+        </div>
        
 
 
@@ -58,7 +84,98 @@
 </section>
 
 {% endblock %} {% block script %}
+<script>
+ 
 
+
+
+    const chosenAddressId = chosenAddressDiv.dataset.addressId;
+    document.getElementById("chosen-address-id").value = chosenAddressId;
+
+    const { clientSecret } = await (
+      await fetch("/produit/commande/create-payment-intent/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": csrftoken,
+        },
+      })
+    ).json();
+    const { error, paymentIntent } = await stripe.confirmCardPayment(
+      clientSecret,
+      {
+        payment_method: {
+          card: cardElement,
+          billing_details: { name: cardHolderName.value },
+        },
+      }
+    );
+
+    if (error) {
+      console.error("Erreur lors du paiement :", error);
+      alert("Le paiement a échoué. Veuillez réessayer.");
+    } else {
+      console.log("Paiement réussi :", paymentIntent);
+      window.location.href = "{% url 'success_n' %}"; // Redirige vers la page de succès
+    }
+  ;
+
+  function stripeTokenHandler(paymentMethodId) {
+    // Insérez le token dans le formulaire pour qu'il soit soumis au serveur
+    const form = document.getElementById("payment-form");
+    const hiddenInput = document.createElement("input");
+    hiddenInput.setAttribute("type", "hidden");
+    hiddenInput.setAttribute("name", "payment_method_id");
+    hiddenInput.setAttribute("value", paymentMethodId);
+    form.appendChild(hiddenInput);
+
+    // Soumettez le formulaire
+    form.submit();
+  }
+
+  // address & pay
+
+  function enablePaymentButton() {
+    cardButton.disabled = false;
+  }
+
+  // address choice
+
+
+
+    const newAddressForm = document.getElementById("new-address-form");
+    const csrfToken = document.querySelector(
+      "[name=csrfmiddlewaretoken]"
+    ).value;
+
+    newAddressForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(newAddressForm);
+      const response = await fetch("{% url 'checkout_n' %}", {
+        method: "POST",
+        headers: {
+          "X-CSRFToken": csrfToken,
+        },
+        body: formData,
+      });
+
+      if (response.ok) {
+        const address = await response.json();
+        chosenAddressDiv.innerHTML = `<h5 class="mb-2">Adresse choisie :</h5>${address.html}`;
+        // Ajoutez cette ligne pour stocker l'ID de l'adresse dans un attribut data
+        chosenAddressDiv.dataset.addressId = address.address_id;
+        newAddressForm.reset();
+        enablePaymentButton();
+      } else {
+        // Gérer les erreurs de soumission du formulaire ici
+        alert(
+          "Erreur lors de la soumission de la nouvelle adresse. Veuillez réessayer."
+        );
+      }
+    });
+  ;
+</script>
 
 <script src="https://js.stripe.com/v3/"></script>
 <script src="{% static 'vendors/bootstrap/bootstrap.bundle.min.js' %}"></script>
