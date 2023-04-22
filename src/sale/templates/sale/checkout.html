@@ -122,106 +122,101 @@
 
 {% endblock %} {% block script %}
 <script>
+// Charger l'API Stripe et créer un objet Stripe
+const stripe = Stripe('{{ STRIPE_PUBLIC_KEY }}');
+const elements = stripe.elements();
 
-    // stripe
+// Créer un élément de carte
+const cardElement = elements.create('card');
+cardElement.mount('#card-element');
 
-    function getCookie(name) {
-      let cookieValue = null;
-      if (document.cookie && document.cookie !== "") {
-        const cookies = document.cookie.split(";");
-        for (let i = 0; i < cookies.length; i++) {
-          const cookie = cookies[i].trim();
-          if (cookie.substring(0, name.length + 1) === name + "=") {
-            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-            break;
-          }
-        }
-      }
-      return cookieValue;
+// Gérer la validation de la carte
+cardElement.on('change', function (event) {
+    const displayError = document.getElementById('card-errors');
+    if (event.error) {
+        displayError.textContent = event.error.message;
+    } else {
+        displayError.textContent = '';
     }
-
-    const csrftoken = getCookie("csrftoken");
-
-    const stripe = Stripe("{{ STRIPE_PUBLIC_KEY }}");
-    const elements = stripe.elements();
-    const cardElement = elements.create("card");
-    cardElement.mount("#card-element");
-
-
-
-
-      const chosenAddressId = chosenAddressDiv.dataset.addressId;
-      document.getElementById("chosen-address-id").value = chosenAddressId;
-
-      const { clientSecret } = await (
-        await fetch("/produit/commande/create-payment-intent/", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "X-CSRFToken": csrftoken,
-          },
-        })
-      ).json();
-      const { error, paymentIntent } = await stripe.confirmCardPayment(
-        clientSecret,
-        {
-          payment_method: {
-            card: cardElement,
-            billing_details: { name: cardHolderName.value },
-          },
-        }
-      );
-
-      if (error) {
-        console.error("Erreur lors du paiement :", error);
-        alert("Le paiement a échoué. Veuillez réessayer.");
-      } else {
-        console.log("Paiement réussi :", paymentIntent)
-        window.location.href = "{% url 'success_n' %}"; // Redirige vers la page de succès
-      }
-    ;
-
-
-    // address & pay
-
-    function enablePaymentButton() {
-      cardButton.disabled = false;
-    }
-
-     // address choice
-
-    const chosenAddressDiv = document.getElementById("chosen-address");
-    const newAddressForm = document.getElementById("new-address-form");
-    const csrfToken = document.querySelector(
-      "[name=csrfmiddlewaretoken]"
-    ).value;
-
-    newAddressForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  const formData = new FormData(newAddressForm);
-  const response = await fetch("{% url 'checkout_n' %}", {
-    method: "POST",
-    headers: {
-      "X-CSRFToken": csrfToken,
-    },
-    body: formData,
-  });
-
-  if (response.ok) {
-    const data = await response.json();
-    chosenAddressDiv.innerHTML = `<h5 class="mb-2">Adresse choisie :</h5>${data.html}`;
-    chosenAddressDiv.dataset.addressId = data.address_id;
-    newAddressForm.reset();
-    enablePaymentButton();
-  } else {
-    // Gérer les erreurs de soumission du formulaire ici
-    alert(
-      "Erreur lors de la soumission de la nouvelle adresse. Veuillez réessayer."
-    );
-  }
 });
-  
+
+// Gérer la soumission du formulaire de paiement
+const paymentForm = document.getElementById('payment-form');
+paymentForm.addEventListener('submit', async function (event) {
+    event.preventDefault();
+
+    // Désactiver le bouton de soumission
+    const cardButton = document.getElementById('card-button');
+    cardButton.disabled = true;
+
+    // Créer un paiement Intent
+    const response = await fetch("{% url 'create-payment-intent' %}", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': document.getElementsByName('csrfmiddlewaretoken')[0].value
+        }
+    });
+    const data = await response.json();
+
+    // Confirmer le paiement Intent
+    const result = await stripe.confirmCardPayment(data.clientSecret, {
+        payment_method: {
+            card: cardElement,
+            billing_details: {
+                name: document.getElementById('card-holder-name').value
+            }
+        }
+    });
+
+    // Gérer le résultat
+    if (result.error) {
+        // Afficher l'erreur
+        const errorElement = document.getElementById('card-errors');
+        errorElement.textContent = result.error.message;
+
+        // Réactiver le bouton de soumission
+        cardButton.disabled = false;
+    } else {
+        // Rediriger vers la page de succès
+        location.href = "{% url 'success_n' %}";
+    }
+});
+
+// Gérer la soumission du formulaire d'adresse
+const addressForm = document.getElementById('new-address-form');
+addressForm.addEventListener('submit', async function (event) {
+    event.preventDefault();
+
+    // Envoyer les données du formulaire au serveur
+    const formData = new FormData(addressForm);
+    const response = await fetch("{% url 'checkout_n' %}", {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRFToken': document.getElementsByName('csrfmiddlewaretoken')[0].value
+        }
+    });
+
+    // Traiter la réponse
+    if (response.ok) {
+        const data = await response.json();
+
+        // Afficher l'adresse choisie
+        const chosenAddress = document.getElementById('chosen-address');
+        chosenAddress.innerHTML = data.html;
+
+        // Stocker l'ID de l'adresse choisie
+        const chosenAddressId = document.getElementById('chosen-address-id');
+        chosenAddressId.value = data.address_id;
+
+        // Activer le bouton de paiement
+        const cardButton = document.getElementById('card-button');
+        cardButton.disabled = false;
+    } else {
+        alert("Une erreur s'est produite lors de la soumission du formulaire d'adresse.");
+    }
+});
 </script>
 
 <script src="https://js.stripe.com/v3/"></script>
