@@ -324,7 +324,7 @@ def checkout_vi(request):
                 country_region, full_name, phone_number, address, postal_code, city),
             "address_id": address_id
         }
-            return return JsonResponse(address_json)
+            return JsonResponse(address_json)
         else:
             messages.error(request, "Le formulaire d'adresse est invalide.")
     else:
