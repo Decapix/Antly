@@ -330,7 +330,7 @@ def checkout_vi(request):
                         """
             return JsonResponse({"html": address_html, "address_id": new_address.pk})
         else:
-            messages.error(request, "The address form is invalid.")
+            messages.error(request, "Le formulaire d'adresse est invalide.")
     else:
         form = Address_fo()
 

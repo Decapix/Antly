@@ -121,83 +121,259 @@
 </section>
 
 {% endblock %} {% block script %}
+<script src="https://js.stripe.com/v3/"></script>
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+/>
+{% endblock %} {% block content %}
+<div class="if_hidden">{% include "space.html" %}</div>
+<section class="section" id="about">
+  <div class="container">
+    <div class="if_hidden">
+      <h2 class="mb-3">Ma commande</h2>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="blog">
+  <div class="container">
+    <div class="row justify-content-between">
+      <div class="col-md-8 pr-md-5 mb-4 mb-md-0">
+        <div class="mb-5">
+          <h4>Résumé de la commande</h4>
+          <table class="table table-striped">
+            <tbody>
+              {% for item in order.get_cart_items %}
+              <tr>
+                <td>{{ item.name }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.price }} €</td>
+              </tr>
+              {% endfor %}
+              <tr>
+                <td>Transport</td>
+                <td></td>
+                <td>{{ order.shipping_costs }} €</td>
+              </tr>
+
+              {% if order.gift %}
+              <td>Colonie offerte</td>
+              <td>1</td>
+              <td>0 €</td>
+              {% endif %}
+            </tbody>
+
+            <tfoot>
+              <tr>
+                <th scope="col">Total de la commande</th>
+                <th scope="col">{{ order.get_cart_total }} €</th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+        <!-- strip-->
+        <h4 class="mb-4">Paiement</h4>
+        <!-- Affichez ici le formulaire de paiement Stripe -->
+
+        <div class="form-container">
+          <form id="payment-form" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="card-holder-name">Nom du titulaire de la carte</label>
+              <input
+                type="text"
+                class="form-control"
+                id="card-holder-name"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="card-element">Informations de la carte</label>
+              <div id="card-element" class="form-control"></div>
+              <div id="card-errors" role="alert" class="text-danger"></div>
+            </div>
+            <input
+              type="hidden"
+              id="chosen-address-id"
+              name="chosen_address_id"
+              value=""
+            />
+            <button
+              type="submit"
+              class="btn btn-info rounded"
+              id="card-button"
+              disabled
+            >
+              Payer
+            </button>
+          </form>
+        </div>
+
+        <!-- endstrip-->
+      </div>
+
+      <div class="col-md-4 pl-md-5">
+        <!-- adress-->
+        <h4>Adresse de livraison</h4>
+
+        <div class="">
+          <div class="">
+            <form id="new-address-form" method="post">
+              {% csrf_token %}
+              <div class="form-group">
+                <div>{{form.country}}</div>
+                <div>{{form.complete_name}}</div>
+                <div>{{form.phone_number}}</div>
+                <div>{{form.adress}}</div>
+                <div>{{form.detail}}</div>
+                <div>{{form.postal_code}}</div>
+                <div>{{form.city}}</div>
+              </div>
+              <input class="btn btn-primary ml-3" type="submit" />
+            </form>
+          </div>
+        </div>
+        <div id="chosen-address" class="mt-4">
+          <!-- afficher l'adresse choisie-->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %} {% block script %}
+
 <script>
+  // stripe
 
-    // stripe
-
-    const newAddressForm = document.getElementById("new-address-form");
-const csrfToken = document.querySelector(
-  "[name=csrfmiddlewaretoken]"
-).value;
-
-newAddressForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  // Vérifiez si une adresse a été choisie ou saisie
-  const chosenAddress = document.getElementById("chosen-address").innerHTML;
-  if (!chosenAddress) {
-    alert(
-      "Veuillez choisir ou saisir une adresse avant de procéder au paiement."
-    );
-    return;
-  }
-
-  // Déplacez le reste du code de l'événement de soumission du formulaire de paiement ici
-  const chosenAddressId = chosenAddressDiv.dataset.addressId;
-  document.getElementById("chosen-address-id").value = chosenAddressId;
-
-  const { clientSecret } = await (
-    await fetch("/produit/commande/create-payment-intent/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-CSRFToken": csrftoken,
-      },
-    })
-  ).json();
-  const { error, paymentIntent } = await stripe.confirmCardPayment(
-    clientSecret,
-    {
-      payment_method: {
-        card: cardElement,
-        billing_details: { name: cardHolderName.value },
-      },
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== "") {
+      const cookies = document.cookie.split(";");
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.substring(0, name.length + 1) === name + "=") {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
     }
-  );
-
-  if (error) {
-    console.error("Erreur lors du paiement :", error);
-    alert("Le paiement a échoué. Veuillez réessayer.");
-  } else {
-    console.log("Paiement réussi :", paymentIntent);
-    window.location.href = "{% url 'success_n' %}"; // Redirige vers la page de succès
+    return cookieValue;
   }
-  // Fin du code déplacé
 
-  const formData = new FormData(newAddressForm);
-  const response = await fetch("{% url 'checkout_n' %}", {
-    method: "POST",
-    headers: {
-      "X-CSRFToken": csrfToken,
-    },
-    body: formData,
+  const csrftoken = getCookie("csrftoken");
+
+  const stripe = Stripe("{{ STRIPE_PUBLIC_KEY }}");
+  const elements = stripe.elements();
+  const cardElement = elements.create("card");
+  cardElement.mount("#card-element");
+
+  const form = document.getElementById("payment-form");
+  const cardHolderName = document.getElementById("card-holder-name");
+  const cardButton = document.getElementById("card-button");
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    // Vérifiez si une adresse a été choisie ou saisie
+    const chosenAddress = document.getElementById("chosen-address").innerHTML;
+    if (!chosenAddress) {
+      alert(
+        "Veuillez choisir ou saisir une adresse avant de procéder au paiement."
+      );
+      return;
+    }
+
+    const chosenAddressId = chosenAddressDiv.dataset.addressId;
+    document.getElementById("chosen-address-id").value = chosenAddressId;
+
+    const { clientSecret } = await (
+      await fetch("/produit/commande/create-payment-intent/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": csrftoken,
+        },
+      })
+    ).json();
+    const { error, paymentIntent } = await stripe.confirmCardPayment(
+      clientSecret,
+      {
+        payment_method: {
+          card: cardElement,
+          billing_details: { name: cardHolderName.value },
+        },
+      }
+    );
+
+    if (error) {
+      console.error("Erreur lors du paiement :", error);
+      alert("Le paiement a échoué. Veuillez réessayer.");
+    } else {
+      console.log("Paiement réussi :", paymentIntent);
+      window.location.href = "{% url 'success_n' %}"; // Redirige vers la page de succès
+    }
   });
 
-  if (response.ok) {
-    const data = await response.json();
-    chosenAddressDiv.innerHTML = `<h5 class="mb-2">Adresse choisie :</h5>${data.html}`;
-    chosenAddressDiv.dataset.addressId = data.address_id;
-    newAddressForm.reset();
-    enablePaymentButton();
-  } else {
-    // Gérer les erreurs de soumission du formulaire ici
-    alert(
-      "Erreur lors de la soumission de la nouvelle adresse. Veuillez réessayer."
-    );
-  }
-});
-</script>
 
-<script src="https://js.stripe.com/v3/"></script>
-<script src="{% static 'vendors/bootstrap/bootstrap.bundle.min.js' %}"></script>
+
+  // address & pay
+
+  function enablePaymentButton() {
+    cardButton.disabled = false;
+  }
+
+  // address choice
+
+  const chosenAddressDiv = document.getElementById("chosen-address");
+
+  // Gestion des boutons "Choisir" (code précédent)
+  document.addEventListener("DOMContentLoaded", function () {
+    const addressButtons = document.querySelectorAll(".select-address");
+    addressButtons.forEach((button) => {
+      button.addEventListener("click", (e) => {
+        const addressId = e.target.dataset.addressId;
+        const addressDiv = e.target.closest("tr").querySelector("div");
+        chosenAddressDiv.innerHTML = `<h5 class="mb-2">Adresse choisie :</h5>${addressDiv.innerHTML}`;
+        // Ajoutez cette ligne pour stocker l'ID de l'adresse dans un attribut data
+        chosenAddressDiv.dataset.addressId = addressId;
+        enablePaymentButton();
+      });
+    });
+
+    const newAddressForm = document.getElementById("new-address-form");
+    const csrfToken = document.querySelector(
+      "[name=csrfmiddlewaretoken]"
+    ).value;
+
+    newAddressForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(newAddressForm);
+      const response = await fetch("{% url 'checkout_n' %}", {
+        method: "POST",
+        headers: {
+          "X-CSRFToken": csrfToken,
+        },
+        body: formData,
+      });
+
+      if (response.ok) {
+        const address = await response.json();
+        chosenAddressDiv.innerHTML = `<h5 class="mb-2">Adresse choisie :</h5>${address.html}`;
+        // Ajoutez cette ligne pour stocker l'ID de l'adresse dans un attribut data
+        chosenAddressDiv.dataset.addressId = address.address_id;
+        newAddressForm.reset();
+        enablePaymentButton();
+      } else {
+        // Gérer les erreurs de soumission du formulaire ici
+        alert(
+          "Erreur lors de la soumission de la nouvelle adresse. Veuillez réessayer."
+        );
+      }
+    });
+  });
+</script>
+<script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 {% endblock %}

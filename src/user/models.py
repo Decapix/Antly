@@ -147,3 +147,5 @@ class Feedback_m(models.Model):
 
     def __str__(self):
         return f"feedback - {self.shopper} - {self.star}/5"
+
+
