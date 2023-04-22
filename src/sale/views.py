@@ -56,8 +56,8 @@ def ant_product_vi(request):
         The rendered ant product view with context data.
     """
     metat = MetaTemplate(
-        "Ant Foundations for Beginners - Buy and Sell Ant Colonies | Online Store",
-        "Explore our collection of ant foundations for beginners, featuring a variety of species and origins. Start your ant breeding journey with ease and benefit from professional support. Discover our offers now!")
+        "Fondations de Fourmis pour Débutants - Achat et Vente de Colonies de Fourmis | Boutique en Ligne",
+        "Explorez notre collection de fondations de fourmis pour débutants, avec une variété d'espèces et d'origines. Démarrez votre élevage de fourmis en toute simplicité et bénéficiez d'un support professionnel. Découvrez nos offres dès maintenant !")
 
     ant_product = Ant_m.objects.filter(sizes__stock__gt=0).distinct()
     country = []
@@ -78,14 +78,14 @@ def pack_product_vi(request):
         The rendered pack product view with context data.
     """
     metat = MetaTemplate(
-        "Ant Breeding Packs for Beginners - Buy and Sell Ant Packs | Online Store",
-        "Discover our selection of beginner ant breeding packs, including foundations of various species and suitable nests. Benefit from professional support and easily dive into Myrmecology with our complete packs!")
+        "Packs pour Élevage de Fourmis Débutants - Achat et Vente de Packs Fourmis | Boutique en Ligne",
+        "Découvrez notre sélection de packs pour débutants en élevage de fourmis, incluant des fondations de différentes espèces et nids adaptés. Profitez d'un support professionnel et lancez-vous facilement dans la Myrmécologie avec nos packs complets !")
 
     pack_product = Pack_m.objects.filter(size__stock__gt=0).distinct()
     country = []
     for ant in pack_product:
         if ant.localisation not in country:
-            country.append(ant.localisation)
+            country.append(ant.localisation())
     return render(request, 'sale/pack_product.html', context={"pack_product": pack_product, "country": country, 'meta':metat})
 
 
@@ -106,13 +106,13 @@ def product_pack_detail_vi(request, id):
     size = pack_product.size
     ant_product = pack_product.get_ant()
     price = pack_product.get_price()
-    metat = MetaTemplate(
-        f"Ant Pack {pack_product.complete_spece()} from {pack_product.localisation()} - Buy and Sell Beginner Ant Breeding Packs | Online Store",
-        f"Discover our beginner packs including a foundation of {pack_product.complete_spece()} ants from {pack_product.localisation()} and a suitable nest. Get started with ant breeding easily with our complete pack and benefit from professional support. Order now!")
-
+   metat = MetaTemplate(
+        f"Pack Fourmis {pack_product.complete_spece()} de {pack_product.localisation()} - Achat et Vente de Packs pour Élevage de Fourmis Débutants | Boutique en Ligne",
+        f"Découvrez nos packs pour débutants incluant une fondation de fourmis {pack_product.complete_spece()} de {pack_product.localisation()} et un nid adapté. Lancez-vous facilement dans l'élevage de fourmis avec notre pack complet et bénéficiez d'un support professionnel. Commandez dès maintenant !")
+ 
     if ant_product.problem or pack_product.problem:
         # Check problems
-        messages.error(request, "Sorry, we have a problem with this product, we are working on it")
+        messages.error(request, "désolée, nous avons un problème avec ce produit, nous travaillons dessus")
         return redirect("homepage_n")
     # List for offer ant, bottom
     offer_ant = offer_ant_func(ant_product, list(Ant_m.objects.filter(sizes__stock__gt=0).distinct()), list(Pack_m.objects.filter(size__stock__gt=0).distinct()))
@@ -134,8 +134,8 @@ def product_pack_detail_vi(request, id):
                             cart_item.quantity += int(quantity)
                             cart_item.save()
                         else:
-                            messages.error(request,
-                                           f"Sorry, we don't have enough units in stock, we have {size.stock} left")
+                             messages.error(request,
+                                           f"désolée, nous n'avons plus assez d'unitées en stock, il nous en reste {size.stock}")
                             return render(request, 'sale/pack_detail.html', context={"pack": pack_product, 'meta':metat, "price": price, "ant": ant_product, "offer_ant": offer_ant})
 
                 user_order, status = Order_m.objects.get_or_create(owner=user, is_ordered=False)
@@ -143,13 +143,13 @@ def product_pack_detail_vi(request, id):
                 if status:
                     user_order.ref_code = generate_order_id()
                     user_order.save()
-                messages.info(request, "item added to cart")
+                messages.info(request, "article ajouté au panier")
                 return redirect("homepage_n")
             else:
                 return redirect("login_n")
         else:
-            messages.error(request,
-                           f"Sorry, we don't have enough units in stock, we have {size.stock} left")
+             messages.error(request,
+                           f"désolée, nous n'avons plus assez d'unitées en stock, il nous en reste {size.stock}")
     return render(request, 'sale/pack_detail.html', context={"pack": pack_product, "price": price, "ant": ant_product, "offer_ant": offer_ant, 'meta':metat})
 
 
@@ -168,13 +168,13 @@ def product_ant_detail_vi(request, id):
     user = request.user
     ant_product = get_object_or_404(Ant_m, id=id)
     metat = MetaTemplate(
-        f"Buy {ant_product.spece} {ant_product.under_spece} Ants from {ant_product.localisation} - Sale Foundations and Colonies for Beginners | Online Store",
-        f"Buy foundations of {ant_product.spece} {ant_product.under_spece} ants from {ant_product.localisation} for beginners. Perfect for starting an ant farm. Fast delivery and professional support. Join the Myrmecology adventure now!")
+        f"Achat Fourmis {ant_product.spece} {ant_product.under_spece} de {ant_product.localisation} - Vente Fondations et Colonies pour Débutants | Boutique en Ligne",
+        f"Achetez des fondations de fourmis {ant_product.spece} {ant_product.under_spece} originaires de {ant_product.localisation} pour débutants. Parfait pour démarrer un élevage de fourmis. Livraison rapide et support professionnel. Rejoignez l'aventure de la Myrmécologie dès maintenant !")
 
     if ant_product.problem:
         # Check problems
         messages.error(request,
-                       f"Sorry, we have a problem with this product, we are working on it")
+                       f"désolée, nous avons un problème avec ce produit, nous travaillons dessus")
         return redirect("homepage_n")
     # List for offer ant, bottom
     offer_ant = offer_ant_func(ant_product, list(Ant_m.objects.filter(sizes__stock__gt=0).distinct()), list(Pack_m.objects.filter(size__stock__gt=0).distinct()))
@@ -198,7 +198,7 @@ def product_ant_detail_vi(request, id):
                             cart_item.save()
                         else:
                             messages.error(request,
-                                           f"Sorry, we don't have enough units in stock, we have {size.stock} left")
+                                           f"désolée, nous n'avons plus assez d'unitées en stock, il nous en reste {size.stock}")
                             return render(request, 'sale/ant_detail.html',
                                           context={"ant": ant_product, "offer_ant": offer_ant, 'meta':metat})
 
@@ -213,7 +213,7 @@ def product_ant_detail_vi(request, id):
                 return redirect("login_n")
         else:
             messages.error(request,
-                           f"Sorry, we don't have enough units in stock, we have {size.stock} left")
+                           f"désolée, nous n'avons plus assez d'unitées en stock, il nous en reste {size.stock}")
     return render(request, 'sale/ant_detail.html', context={"ant": ant_product, "offer_ant": offer_ant, 'meta':metat})
 
 
@@ -267,7 +267,7 @@ def update_quantity(request):
             size = item.size.first()
 
             if size.stock is not None and new_quantity > size.stock:
-                messages.error(request, "There are not enough units available in stock for this size.")
+                messages.error(request, "Il n'y a pas assez d'unités disponibles en stock pour cette taille.")
             else:
                 item.quantity = new_quantity
                 item.save()
@@ -294,11 +294,7 @@ def delete_cart_item_vi(request, item_id):
         item_to_delete[0].delete()
         messages.info(request, "L'article a été retiré du panier.")
     return redirect(reverse('cart_n'))
-
-
-
-
-
+    
 
 @login_required()
 def checkout_vi(request):
@@ -324,8 +320,8 @@ def checkout_vi(request):
             existing_order.save()
 
             address_json = {
-                "html": "\nCountry/Region : {}<br>\nFull name : {}<br>\nPhone number : {}<br>\nAddress : {}<br>\nDetail : <br>\nPostal code : {}<br>\nCity : {}<br>\n".format(
-                    new_address.country_region, new_address.full_name, new_address.phone_number, new_address.adress, new_address.postal_code, new_address.city),
+                "html": "\nCountry/Region : {}<br>\nFull name : {}<br>\nPhone number : {}<br>\nAddress : {}<br>\nDetail : {}<br>\nPostal code : {}<br>\nCity : {}<br>\n".format(
+                    new_address.country, new_address.complete_name, new_address.phone_number, new_address.adress, new_address.postal_code, new_address.detail ,new_address.city),
                 "address_id": new_address.id
             }
             return JsonResponse(address_json)
@@ -467,7 +463,7 @@ def createpayment(request):
 
     # Ensure the total order amount is greater than zero
     if amount <= 0:
-        return HttpResponse("The total order amount must be greater than zero.", status=400)
+        return HttpResponse("Le montant total de la commande doit être supérieur à zéro.", status=400)
 
     # Set the Stripe API key
 

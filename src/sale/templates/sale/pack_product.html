@@ -15,15 +15,17 @@
             </div>
 {% endblock %}
 
-{% block product %}
 
 
-<div class="row card-product-tri {{ co }} ">
+ {% block product %}
+
+<div class="portfolio-container">
+        <div class="row new">
             {% for pack in pack_product %}
-            <div class="" id="card-ele">
+            <div class="col-md-4">
                 <div class="card border-0 mb-4">
                     <a href="{{ pack.get_absolute_url }}">
-                    <img src="{{ pack.thumbnail_url }}" alt="" class="card-img-top w-100 limite-height">
+                    <img src="{{ pack.thumbnail.url }}" alt="" class="card-img-top w-100 limite-height">
                     <div class="card-body">
                         <h6 class="card-title">{{ pack.name }}</h6>
                         <p>{{ pack.get_price }} €</p>
@@ -33,4 +35,25 @@
             </div>
             {% endfor %}
         </div>
+
+        {% for co in country %}
+        <div class="row card-product-tri {{ co }} ">
+            {% for pack in pack_product %}
+            {% if pack.localisation == co %}
+            <div class="" id="card-ele">
+                <div class="card border-0 mb-4">
+                    <a href="{{ pack.get_absolute_url }}">
+                    <img src="{{ pack.thumbnail.url }}" alt="" class="card-img-top w-100 limite-height">
+                    <div class="card-body">
+                        <h6 class="card-title">{{ pack.name }}</h6>
+                        <p>{{ pack.get_price }} €</p>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
  {% endblock %}

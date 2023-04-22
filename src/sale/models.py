@@ -82,7 +82,7 @@ class Pack_m(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     nest_size = models.CharField(choices=NEST_SIZE, max_length=80, default="small-plastic")
     problem = models.BooleanField(default=False)
-    size = models.OneToOneField(Size_m, null=True, on_delete=models.SET_NULL)
+    size = models.OneToOneField(Size_m, null=True, on_delete=models.CASCADE)
     thumbnail_nest = models.ImageField(upload_to="products", null=True, blank=True)
     thumbnail_nest_1 = models.ImageField(upload_to="products", null=True, blank=True)
     thumbnail_nest_2 = models.ImageField(upload_to="products", null=True, blank=True)

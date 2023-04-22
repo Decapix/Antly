@@ -1,4 +1,5 @@
 from django import template
+from django.utils.safestring import mark_safe
 
 register = template.Library()
 
@@ -28,3 +29,5 @@ def format_description(value):
         result.append('</ul>')
 
     return ''.join(result)
+
+
