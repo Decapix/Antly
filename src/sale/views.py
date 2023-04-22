@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse, HttpResponse, HttpResponseBadRequest
 from django.template.loader import render_to_string
 from .forms import UpdateQuantityForm
 from .models import *
@@ -319,20 +319,16 @@ def checkout_vi(request):
             existing_order.save()
 
             # Create a JSON response with the new address data
-            address_html = f"""
-                        Country/Region : {new_address.country}<br>
-                        Full name : {new_address.complete_name}<br>
-                        Phone number : {new_address.phone_number}<br>
-                        Address : {new_address.adress}<br>
-                        Detail : {new_address.detail or ''}<br>
-                        Postal code : {new_address.postal_code}<br>
-                        City : {new_address.city}<br>
-                        """
-            return JsonResponse({"html": address_html, "address_id": new_address.pk})
+            address_json = {
+            "html": "\nCountry/Region : {}<br>\nFull name : {}<br>\nPhone number : {}<br>\nAddress : {}<br>\nDetail : <br>\nPostal code : {}<br>\nCity : {}<br>\n".format(
+                country_region, full_name, phone_number, address, postal_code, city),
+            "address_id": address_id
+        }
+            return return JsonResponse(address_json)
         else:
             messages.error(request, "Le formulaire d'adresse est invalide.")
     else:
-        form = Address_fo()
+        return HttpResponseBadRequest()
 
     context = {
         'order': existing_order,
