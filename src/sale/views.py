@@ -297,6 +297,9 @@ def delete_cart_item_vi(request, item_id):
 
 
 
+
+
+
 @login_required()
 def checkout_vi(request):
     """
@@ -309,26 +312,25 @@ def checkout_vi(request):
         The rendered checkout view with context data or a JSON response with new address data.
     """
     existing_order = get_user_pending_order(request)
+    form = Address_fo()
+
     if request.method == "POST":
         form = Address_fo(request.POST)
         if form.is_valid():
             new_address = form.save(commit=False)
-            new_address.save()  # Always save the address without associating it with a user
+            new_address.save()
 
             existing_order.address = new_address
             existing_order.save()
 
-            # Create a JSON response with the new address data
             address_json = {
-            "html": "\nCountry/Region : {}<br>\nFull name : {}<br>\nPhone number : {}<br>\nAddress : {}<br>\nDetail : <br>\nPostal code : {}<br>\nCity : {}<br>\n".format(
-                country_region, full_name, phone_number, address, postal_code, city),
-            "address_id": address_id
-        }
+                "html": "\nCountry/Region : {}<br>\nFull name : {}<br>\nPhone number : {}<br>\nAddress : {}<br>\nDetail : <br>\nPostal code : {}<br>\nCity : {}<br>\n".format(
+                    new_address.country_region, new_address.full_name, new_address.phone_number, new_address.adress, new_address.postal_code, new_address.city),
+                "address_id": new_address.id
+            }
             return JsonResponse(address_json)
         else:
             messages.error(request, "Le formulaire d'adresse est invalide.")
-    else:
-        return HttpResponseBadRequest()
 
     context = {
         'order': existing_order,
