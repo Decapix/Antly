@@ -106,7 +106,7 @@ def product_pack_detail_vi(request, id):
     size = pack_product.size
     ant_product = pack_product.get_ant()
     price = pack_product.get_price()
-   metat = MetaTemplate(
+    metat = MetaTemplate(
         f"Pack Fourmis {pack_product.complete_spece()} de {pack_product.localisation()} - Achat et Vente de Packs pour Élevage de Fourmis Débutants | Boutique en Ligne",
         f"Découvrez nos packs pour débutants incluant une fondation de fourmis {pack_product.complete_spece()} de {pack_product.localisation()} et un nid adapté. Lancez-vous facilement dans l'élevage de fourmis avec notre pack complet et bénéficiez d'un support professionnel. Commandez dès maintenant !")
  
