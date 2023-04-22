@@ -136,7 +136,7 @@ def product_pack_detail_vi(request, id):
                         else:
                              messages.error(request,
                                            f"désolée, nous n'avons plus assez d'unitées en stock, il nous en reste {size.stock}")
-                            return render(request, 'sale/pack_detail.html', context={"pack": pack_product, 'meta':metat, "price": price, "ant": ant_product, "offer_ant": offer_ant})
+                            return render(request, 'sale/pack_detail.html', context={"pack": pack_product, 'meta':metat, "price": price, "offer_ant": offer_ant})
 
                 user_order, status = Order_m.objects.get_or_create(owner=user, is_ordered=False)
                 user_order.items.add(cart_item)
