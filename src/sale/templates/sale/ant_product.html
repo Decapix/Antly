@@ -6,7 +6,7 @@
             <div class="row justify-content-between">
                 <div class="col-md-6 pr-md-5 mb-4 mb-md-0">
                     <h6 class="section-title mb-0">Les fourmis</h6>
-                    <h6 class="section-subtitle mb-4">Nos fondations disponible</h6>
+                    <h6 class="section-subtitle mb-4">Les fourmis d'europe</h6>
                     <p>Crée votre univers minuscule chez vous. Optez pour une fondation et introduisez les dans un environnement qui vous inspire, vous être libres de votre imagination !</p>
                 </div>
                 <div class="col-md-6 pl-md-5">
@@ -23,7 +23,7 @@
             <div class="col-md-4">
                 <div class="card border-0 mb-4">
                     <a href="{{ ant.get_absolute_url }}">
-                    <img src="{{ ant.thumbnail_url }}" alt="" class="card-img-top w-100 limite-height">
+                    <img src="{{ ant.thumbnail.url }}" alt="" class="card-img-top w-100 limite-height">
                     <div class="card-body">
                         <h6 class="card-title">{{ ant.name }}</h6>
                         <p>{{ ant.get_price }} €</p>
@@ -41,7 +41,7 @@
             <div class="" id="card-ele">
                 <div class="card border-0 mb-4">
                     <a href="{{ ant.get_absolute_url }}">
-                    <img src="{{ ant.thumbnail_urll }}" alt="" class="card-img-top w-100 limite-height">
+                    <img src="{{ ant.thumbnail.url }}" alt="" class="card-img-top w-100 limite-height">
                     <div class="card-body">
                         <h6 class="card-title">{{ ant.name }}</h6>
                         <p>{{ ant.get_price }} €</p>

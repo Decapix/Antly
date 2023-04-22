@@ -7,7 +7,8 @@
                 <div class="col-md-6 pr-md-5 mb-4 mb-md-0">
                     <h6 class="section-title mb-0">Les pack</h6>
                     <h6 class="section-subtitle mb-4">Nos packs</h6>
-                    <p>Offrez un foyer complet à votre colonie ! Choisissez nos Packs Fourmis incluant une petite colonie et un nid adapté. Créez un écosystème fascinant pour observer et laissez libre cours à votre créativité !</p>
+
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate molestiae temporibus et tenetur unde quasi, cum nemo quo, molestias architecto alias voluptatibus corrupti corporis earum. Necessitatibus maxime modi ipsam, quod!</p>
                 </div>
                 <div class="col-md-6 pl-md-5">
                     <img src="{% static 'sale/imgs/about-pack.jpg' %}" alt="egor-kamelev" class="w-100 shadow-sm">
@@ -16,16 +17,16 @@
 {% endblock %}
 
 
-
  {% block product %}
 
 <div class="portfolio-container">
+
         <div class="row new">
             {% for pack in pack_product %}
             <div class="col-md-4">
                 <div class="card border-0 mb-4">
                     <a href="{{ pack.get_absolute_url }}">
-                    <img src="{{ pack.thumbnail.url }}" alt="" class="card-img-top w-100 limite-height">
+                    <img src="{{ pack.thumbnail_url }}" alt="" class="card-img-top w-100 limite-height">
                     <div class="card-body">
                         <h6 class="card-title">{{ pack.name }}</h6>
                         <p>{{ pack.get_price }} €</p>
@@ -35,15 +36,15 @@
             </div>
             {% endfor %}
         </div>
-
         {% for co in country %}
+
         <div class="row card-product-tri {{ co }} ">
             {% for pack in pack_product %}
             {% if pack.localisation == co %}
             <div class="" id="card-ele">
                 <div class="card border-0 mb-4">
                     <a href="{{ pack.get_absolute_url }}">
-                    <img src="{{ pack.thumbnail.url }}" alt="" class="card-img-top w-100 limite-height">
+                    <img src="{{ pack.thumbnail_url }}" alt="" class="card-img-top w-100 limite-height">
                     <div class="card-body">
                         <h6 class="card-title">{{ pack.name }}</h6>
                         <p>{{ pack.get_price }} €</p>
@@ -55,5 +56,5 @@
             {% endfor %}
         </div>
         {% endfor %}
-    </div>
+</div>
  {% endblock %}
