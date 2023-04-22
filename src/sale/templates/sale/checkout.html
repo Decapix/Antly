@@ -199,46 +199,6 @@
     newAddressForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  // Vérifiez si une adresse a été choisie ou saisie
-  const chosenAddress = document.getElementById("chosen-address").innerHTML;
-  if (!chosenAddress) {
-    alert(
-      "Veuillez choisir ou saisir une adresse avant de procéder au paiement."
-    );
-    return;
-  }
-
-  // Déplacez le reste du code de l'événement de soumission du formulaire de paiement ici
-  const chosenAddressId = chosenAddressDiv.dataset.addressId;
-  document.getElementById("chosen-address-id").value = chosenAddressId;
-
-  const { clientSecret } = await (
-    await fetch("/produit/commande/create-payment-intent/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-CSRFToken": csrftoken,
-      },
-    })
-  ).json();
-  const { error, paymentIntent } = await stripe.confirmCardPayment(
-    clientSecret,
-    {
-      payment_method: {
-        card: cardElement,
-        billing_details: { name: cardHolderName.value },
-      },
-    }
-  );
-
-  if (error) {
-    console.error("Erreur lors du paiement :", error);
-    alert("Le paiement a échoué. Veuillez réessayer.");
-  } else {
-    console.log("Paiement réussi :", paymentIntent);
-    window.location.href = "{% url 'success_n' %}"; // Redirige vers la page de succès
-  }
-
   const formData = new FormData(newAddressForm);
   const response = await fetch("{% url 'checkout_n' %}", {
     method: "POST",
@@ -257,11 +217,11 @@
   } else {
     // Gérer les erreurs de soumission du formulaire ici
     alert(
-      "Erreur lors de la soumission de l'adresse. Veuillez réessayer."
+      "Erreur lors de la soumission de la nouvelle adresse. Veuillez réessayer."
     );
   }
-  });
-  ;
+});
+  
 </script>
 
 <script src="https://js.stripe.com/v3/"></script>
