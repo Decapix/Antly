@@ -331,7 +331,7 @@ def checkout_vi(request):
     context = {
         'order': existing_order,
         "form": form,
-        "STRIPE_PUBLIC_KEY": os.environ.get('STRIPE_PUBLIC_KEY'),
+        "STRIPE_PUBLIC_KEY": os.environ.get('STRIPE_PUBLISHABLE_KEY'),
         "user": request.user
     }
 
@@ -466,7 +466,7 @@ def createpayment(request):
         return HttpResponse("Le montant total de la commande doit être supérieur à zéro.", status=400)
 
     # Set the Stripe API key
-    stripe.api_key = os.environ.get('STRIPE_PUBLIC_KEY')
+    stripe.api_key = os.environ.get('STRIPE_SECRET_KEY')
 
     # Process the POST request
     if request.method == "POST":
