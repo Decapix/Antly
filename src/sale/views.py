@@ -482,6 +482,7 @@ def createpayment(request):
             )
 
             # Return the client secret for the payment intent
+            print(payment_intent["client_secret"])
             return JsonResponse({"clientSecret": payment_intent["client_secret"]})
         except Exception as e:
             # Return an error message in case of an exception
