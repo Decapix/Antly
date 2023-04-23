@@ -111,6 +111,10 @@ class Shopper_m(AbstractUser):
         return self.username or sup(self.email)
 
 
+    def username (self):
+        return self.username or sup(self.email)
+
+
 # def post_save_profile_create(sender, instance, created, *args, **kwargs):
 #     user_profile, created = Shopper_m.objects.get_or_create(user=instance)
 #
