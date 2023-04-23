@@ -125,7 +125,7 @@
 {% endblock %} {% block script %}
 <script>
 // Charger l'API Stripe et créer un objet Stripe
-const stripe = Stripe('{{ STRIPE_PUBLIC_KEY|safe }}');
+const stripe = Stripe('{{ STRIPE_PUBLIC_KEY }}');
 const elements = stripe.elements();
 
 // Créer un élément de carte
@@ -188,32 +188,21 @@ paymentForm.addEventListener('submit', async function (event) {
 // Gérer la soumission du formulaire d'adresse
 const addressForm = document.getElementById('new-address-form');
 addressForm.addEventListener('submit', async function (event) {
-    console.log('Submitting address form');
     event.preventDefault();
 
     // Envoyer les données du formulaire au serveur
     const formData = new FormData(addressForm);
-    console.log(formData);
-    try {
-        const response = await fetch("{% url 'checkout_n' %}", {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'X-CSRFToken': document.getElementsByName('csrfmiddlewaretoken')[0].value
-            }
-        });
-        console.log(response);
-    } catch (error) {
-        console.error("Error during form submission:", error);
-    }
-});
-
+    const response = await fetch("{% url 'checkout_n' %}", {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRFToken': document.getElementsByName('csrfmiddlewaretoken')[0].value
+        }
+    });
 
     // Traiter la réponse
-    if (response.status === 200) {
+    if (response.ok) {
         const data = await response.json();
-        console.log(data);
-
 
         // Afficher l'adresse choisie
         const chosenAddress = document.getElementById('chosen-address');
@@ -227,7 +216,6 @@ addressForm.addEventListener('submit', async function (event) {
         const cardButton = document.getElementById('card-button');
         cardButton.disabled = false;
     } else {
-    console.log("erreur");
         alert("Une erreur s'est produite lors de la soumission du formulaire d'adresse.");
     }
 });
