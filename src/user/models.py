@@ -111,7 +111,7 @@ class Shopper_m(AbstractUser):
         return self.username or sup(self.email)
 
 
-    def username (self):
+    def user_name (self):
         return self.username or sup(self.email)
 
 

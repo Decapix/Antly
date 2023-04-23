@@ -41,7 +41,7 @@ def activate(request, uidb64, token):
 def activateEmail(request, user, to_email):
     mail_subject = "Activez votre compte utilisateur."
     message = render_to_string("user/template_activate_account.html", {
-        'user': user.username(),
+        'user': user.user_name(),
         # 'domain': get_current_site(request).domain,
         'domain': "antly.fr",
         'uid': urlsafe_base64_encode(force_bytes(user.pk)),
