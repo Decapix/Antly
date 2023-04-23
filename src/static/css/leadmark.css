@@ -12044,10 +12044,10 @@ textarea.form-control {
 }
 
 .img-eye1{
-  top:130px
+  top:90px
 }
 .img-eye2{
-  top:175px
+  top:135px
 }
 
 
@@ -12126,10 +12126,6 @@ textarea.form-control {
   color: #f1c40f;
 }
 
-/* braintree */
-#braintree-form {
-  display: none;
-}
 
 
 

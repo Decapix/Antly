@@ -207,7 +207,7 @@ def product_ant_detail_vi(request, id):
                 if status:
                     user_order.ref_code = generate_order_id()
                     user_order.save()
-                messages.info(request, "item added to cart")
+                messages.info(request, "article ajouté au panier")
                 return redirect("homepage_n")
             else:
                 return redirect("login_n")

@@ -94,6 +94,7 @@ class Shopper_m(AbstractUser):
         error_messages={
             "unique": _("A user with that username already exists."),
         },
+        null = True, blank = True
     )
 
     why_ant = models.CharField(max_length=2000, null=True, blank=True)

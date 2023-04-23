@@ -128,3 +128,24 @@ stars.forEach(star => {
 });
 
 updateStars(parseInt(starInput.value) || 5);
+
+
+
+
+// message disappears 
+document.addEventListener('DOMContentLoaded', function () {
+  // Sélectionnez le message et le bouton de fermeture.
+  const messageElement = document.getElementById('message-element');
+  const closeButton = messageElement.querySelector('.close');
+
+  // Créez une fonction pour masquer le message.
+  function hideMessage() {
+      messageElement.style.display = 'none';
+  }
+
+  // Si l'utilisateur clique sur la croix, masquez le message.
+  closeButton.addEventListener('click', hideMessage);
+
+  // Masquez le message automatiquement après 7 secondes.
+  setTimeout(hideMessage, 7000);
+});
