@@ -361,7 +361,7 @@ def success_vi(request):
 
     # Set up the credentials
     credentials = service_account.Credentials.from_service_account_file(
-        settings.BASE_DIR / "google_json/antly-address-c82b73d4440d.json",
+        settings.BASE_DIR / "google_json/credentials.json",
         scopes=['https://www.googleapis.com/auth/spreadsheets']
     )
 
