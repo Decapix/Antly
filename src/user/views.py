@@ -60,7 +60,7 @@ def activateEmail(request, user, to_email):
 def changepasswordEmail(request, user, to_email):
     mail_subject = "Confirmer votre identitée"
     message = render_to_string("user/template_change_password.html", {
-        'user': user.username,
+        'user': user.user_name(),
         # 'domain': get_current_site(request).domain,
         'domain': "antly.fr",
         'uid': urlsafe_base64_encode(force_bytes(user.pk)),
@@ -134,7 +134,7 @@ def login_vi(request):
         user = authenticate(email=email, password=password)
         if user:
             login(request, user)
-            messages.success(request, f"Bonjour {user.username}! Vous avez bien été connecté")
+            messages.success(request, f"Bonjour {user.user_name()}! Vous avez bien été connecté")
 
             if 'next' in request.POST:
                 return redirect(request.POST.get('next'))

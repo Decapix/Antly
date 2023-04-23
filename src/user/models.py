@@ -112,7 +112,10 @@ class Shopper_m(AbstractUser):
 
 
     def user_name (self):
-        return self.username or sup(self.email)
+        if self.username :
+            return self.username
+        else : 
+            return sup(self.email)
 
 
 # def post_save_profile_create(sender, instance, created, *args, **kwargs):
