@@ -466,6 +466,7 @@ def createpayment(request):
         return HttpResponse("Le montant total de la commande doit être supérieur à zéro.", status=400)
 
     # Set the Stripe API key
+    stripe.api_key = os.environ.get('STRIPE_PUBLIC_KEY')
 
     # Process the POST request
     if request.method == "POST":
@@ -482,7 +483,6 @@ def createpayment(request):
             )
 
             # Return the client secret for the payment intent
-            print(payment_intent["client_secret"])
             return JsonResponse({"clientSecret": payment_intent["client_secret"]})
         except Exception as e:
             # Return an error message in case of an exception
