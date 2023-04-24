@@ -506,7 +506,7 @@ def webhook_vi(request):
 
     try:
         # Construct the webhook event
-        event = stripe.Webhook.construct_event(payload, sig_header, os.environ.get('STRIPE_WEBHOOK_SECRET'))
+        event = stripe.Webhook.construct_event(payload, sig_header,'we_1MyaJ3KUGNzb4QbIqF0Thj1d')
     except ValueError as e:
         # Invalid payload
         return HttpResponse(status=400)
@@ -548,6 +548,9 @@ def webhook_vi(request):
 
         # Save the transaction
         transaction.save()
+    
+    else :
+        pass 
 
     return HttpResponse(status=200)
 
