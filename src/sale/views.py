@@ -500,8 +500,8 @@ def webhook_vi(request):
         HttpResponse: An HTTP response with a status code indicating success or failure.
     """
     # Get the webhook payload and signature header
-    payload = request.data
-    sig_header = request.META["STRIPE_SIGNATURE"]
+    payload = request.body
+    sig_header = request.META["HTTP_STRIPE_SIGNATURE"]
     event = None
 
     try:
