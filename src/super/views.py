@@ -22,7 +22,11 @@ def homepage_vi(request):
         comment = random_three_elements(list(comment))
     product = list(ant) + list(pack)
     # offer
-    offers = Offer_m.objects.filter(active=True)
+    offers = None
+    if not request.session.get('offer_shown', False):
+        offers = Offer_m.objects.filter(active=True)
+        request.session['offer_shown'] = True
+        request.session.modified = True
     return render(request, 'super/homepage.html', context={"product": product, "meta": metat, "comment": comment, "offers": offers})
 
 
@@ -34,8 +38,7 @@ def information_vi(request):
     metat = MetaTemplate(
         "Informations | Boutique en Ligne de Fourmis Européennes pour Débutants",
         "Découvrez toutes les informations importantes concernant notre boutique en ligne de fourmis européennes pour débutants. Informez-vous sur nos options de livraison, modes de paiement, conditions d'utilisation, politique de confidentialité, mentions légales, expédition et retours, qui nous sommes, cookies et comment nous contacter.")
-    offers = Offer_m.objects.filter(active=True)
-    return render(request, 'super/information.html', context={"meta": metat, "offers": offers})
+    return render(request, 'super/information.html', context={"meta": metat})
 
 
 def cgv_vi(request):
