@@ -503,7 +503,7 @@ def webhook_vi(request):
     payload = request.body
     sig_header = request.META["HTTP_STRIPE_SIGNATURE"]
     event = None
-
+    """
     try:
         # Construct the webhook event
         event = stripe.Webhook.construct_event(payload, sig_header,'we_1MyaJ3KUGNzb4QbIqF0Thj1d')
@@ -512,7 +512,9 @@ def webhook_vi(request):
         return HttpResponse(status=404)
     except stripe.error.SignatureVerificationError as e:
         # Invalid signature
-        return HttpResponse(status=400)
+        return HttpResponse(status=400) """
+
+    event = stripe.Webhook.construct_event(payload, sig_header,'we_1MyaJ3KUGNzb4QbIqF0Thj1d')
 
     # Handle the event if it's a successful payment intent
     if event.type == "payment_intent.succeeded":
