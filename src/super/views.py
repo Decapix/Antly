@@ -38,7 +38,8 @@ def information_vi(request):
     metat = MetaTemplate(
         "Informations | Boutique en Ligne de Fourmis Européennes pour Débutants",
         "Découvrez toutes les informations importantes concernant notre boutique en ligne de fourmis européennes pour débutants. Informez-vous sur nos options de livraison, modes de paiement, conditions d'utilisation, politique de confidentialité, mentions légales, expédition et retours, qui nous sommes, cookies et comment nous contacter.")
-    return render(request, 'super/information.html', context={"meta": metat})
+    offers = Offer_m.objects.filter(active=True)
+    return render(request, 'super/information.html', context={"meta": metat, "offers": offers})
 
 
 def cgv_vi(request):
