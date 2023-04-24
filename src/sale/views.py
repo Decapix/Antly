@@ -500,21 +500,19 @@ def webhook_vi(request):
         HttpResponse: An HTTP response with a status code indicating success or failure.
     """
     # Get the webhook payload and signature header
-    payload = request.body
-    sig_header = request.META["HTTP_STRIPE_SIGNATURE"]
+    payload = request.data
+    sig_header = request.META["STRIPE_SIGNATURE"]
     event = None
-    """
+
     try:
         # Construct the webhook event
-        event = stripe.Webhook.construct_event(payload, sig_header,'we_1MyaJ3KUGNzb4QbIqF0Thj1d')
+        event = stripe.Webhook.construct_event(payload, sig_header,'whsec_iG1a7cIlmL5RcFYB1Wn03QiX4FIdmXHn')
     except ValueError as e:
         # Invalid payload
-        return HttpResponse(status=404)
+        return HttpResponse(status=400)
     except stripe.error.SignatureVerificationError as e:
         # Invalid signature
-        return HttpResponse(status=400) """
-
-    event = stripe.Webhook.construct_event(payload, sig_header,'we_1MyaJ3KUGNzb4QbIqF0Thj1d')
+        return HttpResponse(status=400)
 
     # Handle the event if it's a successful payment intent
     if event.type == "payment_intent.succeeded":
