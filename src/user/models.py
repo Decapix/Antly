@@ -105,17 +105,18 @@ class Shopper_m(AbstractUser):
     objects = CustomUserManager()
 
 
-    # payment methods
+
+    def user_name(self):
+        if self.username:
+            return self.username
+        else:
+            return sup(self.email)
 
     def __str__(self):
-        return self.username or sup(self.email)
+        return self.user_name()
 
-
-    def user_name (self):
-        if self.username :
-            return self.username
-        else : 
-            return sup(self.email)
+    
+    # payment methods
 
 
 # def post_save_profile_create(sender, instance, created, *args, **kwargs):
