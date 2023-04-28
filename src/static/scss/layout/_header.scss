@@ -18,7 +18,7 @@
         align-items: center;
         flex-direction: column;
         justify-content: center;
-
+        
         .subtitle {
             font-size: calc(13px + (18 - 13) * ((100vw - 320px) / (1200 - 320)));
             font-weight: 400;

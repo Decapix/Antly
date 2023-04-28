@@ -46,5 +46,4 @@ sitemaps = {
     'static': StaticSitemap,
     'ants': AntSitemap,
     'packs': PackSitemap,
-
 }
