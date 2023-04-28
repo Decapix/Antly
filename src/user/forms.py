@@ -12,7 +12,7 @@ from django import forms
 class Signup_fo(UserCreationForm):
     class Meta:
         model = Shopper_m
-        fields = ['username', 'email', 'password1', 'password2']
+        fields = [ 'email', 'password1', 'password2']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -27,10 +27,6 @@ class Signup_fo(UserCreationForm):
             'placeholder': 'mot de passe',
             "onclick": "changer2()",
             "id": "password2",
-        })
-        self.fields['username'].widget.attrs.update({
-            'class': 'form-control',
-            'placeholder': 'Nom d\'utilisateur',
         })
 
         self.fields['email'].widget.attrs.update({
