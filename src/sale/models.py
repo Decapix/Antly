@@ -130,3 +130,11 @@ class Ant_m(ProductBaseAnt_m):
 
     def get_absolute_url(self):
         return reverse("ant_detail_n", kwargs={"id": self.id})
+
+
+
+class Nest_m(Product_m) :
+    """The model base for ant nest"""
+    nest_size = models.CharField(choices=NEST_SIZE, max_length=80, default="small-plastic")
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+    stock = models.PositiveIntegerField(null=True, blank=True)
