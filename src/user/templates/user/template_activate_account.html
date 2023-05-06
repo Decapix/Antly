@@ -2,9 +2,35 @@
 {% block mail %}
 
 
-Bonjour {{ user.username }},
+Cher(e) {{ user.username }},
 
-Veuillez cliquer sur le lien ci-dessous pour confirmer votre inscription :
+Merci de vous être inscrit(e) sur notre boutique en ligne antly.fr, spécialisée dans le monde fascinant des fourmis. 
+Pour activer votre compte et profiter pleinement de nos services, veuillez confirmer votre adresse e-mail en cliquant sur le lien ci-dessous :
 
 {{ protocol }}://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+
+Cliquez ici pour valider votre adresse e-mail
+
+Si le lien ci-dessus ne fonctionne pas, copiez et collez l'URL suivante dans la barre d'adresse de votre navigateur :
+{{ protocol }}://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+
+En confirmant votre adresse e-mail, vous pourrez accéder à toutes les fonctionnalités de notre boutique en ligne, recevoir des offres spéciales et être informé(e) des dernières nouveautés concernant le monde des fourmis.
+
+Nous sommes impatients de vous accueillir chez Antly.fr et de partager notre passion pour les fourmis avec vous.
+
+Si vous avez des questions ou rencontrez des problèmes pour valider votre adresse e-mail, n'hésitez pas à nous contacter à l'adresse antly.fourmis@gmail.fr, au numéro 06 51 33 61 58, ou via nos réseaux sociaux.
+
+Cordialement,
+
+L'équipe Antly
+
+
+
+
+
+Antly - La boutique en ligne dédiée aux fourmis
+https://www.antly.fr
+Service client :
+antly.fourmis@gmail.fr
+06 51 33 61 58
 {% endblock %}
