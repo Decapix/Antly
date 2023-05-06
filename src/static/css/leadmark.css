@@ -12044,12 +12044,12 @@ textarea.form-control {
 }
 
 .img-eye1{
-  /* top:90px  without username */
-      top:130px
+  /* top:130px  with username */
+      top:90px
   }
   .img-eye2{
-  /*  top:135px without username */
-      top:175px
+  /*  top:175px with username */
+      top:135px
   }
 
 
