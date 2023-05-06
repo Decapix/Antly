@@ -28,8 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-4o949ijfccf)w8ll%(hgb#b%h29p#g69dljf*)af9pkd1f_iw5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = os.environ.get('ENV') != 'PRODUCTION'
-DEBUG = True
+DEBUG = os.environ.get('ENV') != 'PRODUCTION'
 ALLOWED_HOSTS = ['antly.herokuapp.com', 'localhost', '127.0.0.1', 'antly.fr', 'www.antly.fr']
 
 
