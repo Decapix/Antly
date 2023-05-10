@@ -1,0 +1,28 @@
+Cher(e) {{ user.user_name }},
+
+Nous sommes ravis de vous informer que votre commande {{ order.ref_code }} chez Antly a été expédiée avec succès !
+
+Voici les détails de l'expédition de votre colis :
+
+Numéro de suivi : {{ tracking_number }}
+Transporteur : {{ carrier_name }}
+Date d'expédition : {{ shipping_date|date:"d F Y" }}
+Estimation de la date de livraison : {{ estimated_delivery_date|date:"d F Y" }}
+Pour suivre l'acheminement de votre colis, veuillez cliquer sur le lien ci-dessous ou copiez-le dans la barre d'adresse de votre navigateur et entrez votre numéro de suivi :
+
+{{ tracking_url }}
+
+Nous vous remercions de votre confiance et de votre achat chez Antly. Si vous avez des questions ou si vous rencontrez des problèmes avec votre commande, n'hésitez pas à nous contacter.
+
+Nous espérons que vous serez satisfait de votre achat et que vous apprécierez vos nouvelles fourmis. N'hésitez pas à partager votre expérience avec Antly sur les réseaux sociaux et à nous recommander à vos amis et à votre famille.
+
+Encore merci de votre confiance et à bientôt sur Antly !
+
+Cordialement,
+
+
+L'équipe Antly
+
+tel : 06 51 33 61 58
+email : antly.fourmis@gmail.com
+instagram : @antly.fourmis 

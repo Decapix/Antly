@@ -2,8 +2,10 @@ from django.db import models
 from user.models import Shopper_m as Profile
 from user.models import Address_m as Address
 from .models import *
+from .extras import send_tracking_number_email
 from django.conf import settings
-
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 
 # cart
 
@@ -41,6 +43,7 @@ class Order_m(models.Model):
     items = models.ManyToManyField(OrderItem_m)
     date_ordered = models.DateTimeField(auto_now=True)
     address = models.OneToOneField(Address, null=True, on_delete=models.SET_NULL)
+    order_track = models.CharField(max_length=15, null=True, blank=True)
 
 
     def shipping_costs(self):
@@ -79,3 +82,11 @@ class Transaction(models.Model):
 
     class Meta:
         ordering = ['-timestamp']
+
+
+@receiver(pre_save, sender=Order_m)
+def send_tracking_number(sender, instance, **kwargs):
+    if instance.pk:  # Vérifie si l'objet a déjà été sauvegardé auparavant
+        old_order = Order_m.objects.get(pk=instance.pk)
+        if old_order.order_track != instance.order_track:  # Vérifie si le numéro de suivi a été modifié
+            send_tracking_number_email(instance)
