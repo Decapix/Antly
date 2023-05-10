@@ -43,7 +43,7 @@ class Order_m(models.Model):
     items = models.ManyToManyField(OrderItem_m)
     date_ordered = models.DateTimeField(auto_now=True)
     address = models.OneToOneField(Address, null=True, on_delete=models.SET_NULL)
-    order_track = models.CharField(max_length=15, null=True, blank=True)
+    order_track = models.CharField(max_length=30, null=True, blank=True)
 
 
     def shipping_costs(self):

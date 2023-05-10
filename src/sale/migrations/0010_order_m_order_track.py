@@ -13,6 +13,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='order_m',
             name='order_track',
-            field=models.CharField(blank=True, max_length=15, null=True),
+            field=models.CharField(blank=True, max_length=30, null=True),
         ),
     ]
