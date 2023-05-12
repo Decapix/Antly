@@ -210,8 +210,8 @@ COMPANY_VAT_NUMBER = "Pas de TVA applicable"
 
 # offert
 
-FREE_COLONIE = False
-FREE_SHIPPING_COSTE = True
+FREE_COLONIE = True
+FREE_SHIPPING_COSTE = False
 
 
 # storage
