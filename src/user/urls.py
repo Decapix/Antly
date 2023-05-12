@@ -13,10 +13,13 @@ urlpatterns = [
     path('compte/<str:pk>', dashboard_vi, name="dashboard_n"),
     path('compte/<str:pk>/commandes/', orders_vi, name="orders_n"),
     path('compte/<str:pk>/detailes/', detail_vi, name="detail_n"),
+    path('compte/<str:pk>/ressources/', resources_vi, name="resources_n"),
+    path('compte/ressources/', get_debut_pdf, name='get_debut_pdf'),
     # path('compte/<str:pk>/adresse/', address_vi, name="address_n"),
     path('compte/commentaire/', comment_vi, name="comment_n"),
     path('compte/<str:pk>/supprimer_mon_compt/', delete_account_vi, name="delete_account_n"),
     path('password-reset/', password_reset_request_vi, name='password_reset_request_n'),
     path('password-change/<uidb64>/<token>', change_password_vi, name='change_password_n'),
+
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

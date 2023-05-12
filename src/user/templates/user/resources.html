@@ -1,0 +1,21 @@
+{% extends "account.html" %}
+
+{% block account %}
+
+<h5>Ressources</h5>
+<p>Mes ressources :</p>
+
+
+
+<table class="table table-striped">
+    <tbody>
+       <tr>
+          <td>
+                Guide élevage de fourmis, introduction à la myrmécologie
+          </td>
+           <td><a href="{% url 'get_debut_pdf' %}" class="btn btn-primary mt-4">Télecharger</a></td>
+       </tr>
+    </tbody>
+ </table>
+
+{% endblock %}

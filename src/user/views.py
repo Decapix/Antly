@@ -15,6 +15,25 @@ from django.template.loader import render_to_string
 from django.core.mail import EmailMessage, send_mail
 from super.models import MetaTemplate
 from sale.modelcart import Order_m
+from django.http import FileResponse, Http404
+import os
+from django.conf import settings
+
+
+def pdfemail(request, user):
+    mail_subject = "Bienvenue chez Antly.fr - Votre Guide d'Introduction à la Myrmécologie joint"
+    message = render_to_string("user/template_pdf_mail.html", {
+        'user': user.user_name(),
+    })
+    email = EmailMessage(mail_subject, message, to=[user.email])
+    pdf_path = os.path.join(settings.BASE_DIR, 'user', 'templates', 'user', 'guide.pdf')
+    email.attach_file(pdf_path)
+    if email.send():
+        messages.success(request, f"L'envoi de l'email contenant le guide PDF à {user.email} est un succès, veuillez regarder dans votre boite "
+                                  f"mail ")
+    else:
+        messages.error(request,
+                       f"Problème d'envoi de l'email contenant le guide PDF à {user.email}, vérifiez si vous l'avez entré correctement.")
 
 
 def activate(request, uidb64, token):
@@ -28,6 +47,7 @@ def activate(request, uidb64, token):
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
         user.save()
+        pdfemail(request, user)
 
         messages.success(request, "Merci pour votre confirmation par e-mail. Votre compte à été crée")
         login(request, user)
@@ -36,6 +56,8 @@ def activate(request, uidb64, token):
         messages.error(request, "Lien d'activation invalide")
 
     return redirect('homepage_n')
+
+
 
 
 def activateEmail(request, user, to_email):
@@ -301,6 +323,16 @@ def comment_vi(request):
         return redirect("login_n")
 
 
+@login_required
+def resources_vi(request, pk):
+    user = request.user
 
+    return render(request, 'user/resources.html', context={"user": user})
 
+def get_debut_pdf(request):
+    pdf_path = os.path.join(settings.BASE_DIR, 'user', 'templates', 'user', 'guide.pdf')
+    try:
+        return FileResponse(open(pdf_path, 'rb'), content_type='application/pdf')
+    except FileNotFoundError:
+        raise Http404()
 
