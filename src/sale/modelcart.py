@@ -4,7 +4,7 @@ from user.models import Address_m as Address
 from .models import *
 from .extras import send_tracking_number_email
 from django.conf import settings
-from django.db.models.signals import pre_save
+from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 # cart
@@ -84,9 +84,7 @@ class Transaction(models.Model):
         ordering = ['-timestamp']
 
 
-@receiver(pre_save, sender=Order_m)
+@receiver(post_save, sender=Order_m)
 def send_tracking_number(sender, instance, **kwargs):
-    if instance.pk:  # Vérifie si l'objet a déjà été sauvegardé auparavant
-        old_order = Order_m.objects.get(pk=instance.pk)
-        if old_order.order_track != instance.order_track:  # Vérifie si le numéro de suivi a été modifié
-            send_tracking_number_email(instance)
+    if instance.order_track:  # Vérifie si le numéro de suivi n'est pas vide
+        send_tracking_number_email(instance)
