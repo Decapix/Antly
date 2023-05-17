@@ -12229,3 +12229,23 @@ textarea.form-control {
 .french {
   width: 30px
 }
+
+
+
+/* message offer in checkout */
+
+
+.affichtxt:hover .description-pop {
+  display: block;
+}
+
+.description-pop {
+  display: none;
+  position: absolute;
+  width: 200px;
+  padding: 10px;
+  background: #ffffff; /* couleur de fond en blanc */
+  color: #000000; /* couleur du texte en noir */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}

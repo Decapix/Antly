@@ -50,6 +50,14 @@
               </tr>
             </tfoot>
           </table>
+          {% if order.gift %}
+          <button class="btn btn-outline-primary circle ml-5 affichtxt">
+            <i class="ti-star"></i>
+            <div class="description-pop"><p>La colonie offerte est une colonie, sélectionnée au hasard, parmi tous nos 
+              stocks. Nous l’ajoutons à votre commande en plus des articles que vous avez choisi. 
+            </p></div>
+          </button>
+          {% endif %}
         </div>
         <!-- strip-->
         <h4 class="mb-4">Paiement</h4>

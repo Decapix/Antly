@@ -218,7 +218,7 @@ class Address_fo(forms.ModelForm):
             }),
             'phone_number': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': _('Numéro de téléphone (ex : 06 60 06 60 06)')
+                'placeholder': _('Numéro de téléphone (ex : 0660066006)')
             }),
             'adress': forms.TextInput(attrs={
                 'class': 'form-control',
@@ -226,7 +226,7 @@ class Address_fo(forms.ModelForm):
             }),
             'detail': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': _('Détail (ex : batiment 2, porte à gauche )')
+                'placeholder': _('Détail (ex : batiment 2) *facultatif*')
             }),
             'postal_code': forms.TextInput(attrs={
                 'class': 'form-control',
