@@ -210,31 +210,31 @@ class Address_fo(forms.ModelForm):
         widgets = {
             'country': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': _('Pays/Région')
+                'placeholder': _('Pays/Région (ex : France)')
             }),
             'complete_name': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': _('Nom complet')
+                'placeholder': _('Nom complet (ex : Bernard Weber)')
             }),
             'phone_number': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': _('Numéro de téléphone')
+                'placeholder': _('Numéro de téléphone (ex : 06 60 06 60 06)')
             }),
             'adress': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': _('Adresse')
+                'placeholder': _('Adresse (ex : 6 sentier de la fourmis)')
             }),
             'detail': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': _('Détail *')
+                'placeholder': _('Détail (ex : batiment 2, porte à gauche )')
             }),
             'postal_code': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': _('Code postal')
+                'placeholder': _('Code postal (ex : 59610)')
             }),
             'city': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': _('Ville')
+                'placeholder': _('Ville (ex : Fourmies)')
             }),
         }
 
