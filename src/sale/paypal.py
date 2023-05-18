@@ -35,10 +35,10 @@ def create_paypal_transaction(order):
             "item_list": {
                 "items": items},
             "amount": {
-                "total": str(int(order.get_cart_total())),
+                "total": "10",
                 "details": {
-                    "subtotal": str(int(order.get_cart_total()) - int(order.shipping_costs())),
-                    "shipping": str(int(order.shipping_costs())),
+                    "subtotal": "7",
+                    "shipping": "3",
                 },
                 "currency": "EUR"},
             "description": "commande fourmis antly"}]})
