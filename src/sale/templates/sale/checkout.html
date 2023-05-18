@@ -108,6 +108,11 @@
         </div>
 
         <!-- endstrip-->
+                <!-- paypal -->
+                <div id="paypal-button-container"></div>
+                <input type="hidden" name="csrfmiddlewaretoken" value="{% csrf_token %}">
+        
+                <!-- endpaypal-->
       </div>
 
       <div class="col-md-4 pl-md-5">
@@ -236,6 +241,49 @@ addressForm.addEventListener('submit', async function (event) {
         alert("Une erreur s'est produite lors de la soumission du formulaire d'adresse.");
     }
 });
+
+// Paypal
+var csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+paypal.Buttons({
+    style: {
+        shape: 'rect',
+        color: 'blue',
+        layout: 'vertical',
+        label: 'paypal',
+    },
+    createOrder: function(data, actions) {
+        // Appeler votre serveur pour configurer la transaction
+        return fetch('{% url 'create-paypal-payment' %}', {
+            method: 'post',
+            headers: {
+                'content-type': 'application/json',
+                'X-CSRFToken': csrfToken  // Ajoutez cette ligne
+            },
+        }).then(function(res) {
+            return res.json();
+        }).then(function(data) {
+            return data.orderID; // Utilisez l'ID de la commande renvoyé par votre serveur
+        });
+    },
+    onApprove: function(data, actions) {
+        // Appeler votre serveur pour finaliser la transaction
+        return fetch('/commande/process-paypal-payment/', {
+            method: 'post',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                orderID: data.orderID
+            })
+        }).then(function(res) {
+            return res.json();
+        }).then(function(details) {
+            alert('Transaction completed by ' + details.payer.name.given_name);
+            // Redirigez l'utilisateur vers une page de réussite
+            window.location.href = "/commande/success/";
+        });
+    }
+}).render('#paypal-button-container'); // Affiche le bouton PayPal
 </script>
 
 <script src="{% static 'vendors/bootstrap/bootstrap.bundle.min.js' %}"></script>
