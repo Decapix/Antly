@@ -19,7 +19,7 @@ def create_paypal_transaction(order):
     })
 
     items = [
-        {'name': item.name(), 'sku': str(item.id), 'price': str(item.price), 'currency': "EUR", 'quantity': item.quantity}
+        {'name': item.name(), 'sku': str(item.id), 'price': str(item.price), 'currency': "EUR", 'quantity': str(item.quantity)}
         for item in order.get_cart_items()]
 
     # Créez la transaction PayPal
@@ -35,10 +35,10 @@ def create_paypal_transaction(order):
             "item_list": {
                 "items": items},
             "amount": {
-                "total": "10",
+                "total": str(int(order.get_cart_total())),
                 "details": {
-                    "subtotal": "7",
-                    "shipping": "3",
+                    "subtotal": str(int(order.get_cart_total()) - int(order.shipping_costs())),
+                    "shipping": str(int(order.shipping_costs())),
                 },
                 "currency": "EUR"},
             "description": "commande fourmis antly"}]})
