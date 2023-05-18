@@ -253,7 +253,7 @@ paypal.Buttons({
     },
     createOrder: function(data, actions) {
         // Appeler votre serveur pour configurer la transaction
-        return fetch('{% url 'create-paypal-payment' %}', {
+        return fetch("{% url 'create-paypal-payment' %}", {
             method: 'post',
             headers: {
                 'content-type': 'application/json',
