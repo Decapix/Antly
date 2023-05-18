@@ -26,6 +26,7 @@ from django.http import FileResponse
 from reportlab.pdfgen import canvas
 from django.templatetags.static import static as stat
 from django.contrib.staticfiles import finders
+from .paypal import create_paypal_transaction, execute_paypal_transaction
 
 def get_user_pending_order(request):
     """
@@ -554,6 +555,73 @@ def webhook_vi(request):
 
     return HttpResponse(status=200)
 
+
+
+def create_paypal_payment(request):
+    # Récupérez les détails de la commande de l'utilisateur
+    order = get_user_pending_order(request)
+
+    # Créez la transaction PayPal
+    payment = create_paypal_transaction(order)
+
+    # Si la création de la transaction a échoué, handle the failure
+    if payment is None:
+        # Handle failure here. Maybe redirect to an error page, or log the error.
+        return
+
+    # Récupérez l'URL de redirection de PayPal
+    paypal_url = next(link.href for link in payment.links if link.rel == 'approval_url')
+
+    # Renvoyez l'URL à votre front-end
+    return redirect(paypal_url)
+
+
+def process_paypal_payment(request):
+    # Récupérez les informations de paiement de la requête
+    payment_id = request.GET.get('paymentId')
+    payer_id = request.GET.get('PayerID')
+
+    # Exécutez la transaction PayPal
+    payment = execute_paypal_transaction(payment_id, payer_id)
+
+    # Vérifiez que le paiement a été effectué avec succès
+    if payment.state == 'approved':
+        # Effectuez des actions supplémentaires, comme l'envoi d'e-mails
+        # Get the order and user profile associated with the payment intent
+        order_to_purchase = get_user_pending_order(request)
+        user_profile = request.user
+
+        # Update the placed order
+        order_to_purchase.is_ordered = True
+        order_to_purchase.date_ordered = timezone.now().date()
+        order_to_purchase.save()
+
+        # Get all items in the order (generates a queryset)
+        order_items = order_to_purchase.items.all()
+
+        # Update order items
+        order_items.update(is_ordered=True)
+
+        # Reduce stock for each item in the order
+        for item in order_items:
+            for size in item.size.all():
+                size.stock -= item.quantity
+                size.save()
+
+        # Create a transaction
+        transaction = Transaction(shopper=user_profile,
+                                  order=order_to_purchase,
+                                  success=True)
+
+        # Save the transaction
+        transaction.save()
+
+        # Redirigez l'utilisateur vers une page de succès
+        return redirect('success_n')
+    else:
+        # Redirigez l'utilisateur vers la page de paiement s'il y a eu un problème
+        messages.error("la transaction a échoué")
+        return redirect('checkout_n')
 
 
 @login_required
