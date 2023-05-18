@@ -110,7 +110,7 @@
         <!-- endstrip-->
                 <!-- paypal -->
                 <div id="paypal-button-container"></div>
-                <input type="hidden" name="csrfmiddlewaretoken" value="{% csrf_token %}">
+                <input type="hidden" name="csrfmiddlewaretokenn" value="{% csrf_token %}" >
         
                 <!-- endpaypal-->
       </div>
@@ -243,7 +243,7 @@ addressForm.addEventListener('submit', async function (event) {
 });
 
 // Paypal
-var csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+var csrfToken = document.querySelector('[name=csrfmiddlewaretokenn]').value;
 paypal.Buttons({
     style: {
         shape: 'rect',
