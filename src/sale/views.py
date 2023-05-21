@@ -382,9 +382,9 @@ def success_vi(request):
     address = order.address
     address_info = f"{address.complete_name}, {address.adress}, {address.detail}, {address.postal_code} {address.city}, {address.country}"
     contact = f"{address.phone_number} | {request.user.email}"
-    total = sum(i.price for i in order.get_cart_items())
-    total_ship = total + order.shipping_costs()
-
+    to = sum(i.price for i in order.get_cart_items())
+    total = f"{to}"
+    total_ship = f"{to + order.shipping_costs()}"
     order_data = [date_ordered, customer_name, order_contents, address_info, contact, total, total_ship]
 
     # Add the order information to the spreadsheet
