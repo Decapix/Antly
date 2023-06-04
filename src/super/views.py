@@ -60,7 +60,7 @@ def superfeed_xml_view(request):
     # Retrieve all Ant_m, Pack_m, and Other_m products
     ant_products = Ant_m.objects.filter(sizes__stock__gt=0).distinct()
     pack_products = Pack_m.objects.filter(size__stock__gt=0).distinct()
-    other_products = Other_m.objects.filter(stock__gt=0).distinct()
+    #other_products = Other_m.objects.filter(stock__gt=0).distinct()
 
     # Load the template for the superfeed.xml file
     template = loader.get_template('super/superfeed.xml')
@@ -69,7 +69,7 @@ def superfeed_xml_view(request):
     context = {
         'ant_products': ant_products,
         'pack_products': pack_products,
-        'other_products': other_products,
+   #     'other_products': other_products,
     }
 
     # Render the template with the context data

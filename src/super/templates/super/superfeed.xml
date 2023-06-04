@@ -21,7 +21,7 @@
         </item>
         {% endfor %}
 
-        {% for product in other_products %}
+<!--         {% for product in other_products %}
         <item>
             <title>{{ product.name }}</title>
             <link>{{ product.get_absolute_url }}</link>
@@ -29,6 +29,6 @@
             <g:price>{{ product.sh_price }}</g:price>
             <g:image_link>{{ product.thumbnail_url }}</g:image_link>
         </item>
-        {% endfor %}
+        {% endfor %} -->
     </channel>
 </rss>
