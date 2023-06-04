@@ -6,7 +6,7 @@
             <title>{{ product.name }}</title>
             <link>{{ product.get_absolute_url }}</link>
             <description>{{ product.description }}</description>
-            <g:price>{{ product.sh_price }}</g:price>
+            <g:price>{{ product.get_price }}</g:price>
             <g:image_link>{{ product.thumbnail_url }}</g:image_link>
         </item>
         {% endfor %}
@@ -15,8 +15,8 @@
         <item>
             <title>{{ product.name }}</title>
             <link>{{ product.get_absolute_url }}</link>
-            <description>{{ product.sh_description }}</description>
-            <g:price>{{ product.sh_price }}</g:price>
+            <description>{{ product.description }}</description>
+            <g:price>{{ product.get_price }}</g:price>
             <g:image_link>{{ product.thumbnail_url }}</g:image_link>
         </item>
         {% endfor %}
