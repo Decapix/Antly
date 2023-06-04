@@ -7,6 +7,9 @@ from django.http import HttpResponse
 from django.template import loader
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET
+from datetime import datetime
+from django.template.defaultfilters import date
+
 
 def random_three_elements(input_list):
     if len(input_list) < 3:
@@ -65,11 +68,15 @@ def superfeed_xml_view(request):
     # Load the template for the superfeed.xml file
     template = loader.get_template('super/superfeed.xml')
 
+    current_date = date(datetime.now(), "Y-m-d\TH:iO")
+
+
     # Context data to be passed to the template
     context = {
         'ant_products': ant_products,
         'pack_products': pack_products,
    #     'other_products': other_products,
+        'current_date' : current_date
     }
 
     # Render the template with the context data

@@ -4,20 +4,40 @@
         {% for product in ant_products %}
         <item>
             <title>{{ product.name }}</title>
+            <g:brand>antly</g:brand>
+            <g:adult>no</g:adult>
+            <g:is_bundle>no</g:is_bundle>
+            <g:condition>new</g:condition>
             <link>{{ product.get_absolute_url }}</link>
             <description>{{ product.description }}</description>
             <g:price>{{ product.get_price }}</g:price>
             <g:image_link>{{ product.thumbnail_url }}</g:image_link>
+            <g:id>{{ product.id }}</g:id>
+            <g:availability>in_stock</g:availability>
+            <g:product_type>3237 - Animaux et articles pour animaux de compagnie &gt; Animaux vivants</g:product_type>
+
+
+
         </item>
         {% endfor %}
 
         {% for product in pack_products %}
         <item>
             <title>{{ product.name }}</title>
+            <g:brand>antly</g:brand>
+            <g:adult>no</g:adult>
+            <g:is_bundle>yes</g:is_bundle>
+            <g:condition>new</g:condition>
             <link>{{ product.get_absolute_url }}</link>
             <description>{{ product.description }}</description>
             <g:price>{{ product.get_price }}</g:price>
             <g:image_link>{{ product.thumbnail_url }}</g:image_link>
+            <g:id>{{ product.id }}</g:id>
+            <g:availability>in_stock</g:availability>
+            <g:availability_date>{{ current_date }}</g:availability_date>          	
+            <g:product_type>3088 - Jeux et jouets &gt; Jouets &gt; Jouets éducatifs &gt; Fermes à fourmis</g:product_type>
+
+
         </item>
         {% endfor %}
 
@@ -28,6 +48,8 @@
             <description>{{ product.description }}</description>
             <g:price>{{ product.sh_price }}</g:price>
             <g:image_link>{{ product.thumbnail_url }}</g:image_link>
+            <g:id>{{ product.id }}</g:id>
+            <g:availability>in_stock</g:availability>
         </item>
         {% endfor %} -->
     </channel>
