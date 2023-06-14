@@ -7,9 +7,8 @@
 
 <section class="section" id="about">
         <div class="container">
-            <div class="if_hidden">
-                <h5 class="mb-3" >Panier</h5>
-            </div>
+                    <h6 class="section-title mb-0">Panier</h6>
+                    <h6 class="section-subtitle mb-4">Ma commande</h6>
         </div>
 </section>
 
@@ -22,16 +21,15 @@
             <div class="col-md-4">
                 <div class="card border-0 mb-4">
                     <a href="{{ item.get_absolute_url }}">
-                    <img src="{{ item.product.thumbnail.url }}" alt="{{ item.name }}" class="card-img-top w-100 limite-height">
+                    <img src="{{ item.content_object.thumbnail_url }}" alt="{{ item.sh_name }}" class="card-img-top w-100 limite-height">
                     <div class="card-body card-body-trash">
                         <div class="row justify-content-between">
                             <div class="ml-2">
 
-                                <h6 class="card-title card-title-limit">{{ item.name }}</h6>
-                                {% for size in item.size.all %}
-                                <p class="card-text mb-1">{{ size.gyne }} gyne - {{ size.worker }} ouvrières</p>
+                                <h6 class="card-title card-title-limit">{{ item.sh_name }}</h6>
+
+                                <p class="card-text mb-1">{{ item.sh_titlecart }}</p>
                                 <p class="card-text mb-1">{{ item.price }}€</p>
-                                {% endfor %}
                                 <p class="card-text">
                                     <form method="POST" action="{% url 'update_quantity' %}" class="d-inline">
                                         {% csrf_token %}

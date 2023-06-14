@@ -27,6 +27,8 @@ from reportlab.pdfgen import canvas
 from django.templatetags.static import static as stat
 from django.contrib.staticfiles import finders
 from .paypal import create_paypal_transaction, execute_paypal_transaction
+from django.contrib.contenttypes.models import ContentType
+
 
 def get_user_pending_order(request):
     """
@@ -63,9 +65,31 @@ def ant_product_vi(request):
     ant_product = Ant_m.objects.filter(sizes__stock__gt=0).distinct()
     country = []
     for ant in ant_product:
-        if ant.localisation not in country:
-            country.append(ant.localisation)
+        if ant.sh_localisation() not in country:
+            country.append(ant.sh_localisation())
     return render(request, 'sale/ant_product.html', context={"ant_product": ant_product, "country": country, 'meta':metat})
+
+
+def other_product_vi(request):
+    """
+    Render the ant product view.
+
+    Args:
+        request: The user's request object.
+
+    Returns:
+        The rendered ant product view with context data.
+    """
+    metat = MetaTemplate(
+        "Accessoires pour l'élevage de Fourmis - Nids, Outils et Plus | Boutique en Ligne",
+"Découvrez notre gamme complète d'accessoires pour l'élevage de fourmis, conçue pour les débutants. De la mise en place de votre nid à la maintenance de votre colonie, nos produits assurent une expérience optimale. Visitez notre boutique et découvrez nos offres !")
+
+    other_product = Other_m.objects.filter(stock__gt=0).distinct()
+    country = []
+    for ant in other_product:
+        if ant.type not in country:
+            country.append(ant.type)
+    return render(request, 'sale/other_product.html', context={"other_product": other_product, "country": country, 'meta':metat})
 
 
 def pack_product_vi(request):
@@ -84,10 +108,14 @@ def pack_product_vi(request):
 
     pack_product = Pack_m.objects.filter(size__stock__gt=0).distinct()
     country = []
-    for ant in pack_product:
-        if ant.localisation not in country:
-            country.append(ant.localisation())
+    for pack in pack_product:
+        if pack.sh_localisation() not in country:
+            country.append(pack.sh_localisation())
     return render(request, 'sale/pack_product.html', context={"pack_product": pack_product, "country": country, 'meta':metat})
+
+
+
+
 
 
 
@@ -102,42 +130,62 @@ def product_pack_detail_vi(request, id):
     Returns:
         The rendered pack product detail view with context data.
     """
+    description_pack = "Le pack contient le nid, la fondation, une pince à épiler, une seringue, un morceau de 10 cm de tuyau pour les liaisons"
     user = request.user
     pack_product = get_object_or_404(Pack_m, id=id)
     size = pack_product.size
+    nest = pack_product.nest
     ant_product = pack_product.get_ant()
-    price = pack_product.get_price()
+    price = pack_product.sh_price()
     metat = MetaTemplate(
-        f"Pack Fourmis {pack_product.complete_spece()} de {pack_product.localisation()} - Achat et Vente de Packs pour Élevage de Fourmis Débutants | Boutique en Ligne",
-        f"Découvrez nos packs pour débutants incluant une fondation de fourmis {pack_product.complete_spece()} de {pack_product.localisation()} et un nid adapté. Lancez-vous facilement dans l'élevage de fourmis avec notre pack complet et bénéficiez d'un support professionnel. Commandez dès maintenant !")
- 
-    if ant_product.problem or pack_product.problem:
+        f"Pack Fourmis {pack_product.complete_spece()} de {pack_product.sh_localisation()} - Achat et Vente de Packs pour Élevage de Fourmis Débutants | Boutique en Ligne",
+        f"Découvrez nos packs pour débutants incluant une fondation de fourmis {pack_product.complete_spece()} de {pack_product.sh_localisation()} et un nid adapté. Lancez-vous facilement dans l'élevage de fourmis avec notre pack complet et bénéficiez d'un support professionnel. Commandez dès maintenant !")
+
+    if ant_product.sh_problem() or pack_product.sh_problem():
         # Check problems
         messages.error(request, "désolée, nous avons un problème avec ce produit, nous travaillons dessus")
         return redirect("homepage_n")
     # List for offer ant, bottom
-    offer_ant = offer_ant_func(ant_product, list(Ant_m.objects.filter(sizes__stock__gt=0).distinct()), list(Pack_m.objects.filter(size__stock__gt=0).distinct()))
+    offer_ant = offer_ant_func(pack_product, list(Ant_m.objects.filter(sizes__stock__gt=0).distinct()),
+                               list(Pack_m.objects.filter(size__stock__gt=0).distinct()), list(Other_m.objects.filter(stock__gt=0).distinct()) )
     if request.method == 'POST':
         quantity = request.POST.get('quantity')
         # Check if the size is available
-        if int(size.stock) - int(quantity) >= 0:
+        res = pack_product.check_stock(quantity)
+        if res:
             if user.is_authenticated:
-                # Check if the product with the same size is already in the user's cart
-                cart_item = OrderItem_m.objects.filter(owner=user, product=ant_product, size=size, pack=pack_product, is_ordered=False).first()
+                # Retrieve the ContentType for the product
+                content_type = ContentType.objects.get_for_model(Pack_m)
+                cart_item = OrderItem_m.objects.filter(
+                    owner=user,
+                    content_type=content_type,
+                    object_id=pack_product.id,
+                    is_ordered=False).first()
                 match cart_item:
                     case None:
-                        cart_item = OrderItem_m.objects.create(owner=user, product=ant_product, quantity=quantity, price=price)
-                        cart_item.size.add(size)
-                        cart_item.pack.add(pack_product)
-                        cart_item.save()
+                        st = pack_product.check_stock(int(quantity))
+                        if type(st) == bool:
+                            cart_item = OrderItem_m.objects.create(owner=user, content_type=content_type,
+                                                                   object_id=pack_product.id, quantity=quantity,
+                                                                   price=price)
+                            cart_item.save()
+                        else:
+                            messages.error(request,
+                                           f"désolée, nous n'avons plus assez d'unitées en stock, il nous en reste {res}")
+                            return render(request, 'sale/pack_detail.html',
+                                          context={"pack": pack_product, "nest": nest, 'meta': metat, "price": price,
+                                                   "ant": ant_product, "offer_ant": offer_ant, "description_pack": description_pack})
                     case _:
-                        if int(size.stock) - (int(quantity) + cart_item.quantity) >= 0:
+                        res = pack_product.check_stock(int(quantity)+cart_item.quantity)
+                        if res:
                             cart_item.quantity += int(quantity)
                             cart_item.save()
                         else:
                             messages.error(request,
-                                           f"désolée, nous n'avons plus assez d'unitées en stock, il nous en reste {size.stock}")
-                            return render(request, 'sale/pack_detail.html', context={"pack": pack_product, 'meta':metat, "price": price, "ant": ant_product, "offer_ant": offer_ant})
+                                           f"désolée, nous n'avons plus assez d'unitées en stock, il nous en reste {res}")
+                            return render(request, 'sale/pack_detail.html',
+                                          context={"pack": pack_product,"nest": nest, 'meta': metat, "price": price,
+                                                   "ant": ant_product, "offer_ant": offer_ant, "description_pack": description_pack})
 
                 user_order, status = Order_m.objects.get_or_create(owner=user, is_ordered=False)
                 user_order.items.add(cart_item)
@@ -150,9 +198,10 @@ def product_pack_detail_vi(request, id):
                 return redirect("login_n")
         else:
             messages.error(request,
-                           f"désolée, nous n'avons plus assez d'unitées en stock, il nous en reste {size.stock}")
-    return render(request, 'sale/pack_detail.html', context={"pack": pack_product, "price": price, "ant": ant_product, "offer_ant": offer_ant, 'meta':metat})
-
+                           f"désolée, nous n'avons plus assez d'unitées en stock, il nous en reste {res}")
+    return render(request, 'sale/pack_detail.html',
+                  context={"pack": pack_product, "price": price, "ant": ant_product, "offer_ant": offer_ant,
+                           'meta': metat, "nest": nest, "description_pack": description_pack})
 
 
 def product_ant_detail_vi(request, id):
@@ -169,39 +218,56 @@ def product_ant_detail_vi(request, id):
     user = request.user
     ant_product = get_object_or_404(Ant_m, id=id)
     metat = MetaTemplate(
-        f"Achat Fourmis {ant_product.spece} {ant_product.under_spece} de {ant_product.localisation} - Vente Fondations et Colonies pour Débutants | Boutique en Ligne",
-        f"Achetez des fondations de fourmis {ant_product.spece} {ant_product.under_spece} originaires de {ant_product.localisation} pour débutants. Parfait pour démarrer un élevage de fourmis. Livraison rapide et support professionnel. Rejoignez l'aventure de la Myrmécologie dès maintenant !")
+        f"Achat Fourmis {ant_product.sh_spece()} {ant_product.under_spece} de {ant_product.sh_localisation()} - Vente Fondations et Colonies pour Débutants | Boutique en Ligne",
+        f"Achetez des fondations de fourmis {ant_product.sh_spece()} {ant_product.under_spece} originaires de {ant_product.sh_localisation()} pour débutants. Parfait pour démarrer un élevage de fourmis. Livraison rapide et support professionnel. Rejoignez l'aventure de la Myrmécologie dès maintenant !")
 
-    if ant_product.problem:
+    if ant_product.sh_problem():
         # Check problems
         messages.error(request,
                        f"désolée, nous avons un problème avec ce produit, nous travaillons dessus")
         return redirect("homepage_n")
     # List for offer ant, bottom
-    offer_ant = offer_ant_func(ant_product, list(Ant_m.objects.filter(sizes__stock__gt=0).distinct()), list(Pack_m.objects.filter(size__stock__gt=0).distinct()))
+    offer_ant = offer_ant_func(ant_product, list(Ant_m.objects.filter(sizes__stock__gt=0).distinct()),
+                               list(Pack_m.objects.filter(size__stock__gt=0).distinct()), list(Other_m.objects.filter(stock__gt=0).distinct()) )
     if request.method == 'POST':
         quantity = request.POST.get('quantity')
         size_id = request.POST.get('size_id')
         size = Size_m.objects.get(id=size_id)
         # Check if the size is available
-        if int(size.stock) - int(quantity) >= 0:
+        st = ant_product.check_stock(quantity, size)
+        if st:
             if user.is_authenticated:
                 # Check if the product with the same size is already in the user's cart
-                cart_item = OrderItem_m.objects.filter(owner=user, product=ant_product, size=size, pack__isnull=True, is_ordered=False).first()
+                content_type = ContentType.objects.get_for_model(Ant_m)
+                cart_item = OrderItem_m.objects.filter(
+                    owner=user,
+                    content_type=content_type,
+                    object_id=ant_product.id,
+                    is_ordered=False).first()
                 match cart_item:
                     case None:
-                        cart_item = OrderItem_m.objects.create(owner=user, product=ant_product, quantity=quantity, price=size.price)
-                        cart_item.size.add(size)
-                        cart_item.save()
+                        st = ant_product.check_stock(int(quantity), size)
+                        if type(st) == bool:
+                            cart_item = OrderItem_m.objects.create(owner=user, content_type=content_type,
+                                                                   object_id=ant_product.id, quantity=quantity,
+                                                                   price=size.price)
+                            cart_item.save()
+                        else:
+                            messages.error(request,
+                                           f"désolée, nous n'avons plus assez d'unitées en stock, il nous en reste {st}")
+                            return render(request, 'sale/ant_detail.html',
+                                          context={"ant": ant_product, "offer_ant": offer_ant, 'meta': metat})
+
                     case _:
-                        if int(size.stock) - (int(quantity) + cart_item.quantity) >= 0:
+                        st = ant_product.check_stock(int(quantity) + cart_item.quantity, size)
+                        if st:
                             cart_item.quantity += int(quantity)
                             cart_item.save()
                         else:
                             messages.error(request,
-                                           f"désolée, nous n'avons plus assez d'unitées en stock, il nous en reste {size.stock}")
+                                           f"désolée, nous n'avons plus assez d'unitées en stock, il nous en reste {st}")
                             return render(request, 'sale/ant_detail.html',
-                                          context={"ant": ant_product, "offer_ant": offer_ant, 'meta':metat})
+                                          context={"ant": ant_product, "offer_ant": offer_ant, 'meta': metat})
 
                 user_order, status = Order_m.objects.get_or_create(owner=user, is_ordered=False)
                 user_order.items.add(cart_item)
@@ -214,8 +280,89 @@ def product_ant_detail_vi(request, id):
                 return redirect("login_n")
         else:
             messages.error(request,
-                           f"désolée, nous n'avons plus assez d'unitées en stock, il nous en reste {size.stock}")
-    return render(request, 'sale/ant_detail.html', context={"ant": ant_product, "offer_ant": offer_ant, 'meta':metat})
+                           f"désolée, nous n'avons plus assez d'unitées en stock, il nous en reste {st}")
+    return render(request, 'sale/ant_detail.html', context={"ant": ant_product, "offer_ant": offer_ant, 'meta': metat})
+
+
+
+
+def product_other_detail_vi(request, id):
+    """
+    Render the other product detail view.
+
+    Args:
+        request: The user's request object.
+        id: The ID of the other product.
+
+    Returns:
+        The rendered other product detail view with context data.
+    """
+    user = request.user
+    other_product = get_object_or_404(Other_m, id=id)
+    metat = MetaTemplate(
+        f"{other_product.type.capitalize()} pour élevage de Fourmis - {other_product.sh_name()} | Boutique en Ligne",
+        f"Découvrez {other_product.sh_name()}, un {other_product.type} essentiel pour votre élevage de fourmis. Idéal pour les débutants, ce produit assure les meilleures conditions pour votre colonie. Explorez ses caractéristiques et profitez de nos offres exceptionnelles dès maintenant !"
+    )
+
+    if other_product.sh_problem():
+        # Check problems
+        messages.error(request,
+                       f"désolée, nous avons un problème avec ce produit, nous travaillons dessus")
+        return redirect("homepage_n")
+    # List for offer ant, bottom
+    offer_ant = offer_other_func(other_product, list(Ant_m.objects.filter(sizes__stock__gt=0).distinct()),
+                               list(Pack_m.objects.filter(size__stock__gt=0).distinct()), list(Other_m.objects.filter(stock__gt=0).distinct()) )
+    if request.method == 'POST':
+        quantity = request.POST.get('quantity')
+        # Check if the size is available
+        st = other_product.check_stock(quantity)
+        if st:
+            if user.is_authenticated:
+                # Check if the product with the same size is already in the user's cart
+                content_type = ContentType.objects.get_for_model(Other_m)
+                cart_item = OrderItem_m.objects.filter(
+                    owner=user,
+                    content_type=content_type,
+                    object_id=other_product.id,
+                    is_ordered=False).first()
+                match cart_item:
+                    case None :
+                        st = other_product.check_stock(int(quantity))
+                        if type(st) == bool:
+                            cart_item = OrderItem_m.objects.create(owner=user, content_type=content_type,
+                                                                   object_id=other_product.id, quantity=quantity,
+                                                                   price=other_product.sh_price())
+                            cart_item.save()
+                        else:
+                            messages.error(request,
+                                           f"désolée, nous n'avons plus assez d'unitées en stock, il nous en reste {st}")
+                            return render(request, 'sale/other_detail.html',
+                                          context={"other": other_product, "offer_ant": offer_ant, 'meta': metat})
+                    case _:
+                        st = other_product.check_stock(int(quantity) + cart_item.quantity)
+                        if st:
+                            cart_item.quantity += int(quantity)
+                            cart_item.save()
+                        else:
+                            messages.error(request,
+                                           f"désolée, nous n'avons plus assez d'unitées en stock, il nous en reste {st}")
+                            return render(request, 'sale/other_detail.html',
+                                          context={"other": other_product, "offer_ant": offer_ant, 'meta': metat})
+
+                user_order, status = Order_m.objects.get_or_create(owner=user, is_ordered=False)
+                user_order.items.add(cart_item)
+                if status:
+                    user_order.ref_code = generate_order_id()
+                    user_order.save()
+                messages.info(request, "article ajouté au panier")
+                return redirect("homepage_n")
+            else:
+                return redirect("login_n")
+        else:
+            messages.error(request,
+                           f"désolée, nous n'avons plus assez d'unitées en stock, il nous en reste {st}")
+    return render(request, 'sale/other_detail.html', context={"other": other_product, "offer_ant": offer_ant, 'meta': metat})
+
 
 
 @login_required
@@ -239,43 +386,10 @@ def cart_vi(request):
                     return render(request, "sale/vacuum_cart.html")
                 case False:
                     if existing_order.items.exists():
-                        items = existing_order.items.all()
-
-                        return render(request, "sale/cart.html", context={'items': items, "order": existing_order})
+                        updated_items = existing_order.check_stock()
+                        return render(request, "sale/cart.html", context={'items': updated_items, "order": existing_order})
                     else:
                         return render(request, "sale/vacuum_cart.html")
-
-
-@login_required
-def update_quantity(request):
-    """
-    Update the quantity of an item in the cart.
-
-    Args:
-        request: The user's request object.
-
-    Returns:
-        A redirect to the cart view after updating the quantity.
-    """
-    if request.method == "POST":
-        form = UpdateQuantityForm(request.POST)
-        if form.is_valid():
-            item_id = form.cleaned_data['item_id']
-            new_quantity = form.cleaned_data['new_quantity']
-            item = get_object_or_404(OrderItem_m, id=item_id, owner=request.user)
-
-            # Find the size associated with the item
-            size = item.size.first()
-
-            if size.stock is not None and new_quantity > size.stock:
-                messages.error(request, "Il n'y a pas assez d'unités disponibles en stock pour cette taille.")
-            else:
-                item.quantity = new_quantity
-                item.save()
-
-            return redirect('cart_n')
-    else:
-        return redirect('cart_n')
 
 
 @login_required()
@@ -297,6 +411,39 @@ def delete_cart_item_vi(request, item_id):
     return redirect(reverse('cart_n'))
     
 
+@login_required
+def update_quantity(request):
+    """
+    Update the quantity of an item in the cart.
+
+    Args:
+        request: The user's request object.
+
+    Returns:
+        A redirect to the cart view after updating the quantity.
+    """
+    if request.method == "POST":
+        form = UpdateQuantityForm(request.POST)
+        if form.is_valid():
+            item_id = form.cleaned_data['item_id']
+            new_quantity = form.cleaned_data['new_quantity']
+            item = get_object_or_404(OrderItem_m, id=item_id, owner=request.user)
+            stock = item.get_stock()
+
+            y = stock - new_quantity
+            if y >= 0 :
+                item.quantity = new_quantity
+                messages.success(request, "La quantité a été mise à jour avec succès.")
+                item.save()
+            else :
+                item.quantity = stock
+                messages.warning(request,
+                                 f"Il n'y a pas assez d'unités disponibles en stock, il ne nous en reste plus que {stock}.")
+            return redirect('cart_n')
+    else:
+        return redirect('cart_n')
+
+
 @login_required()
 def checkout_vi(request):
     """
@@ -309,6 +456,8 @@ def checkout_vi(request):
         The rendered checkout view with context data or a JSON response with new address data.
     """
     existing_order = get_user_pending_order(request)
+    existing_order.shipping_type = "C"
+
     form = Address_fo()
 
     if request.method == "POST":
@@ -318,12 +467,18 @@ def checkout_vi(request):
             new_address.save()
 
             existing_order.address = new_address
+            existing_order.shipping_type = request.POST.get('shipping_type', 'C')
+            print(existing_order.shipping_type,existing_order.get_cart_total() , "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
             existing_order.save()
-
+            shipping_costs = existing_order.shipping_costs()
+            total = existing_order.get_cart_total()
+            ze = "colis" if existing_order.shipping_type == "C" else "lettre"
             address_json = {
-                "html": "\nCountry/Region : {}<br>\nFull name : {}<br>\nPhone number : {}<br>\nAddress : {}<br>\nDetail : {}<br>\nPostal code : {}<br>\nCity : {}<br>\n".format(
-                    new_address.country, new_address.complete_name, new_address.phone_number, new_address.adress, new_address.postal_code, new_address.detail ,new_address.city),
-                "address_id": new_address.id
+                "html": "\nPays : {}<br>\nNom complet : {}<br>\nNuméro de télephone : {}<br>\nAdresse : {}<br>\nDetails : {}<br>\nCode postal : {}<br>\nVille : {}<br>\n<hr>\n  Méthode de livraison : {}".format(
+                    new_address.country, new_address.complete_name, new_address.phone_number, new_address.adress, new_address.postal_code, new_address.detail ,new_address.city, ze),
+                "address_id": new_address.id,
+                "total": total,
+                "shipping_costs" : shipping_costs
             }
             return JsonResponse(address_json)
         else:
@@ -333,7 +488,10 @@ def checkout_vi(request):
         'order': existing_order,
         "form": form,
         "STRIPE_PUBLIC_KEY": os.environ.get('STRIPE_PUBLISHABLE_KEY'),
-        "user": request.user
+        "user": request.user,
+        "letter_shipping_possible": existing_order.shipping_possible(),
+
+
     }
 
     return render(request, "sale/checkout.html", context)

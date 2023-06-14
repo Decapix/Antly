@@ -57,31 +57,45 @@
               alt="Image 5"
               onmouseover="changeLargeImage(this)"
             />
-            {% endif %}{% if pack.thumbnail_nest %}
+            {% endif %}{% if nest.thumbnail %}
             <img
               class="card-img-top mb-1"
-              src="{{ pack.thumbnail_nest.url }}"
+              src="{{ nest.thumbnail.url }}"
               alt="Image Nid"
               onmouseover="changeLargeImage(this)"
             />
-            {% endif %} {% if pack.thumbnail_nest_1 %}
+            {% endif %} {% if nest.thumbnail_1 %}
             <img
               class="card-img-top mb-1"
-              src="{{ pack.thumbnail_nest_1.url }}"
+              src="{{ nest.thumbnail_1.url }}"
               alt="Image Nid"
               onmouseover="changeLargeImage(this)"
             />
-            {% endif %} {% if pack.thumbnail_nest_2 %}
+            {% endif %} {% if  nest.thumbnail_2 %}
             <img
               class="card-img-top mb-1"
-              src="{{ pack.thumbnail_nest_2.url }}"
+              src="{{ nest.thumbnail_2.url }}"
               alt="Image Nid"
               onmouseover="changeLargeImage(this)"
             />
-            {% endif %} {% if ant.video %}
+            {% endif %} {% if  nest.thumbnail_3 %}
+            <img
+              class="card-img-top mb-1"
+              src="{{ nest.thumbnail_3.url }}"
+              alt="Image Nid"
+              onmouseover="changeLargeImage(this)"
+            />
+            {% endif %} {% if  nest.thumbnail_4 %}
+            <img
+              class="card-img-top mb-1"
+              src="{{ nest.thumbnail_4.url }}"
+              alt="Image Nid"
+              onmouseover="changeLargeImage(this)"
+            />
+            {% endif %}  {% if ant.video %}
             <video src="{{ ant.video.url }}" class="card-img-top mb-1" onmouseover="changeLargeImage(this)"></video>
-            {% endif %}{% if pack.video_nest %}
-            <video src="{{ pack.video_nest.url }}" class="card-img-top mb-1" onmouseover="changeLargeImage(this)"></video>
+            {% endif %}{% if nest.video %}
+            <video src="{{ nest.video.url }}" class="card-img-top mb-1" onmouseover="changeLargeImage(this)"></video>
             {% endif %}
           </div>
         </div>
@@ -103,21 +117,22 @@
                   <td>
                     <ul>
                       {% if ant.spece %}
-                      <li>Espèce : {{ ant.spece }} {{ ant.under_spece }}</li>
-                      {% endif %} {% if ant.localisation %}
-                      <li>Localisation : {{ ant.localisation }}</li>
+                      <li>Espèce : {{ ant.sh_spece }} {{ ant.under_spece }}</li>
+                      {% endif %} {% if ant.sh_localisation %}
+                      <li>Localisation : {{ ant.sh_localisation }}</li>
                       {% endif %}
                       <li>Nombre de gyne : {{ pack.size.gyne }}</li>
                       <li>Nombre d'ouvrière : {{ pack.size.worker }}</li>
                       {% if pack.nest_size %}
-                      <li>Taille du nid : {{ pack.nest_size }}</li>
+                      <li>Taille du nid : {{ nest.name }}</li>
                       {% endif %}
                     </ul>
                   </td>
                 </div>
                 <div>
+                  <p>{{ description_pack|format_description|safe }}</p>
                   <p>{{ ant.description|format_description|safe }}</p>
-
+                  <p>{{ nest.description|format_description|safe }}</p>
                 </div>
                 <div class="d-flex mt-5">
                   <div class="form-group mr-3">
@@ -164,7 +179,7 @@
                 />
                 <div class="card-body">
                   <h6 class="card-title">{{ ant.name }}</h6>
-                  <p>{{ ant.get_price }} €</p>
+                  <p>{{ ant.sh_price }} €</p>
                 </div>
               </a>
             </div>

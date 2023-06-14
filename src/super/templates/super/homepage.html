@@ -8,15 +8,15 @@
 
 <link rel="stylesheet" href="{% static 'super/css/style.css' %}">
 
+
 {% endblock %}
 
 {% block home %}
  <!-- Page Header -->
     <header class="header">
         <div class="overlay">
-            <h1 class="subtitle">La précision à l'état naturel</h1>
+            <h1 class="subtitle">La précision a l'état naturel</h1>
             <h1 class="title">Antly</h1>
-            
         </div>
         <div class="shape">
             <svg viewBox="0 0 1500 200">
@@ -31,14 +31,14 @@
     <section  id="service" class="section pt-0">
         <div class="container">
             <h6 class="section-title text-center">Nos domaines d'expertise</h6>
-            <h6 class="section-subtitle text-center mb-5 pb-3">Optez pour les fourmis qui vous correspondent</h6>
+            <h6 class="section-subtitle text-center mb-5 pb-3">Optez pour les fourmis qui vous corespondent</h6>
 
             <div class="row">
                 <div class="col-md-6">
                     <div class="card mb-4 mb-md-0">
                         <div class="card-body">
                             <h5 class="card-title mt-3">Les fondations<h5>
-                            <p class="mb-0">Créez votre univers minuscule chez vous. Optez pour une fondation et introduisez les dans un environnement qui vous inspire, laissez-vous guider par votre imagination !</p>
+                            <p class="mb-0">Crée votre univers minuscule chez vous. Optez pour une fondation et introduisez les dans un environnement qui vous inspire, vous être libres de votre imagination !</p>
                             <a href="{% url 'ant_product_n' %}" class="mb-0 small" >Voir les fondations</a>
                         </div>
                     </div>
@@ -47,7 +47,7 @@
                     <div class="card mb-4 mb-md-0">
                         <div class="card-body">
                             <h5 class="card-title mt-3">Les packs<h5>
-                            <p class="mb-0">Commencez tout de suite et facilitez vous la vie ! Avec les packs complets, élevez en toute tranquilité vos futures fourmis.</p>
+                            <p class="mb-0">Commencer tout de suite et facilitez vous la vie ! Avec nos pack complets, élevez en outes tranqulité vos future fourmis.</p>
                             <a href="{% url 'pack_product_n' %}" class="mb-0 small">Voir les packs</a>
                         </div>
                     </div>
@@ -73,7 +73,7 @@
                     <img src="{{ p.thumbnail_url }}" alt="" class="card-img-top w-100 limite-height">
                     <div class="card-body">
                         <h6 class="card-title">{{ p.name }}</h6>
-                        <p>{{ p.get_price }} €</p>
+                        <p>{{ p.sh_price }} €</p>
                     </div>
                     </a>
                 </div>
@@ -124,7 +124,7 @@
     </section>
     <!-- End of Testmonial Section -->
 
-    <!-- About Section -->
+<!-- About Section -->
     <section class="section" id="portfolio">
         <div class="container">
             <div class="row justify-content-between">

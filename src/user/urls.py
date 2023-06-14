@@ -17,9 +17,8 @@ urlpatterns = [
     path('compte/ressources/', get_debut_pdf, name='get_debut_pdf'),
     # path('compte/<str:pk>/adresse/', address_vi, name="address_n"),
     path('compte/commentaire/', comment_vi, name="comment_n"),
-    path('compte/<str:pk>/supprimer_mon_compt/', delete_account_vi, name="delete_account_n"),
+    path('compte/<str:pk>/supprimer_mon_compte/', delete_account_vi, name="delete_account_n"),
     path('password-reset/', password_reset_request_vi, name='password_reset_request_n'),
     path('password-change/<uidb64>/<token>', change_password_vi, name='change_password_n'),
-
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

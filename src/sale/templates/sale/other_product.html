@@ -1,0 +1,57 @@
+{% extends "product.html" %}
+{% load static %}
+
+{% block start %}
+
+            <div class="row justify-content-between">
+                <div class="col-md-6 pr-md-5 mb-4 mb-md-0">
+                    <h6 class="section-title mb-0">Les produits annexes</h6>
+                    <h6 class="section-subtitle mb-4">Tout le nécessaire pour élever vos fourmis</h6>
+                    <p>Équipez-vous comme un véritable myrmécologue avec notre sélection d'accessoires pour fourmis. Des nids de fourmis aux seringues, en passant par les pinces à épiler et les Abreuvoirs, vous trouverez tout ce dont vous avez besoin pour prendre soin de votre colonie. Idéales pour les débutants, ces fournitures vous permettront d'élever vos fourmis dans des conditions optimales.</p>
+                </div>
+                <div class="col-md-6 pl-md-5">
+                    <img src="{% static 'sale/imgs/about-other.jpg' %}" alt="egor-kamelev" class="w-100 shadow-sm">
+                </div>
+            </div>
+{% endblock %}
+
+{% block product %}
+
+<div class="portfolio-container">
+        <div class="row new">
+            {% for other in other_product %}
+            <div class="col-md-4">
+                <div class="card border-0 mb-4">
+                    <a href="{{ other.get_absolute_url }}">
+                    <img src="{{ other.thumbnail.url }}" alt="" class="card-img-top w-100 limite-height">
+                    <div class="card-body">
+                        <h6 class="card-title">{{ other.name }}</h6>
+                        <p>{{ other.sh_price }} €</p>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        {% for co in country %}
+        <div class="row card-product-tri {{ co }} ">
+            {% for other in other_product %}
+            {% if other.type == co %}
+            <div class="" id="card-ele">
+                <div class="card border-0 mb-4">
+                    <a href="{{ other.get_absolute_url }}">
+                    <img src="{{ other.thumbnail.url }}" alt="" class="card-img-top w-100 limite-height">
+                    <div class="card-body">
+                        <h6 class="card-title">{{ other.name }}</h6>
+                        <p>{{ other.sh_price }} €</p>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+ {% endblock %}

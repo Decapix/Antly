@@ -25,8 +25,8 @@
                     <a href="{{ ant.get_absolute_url }}">
                     <img src="{{ ant.thumbnail.url }}" alt="" class="card-img-top w-100 limite-height">
                     <div class="card-body">
-                        <h6 class="card-title">{{ ant.name }}</h6>
-                        <p>{{ ant.get_price }} €</p>
+                        <h6 class="card-title">{{ ant.sh_name }}</h6>
+                        <p>{{ ant.sh_price }} €</p>
                     </div>
                     </a>
                 </div>
@@ -37,14 +37,14 @@
         {% for co in country %}
         <div class="row card-product-tri {{ co }} ">
             {% for ant in ant_product %}
-            {% if ant.get_location == co %}
+            {% if ant.sh_localisation == co %}
             <div class="" id="card-ele">
                 <div class="card border-0 mb-4">
                     <a href="{{ ant.get_absolute_url }}">
                     <img src="{{ ant.thumbnail.url }}" alt="" class="card-img-top w-100 limite-height">
                     <div class="card-body">
-                        <h6 class="card-title">{{ ant.name }}</h6>
-                        <p>{{ ant.get_price }} €</p>
+                        <h6 class="card-title">{{ ant.sh_name }}</h6>
+                        <p>{{ ant.sh_price }} €</p>
                     </div>
                     </a>
                 </div>

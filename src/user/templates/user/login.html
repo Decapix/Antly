@@ -11,7 +11,7 @@
     <div class="container">
 
       <div class="row mt-5">
-         <div class="col-md-6">
+         <div class="col-md-6 shipping-method">
              <form action="" method="post">
                  {% csrf_token %}
                 <h6 class="section-secondary-title">Connexion</h6>
@@ -23,7 +23,7 @@
                         </p>
                     </div>
                     <div class="passimg-login">
-                        <img src="{% static 'imgs/oeil-cache.png' %}" id="eye" onclick="changer()">
+                        <img src="{% static 'imgs/oeil-cache.png' %}" id="eye" onclick="changer()" class="eyelogin">
                         <input type="password" class="form-control" id="password" placeholder="Mot de passe" name="password">
                     </div>
                 </div>
@@ -35,6 +35,9 @@
                  <a href="{% url 'password_reset_request_n' %}" class="btn btn-info btn-sm ml-5">mot de passe oublié</a>
              </form>
       </div>
+    <div class="col-md-6">
+        <img src="{% static 'user/imgs/image-login.jpg' %}" class=" ml-4 if_hidden w-100 shadow-sm">
+    </div>
     </div>
     </div>
 </section>

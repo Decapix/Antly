@@ -28,8 +28,8 @@
                     <a href="{{ pack.get_absolute_url }}">
                     <img src="{{ pack.thumbnail_url }}" alt="" class="card-img-top w-100 limite-height">
                     <div class="card-body">
-                        <h6 class="card-title">{{ pack.name }}</h6>
-                        <p>{{ pack.get_price }} €</p>
+                        <h6 class="card-title">{{ pack.sh_name }}</h6>
+                        <p>{{ pack.sh_price }} €</p>
                     </div>
                     </a>
                 </div>
@@ -40,14 +40,14 @@
 
         <div class="row card-product-tri {{ co }} ">
             {% for pack in pack_product %}
-            {% if pack.localisation == co %}
+            {% if pack.sh_localisation == co %}
             <div class="" id="card-ele">
                 <div class="card border-0 mb-4">
                     <a href="{{ pack.get_absolute_url }}">
                     <img src="{{ pack.thumbnail_url }}" alt="" class="card-img-top w-100 limite-height">
                     <div class="card-body">
-                        <h6 class="card-title">{{ pack.name }}</h6>
-                        <p>{{ pack.get_price }} €</p>
+                        <h6 class="card-title">{{ pack.sh_name }}</h6>
+                        <p>{{ pack.sh_price }} €</p>
                     </div>
                     </a>
                 </div>

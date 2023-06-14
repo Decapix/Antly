@@ -8,13 +8,13 @@
           <!-- image -->
           <div id="large-image" class="mb-3 big">
             <img
-              src="{{ ant.thumbnail.url }}"
+              src="{{ other.thumbnail.url }}"
               class="card-img-top w-100 default-image"
               id="large-image-img"
             />
-            {% if ant.video %}
+            {% if other.video %}
             <video
-              src="{{ ant.video.url }}"
+              src="{{ other.video.url }}"
               class="card-img-top w-100"
               id="large-image-video"
               controls
@@ -25,87 +25,59 @@
           <div id="small-images">
             <img
               class="card-img-top mb-1"
-              src="{{ ant.thumbnail.url }}"
+              src="{{ other.thumbnail.url }}"
               alt="Image 1"
               onmouseover="changeLargeImage(this)"
             />
-            {% if ant.thumbnail_1 %}
+            {% if other.thumbnail_1 %}
             <img
               class="card-img-top mb-1"
-              src="{{ ant.thumbnail_1.url }}"
+              src="{{ other.thumbnail_1.url }}"
               alt="Image 2"
               onmouseover="changeLargeImage(this)"
             />
-            {% endif %} {% if ant.thumbnail_2 %}
+            {% endif %} {% if other.thumbnail_2 %}
             <img
               class="card-img-top mb-1"
-              src="{{ ant.thumbnail_2.url }}"
+              src="{{ other.thumbnail_2.url }}"
               alt="Image 3"
               onmouseover="changeLargeImage(this)"
             />
-            {% endif %} {% if ant.thumbnail_3 %}
+            {% endif %} {% if other.thumbnail_3 %}
             <img
               class="card-img-top mb-1"
-              src="{{ ant.thumbnail_3.url }}"
+              src="{{ other.thumbnail_3.url }}"
               alt="Image 4"
               onmouseover="changeLargeImage(this)"
             />
-            {% endif %} {% if ant.thumbnail_4 %}
+            {% endif %} {% if other.thumbnail_4 %}
             <img
               class="card-img-top mb-1"
-              src="{{ ant.thumbnail_4.url }}"
+              src="{{ other.thumbnail_4.url }}"
               alt="Image 5"
               onmouseover="changeLargeImage(this)"
             />
-            {% endif %} {% if ant.video %}
-            <video src="{{ ant.video.url }}" class="card-img-top mb-1" onmouseover="changeLargeImage(this)"></video>
+            {% endif %} {% if other.video %}
+            <video src="{{ other.video.url }}" class="card-img-top mb-1" onmouseover="changeLargeImage(this)"></video>
             {% endif %}
           </div>
         </div>
 
         <div class="col-md-6 pl-md-5">
-          <h1 class="display-5 fw-bolder mb-4">{{ ant.name }}</h1>
+          <h1 class="display-5 fw-bolder mb-4">{{ other.name }}</h1>
           <hr />
           <div class="row mt-3">
             <div class="col-md-4">
               <div class="fs-5 mb-2">
-                <h5 class="col-sm-6" id="price-display">x</h5>
+                <h5 class="col-sm-6" id="price-display">{{ other.sh_price }}</h5>
               </div>
             </div>
             <div class="col-md-6">
+                <div>
+                  <p>{{ other.description|format_description|safe }}</p>
+                </div>
               <form method="POST" action="">
                 {% csrf_token %}
-                <div class="form-group">
-                  <select
-                    class="form-control"
-                    id="size"
-                    name="size"
-                    onchange="updateSizeId()"
-                  >
-                    {% for an in ant.get_sizes_wiq %}
-                    <option value="{{ an.id }}">
-                      {{ an.gyne }} gyne {{ an.worker }} ouvrière {{ an.price }}
-                    </option>
-                    {% endfor %}
-                  </select>
-                  <input type="hidden" name="size_id" value="" />
-                </div>
-
-                <div class="">
-                  <td>
-                    <ul>
-                      {% if ant.spece %}
-                      <li>Espèce : {{ ant.spece }} {{ ant.under_spece }}</li>
-                      {% endif %} {% if ant.localisation %}
-                      <li>Localisation : {{ ant.localisation }}</li>
-                      {% endif %}
-                    </ul>
-                  </td>
-                </div>
-                <div>
-                  <p>{{ ant.description|format_description|safe }}</p>
-
-                </div>
                 <div class="d-flex mt-5">
                   <div class="form-group mr-3">
                     <label for="quantity"></label>
@@ -127,9 +99,7 @@
                       <option>15</option>
                     </select>
                   </div>
-
                 </div>
-
                 <input type="submit" value="Ajouter au panier" class="btn btn-dark mr-4">
               </form>
             </div>
@@ -162,34 +132,4 @@
     </div>
   </div>
 </section>
-{% endblock content %} {% block script %}
-
-<script>
-// Récupération des éléments HTML
-let select = document.getElementById("size");
-
-// Fonction pour mettre à jour le prix affiché et modifier le texte de l'option sélectionnée
-function updatePriceDisplay() {
-  var option = select.options[select.selectedIndex];
-  var text = option.text;
-  var priceDisplay = document.getElementById("price-display");
-  var price = text.split(" ouvrière ")[0] + " ouvrière ";
-  priceDisplay.textContent = text.replace( price, "") + "€";
-}
-
-// Écouteur d'événement pour mettre à jour le prix affiché lorsque la sélection change
-select.addEventListener("change", updatePriceDisplay);
-
-// Appel initial de la fonction pour afficher le prix de la première option
-updatePriceDisplay();
-
-function updateSizeId() {
-  var selectBox = document.getElementById("size");
-  var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-  document.getElementsByName("size_id")[0].value = selectedValue;
-}
-updateSizeId();
-
-</script>
-
-{% endblock script %}
+{% endblock content %}

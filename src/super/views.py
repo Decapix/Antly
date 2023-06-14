@@ -7,9 +7,6 @@ from django.http import HttpResponse
 from django.template import loader
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET
-from datetime import datetime
-from django.template.defaultfilters import date
-
 
 def random_three_elements(input_list):
     if len(input_list) < 3:
@@ -23,10 +20,11 @@ def homepage_vi(request):
                          "Bienvenue sur notre boutique en ligne de fourmis pour débutants ! Découvrez notre sélection de fondations, packs, nids et accessoires pour commencer votre élevage de fourmis. Profitez de conseils d'experts et rejoignez la communauté des passionnés de Myrmécologie.")
     ant = Ant_m.objects.filter(sizes__stock__gt=0).distinct()
     pack = Pack_m.objects.filter(size__stock__gt=0).distinct()
+    other = Other_m.objects.filter(stock__gt=0).distinct()
     comment = Feedback_m.objects.all()
     if len(comment) >= 3:
         comment = random_three_elements(list(comment))
-    product = list(ant) + list(pack)
+    product = list(ant) + list(pack) + list(other)
     # offer
     offers = None
     if not request.session.get('offer_shown', False):
@@ -63,20 +61,16 @@ def superfeed_xml_view(request):
     # Retrieve all Ant_m, Pack_m, and Other_m products
     ant_products = Ant_m.objects.filter(sizes__stock__gt=0).distinct()
     pack_products = Pack_m.objects.filter(size__stock__gt=0).distinct()
-    #other_products = Other_m.objects.filter(stock__gt=0).distinct()
+    other_products = Other_m.objects.filter(stock__gt=0).distinct()
 
     # Load the template for the superfeed.xml file
     template = loader.get_template('super/superfeed.xml')
-
-    current_date = date(datetime.now(), "Y-m-d\TH:iO")
-
 
     # Context data to be passed to the template
     context = {
         'ant_products': ant_products,
         'pack_products': pack_products,
-   #     'other_products': other_products,
-        'current_date' : current_date
+        'other_products': other_products,
     }
 
     # Render the template with the context data

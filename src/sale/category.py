@@ -146,14 +146,13 @@ SPECE_CHOICES = [('Acamatus', 'Acamatus'), ('Acanthognathus', 'Acanthognathus'),
                  ('Xiphomyrmex', 'Xiphomyrmex')]
 WORKER_CHOICES = [
     ("0", "0"),
-    ("1 à 5", "1/5"),
-    ("6 à 10", "6/10"),
-    ("11 à 15", "11/15"),
-    ("16 à 30", "16/30"),
-    ("31 à 50", "31/50"),
-    ("51 à 100", "51/100"),
-    ("100 à 200", "100 à 200"),
-    ("plus de 200", "+ 200"),
+    ("5", "5"),
+    ("10", "10"),
+    ("15", "15"),
+    ("30", "30"),
+    ("50", "50"),
+    ("100", "100"),
+    ("200", "200"),
 ]
 
 GYNE_CHOICES = [
@@ -168,22 +167,10 @@ GYNE_CHOICES = [
     ("+ 10", "+ 10"),
 ]
 
-NEST_SIZE = [
-    ("Petit Plexi", "small-plastic"),
-    ("Moyen Plexi", "medium-plastic"),
-    ("Grand Plexi", "big-plastic"),
+
+TYPE_CHOICES = [
+    ("nid", "nid"),
+    ("accessoire", "accessoire"),
+    ("nourriture", "nourriture"),
+    ("matériaux", "materiaux"),
 ]
-
-NEST_PRICE = {
-    "Petit Plexi": 10,
-    "Moyen Plexi": 12,
-    "Grand Plexi": 14,
-
-}
-
-
-def nest_price_f(sizen):
-    global NEST_PRICE
-    for i in NEST_PRICE.keys():
-        if i == sizen:
-            return NEST_PRICE.get(i)

@@ -6,7 +6,6 @@
 <script src="https://js.stripe.com/v3/"></script>
 <script src="https://www.paypal.com/sdk/js?client-id=Acb3IR5wQA3REg9DwoagGp9Sud9jukVKNq1Yl3gunikfLTzONLdsSLAyzcI6OOyuMCg8ltYSuvJnjgJl"></script>
 
-
 {% endblock %} {% block content %}
 <div class="if_hidden">{% include "space.html" %}</div>
 <section class="section" id="about">
@@ -27,7 +26,7 @@
             <tbody>
               {% for item in order.get_cart_items %}
               <tr>
-                <td>{{ item.name }}</td>
+                <td>{{ item.sh_name }}</td>
                 <td>{{ item.quantity }}</td>
                 <td>{{ item.price }} €</td>
               </tr>
@@ -35,7 +34,7 @@
               <tr>
                 <td>Transport</td>
                 <td></td>
-                <td>{{ order.shipping_costs }} €</td>
+                <td id="shipping-costs">{{ order.shipping_costs }} €</td>
               </tr>
 
               {% if order.gift %}
@@ -48,16 +47,22 @@
             <tfoot>
               <tr>
                 <th scope="col">Total de la commande</th>
-                <th scope="col">{{ order.get_cart_total }} €</th>
+                <th scope="col" class="total_px">
+                  {{ order.get_cart_total }} €
+                </th>
               </tr>
             </tfoot>
           </table>
           {% if order.gift %}
           <button class="btn btn-outline-primary circle ml-5 affichtxt">
             <i class="ti-star"></i>
-            <div class="description-pop"><p>La colonie offerte est une colonie, sélectionnée au hasard, parmi tous nos 
-              stocks. Nous l’ajoutons à votre commande en plus des articles que vous avez choisi. 
-            </p></div>
+            <div class="description-pop">
+              <p>
+                La colonie offerte est une colonie, sélectionnée au hasard,
+                parmi tous nos stocks. Nous l’ajoutons à votre commande en plus
+                des articles que vous avez choisi.
+              </p>
+            </div>
           </button>
           {% endif %}
         </div>
@@ -91,24 +96,24 @@
             />
             <div class="row">
               <div class="col-md-5">
-            <button
-              type="submit"
-              class="btn btn-info rounded"
-              id="card-button"
-              disabled
-            >
-              Payer
-            </button>
-          </div>
-          <div class="col-md-7">
-            <h6 class="text-info">{{ order.get_cart_total }} €</p>
+                <button
+                  type="submit"
+                  class="btn btn-info rounded"
+                  id="card-button"
+                  disabled
+                >
+                  Payer
+                </button>
+              </div>
+              <div class="col-md-7">
+                <h6 class="text-info" id="total_px">{{ order.get_cart_total }} €</h6>
+              </div>
             </div>
-          </div>
           </form>
         </div>
 
         <!-- endstrip-->
-                <!-- paypal 
+        <!-- paypal 
                 <div id="paypal-button-container"></div>
                 <input type="hidden" name="csrfmiddlewaretokenn" value="{% csrf_token %}" >
         
@@ -117,13 +122,13 @@
 
       <div class="col-md-4 pl-md-5">
         <!-- adress-->
-        <h4>Adresse de livraison</h4>
 
         <div class="">
           <div class="">
             <form id="new-address-form" method="post">
               {% csrf_token %}
-              <div class="form-group">
+              <div class="form-group shipping-method">
+                <h4>Adresse de livraison</h4>
                 <div>{{form.country}}</div>
                 <div>{{form.complete_name}}</div>
                 <div>{{form.phone_number}}</div>
@@ -132,6 +137,19 @@
                 <div>{{form.postal_code}}</div>
                 <div>{{form.city}}</div>
               </div>
+
+              {% if letter_shipping_possible %}
+              <div class="mt-5 mb-4 shipping-method">
+                  <h4 class="mb-3 shipping-method__title">Méthode de livraison</h4>
+                  <label for="shipping_type" class="shipping-method__label">Type d'envoi:</label>
+                  <select name="shipping_type" id="shipping_type" class="shipping-method__select">
+                      <option value="L">Lettre - 3€</option>
+                      <option value="C">Colis - 5€</option>
+                  </select>
+              </div>
+              {% endif %}
+
+
               <input class="btn btn-primary ml-3" type="submit" />
             </form>
           </div>
@@ -146,144 +164,161 @@
 
 {% endblock %} {% block script %}
 <script>
-// Charger l'API Stripe et créer un objet Stripe
-const stripe = Stripe('{{ STRIPE_PUBLIC_KEY }}');
-const elements = stripe.elements();
+  // Charger l'API Stripe et créer un objet Stripe
+  const stripe = Stripe('{{ STRIPE_PUBLIC_KEY }}');
+  const elements = stripe.elements();
 
-// Créer un élément de carte
-const cardElement = elements.create('card');
-cardElement.mount('#card-element');
+  // Créer un élément de carte
+  const cardElement = elements.create('card');
+  cardElement.mount('#card-element');
 
-// Gérer la validation de la carte
-cardElement.on('change', function (event) {
-    const displayError = document.getElementById('card-errors');
-    if (event.error) {
-        displayError.textContent = event.error.message;
-    } else {
-        displayError.textContent = '';
-    }
-});
+  // Gérer la validation de la carte
+  cardElement.on('change', function (event) {
+      const displayError = document.getElementById('card-errors');
+      if (event.error) {
+          displayError.textContent = event.error.message;
+      } else {
+          displayError.textContent = '';
+      }
+  });
 
-// Gérer la soumission du formulaire de paiement
-const paymentForm = document.getElementById('payment-form');
-paymentForm.addEventListener('submit', async function (event) {
-    event.preventDefault();
+  // Gérer la soumission du formulaire de paiement
+  const paymentForm = document.getElementById('payment-form');
+  paymentForm.addEventListener('submit', async function (event) {
+      event.preventDefault();
 
-    // Désactiver le bouton de soumission
-    const cardButton = document.getElementById('card-button');
-    cardButton.disabled = true;
+      // Désactiver le bouton de soumission
+      const cardButton = document.getElementById('card-button');
+      cardButton.disabled = true;
 
-    // Créer un paiement Intent
-    const response = await fetch("{% url 'create-payment-intent' %}", {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': document.getElementsByName('csrfmiddlewaretoken')[0].value
-        }
-    });
-    const data = await response.json();
+      // Créer un paiement Intent
+      const response = await fetch("{% url 'create-payment-intent' %}", {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+              'X-CSRFToken': document.getElementsByName('csrfmiddlewaretoken')[0].value
+          }
+      });
+      const data = await response.json();
 
-    // Confirmer le paiement Intent
-    const result = await stripe.confirmCardPayment(data.clientSecret, {
-        payment_method: {
-            card: cardElement,
-            billing_details: {
-                name: document.getElementById('card-holder-name').value
-            }
-        }
-    });
+      // Confirmer le paiement Intent
+      const result = await stripe.confirmCardPayment(data.clientSecret, {
+          payment_method: {
+              card: cardElement,
+              billing_details: {
+                  name: document.getElementById('card-holder-name').value
+              }
+          }
+      });
 
-    // Gérer le résultat
-    if (result.error) {
-        // Afficher l'erreur
-        const errorElement = document.getElementById('card-errors');
-        errorElement.textContent = result.error.message;
+      // Gérer le résultat
+      if (result.error) {
+          // Afficher l'erreur
+          const errorElement = document.getElementById('card-errors');
+          errorElement.textContent = result.error.message;
 
-        // Réactiver le bouton de soumission
-        cardButton.disabled = false;
-    } else {
-        // Rediriger vers la page de succès
-        location.href = "{% url 'success_n' %}";
-    }
-});
+          // Réactiver le bouton de soumission
+          cardButton.disabled = false;
+      } else {
+          // Rediriger vers la page de succès
+          location.href = "{% url 'success_n' %}";
+      }
+  });
 
-// Gérer la soumission du formulaire d'adresse
-const addressForm = document.getElementById('new-address-form');
-addressForm.addEventListener('submit', async function (event) {
-    event.preventDefault();
+  // Gérer la soumission du formulaire d'adresse
+  const addressForm = document.getElementById('new-address-form');
+  addressForm.addEventListener('submit', async function (event) {
+      event.preventDefault();
 
-    // Envoyer les données du formulaire au serveur
-    const formData = new FormData(addressForm);
-    const response = await fetch("{% url 'checkout_n' %}", {
-        method: 'POST',
-        body: formData,
-        headers: {
-            'X-CSRFToken': document.getElementsByName('csrfmiddlewaretoken')[0].value
-        }
-    });
+      // Envoyer les données du formulaire au serveur
+      const formData = new FormData(addressForm);
+      const response = await fetch("{% url 'checkout_n' %}", {
+          method: 'POST',
+          body: formData,
+          headers: {
+              'X-CSRFToken': document.getElementsByName('csrfmiddlewaretoken')[0].value
+          }
+      });
 
-    // Traiter la réponse
-    if (response.ok) {
-        const data = await response.json();
+      // Traiter la réponse
+      if (response.ok) {
+          const data = await response.json();
 
-        // Afficher l'adresse choisie
-        const chosenAddress = document.getElementById('chosen-address');
-        chosenAddress.innerHTML = data.html;
+          // Afficher l'adresse choisie
+          const chosenAddress = document.getElementById('chosen-address');
+          chosenAddress.innerHTML = data.html;
 
-        // Stocker l'ID de l'adresse choisie
-        const chosenAddressId = document.getElementById('chosen-address-id');
-        chosenAddressId.value = data.address_id;
+          // Stocker l'ID de l'adresse choisie
+          const chosenAddressId = document.getElementById('chosen-address-id');
+          chosenAddressId.value = data.address_id;
 
-        // Activer le bouton de paiement
-        const cardButton = document.getElementById('card-button');
-        cardButton.disabled = false;
-    } else {
-        alert("Une erreur s'est produite lors de la soumission du formulaire d'adresse.");
-    }
-});
+          // Activer le bouton de paiement
+          const cardButton = document.getElementById('card-button');
+          cardButton.disabled = false;
 
-// Paypal
-var csrfToken = document.querySelector('[name=csrfmiddlewaretokenn]').value;
-paypal.Buttons({
-    style: {
-        shape: 'rect',
-        color: 'blue',
-        layout: 'vertical',
-        label: 'paypal',
-    },
-    createOrder: function(data, actions) {
-        // Appeler votre serveur pour configurer la transaction
-        return fetch("{% url 'create-paypal-payment' %}", {
-            method: 'post',
-            headers: {
-                'content-type': 'application/json',
-                'X-CSRFToken': csrfToken  // Ajoutez cette ligne
-            },
-        }).then(function(res) {
-            return res.json();
-        }).then(function(data) {
-            return data.orderID; // Utilisez l'ID de la commande renvoyé par votre serveur
-        });
-    },
-    onApprove: function(data, actions) {
-        // Appeler votre serveur pour finaliser la transaction
-        return fetch('/commande/process-paypal-payment/', {
-            method: 'post',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify({
-                orderID: data.orderID
-            })
-        }).then(function(res) {
-            return res.json();
-        }).then(function(details) {
-            alert('Transaction completed by ' + details.payer.name.given_name);
-            // Redirigez l'utilisateur vers une page de réussite
-            window.location.href = "/commande/success/";
-        });
-    }
-}).render('#paypal-button-container'); // Affiche le bouton PayPal
+
+          // Obtenir les éléments HTML pour le coût de livraison et le total de la commande
+          const shippingCostElement = document.getElementById('shipping-costs');
+          const totalElement = document.querySelector('.total_px');
+          const totalElement2 = document.getElementById('total_px');
+
+
+          // Mettre à jour le coût de livraison affiché
+          shippingCostElement.textContent = data.shipping_costs + ' €';
+          totalElement.textContent = data.total + ' €';
+          totalElement2.textContent = data.total + ' €';
+
+      } else {
+          alert("Une erreur s'est produite lors de la soumission du formulaire d'adresse.");
+      }
+  });
+
+
+
+
+
+  // Paypal
+  var csrfToken = document.querySelector('[name=csrfmiddlewaretokenn]').value;
+  paypal.Buttons({
+      style: {
+          shape: 'rect',
+          color: 'blue',
+          layout: 'vertical',
+          label: 'paypal',
+      },
+      createOrder: function(data, actions) {
+          // Appeler votre serveur pour configurer la transaction
+          return fetch("{% url 'create-paypal-payment' %}", {
+              method: 'post',
+              headers: {
+                  'content-type': 'application/json',
+                  'X-CSRFToken': csrfToken  // Ajoutez cette ligne
+              },
+          }).then(function(res) {
+              return res.json();
+          }).then(function(data) {
+              return data.orderID; // Utilisez l'ID de la commande renvoyé par votre serveur
+          });
+      },
+      onApprove: function(data, actions) {
+          // Appeler votre serveur pour finaliser la transaction
+          return fetch('/commande/process-paypal-payment/', {
+              method: 'post',
+              headers: {
+                  'content-type': 'application/json'
+              },
+              body: JSON.stringify({
+                  orderID: data.orderID
+              })
+          }).then(function(res) {
+              return res.json();
+          }).then(function(details) {
+              alert('Transaction completed by ' + details.payer.name.given_name);
+              // Redirigez l'utilisateur vers une page de réussite
+              window.location.href = "/commande/success/";
+          });
+      }
+  }).render('#paypal-button-container'); // Affiche le bouton PayPal
 </script>
 
 <script src="{% static 'vendors/bootstrap/bootstrap.bundle.min.js' %}"></script>
