@@ -8789,6 +8789,10 @@ button.bg-dark:focus {
   box-shadow: none !important;
 }
 
+.w-10 {
+  width: 10% !important;
+}
+
 .w-25 {
   width: 25% !important;
 }
@@ -12044,13 +12048,15 @@ textarea.form-control {
 }
 
 .img-eye1{
-  /* top:130px  with username */
-      top:90px
-  }
-  .img-eye2{
-  /*  top:175px with username */
-      top:135px
-  }
+top: 110px
+}
+.img-eye2{
+    top:155px
+}
+.eyelogin{
+    top:145px
+}
+
 
 
 .passimg-login{
@@ -12127,6 +12133,7 @@ textarea.form-control {
 .star-filled {
   color: #f1c40f;
 }
+
 
 
 
@@ -12225,27 +12232,61 @@ textarea.form-control {
   display: none;
 }
 
+
+
 /* french flag */
 .french {
-  width: 30px
-}
+        width: 30px
+
+    }
 
 
-
-/* message offer in checkout */
+/* message offer */
 
 
 .affichtxt:hover .description-pop {
-  display: block;
+    display: block;
 }
 
 .description-pop {
-  display: none;
-  position: absolute;
-  width: 200px;
-  padding: 10px;
-  background: #ffffff; /* couleur de fond en blanc */
-  color: #000000; /* couleur du texte en noir */
-  border: 1px solid #ccc;
-  border-radius: 5px;
+    display: none;
+    position: absolute;
+    width: 200px;
+    padding: 10px;
+    background: #ffffff; /* couleur de fond en blanc */
+    color: #000000; /* couleur du texte en noir */
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
+
+
+
+/* livraison choice */
+
+.shipping-method {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.shipping-method__title {
+    font-size: 1.5em;
+    color: #333;
+}
+
+.shipping-method__label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.shipping-method__select {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+
