@@ -468,7 +468,6 @@ def checkout_vi(request):
 
             existing_order.address = new_address
             existing_order.shipping_type = request.POST.get('shipping_type', 'C')
-            print(existing_order.shipping_type,existing_order.get_cart_total() , "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
             existing_order.save()
             shipping_costs = existing_order.shipping_costs()
             total = existing_order.get_cart_total()
@@ -536,7 +535,7 @@ def success_vi(request):
     # The order information you want to add
     date_ordered = order.date_ordered.strftime('%Y-%m-%d %H:%M:%S')
     customer_name = f"{address.complete_name}"
-    order_contents = ", ".join([f"{item.name()} x {item.quantity} ({item.price}€)" for item in order.get_cart_items()])
+    order_contents = ", ".join([f"{item.sh_name()} x {item.quantity} ({item.price}€)" for item in order.get_cart_items()])
     address = order.address
     address_info = f"{address.complete_name}, {address.adress}, {address.detail}, {address.postal_code} {address.city}, {address.country}"
     contact = f"{address.phone_number} | {request.user.email}"

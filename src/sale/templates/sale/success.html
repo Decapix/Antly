@@ -19,7 +19,7 @@
 </h5>
   <ul>
     {% for item in order.get_cart_items %}
-      <li>{{ item.name }} x {{ item.quantity }} ({{ item.price }}€)</li>
+      <li>{{ item.sh_name }} x {{ item.quantity }} ({{ item.price }}€)</li>
     {% endfor %}
   </ul>
   <p>Total : {{ order.get_order_total }}€</p>
