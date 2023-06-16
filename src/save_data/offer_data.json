@@ -1,6 +1,0 @@
-System check identified some issues:
-
-WARNINGS:
-[33;1msale.OrderItem_m.pack: (fields.W340) null has no effect on ManyToManyField.[0m
-[31;1mCommandError: Unknown model: user.Offer_m
-[0m
