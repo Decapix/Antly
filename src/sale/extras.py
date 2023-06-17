@@ -68,10 +68,11 @@ def offer_ant_func(ant_product, l1, l2, l3):
     # reduce to 5
     offer_ant = offer_ant[:5] if len(offer_ant) > 5 else offer_ant
     # get other product
-    other = random.choice(l3)
-    position = random.randint(0, len(offer_ant))
-    # add other to the list
-    offer_ant.insert(position, other)
+    if l3:
+        other = random.choice(l3)
+        position = random.randint(0, len(offer_ant))
+        # add other to the list
+        offer_ant.insert(position, other)
     return offer_ant
 
 
