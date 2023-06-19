@@ -581,7 +581,7 @@ def orderEmail(request, user, to_email, order):
     order_items = order.get_cart_items()
     items_list = ""
     for item in order_items:
-        items_list += f"{item.name()} x {item.quantity} ({item.price}€)\n"
+        items_list += f"{item.sh_name()} x {item.quantity} ({item.price}€)\n"
 
     address = order.address
     address_info = f"{address.complete_name}\n{address.adress}\n{address.detail}\n{address.postal_code} {address.city}\n{address.country}"
