@@ -130,7 +130,7 @@ def product_pack_detail_vi(request, id):
     Returns:
         The rendered pack product detail view with context data.
     """
-    description_pack = "Le pack contient le nid, la fondation, une pince à épiler, une seringue, un morceau de 10 cm de tuyau pour les liaisons"
+    description_pack = "Le pack contient le nid, la fondation, une pince à épiler, une seringue, un morceau de 10 cm de tuyau pour les liaisons et une pipette"
     user = request.user
     pack_product = get_object_or_404(Pack_m, id=id)
     size = pack_product.size
