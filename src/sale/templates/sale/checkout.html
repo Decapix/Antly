@@ -21,7 +21,7 @@
     <div class="row justify-content-between">
       <div class="col-md-8 pr-md-5 mb-4 mb-md-0">
         <div class="mb-5">
-          <button class="circle btn btn-outline-primary">3</i></button>
+          <button class="circle btn btn-outline-primary mb-2">3</i></button>
           <h4>Résumé de la commande</h4>
           <table class="table table-striped">
             <tbody>
@@ -68,7 +68,7 @@
           {% endif %}
         </div>
         <!-- strip-->
-        <button class="circle btn btn-outline-primary">4</i></button>
+        <button class="circle btn btn-outline-primary mb-2">4</i></button>
         <h4 class="mb-4">Paiement</h4>
         <!-- Affichez ici le formulaire de paiement Stripe -->
 
@@ -130,7 +130,7 @@
             <form id="new-address-form" method="post">
               {% csrf_token %}
               <div class="form-group shipping-method">
-                <button class="circle btn btn-outline-primary">1</i></button>
+                <button class="circle btn btn-outline-primary mb-2">1</i></button>
                 <h4>Adresse de livraison</h4>
                 <div>{{form.country}}</div>
                 <div>{{form.complete_name}}</div>
@@ -143,7 +143,7 @@
 
               {% if letter_shipping_possible %}
               <div class="mt-5 mb-4 shipping-method">
-                  <button class="circle btn btn-outline-primary">2</i></button>
+                  <button class="circle btn btn-outline-primary mb-2">2</i></button>
                   <h4 class="mb-3 shipping-method__title">Méthode de livraison</h4>
                   <label for="shipping_type" class="shipping-method__label">Type d'envoi:</label>
                   <select name="shipping_type" id="shipping_type" class="shipping-method__select">
