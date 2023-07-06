@@ -843,7 +843,7 @@ def generate_invoice_pdf(request, order_id):
 
     # Ajoutez ici les produits ou services, avec la quantité, le prix unitaire et le prix total
     for item in order.get_cart_items():
-        p.drawString(x, y, f"{item.name()}")
+        p.drawString(x, y, f"{item.sh_name()}")
         p.drawString(x + 200, y, f"{item.quantity}")
         p.drawString(x + 300, y, f"{item.price} €")
     y -= 20
