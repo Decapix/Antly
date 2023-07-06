@@ -126,6 +126,9 @@ class Other_m(Product_m):
     def get_stock(self):
         return self.stock
 
+    def reduce_stock(self, quantity):
+        self.stock = self.stock - quantity
+
 
 
 
@@ -196,6 +199,9 @@ class Pack_m(models.Model):
         elif self.nest.stock < self.size.stock or self.nest.stock == self.size.stock:
             st = self.nest.stock
         return st
+        
+    def reduce_stock(self, quantity):
+        self.size.stock = self.size.stock - quantity
 
 
 

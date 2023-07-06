@@ -98,6 +98,21 @@ class OrderItem_m(models.Model):
                         else:
                             self.delete()
                             return False
+    
+
+    def reduce_stock(self):
+        """
+        pour réduire le stock des produits apres la commande
+        """
+        # Obtenez le ContentType pour chaque modèle
+        if self.content_type == ContentType.objects.get_for_model(Ant_m):
+            for y in self.content_object.get_sizes():
+                if y.price == self.price:
+                    size = y
+                    size.stock = size.stock - self.quantity
+
+        else:
+            self.content_object.reduce_stock(self.quantity)
 
 
     def sh_titlecart(self):

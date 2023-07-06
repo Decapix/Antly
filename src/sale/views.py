@@ -697,9 +697,7 @@ def webhook_vi(request):
 
         # Reduce stock for each item in the order
         for item in order_items:
-            for size in item.size.all():
-                size.stock -= item.quantity
-                size.save()
+            item.reduce_stock()
 
         # Create a transaction
         transaction = Transaction(shopper=user_profile,
