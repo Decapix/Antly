@@ -97,7 +97,7 @@
               value=""
             />
             <div class="row">
-              <div class="col-md-5">
+              <div class="col-md-4">
                 <button
                   type="submit"
                   class="btn btn-info rounded"
@@ -107,10 +107,16 @@
                   Payer
                 </button>
               </div>
-              <div class="col-md-7">
+              <div class="col-md-4">
                 <h6 class="text-info" id="total_px">{{ order.get_cart_total }} €</h6>
               </div>
+              <div class="col-md-4">
+                <img src="{% static 'sale/imgs/secu-strip.png' %}" alt="" class="secu">
+              </div>
             </div>
+
+
+     
           </form>
         </div>
 
