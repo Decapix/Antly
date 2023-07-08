@@ -63,48 +63,57 @@
           </div>
         </div>
 
+
+
         <div class="col-md-6 pl-md-5">
           <h1 class="display-5 fw-bolder mb-4">{{ other.name }}</h1>
           <hr />
           <div class="row mt-3">
             <div class="col-md-4">
               <div class="fs-5 mb-2">
-                <h5 class="col-sm-6" id="price-display">{{ other.sh_price }}</h5>
+                <h5 class="" id="price-display">{{ other.sh_price }} €</h5>
               </div>
             </div>
             <div class="col-md-6">
-                <div>
-                  <p>{{ other.description|format_description|safe }}</p>
-                </div>
               <form method="POST" action="">
                 {% csrf_token %}
-                <div class="d-flex mt-5">
-                  <div class="form-group mr-3">
-                    <label for="quantity"></label>
-                    <select class="form-control" id="quantity" name="quantity">
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
-                      <option>6</option>
-                      <option>7</option>
-                      <option>8</option>
-                      <option>9</option>
-                      <option>10</option>
-                      <option>11</option>
-                      <option>12</option>
-                      <option>13</option>
-                      <option>14</option>
-                      <option>15</option>
-                    </select>
+            </div>
+            <div>
+              <p>{{ other.description|format_description|safe }}</p>
+            </div>
+                <div class="row align-items-center">
+                  <div class="col-md-6">
+                    <div class="d-flex">
+                      <div class="form-group ">
+                        <label for="quantity"></label>
+                        <select class="form-control" id="quantity" name="quantity">
+                          <option>1</option>
+                          <option>2</option>
+                          <option>3</option>
+                          <option>4</option>
+                          <option>5</option>
+                          <option>6</option>
+                          <option>7</option>
+                          <option>8</option>
+                          <option>9</option>
+                          <option>10</option>
+                          <option>11</option>
+                          <option>12</option>
+                          <option>13</option>
+                          <option>14</option>
+                          <option>15</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <input type="submit" value="Ajouter au panier" class="btn btn-dark mr-4 btn-lg"> <!-- mr-4 -->
                   </div>
                 </div>
-                <input type="submit" value="Ajouter au panier" class="btn btn-dark mr-4">
               </form>
-            </div>
           </div>
         </div>
+
       </div>
       {% include "space.html" %}
 
