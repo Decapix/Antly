@@ -1,0 +1,371 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+
+
+
+
+
+{% block content %}
+{% include "space.html" %}
+<section class="section" id="service">
+        <div class="container">
+            <div class="if_hidden ">
+                <h3 class="mb-2">Choisissez Votre Espèce de Fourmis Idéale</h3>
+                <h5 class="mb-3">Guide d'Élevage de Fourmis pour Débutants et Experts</h5>
+                <p>Bienvenue sur Antly, votre source de confiance pour l'élevage de fourmis. Que vous soyez un débutant
+                    ou un éleveur expérimenté, notre guide d'identification des espèces vous aidera à choisir l'espèce
+                    de fourmis parfaite pour vous. Faites votre choix en fonction de la taille, de la couleur, du niveau
+                    d'élevage et plus encore pour répondre à vos besoins spécifiques en matière d'élevage de fourmis.
+                    Notre objectif est de rendre l'élevage de fourmis accessible à tous et de fournir une ressource
+                    précieuse pour notre communauté. Avec Antly, vous n'êtes jamais seuls dans votre aventure d'élevage
+                    de fourmis. Commencez dès aujourd'hui votre passionnante expérience d'élevage de fourmis.</p>
+            </div>
+        </div>
+</section>
+
+<section class="section" id="about">
+    <div class="container">
+        <form action="" method="post" id="specie" class="ml-3">
+                 {% csrf_token %}
+            <div id="form-niveau">
+                <div class="form-group">
+                    <h3>Niveau de connaissance</h3>
+                    <div class="form-check ml-4">
+                        <input class="form-check-input" type="radio" name="niveau" value="debutant">
+                        <label class="form-check-label" for="debutant">Débutant</label>
+                    </div>
+                    <div class="form-check ml-4">
+                        <input class="form-check-input" type="radio" name="niveau" value="intermediaire">
+                        <label class="form-check-label" for="intermediaire">Intermédiaire</label>
+                    </div>
+                    <div class="form-check ml-4">
+                        <input class="form-check-input" type="radio" name="niveau" value="experimente">
+                        <label class="form-check-label" for="experimente">Expérimenté</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- formulaire pour les débutants -->
+            <div id="form-debutant" style="display: none;">
+                <h3>Informations sur l'espèce de fourmis</h3>
+                <div id="size-deb" class="form-group">
+                    <h4>Taille de l'espèce</h4>
+                    <div class="form-check ml-4">
+                        <input class="form-check-input" type="radio" name="taille" value="true">
+                        <label class="form-check-label" for="grosse">Grosse</label>
+                    </div>
+                    <div class="form-check ml-4">
+                        <input class="form-check-input" type="radio" name="taille" value="false">
+                        <label class="form-check-label" for="petite">Petite</label>
+                    </div>
+                    <div class="form-check ml-4 text-info">
+                        <input class="form-check-input" type="radio" name="taille" value="none">
+                        <label class="form-check-label" for="sans importance">Sans importance</label>
+                    </div>
+                </div>
+
+                <!-- Formulaire couleur -->
+                <div id="color-deb">
+                    <h4>Couleur de l'espèce</h4>
+                    <div class="form-check ml-4">
+                        <input class="form-check-input" type="radio" name="couleur" value="true">
+                        <label class="form-check-label" for="colore">Coloré</label>
+                    </div>
+                    <div class="form-check ml-4">
+                        <input class="form-check-input" type="radio" name="couleur" value="false">
+                        <label class="form-check-label" for="noir">Noir</label>
+                    </div>
+                    <div class="form-check ml-4 text-info">
+                        <input class="form-check-input" type="radio" name="couleur" value="none">
+                        <label class="form-check-label" for="sans importance">Sans importance</label>
+                    </div>
+                </div>
+
+
+                <!-- Formulaire localisation -->
+                <div id="location-deb">
+                    <h4>Localisation de l'espèce</h4>
+                    <div class="form-check ml-4">
+                        <input class="form-check-input" type="checkbox" name="localisation" value="Europe du Sud">
+                        <label class="form-check-label" for="Europe du Sud">Europe du Sud</label>
+                    </div>
+                    <div class="form-check ml-4">
+                        <input class="form-check-input" type="checkbox" name="localisation" value="Europe du Nord">
+                        <label class="form-check-label" for="Europe du Nord">Europe du Nord</label>
+                    </div>
+                    <div class="form-check ml-4">
+                        <input class="form-check-input" type="checkbox" name="localisation" value="Asie">
+                        <label class="form-check-label" for="Asie">Asie</label>
+                    </div>
+                    <div class="form-check ml-4">
+                        <input class="form-check-input" type="checkbox" name="localisation" value="Amérique du Sud">
+                        <label class="form-check-label" for="Amérique du Sud">Amérique du Sud</label>
+                    </div>
+                    <div class="form-check ml-4">
+                        <input class="form-check-input" type="checkbox" name="localisation" value="Amérique du Nord">
+                        <label class="form-check-label" for="Amérique du Nord">Amérique du Nord</label>
+                    </div>
+                    <div class="form-check ml-4">
+                        <input class="form-check-input" type="checkbox" name="localisation" value="Australie">
+                        <label class="form-check-label" for="Australie">Australie</label>
+                    </div>
+                    <div class="form-check ml-4">
+                        <input class="form-check-input" type="checkbox" name="localisation" value="Afrique">
+                        <label class="form-check-label" for="Afrique">Afrique</label>
+                    </div>
+                    <div class="form-check ml-4 text-info">
+                        <input class="form-check-input" type="checkbox" name="localisation" value="sans importance">
+                        <label class="form-check-label" for="sans importance">Sans importance</label>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- formulaire pour les intermédiaires et expérimentés -->
+            <div id="form-experimente" style="display: none;">
+                <h3>Informations sur l'espèce de fourmis</h3>
+
+                <!-- Formulaire activité -->
+                <div id="activity-exp">
+                    <h4>Activité de la colonie</h4>
+                    <div class="form-check ml-4">
+                        <input class="form-check-input" type="radio" name="activite" value="true">
+                        <label class="form-check-label" for="forte activité">Forte activité</label>
+                    </div>
+                    <div class="form-check ml-4">
+                        <input class="form-check-input" type="radio" name="activite" value="false">
+                        <label class="form-check-label" for="basse activité">Basse activité</label>
+                    </div>
+                    <div class="form-check ml-4 text-info">
+                        <input class="form-check-input" type="radio" name="activite" value="none">
+                        <label class="form-check-label" for="sans importance">Sans importance</label>
+                    </div>
+                </div>
+
+                <div id="size-exp">
+                    <h4>Taille de l'espèce</h4>
+                    <div class="form-check ml-4">
+                        <input class="form-check-input" type="radio" name="taille" value="true">
+                        <label class="form-check-label" for="grosse">Grosse</label>
+                    </div>
+                    <div class="form-check ml-4">
+                        <input class="form-check-input" type="radio" name="taille" value="false">
+                        <label class="form-check-label" for="petite">Petite</label>
+                    </div>
+                    <div class="form-check ml-4 text-info">
+                        <input class="form-check-input" type="radio" name="taille" value="none">
+                        <label class="form-check-label" for="sans importance">Sans importance</label>
+                    </div>
+                </div>
+
+                <!-- Formulaire couleur -->
+                <div id="color-exp">
+                    <h4>Couleur de l'espèce</h4>
+                    <div class="form-check ml-4">
+                        <input class="form-check-input" type="radio" name="couleur" value="true">
+                        <label class="form-check-label" for="colore">Coloré</label>
+                    </div>
+                    <div class="form-check ml-4">
+                        <input class="form-check-input" type="radio" name="couleur" value="false">
+                        <label class="form-check-label" for="noir">Noir</label>
+                    </div>
+                    <div class="form-check ml-4 text-info">
+                        <input class="form-check-input" type="radio" name="couleur" value="none">
+                        <label class="form-check-label" for="noir">Sans importance</label>
+                    </div>
+                </div>
+
+                <!-- Formulaire type de nid -->
+                <div id="nest-exp">
+                    <h4>Type de nid</h4>
+                    <div class="form-check ml-4">
+                        <input class="form-check-input" type="radio" name="nid" value="true">
+                        <label class="form-check-label" for="sec">Sec</label>
+                    </div>
+                    <div class="form-check ml-4">
+                        <input class="form-check-input" type="radio" name="nid" value="false">
+                        <label class="form-check-label" for="humide">Humide</label>
+                    </div>
+                    <div class="form-check ml-4 text-info" >
+                        <input class="form-check-input" type="radio" name="nid" value="none">
+                        <label class="form-check-label" for="sans importance">Sans importance</label>
+                    </div>
+                </div>
+
+                <!-- Formulaire localisation -->
+                <div id="location-exp">
+                    <h4>Localisation de l'espèce</h4>
+                    <div class="form-check ml-4">
+                        <input class="form-check-input" type="checkbox" name="localisation" value="Europe du Sud">
+                        <label class="form-check-label" for="Europe du Sud">Europe du Sud</label>
+                    </div>
+                    <div class="form-check ml-4">
+                        <input class="form-check-input" type="checkbox" name="localisation" value="Europe du Nord">
+                        <label class="form-check-label" for="Europe du Nord">Europe du Nord</label>
+                    </div>
+                    <div class="form-check ml-4">
+                        <input class="form-check-input" type="checkbox" name="localisation" value="Asie">
+                        <label class="form-check-label" for="Asie">Asie</label>
+                    </div>
+                    <div class="form-check ml-4">
+                        <input class="form-check-input" type="checkbox" name="localisation" value="Amérique du Sud">
+                        <label class="form-check-label" for="Amérique du Sud">Amérique du Sud</label>
+                    </div>
+                    <div class="form-check ml-4">
+                        <input class="form-check-input" type="checkbox" name="localisation" value="Amérique du Nord">
+                        <label class="form-check-label" for="Amérique du Nord">Amérique du Nord</label>
+                    </div>
+                    <div class="form-check ml-4">
+                        <input class="form-check-input" type="checkbox" name="localisation" value="Australie">
+                        <label class="form-check-label" for="Australie">Australie</label>
+                    </div>
+                    <div class="form-check ml-4">
+                        <input class="form-check-input" type="checkbox" name="localisation" value="Afrique">
+                        <label class="form-check-label" for="Afrique">Afrique</label>
+                    </div>
+                    <div class="form-check ml-4 text-info">
+                        <input class="form-check-input" type="checkbox" name="localisation" value="sans importance">
+                        <label class="form-check-label" for="sans importance">Sans importance</label>
+                    </div>
+                </div>
+                </div>
+            <input class="btn btn-primary mt-3 ml-3" type="submit"  id="submit"/>
+        </form>
+
+        <div style="display: none;" id="show-specie">
+            <div class="mt-4">
+                <h6>Les espèces qui pourrais vous correspondre</h6>
+                <div id="specie-corespond" class="mt-4"><!-- afficher l'adresse choisie--></div>
+            </div>
+            <div class="mt-2">
+                <h6>Les espèces que nous avons en stock actuelement</h6>
+                <div id="specie-in-stock" class="mt-4"><!-- afficher l'adresse choisie--></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+{% endblock content %}
+
+{% block script %}
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script>
+$(document).ready(function() {
+    // Gère le changement de niveau de connaissance
+    $("#submit").hide();
+    $("input[name='niveau']").on('change', function() {
+        var value = $(this).val();
+
+        if (value == 'debutant') {
+            $("#form-debutant").show();
+            $("#form-experimente").hide();
+            // Affiche uniquement le premier formulaire du débutant
+            $("#form-debutant > div").hide();
+            $("#size-deb").show();
+        } else if (value == 'intermediaire' || value == 'experimente') {
+            $("#form-experimente").show();
+            $("#form-debutant").hide();
+            // Affiche uniquement le premier formulaire de l'expérimenté
+            $("#form-experimente > div").hide();
+            $("#activity-exp").show();
+        } else {
+            $("#form-debutant").hide();
+            $("#form-experimente").hide();
+        }
+    });
+
+    // Gère le changement dans le formulaire pour les débutants
+    $("#size-deb").on('change', function() {
+        $("#color-deb").show();
+    });
+
+    $("#color-deb").on('change', function() {
+        $("#location-deb").show();
+    });
+
+    $("#location-deb").on('change', function() {
+        $("#submit").show();
+    });
+
+    // Gère le changement dans le formulaire pour les expérimentés
+    $("#activity-exp").on('change', function() {
+        $("#size-exp").show();
+    });
+
+    $("#size-exp").on('change', function() {
+        $("#color-exp").show();
+    });
+
+    $("#color-exp").on('change', function() {
+        $("#nest-exp").show();
+    });
+
+    $("#nest-exp").on('change', function() {
+        $("#location-exp").show();
+    });
+
+    $("#location-exp").on('change', function() {
+        $("#submit").show();
+    });
+
+
+});
+
+
+
+// afficher les especes
+const specieForm = document.getElementById('specie');
+specieForm.addEventListener('submit', async function (event) {
+      event.preventDefault();
+
+      // Envoyer les données du formulaire au serveur
+      const formData = new FormData(specieForm);
+      const response = await fetch("{% url 'specie_form_n' %}", {
+          method: 'POST',
+          body: formData,
+          headers: {
+              'X-CSRFToken': document.getElementsByName('csrfmiddlewaretoken')[0].value
+          }
+      });
+
+      // Traiter la réponse
+      if (response.ok) {
+          const data = await response.json();
+
+          // Retirer la classe "hidden"
+           $("#show-specie").show();
+
+          // Afficher les espèce qui pourarait correspondre
+          const species = document.getElementById('specie-corespond');
+          species.innerHTML = data.specie;
+
+          // Afficher les especes en stock
+          if (data.stock !== "none") {
+
+          const stock = document.getElementById('specie-in-stock');
+          stock.innerHTML = data.stock;
+
+          } else {
+          const stock = document.getElementById('specie-in-stock');
+          stock.innerHTML = `Nous n'avons aucune de ces espèces dans nos stocks`
+          }
+
+
+
+
+
+      } else {
+          alert("Une erreur s'est produite lors de la soumission du formulaire");
+      }
+  });
+</script>
+{% endblock %}
