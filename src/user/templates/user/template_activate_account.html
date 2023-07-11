@@ -1,10 +1,20 @@
 {% extends "email.html" %}
 {% block mail %}
 
+Bonjour {{ user.user_name }},
 
-Bonjour {{ user.username }},
+Nous sommes ravis de vous accueillir au sein de notre communauté passionnée de fourmis !
 
-Veuillez cliquer sur le lien ci-dessous pour confirmer votre inscription :
+Afin de finaliser votre inscription et de commencer à explorer notre collection, veuillez confirmer votre compte en cliquant sur le lien ci-dessous :
 
 {{ protocol }}://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+
+Si vous rencontrez des problèmes lors de l'activation de votre compte, n'hésitez pas à nous contacter à antly.fourmis@gmail.com.
+
+Nous sommes impatients de vous aider à construire votre empire de fourmis. Merci d'avoir choisi Antly et à très bientôt !
+
+Cordialement,
+Antly - antly.fr
+antly.fourmis@gmail.com | 06 51 33 61 58
+
 {% endblock %}
