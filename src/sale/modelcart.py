@@ -184,7 +184,16 @@ class Order_m(models.Model):
             n = sum(item.quantity for item in self.items.all() if item.is_ordered == False)
             if n >= 3:
                 return True
+        elif settings.FREE_COLONIE2:
+            n = sum(item.quantity for item in self.items.all() if item.is_ordered == False)
+            if n >= 2:
+                return True
+        elif settings.FREE_COLONIE1:
+            n = sum(item.quantity for item in self.items.all() if item.is_ordered == False)
+            if n >= 1:
+                return True
         return False
+
 
     def get_cart_items(self):
         return self.items.all()

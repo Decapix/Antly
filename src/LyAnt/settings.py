@@ -213,10 +213,13 @@ COMPANY_SIRET = "91493900400018"
 COMPANY_VAT_NUMBER = "Pas de TVA applicable"
 
 
-# offert
+# offer
 
-FREE_COLONIE = True
+FREE_COLONIE = False
+FREE_COLONIE2 = True
+FREE_COLONIE1 = False
 FREE_SHIPPING_COSTE = False
+
 
 
 # storage
