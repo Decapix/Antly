@@ -1,4 +1,19 @@
-{% extends "index.html" %} {% load custom_filters %} {% load static %} {% block content %}
+{% extends "index.html" %} {% load custom_filters %} {% load static %} 
+
+
+{% block head %} 
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org/", 
+    "@type": "Product", 
+    "name": "{{ pack.sh_name }}",
+    "image": "{{ ant.thumbnail.url }}",
+    "description": "{{ description_pack|format_description|safe }}{{ ant.description|format_description|safe }}{{ nest.description|format_description|safe }}",
+  }
+  </script>
+{% endblock %}
+
+{% block content %}
 {% include "space.html" %}
 <section class="section mt-4" id="blog">
   <div class="container">

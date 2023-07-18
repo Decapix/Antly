@@ -18,3 +18,9 @@ class Offer_m(models.Model):
     def __str__(self):
         return f'{self.message}'
 
+
+class Page :
+    def __init__(self, name, link, position):
+        self.name = name
+        self.link = link
+        self.position = position

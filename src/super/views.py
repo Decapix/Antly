@@ -10,6 +10,8 @@ from django.template import loader
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET
 
+
+
 def random_three_elements(input_list):
     if len(input_list) < 3:
         raise ValueError("La liste doit contenir au moins trois éléments.")
@@ -20,6 +22,8 @@ def homepage_vi(request):
     """view for homepage"""
     metat = MetaTemplate("Boutique en Ligne de Fourmis pour Débutants - Fondations, Packs, Nids et Accessoires | Myrmécologie",
                          "Bienvenue sur notre boutique en ligne de fourmis pour débutants ! Découvrez notre sélection de fondations, packs, nids et accessoires pour commencer votre élevage de fourmis. Profitez de conseils d'experts et rejoignez la communauté des passionnés de Myrmécologie.")
+    page1 = Page("Ac", reverse('homepage_n'), "1")
+    bread = [page1]
     ant = Ant_m.objects.filter(sizes__stock__gt=0).distinct()
     pack = Pack_m.objects.filter(size__stock__gt=0).distinct()
     other = Other_m.objects.filter(stock__gt=0).distinct()
@@ -33,7 +37,7 @@ def homepage_vi(request):
         offers = Offer_m.objects.filter(active=True)
         request.session['offer_shown'] = True
         request.session.modified = True
-    return render(request, 'super/homepage.html', context={"product": product, "meta": metat, "comment": comment, "offers": offers})
+    return render(request, 'super/homepage.html', context={"product": product, "meta": metat, "comment": comment, "offers": offers, "bread": bread})
 
 
 

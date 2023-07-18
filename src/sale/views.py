@@ -62,6 +62,7 @@ def ant_product_vi(request):
         "Fondations de Fourmis pour Débutants - Achat et Vente de Colonies de Fourmis | Boutique en Ligne",
         "Explorez notre collection de fondations de fourmis pour débutants, avec une variété d'espèces et d'origines. Démarrez votre élevage de fourmis en toute simplicité et bénéficiez d'un support professionnel. Découvrez nos offres dès maintenant !")
 
+    bread = ""
     ant_product = Ant_m.objects.filter(sizes__stock__gt=0).distinct()
     country = []
     for ant in ant_product:

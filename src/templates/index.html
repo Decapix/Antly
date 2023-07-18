@@ -65,6 +65,61 @@
     })(window, document, "script", "dataLayer", "GTM-KBZ4KWTR");
   </script>
   <!-- End Google Tag Manager -->
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "WebSite",
+      "name": "Antly",
+      "url": "https://www.antly.fr/",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "{search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Antly",
+        "url": "https://www.antly.fr/",
+        "logo": "https://www.antly.fr/static/imgs/logo.5d174105a527.png",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "0651336158",
+          "contactType": "customer service",
+          "contactOption": "TollFree",
+          "areaServed": ["FR","CH"],
+          "availableLanguage": "fr"
+        },
+        "sameAs": [
+          "https://www.instagram.com/antly.fourmis/",
+          "https://www.youtube.com/channel/UC0PVQC_BZZjOFpQt0nItvhg",
+          "https://www.antly.fr/",
+          "https://www.facebook.com/profile.php?id=100092001896391"
+        ]
+      }
+      </script>
+
+      <script type="application/ld+json">
+        {
+          "@context": "https://schema.org/", 
+          "@type": "BreadcrumbList", 
+          "itemListElement": [
+          {% for u in bread %}
+          {
+            "@type": "ListItem", 
+            "position": {{u.position}}, 
+            "name": "{{u.name}}",
+            "item": "{{u.link}}"  
+          },
+          {% endfor %}
+          ]
+        }
+        </script>
   </head>
 
   <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
