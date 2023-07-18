@@ -25,17 +25,17 @@
     />
     <meta name="author" content="Antly" />
     {% if meta %}
-    <meta
-      name="description"
-      content="{{ meta.des }}"
-    />
+    <meta name="description" content="{{ meta.des }}" />
     <title>{{ meta.title }}</title>
     {% else %}
     <meta
       name="description"
       content="Bienvenue sur notre boutique en ligne de fourmis pour débutants ! Découvrez notre sélection de fondations, packs, nids et accessoires pour commencer votre élevage de fourmis. Profitez de conseils d'experts et rejoignez la communauté des passionnés de Myrmécologie."
     />
-    <title>Boutique en Ligne de Fourmis pour Débutants - Fondations, Packs, Nids et Accessoires | Myrmécologie</title>
+    <title>
+      Boutique en Ligne de Fourmis pour Débutants - Fondations, Packs, Nids et
+      Accessoires | Myrmécologie
+    </title>
     {% endif %}
     <!-- font icons -->
     <link
@@ -52,27 +52,32 @@
     <link rel="stylesheet" href="{% static 'css/leadmark.css' %}" />
     {% block head %} {% endblock %}
   </head>
-  <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11191390842"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'AW-11191390842');
-    </script>
-    <!-- Google tag (gtag.js) gg analitics-->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NTF55KDL1L"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-NTF55KDL1L');
-    </script>
+  <!-- Google Tag Manager -->
+  <script>
+    (function (w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != "dataLayer" ? "&l=" + l : "";
+      j.async = true;
+      j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, "script", "dataLayer", "GTM-KBZ4KWTR");
+  </script>
+  <!-- End Google Tag Manager -->
 
   <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
-
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-KBZ4KWTR"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
 
     <!-- page Navigation -->
     <nav
@@ -150,8 +155,7 @@
         </div>
       </div>
     </nav>
-    {% include 'messages.html' %}
-    {% include 'offers.html' %}
+    {% include 'messages.html' %} {% include 'offers.html' %}
     <!-- End Of Second Navigation -->
     {% block home %} {% endblock home %}
 
@@ -171,7 +175,6 @@
 
             <h6 class="mb-0">Email</h6>
             <p class="mb-0">antly.fourmis@gmail.com</p>
-
 
             <p></p>
           </div>
@@ -259,24 +262,28 @@
         <!-- Page Footer -->
         <footer class="mt-5 py-4 border-top border-secondary">
           <div class="row">
-                <div class="col-md-8">
-          <p class="mb-0 small">
-            &copy;
-            <script>
-              document.write(new Date().getFullYear());
-            </script>
-            , Created By
-            <a href="{% url 'homepage_n' %}" target="_blank" class="adown"
-              >Antly.</a
-            >
-            All rights reserved
-          </p>
-                  </div>
-                <div class="col-md-4 d-flex align-items-center">
-                  <p class="mb-0 small mr-2">boutique française</p>
-                  <img src="{% static 'imgs/france.png' %}" alt="france" class="mb-0 french"/>
-                </div>
-              </div>
+            <div class="col-md-8">
+              <p class="mb-0 small">
+                &copy;
+                <script>
+                  document.write(new Date().getFullYear());
+                </script>
+                , Created By
+                <a href="{% url 'homepage_n' %}" target="_blank" class="adown"
+                  >Antly.</a
+                >
+                All rights reserved
+              </p>
+            </div>
+            <div class="col-md-4 d-flex align-items-center">
+              <p class="mb-0 small mr-2">boutique française</p>
+              <img
+                src="{% static 'imgs/france.png' %}"
+                alt="france"
+                class="mb-0 french"
+              />
+            </div>
+          </div>
         </footer>
         <!-- End of Page Footer -->
       </div>
@@ -294,6 +301,5 @@
     <!-- LeadMark js -->
     <script src="{% static 'js/leadmark.js' %}"></script>
     {% block script %} {% endblock script %}
-
   </body>
 </html>
