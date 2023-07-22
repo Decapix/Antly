@@ -1,4 +1,3 @@
-from allauth.account.forms import default_token_generator
 from django.contrib.auth import logout, login, get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.sites.shortcuts import get_current_site
@@ -18,6 +17,7 @@ from sale.modelcart import Order_m
 from django.http import FileResponse, Http404
 import os
 from django.conf import settings
+from LyAnt.breadcrumbs import *
 
 
 def pdfemail(request, user):
@@ -304,6 +304,7 @@ def delete_account_vi(request, pk):
 
 
 def comment_vi(request):
+    bread = [pageAccueil, pageAvis]
     user = request.user
     if user.is_authenticated:
         if request.method == 'POST':
@@ -317,7 +318,7 @@ def comment_vi(request):
         else:
             form = Feedback_fo()
 
-        context = {'form': form}
+        context = {'form': form, "bread": bread}
         return render(request, 'user/comment.html', context)
     else:
         return redirect("login_n")

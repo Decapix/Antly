@@ -1,7 +1,10 @@
+import os
 import uuid
 from django.urls import reverse
 from .category import *
-
+from PIL import Image
+from io import BytesIO
+from django.core.files import File
 
 class Product_m(models.Model):
     """The model base for any product"""
@@ -28,6 +31,38 @@ class Product_m(models.Model):
 
     def thumbnail_url(self):
         return self.thumbnail.url
+    
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)  # Call the "real" save() method.
+
+        thumbnails = [
+            self.thumbnail,
+            self.thumbnail_1,
+            self.thumbnail_2,
+            self.thumbnail_3,
+            self.thumbnail_4,
+        ]
+
+        for thumbnail in thumbnails:
+            if thumbnail and thumbnail.name and thumbnail.file:  # check if the thumbnail exists, has a name, and has a file
+                try:
+                    img = Image.open(thumbnail.path)  # open the image
+
+                    output_io = BytesIO()
+                    img.resize((1560, 1320)).convert('RGB').save(output_io, format='WEBP',
+                                                               quality=70)  # resize and convert to WebP
+                    output_io.seek(0)
+
+                    # Change the file extension to .webp
+                    thumbnail_name = f'{os.path.splitext(thumbnail.name)[0]}.webp'
+
+                    thumbnail.delete(save=False)
+                    thumbnail.save(thumbnail_name, File(output_io), save=False)
+                except Exception as e:
+                    print(f"Error processing image: {e}")
+
+        super().save(*args, **kwargs)  # Call the "real" save() method again.
 
 
 class Ant_m(Product_m):

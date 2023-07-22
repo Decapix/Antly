@@ -28,6 +28,7 @@ from django.templatetags.static import static as stat
 from django.contrib.staticfiles import finders
 from .paypal import create_paypal_transaction, execute_paypal_transaction
 from django.contrib.contenttypes.models import ContentType
+from LyAnt.breadcrumbs import *
 
 
 def get_user_pending_order(request):
@@ -62,13 +63,13 @@ def ant_product_vi(request):
         "Fondations de Fourmis pour Débutants - Achat et Vente de Colonies de Fourmis | Boutique en Ligne",
         "Explorez notre collection de fondations de fourmis pour débutants, avec une variété d'espèces et d'origines. Démarrez votre élevage de fourmis en toute simplicité et bénéficiez d'un support professionnel. Découvrez nos offres dès maintenant !")
 
-    bread = ""
+    bread = [pageAccueil, pageFourmis]
     ant_product = Ant_m.objects.filter(sizes__stock__gt=0).distinct()
     country = []
     for ant in ant_product:
         if ant.sh_localisation() not in country:
             country.append(ant.sh_localisation())
-    return render(request, 'sale/ant_product.html', context={"ant_product": ant_product, "country": country, 'meta':metat})
+    return render(request, 'sale/ant_product.html', context={"ant_product": ant_product, "country": country, 'meta':metat, "bread": bread})
 
 
 def other_product_vi(request):
@@ -84,13 +85,13 @@ def other_product_vi(request):
     metat = MetaTemplate(
         "Accessoires pour l'élevage de Fourmis - Nids, Outils et Plus | Boutique en Ligne",
 "Découvrez notre gamme complète d'accessoires pour l'élevage de fourmis, conçue pour les débutants. De la mise en place de votre nid à la maintenance de votre colonie, nos produits assurent une expérience optimale. Visitez notre boutique et découvrez nos offres !")
-
+    bread = [pageAccueil, pageOther]
     other_product = Other_m.objects.filter(stock__gt=0).distinct()
     country = []
     for ant in other_product:
         if ant.type not in country:
             country.append(ant.type)
-    return render(request, 'sale/other_product.html', context={"other_product": other_product, "country": country, 'meta':metat})
+    return render(request, 'sale/other_product.html', context={"other_product": other_product, "country": country, 'meta':metat, "bread":bread})
 
 
 def pack_product_vi(request):
@@ -107,12 +108,13 @@ def pack_product_vi(request):
         "Packs pour Élevage de Fourmis Débutants - Achat et Vente de Packs Fourmis | Boutique en Ligne",
         "Découvrez notre sélection de packs pour débutants en élevage de fourmis, incluant des fondations de différentes espèces et nids adaptés. Profitez d'un support professionnel et lancez-vous facilement dans la Myrmécologie avec nos packs complets !")
 
+    bread = [pageAccueil, pagePack]
     pack_product = Pack_m.objects.filter(size__stock__gt=0).distinct()
     country = []
     for pack in pack_product:
         if pack.sh_localisation() not in country:
             country.append(pack.sh_localisation())
-    return render(request, 'sale/pack_product.html', context={"pack_product": pack_product, "country": country, 'meta':metat})
+    return render(request, 'sale/pack_product.html', context={"pack_product": pack_product, "country": country, 'meta':metat, "bread":bread})
 
 
 
@@ -134,13 +136,15 @@ def product_pack_detail_vi(request, id):
     description_pack = "Le pack contient le nid, la fondation, une pince à épiler, une seringue, un morceau de 10 cm de tuyau pour les liaisons et une pipette"
     user = request.user
     pack_product = get_object_or_404(Pack_m, id=id)
-    size = pack_product.size
     nest = pack_product.nest
     ant_product = pack_product.get_ant()
     price = pack_product.sh_price()
     metat = MetaTemplate(
         f"Pack Fourmis {pack_product.complete_spece()} de {pack_product.sh_localisation()} - Achat et Vente de Packs pour Élevage de Fourmis Débutants | Boutique en Ligne",
         f"Découvrez nos packs pour débutants incluant une fondation de fourmis {pack_product.complete_spece()} de {pack_product.sh_localisation()} et un nid adapté. Lancez-vous facilement dans l'élevage de fourmis avec notre pack complet et bénéficiez d'un support professionnel. Commandez dès maintenant !")
+
+    pagePackDetails = Page("Pack détailles", 'product_pack_detail_n', 3, id)
+    bread = [pageAccueil, pagePack, pagePackDetails]
 
     if ant_product.sh_problem() or pack_product.sh_problem():
         # Check problems
@@ -175,7 +179,7 @@ def product_pack_detail_vi(request, id):
                                            f"désolée, nous n'avons plus assez d'unitées en stock, il nous en reste {res}")
                             return render(request, 'sale/pack_detail.html',
                                           context={"pack": pack_product, "nest": nest, 'meta': metat, "price": price,
-                                                   "ant": ant_product, "offer_ant": offer_ant, "description_pack": description_pack})
+                                                   "ant": ant_product, "offer_ant": offer_ant, "description_pack": description_pack, "bread":bread})
                     case _:
                         res = pack_product.check_stock(int(quantity)+cart_item.quantity)
                         if res:
@@ -186,7 +190,7 @@ def product_pack_detail_vi(request, id):
                                            f"désolée, nous n'avons plus assez d'unitées en stock, il nous en reste {res}")
                             return render(request, 'sale/pack_detail.html',
                                           context={"pack": pack_product,"nest": nest, 'meta': metat, "price": price,
-                                                   "ant": ant_product, "offer_ant": offer_ant, "description_pack": description_pack})
+                                                   "ant": ant_product, "offer_ant": offer_ant, "description_pack": description_pack, "bread":bread})
 
                 user_order, status = Order_m.objects.get_or_create(owner=user, is_ordered=False)
                 user_order.items.add(cart_item)
@@ -202,7 +206,7 @@ def product_pack_detail_vi(request, id):
                            f"désolée, nous n'avons plus assez d'unitées en stock, il nous en reste {res}")
     return render(request, 'sale/pack_detail.html',
                   context={"pack": pack_product, "price": price, "ant": ant_product, "offer_ant": offer_ant,
-                           'meta': metat, "nest": nest, "description_pack": description_pack})
+                           'meta': metat, "nest": nest, "description_pack": description_pack, "bread":bread})
 
 
 def product_ant_detail_vi(request, id):
@@ -222,6 +226,8 @@ def product_ant_detail_vi(request, id):
         f"Achat Fourmis {ant_product.sh_spece()} {ant_product.under_spece} de {ant_product.sh_localisation()} - Vente Fondations et Colonies pour Débutants | Boutique en Ligne",
         f"Achetez des fondations de fourmis {ant_product.sh_spece()} {ant_product.under_spece} originaires de {ant_product.sh_localisation()} pour débutants. Parfait pour démarrer un élevage de fourmis. Livraison rapide et support professionnel. Rejoignez l'aventure de la Myrmécologie dès maintenant !")
 
+    pageFourmisDetails = Page("Fourmis détailles", 'product_ant_detail_n', 3, id)
+    bread = [pageAccueil, pageFourmis, pageFourmisDetails]
     if ant_product.sh_problem():
         # Check problems
         messages.error(request,
@@ -257,7 +263,7 @@ def product_ant_detail_vi(request, id):
                             messages.error(request,
                                            f"désolée, nous n'avons plus assez d'unitées en stock, il nous en reste {st}")
                             return render(request, 'sale/ant_detail.html',
-                                          context={"ant": ant_product, "offer_ant": offer_ant, 'meta': metat})
+                                          context={"ant": ant_product, "offer_ant": offer_ant, 'meta': metat, "bread":bread})
 
                     case _:
                         st = ant_product.check_stock(int(quantity) + cart_item.quantity, size)
@@ -268,7 +274,7 @@ def product_ant_detail_vi(request, id):
                             messages.error(request,
                                            f"désolée, nous n'avons plus assez d'unitées en stock, il nous en reste {st}")
                             return render(request, 'sale/ant_detail.html',
-                                          context={"ant": ant_product, "offer_ant": offer_ant, 'meta': metat})
+                                          context={"ant": ant_product, "offer_ant": offer_ant, 'meta': metat, "bread":bread})
 
                 user_order, status = Order_m.objects.get_or_create(owner=user, is_ordered=False)
                 user_order.items.add(cart_item)
@@ -282,7 +288,7 @@ def product_ant_detail_vi(request, id):
         else:
             messages.error(request,
                            f"désolée, nous n'avons plus assez d'unitées en stock, il nous en reste {st}")
-    return render(request, 'sale/ant_detail.html', context={"ant": ant_product, "offer_ant": offer_ant, 'meta': metat})
+    return render(request, 'sale/ant_detail.html', context={"ant": ant_product, "offer_ant": offer_ant, 'meta': metat, "bread":bread})
 
 
 
@@ -304,6 +310,9 @@ def product_other_detail_vi(request, id):
         f"{other_product.type.capitalize()} pour élevage de Fourmis - {other_product.sh_name()} | Boutique en Ligne",
         f"Découvrez {other_product.sh_name()}, un {other_product.type} essentiel pour votre élevage de fourmis. Idéal pour les débutants, ce produit assure les meilleures conditions pour votre colonie. Explorez ses caractéristiques et profitez de nos offres exceptionnelles dès maintenant !"
     )
+
+    pageOtherDetails = Page("Other détailles", 'product_other_detail_n', 3, id)
+    bread = [pageAccueil, pageOther, pageOtherDetails]
 
     if other_product.sh_problem():
         # Check problems
@@ -338,7 +347,7 @@ def product_other_detail_vi(request, id):
                             messages.error(request,
                                            f"désolée, nous n'avons plus assez d'unitées en stock, il nous en reste {st}")
                             return render(request, 'sale/other_detail.html',
-                                          context={"other": other_product, "offer_ant": offer_ant, 'meta': metat})
+                                          context={"other": other_product, "offer_ant": offer_ant, 'meta': metat, "bread":bread})
                     case _:
                         st = other_product.check_stock(int(quantity) + cart_item.quantity)
                         if st:
@@ -348,7 +357,7 @@ def product_other_detail_vi(request, id):
                             messages.error(request,
                                            f"désolée, nous n'avons plus assez d'unitées en stock, il nous en reste {st}")
                             return render(request, 'sale/other_detail.html',
-                                          context={"other": other_product, "offer_ant": offer_ant, 'meta': metat})
+                                          context={"other": other_product, "offer_ant": offer_ant, 'meta': metat, "bread":bread})
 
                 user_order, status = Order_m.objects.get_or_create(owner=user, is_ordered=False)
                 user_order.items.add(cart_item)
@@ -362,7 +371,7 @@ def product_other_detail_vi(request, id):
         else:
             messages.error(request,
                            f"désolée, nous n'avons plus assez d'unitées en stock, il nous en reste {st}")
-    return render(request, 'sale/other_detail.html', context={"other": other_product, "offer_ant": offer_ant, 'meta': metat})
+    return render(request, 'sale/other_detail.html', context={"other": other_product, "offer_ant": offer_ant, 'meta': metat, "bread":bread})
 
 
 
@@ -377,6 +386,7 @@ def cart_vi(request):
     Returns:
         The rendered cart view with context data.
     """
+    bread = [pageAccueil, pagePanier]
     existing_order = get_user_pending_order(request)
     match existing_order:
         case 0:
@@ -388,7 +398,7 @@ def cart_vi(request):
                 case False:
                     if existing_order.items.exists():
                         updated_items = existing_order.check_stock()
-                        return render(request, "sale/cart.html", context={'items': updated_items, "order": existing_order})
+                        return render(request, "sale/cart.html", context={'items': updated_items, "order": existing_order, "bread":bread})
                     else:
                         return render(request, "sale/vacuum_cart.html")
 
@@ -456,6 +466,8 @@ def checkout_vi(request):
     Returns:
         The rendered checkout view with context data or a JSON response with new address data.
     """
+    bread = [pageAccueil, pagePanier, pageCheckout]
+
     existing_order = get_user_pending_order(request)
     existing_order.shipping_type = "C"
 
@@ -490,8 +502,7 @@ def checkout_vi(request):
         "STRIPE_PUBLIC_KEY": os.environ.get('STRIPE_PUBLISHABLE_KEY'),
         "user": request.user,
         "letter_shipping_possible": existing_order.shipping_possible(),
-
-
+        "bread":bread
     }
 
     return render(request, "sale/checkout.html", context)

@@ -9,7 +9,7 @@ from django.http import HttpResponse, JsonResponse
 from django.template import loader
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET
-
+from LyAnt.breadcrumbs import *
 
 
 def random_three_elements(input_list):
@@ -22,8 +22,7 @@ def homepage_vi(request):
     """view for homepage"""
     metat = MetaTemplate("Boutique en Ligne de Fourmis pour Débutants - Fondations, Packs, Nids et Accessoires | Myrmécologie",
                          "Bienvenue sur notre boutique en ligne de fourmis pour débutants ! Découvrez notre sélection de fondations, packs, nids et accessoires pour commencer votre élevage de fourmis. Profitez de conseils d'experts et rejoignez la communauté des passionnés de Myrmécologie.")
-    page1 = Page("Accueil", reverse('homepage_n'), 1)
-    bread = [page1]
+    bread = [pageAccueil]
     ant = Ant_m.objects.filter(sizes__stock__gt=0).distinct()
     pack = Pack_m.objects.filter(size__stock__gt=0).distinct()
     other = Other_m.objects.filter(stock__gt=0).distinct()
@@ -31,6 +30,8 @@ def homepage_vi(request):
     if len(comment) >= 3:
         comment = random_three_elements(list(comment))
     product = list(ant) + list(pack) + list(other)
+    if len(product) > 20:
+        product = product[:20]
     # offer
     offers = None
     if not request.session.get('offer_shown', False):
@@ -45,19 +46,21 @@ def homepage_vi(request):
 
 def information_vi(request):
     """view for information"""
+    bread = [pageAccueil, pageInformation]
     metat = MetaTemplate(
         "Informations | Boutique en Ligne de Fourmis Européennes pour Débutants",
         "Découvrez toutes les informations importantes concernant notre boutique en ligne de fourmis européennes pour débutants. Informez-vous sur nos options de livraison, modes de paiement, conditions d'utilisation, politique de confidentialité, mentions légales, expédition et retours, qui nous sommes, cookies et comment nous contacter.")
     offers = Offer_m.objects.filter(active=True)
-    return render(request, 'super/information.html', context={"meta": metat, "offers": offers})
+    return render(request, 'super/information.html', context={"meta": metat, "offers": offers, "bread": bread})
 
 
 def cgv_vi(request):
     """view for cgv"""
+    bread = [pageAccueil, pageInformation, pageCvg]
     metat = MetaTemplate(
         "Conditions Générales de Vente | Boutique en Ligne de Fourmis Européennes pour Débutants",
         "Consultez les conditions générales de vente de notre boutique en ligne de fourmis européennes pour débutants. Découvrez nos politiques concernant les commandes, les prix, les paiements, les livraisons, les retours et la responsabilité, ainsi que des informations sur les données personnelles et le service clientèle.")
-    return render(request, 'super/cgv.html', context={"meta": metat,})
+    return render(request, 'super/cgv.html', context={"meta": metat, "bread": bread})
 
 
 
@@ -98,6 +101,7 @@ def specie_form(request):
         "Explorez le monde de l'élevage de fourmis avec Antly. Que vous soyez débutant ou expert, trouvez l'espèce " 
         "idéale pour vous grâce à notre guide interactif. Commencez votre aventure avec nos fourmis aujourd'hui !", )
 
+    bread = [pageAccueil, pageChoisir]
 
     if request.method == "POST":
         level = request.POST.get("niveau", default="debutant")
@@ -239,4 +243,4 @@ def specie_form(request):
         }
 
         return JsonResponse(address_json)
-    return render(request, 'super/specie_form.html', context={"meta": metat,})
+    return render(request, 'super/specie_form.html', context={"meta": metat,  "bread": bread})
