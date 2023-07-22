@@ -2804,7 +2804,7 @@ fieldset:disabled a.btn {
 .btn-primary:hover {
   color: #fff;
   background-color: #008000;
-  border-color: #006400;
+  border-color: #ff470f;
 }
 
 .btn-primary:focus, .btn-primary.focus {
@@ -2820,7 +2820,7 @@ fieldset:disabled a.btn {
 .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
 .show > .btn-primary.dropdown-toggle {
   color: #fff;
-  background-color: #006400;
+  background-color: #ff470f;
   border-color: #ff3d02;
 }
 
@@ -5078,6 +5078,7 @@ input[type="button"].btn-block {
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 10px; /* Arrondir les coins à 10px */
+  align-self: stretch;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.25); /* Ajouter un cadre noir fin */
 }
 
@@ -5180,7 +5181,6 @@ input[type="button"].btn-block {
   width: 100%;
   border-top-left-radius: calc(0 - 1px);
   border-top-right-radius: calc(0 - 1px);
-  border-radius: 8px 8px 0 0;
 }
 
 .card-img-bottom {
@@ -5523,7 +5523,7 @@ a.badge:hover, a.badge:focus {
 
 a.badge-primary:hover, a.badge-primary:focus {
   color: #fff;
-  background-color: #006400;
+  background-color: #ff470f;
 }
 
 a.badge-primary:focus, a.badge-primary.focus {
@@ -7170,7 +7170,7 @@ a.close.disabled {
 a.bg-primary:hover, a.bg-primary:focus,
 button.bg-primary:hover,
 button.bg-primary:focus {
-  background-color: #006400 !important;
+  background-color: #ff470f !important;
 }
 
 .bg-secondary {
@@ -12299,6 +12299,7 @@ top: 110px
 .separate {
    margin-top : 1rem !important;}
 
-  .card :is(img) {
-    align-self: stretch;
-  }
+
+.card :is(img) {
+  border-radius: 8px 8px 0 0;
+}
