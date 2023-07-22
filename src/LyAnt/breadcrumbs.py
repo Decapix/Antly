@@ -19,8 +19,6 @@ pagePanier = Page("Panier", 'cart_n', 2)
 pageFourmis = Page("Fourmis", 'ant_product_n', 2)
 pagePack = Page("Pack", 'pack_product_n', 2)
 pageOther = Page("Accessoires", 'other_product_n', 2)
-pagePackDetails = Page("Pack détailles", 'product_pack_detail_n', 3)
-pageOtherDetails = Page("Accessoires détailles", 'product_other_detail_n', 3)
 pageCheckout = Page("Résumé de la commande", 'checkout_n', 3)
 
 

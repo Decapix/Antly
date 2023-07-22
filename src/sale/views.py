@@ -311,7 +311,7 @@ def product_other_detail_vi(request, id):
         f"Découvrez {other_product.sh_name()}, un {other_product.type} essentiel pour votre élevage de fourmis. Idéal pour les débutants, ce produit assure les meilleures conditions pour votre colonie. Explorez ses caractéristiques et profitez de nos offres exceptionnelles dès maintenant !"
     )
 
-    pageOtherDetails = Page("Other détailles", 'product_other_detail_n', 3, id)
+    pageOtherDetails = Page("Accessoires détailles", 'product_other_detail_n', 3, id)
     bread = [pageAccueil, pageOther, pageOtherDetails]
 
     if other_product.sh_problem():

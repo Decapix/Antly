@@ -38,7 +38,7 @@ def homepage_vi(request):
         offers = Offer_m.objects.filter(active=True)
         request.session['offer_shown'] = True
         request.session.modified = True
-    return render(request, 'super/homepage.html', context={"product": product, "meta": metat, "comment": comment, "offers": offers, "bread": bread})
+    return render(request, 'super/homepage.html', context={"product": product, "meta": metat, "comment": comment, "offers": offers})
 
 
 
