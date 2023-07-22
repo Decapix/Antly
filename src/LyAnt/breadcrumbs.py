@@ -7,7 +7,6 @@ class Page :
         self.link = reverse(link, kwargs={'id': id}) if id else reverse(link)
         self.position = position
 
-page = Page("", reverse('_n'), 1)
 
 pageAccueil = Page("Accueil", 'homepage_n', 1)
 pageInformation = Page("Informations", 'information_n', 2)
