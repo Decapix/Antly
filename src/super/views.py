@@ -9,7 +9,7 @@ from django.http import HttpResponse, JsonResponse
 from django.template import loader
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET
-from LyAnt.breadcrumbs import *
+from .breadcrumbs import *
 
 
 def random_three_elements(input_list):

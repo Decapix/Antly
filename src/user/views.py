@@ -17,7 +17,7 @@ from sale.modelcart import Order_m
 from django.http import FileResponse, Http404
 import os
 from django.conf import settings
-from LyAnt.breadcrumbs import *
+from super.breadcrumbs import *
 
 
 def pdfemail(request, user):
