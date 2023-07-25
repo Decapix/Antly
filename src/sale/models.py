@@ -50,7 +50,7 @@ class Product_m(models.Model):
                     img = Image.open(thumbnail.path)  # open the image
 
                     output_io = BytesIO()
-                    img.resize((1560, 1320)).convert('RGB').save(output_io, format='WEBP',
+                    img.resize((1040, 880)).convert('RGB').save(output_io, format='WEBP',
                                                                quality=70)  # resize and convert to WebP
                     output_io.seek(0)
 
