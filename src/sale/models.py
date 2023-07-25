@@ -33,7 +33,7 @@ class Product_m(models.Model):
         return self.thumbnail.url
     
 
-    def save(self, *args, **kwargs):
+    """ def save(self, *args, **kwargs):
         super().save(*args, **kwargs)  # Call the "real" save() method.
 
         thumbnails = [
@@ -62,7 +62,7 @@ class Product_m(models.Model):
                 except Exception as e:
                     print(f"Error processing image: {e}")
 
-        super().save(*args, **kwargs)  # Call the "real" save() method again.
+        super().save(*args, **kwargs)  # Call the "real" save() method again. """
 
 
 class Ant_m(Product_m):
