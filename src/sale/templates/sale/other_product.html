@@ -26,7 +26,14 @@
                     <img src="{{ other.thumbnail.url }}" alt="" class="card-img-top w-100 limite-height">
                     <div class="card-body">
                         <h6 class="card-title">{{ other.name }}</h6>
-                        <p>{{ other.sh_price }} €</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p>{{ other.sh_price }} €</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="text-muted">Vendeur : {{ other.sh_supplier }}</p>
+                            </div>
+                        </div>
                     </div>
                     </a>
                 </div>

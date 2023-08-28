@@ -59,6 +59,8 @@ INSTALLED_APPS = [
     'user',
     'sale',
     'super',
+    'admin_supplier',
+
 ]
 
 SITE_ID = 1
@@ -153,6 +155,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
+SITE_ID = 1
 
 # media
 
@@ -220,7 +223,7 @@ FREE_COLONIE2 = True
 FREE_COLONIE1 = False
 FREE_SHIPPING_COSTE = False
 
-
+PERCENT_ANTLY = 15
 
 # storage
 

@@ -14,15 +14,16 @@ from datetime import timedelta
 
 
 
-def send_tracking_number_email(order):
+def send_tracking_number_email(order, latest_order_track):
     mail_subject = "Antly - Expédition de votre commande et numéro de suivi"
     current_date = timezone.now()
     new_date = current_date + timedelta(days=3)
 
+
     context = {
         'user': order.owner,
         'order': order,
-        'tracking_number': order.order_track,
+        'tracking_number': latest_order_track.order_track if latest_order_track else None,
         'shipping_date': current_date,  # À remplacer par la date d'expédition si différente
         'estimated_delivery_date': new_date,  # À remplacer par la date estimée de livraison
         'carrier_name': 'Colissimo',  # À remplacer par le nom du transporteur

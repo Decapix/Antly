@@ -91,7 +91,14 @@
                     <img src="{{ p.thumbnail_url }}" alt="" class="card-img-top w-100 limite-height">
                     <div class="card-body">
                         <h6 class="card-title">{{ p.sh_name }}</h6>
-                        <p>{{ p.sh_price }} €</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p>{{ p.sh_price }} €</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="text-muted">Vendeur : {{ p.sh_supplier }}</p>
+                            </div>
+                        </div>
                     </div>
                     </a>
                 </div>
@@ -131,7 +138,9 @@
                                     </small>
                                 </div>
                             </div>
-                            <p class="mb-0 comment-text">{{ co.text }}</p>
+                            <p class="comment-text">{{ co.text }}</p>
+                            <p class="mb-0 comment-text"> Sujet(s) : {{ co.sh_subject }} </p>
+
                         </div>
                     </div>
                 </div>

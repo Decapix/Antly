@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse, HttpResponse, HttpResponseBadRequest
 from django.template.loader import render_to_string
@@ -29,6 +30,9 @@ from django.contrib.staticfiles import finders
 from .paypal import create_paypal_transaction, execute_paypal_transaction
 from django.contrib.contenttypes.models import ContentType
 from super.breadcrumbs import *
+from admin_supplier.models import Supplier_m
+from user.models import Feedback_m
+
 
 
 def get_user_pending_order(request):
@@ -64,7 +68,7 @@ def ant_product_vi(request):
         "Explorez notre collection de fondations de fourmis pour débutants, avec une variété d'espèces et d'origines. Démarrez votre élevage de fourmis en toute simplicité et bénéficiez d'un support professionnel. Découvrez nos offres dès maintenant !")
 
     bread = [pageAccueil, pageFourmis]
-    ant_product = Ant_m.objects.filter(sizes__stock__gt=0).distinct()
+    ant_product = Ant_m.objects.filter(sizes__stock__gt=0, supplier__currently_available = True).distinct()
     country = []
     for ant in ant_product:
         if ant.sh_localisation() not in country:
@@ -86,7 +90,7 @@ def other_product_vi(request):
         "Accessoires pour l'élevage de Fourmis - Nids, Outils et Plus | Boutique en Ligne",
 "Découvrez notre gamme complète d'accessoires pour l'élevage de fourmis, conçue pour les débutants. De la mise en place de votre nid à la maintenance de votre colonie, nos produits assurent une expérience optimale. Visitez notre boutique et découvrez nos offres !")
     bread = [pageAccueil, pageOther]
-    other_product = Other_m.objects.filter(stock__gt=0).distinct()
+    other_product = Other_m.objects.filter(stock__gt=0, supplier__currently_available = True).distinct()
     country = []
     for ant in other_product:
         if ant.type not in country:
@@ -109,7 +113,7 @@ def pack_product_vi(request):
         "Découvrez notre sélection de packs pour débutants en élevage de fourmis, incluant des fondations de différentes espèces et nids adaptés. Profitez d'un support professionnel et lancez-vous facilement dans la Myrmécologie avec nos packs complets !")
 
     bread = [pageAccueil, pagePack]
-    pack_product = Pack_m.objects.filter(size__stock__gt=0).distinct()
+    pack_product = Pack_m.objects.filter(size__stock__gt=0, size__supplier__currently_available = True).distinct()
     country = []
     for pack in pack_product:
         if pack.sh_localisation() not in country:
@@ -139,6 +143,12 @@ def product_pack_detail_vi(request, id):
     nest = pack_product.nest
     ant_product = pack_product.get_ant()
     price = pack_product.sh_price()
+
+    comment = Feedback_m.objects.filter(
+        Q(product_pack=pack_product) |
+        Q(supplier=ant_product.supplier)  # Assurez-vous que votre modèle Product a un champ 'supplier'
+    )
+
     metat = MetaTemplate(
         f"Pack Fourmis {pack_product.complete_spece()} de {pack_product.sh_localisation()} - Achat et Vente de Packs pour Élevage de Fourmis Débutants | Boutique en Ligne",
         f"Découvrez nos packs pour débutants incluant une fondation de fourmis {pack_product.complete_spece()} de {pack_product.sh_localisation()} et un nid adapté. Lancez-vous facilement dans l'élevage de fourmis avec notre pack complet et bénéficiez d'un support professionnel. Commandez dès maintenant !")
@@ -153,6 +163,9 @@ def product_pack_detail_vi(request, id):
     # List for offer ant, bottom
     offer_ant = offer_ant_func(pack_product, list(Ant_m.objects.filter(sizes__stock__gt=0).distinct()),
                                list(Pack_m.objects.filter(size__stock__gt=0).distinct()), list(Other_m.objects.filter(stock__gt=0).distinct()) )
+
+    context = {"pack": pack_product, "price": price, "ant": ant_product, "offer_ant": offer_ant, 'meta': metat,
+               "nest": nest, "description_pack": description_pack, "bread": bread, "comment":comment}
     if request.method == 'POST':
         quantity = request.POST.get('quantity')
         # Check if the size is available
@@ -177,9 +190,7 @@ def product_pack_detail_vi(request, id):
                         else:
                             messages.error(request,
                                            f"désolée, nous n'avons plus assez d'unitées en stock, il nous en reste {res}")
-                            return render(request, 'sale/pack_detail.html',
-                                          context={"pack": pack_product, "nest": nest, 'meta': metat, "price": price,
-                                                   "ant": ant_product, "offer_ant": offer_ant, "description_pack": description_pack, "bread":bread})
+                            return render(request, 'sale/pack_detail.html', context)
                     case _:
                         res = pack_product.check_stock(int(quantity)+cart_item.quantity)
                         if res:
@@ -188,9 +199,7 @@ def product_pack_detail_vi(request, id):
                         else:
                             messages.error(request,
                                            f"désolée, nous n'avons plus assez d'unitées en stock, il nous en reste {res}")
-                            return render(request, 'sale/pack_detail.html',
-                                          context={"pack": pack_product,"nest": nest, 'meta': metat, "price": price,
-                                                   "ant": ant_product, "offer_ant": offer_ant, "description_pack": description_pack, "bread":bread})
+                            return render(request, 'sale/pack_detail.html', context)
 
                 user_order, status = Order_m.objects.get_or_create(owner=user, is_ordered=False)
                 user_order.items.add(cart_item)
@@ -204,9 +213,7 @@ def product_pack_detail_vi(request, id):
         else:
             messages.error(request,
                            f"désolée, nous n'avons plus assez d'unitées en stock, il nous en reste {res}")
-    return render(request, 'sale/pack_detail.html',
-                  context={"pack": pack_product, "price": price, "ant": ant_product, "offer_ant": offer_ant,
-                           'meta': metat, "nest": nest, "description_pack": description_pack, "bread":bread})
+    return render(request, 'sale/pack_detail.html',context)
 
 
 def product_ant_detail_vi(request, id):
@@ -222,6 +229,10 @@ def product_ant_detail_vi(request, id):
     """
     user = request.user
     ant_product = get_object_or_404(Ant_m, id=id)
+    comment = Feedback_m.objects.filter(
+        Q(product_ant=ant_product) |
+        Q(supplier=ant_product.supplier)  # Assurez-vous que votre modèle Product a un champ 'supplier'
+    )
     metat = MetaTemplate(
         f"Achat Fourmis {ant_product.sh_spece()} {ant_product.under_spece} de {ant_product.sh_localisation()} - Vente Fondations et Colonies pour Débutants | Boutique en Ligne",
         f"Achetez des fondations de fourmis {ant_product.sh_spece()} {ant_product.under_spece} originaires de {ant_product.sh_localisation()} pour débutants. Parfait pour démarrer un élevage de fourmis. Livraison rapide et support professionnel. Rejoignez l'aventure de la Myrmécologie dès maintenant !")
@@ -236,6 +247,9 @@ def product_ant_detail_vi(request, id):
     # List for offer ant, bottom
     offer_ant = offer_ant_func(ant_product, list(Ant_m.objects.filter(sizes__stock__gt=0).distinct()),
                                list(Pack_m.objects.filter(size__stock__gt=0).distinct()), list(Other_m.objects.filter(stock__gt=0).distinct()) )
+
+    context = {"ant": ant_product, "offer_ant": offer_ant, 'meta': metat, "bread": bread, "comment": comment}
+
     if request.method == 'POST':
         quantity = request.POST.get('quantity')
         size_id = request.POST.get('size_id')
@@ -262,8 +276,7 @@ def product_ant_detail_vi(request, id):
                         else:
                             messages.error(request,
                                            f"désolée, nous n'avons plus assez d'unitées en stock, il nous en reste {st}")
-                            return render(request, 'sale/ant_detail.html',
-                                          context={"ant": ant_product, "offer_ant": offer_ant, 'meta': metat, "bread":bread})
+                            return render(request, 'sale/ant_detail.html',context)
 
                     case _:
                         st = ant_product.check_stock(int(quantity) + cart_item.quantity, size)
@@ -273,8 +286,7 @@ def product_ant_detail_vi(request, id):
                         else:
                             messages.error(request,
                                            f"désolée, nous n'avons plus assez d'unitées en stock, il nous en reste {st}")
-                            return render(request, 'sale/ant_detail.html',
-                                          context={"ant": ant_product, "offer_ant": offer_ant, 'meta': metat, "bread":bread})
+                            return render(request, 'sale/ant_detail.html', context)
 
                 user_order, status = Order_m.objects.get_or_create(owner=user, is_ordered=False)
                 user_order.items.add(cart_item)
@@ -288,7 +300,7 @@ def product_ant_detail_vi(request, id):
         else:
             messages.error(request,
                            f"désolée, nous n'avons plus assez d'unitées en stock, il nous en reste {st}")
-    return render(request, 'sale/ant_detail.html', context={"ant": ant_product, "offer_ant": offer_ant, 'meta': metat, "bread":bread})
+    return render(request, 'sale/ant_detail.html', context)
 
 
 
@@ -306,6 +318,10 @@ def product_other_detail_vi(request, id):
     """
     user = request.user
     other_product = get_object_or_404(Other_m, id=id)
+    comment = Feedback_m.objects.filter(
+        Q(product_other=other_product) |
+        Q(supplier=other_product.supplier)  # Assurez-vous que votre modèle Product a un champ 'supplier'
+    )
     metat = MetaTemplate(
         f"{other_product.type.capitalize()} pour élevage de Fourmis - {other_product.sh_name()} | Boutique en Ligne",
         f"Découvrez {other_product.sh_name()}, un {other_product.type} essentiel pour votre élevage de fourmis. Idéal pour les débutants, ce produit assure les meilleures conditions pour votre colonie. Explorez ses caractéristiques et profitez de nos offres exceptionnelles dès maintenant !"
@@ -322,6 +338,8 @@ def product_other_detail_vi(request, id):
     # List for offer ant, bottom
     offer_ant = offer_other_func(other_product, list(Ant_m.objects.filter(sizes__stock__gt=0).distinct()),
                                list(Pack_m.objects.filter(size__stock__gt=0).distinct()), list(Other_m.objects.filter(stock__gt=0).distinct()) )
+
+    context = {"other": other_product, "offer_ant": offer_ant, 'meta': metat, "bread": bread, "comment": comment}
     if request.method == 'POST':
         quantity = request.POST.get('quantity')
         # Check if the size is available
@@ -347,7 +365,7 @@ def product_other_detail_vi(request, id):
                             messages.error(request,
                                            f"désolée, nous n'avons plus assez d'unitées en stock, il nous en reste {st}")
                             return render(request, 'sale/other_detail.html',
-                                          context={"other": other_product, "offer_ant": offer_ant, 'meta': metat, "bread":bread})
+                                          context={"other": other_product, "offer_ant": offer_ant, 'meta': metat, "bread":bread, "comment": comment})
                     case _:
                         st = other_product.check_stock(int(quantity) + cart_item.quantity)
                         if st:
@@ -356,8 +374,7 @@ def product_other_detail_vi(request, id):
                         else:
                             messages.error(request,
                                            f"désolée, nous n'avons plus assez d'unitées en stock, il nous en reste {st}")
-                            return render(request, 'sale/other_detail.html',
-                                          context={"other": other_product, "offer_ant": offer_ant, 'meta': metat, "bread":bread})
+                            return render(request, 'sale/other_detail.html', context)
 
                 user_order, status = Order_m.objects.get_or_create(owner=user, is_ordered=False)
                 user_order.items.add(cart_item)
@@ -371,7 +388,7 @@ def product_other_detail_vi(request, id):
         else:
             messages.error(request,
                            f"désolée, nous n'avons plus assez d'unitées en stock, il nous en reste {st}")
-    return render(request, 'sale/other_detail.html', context={"other": other_product, "offer_ant": offer_ant, 'meta': metat, "bread":bread})
+    return render(request, 'sale/other_detail.html', context)
 
 
 
@@ -547,7 +564,7 @@ def success_vi(request):
     # The order information you want to add
     date_ordered = order.date_ordered.strftime('%Y-%m-%d %H:%M:%S')
     customer_name = f"{address.complete_name}"
-    order_contents = ", ".join([f"{item.sh_name()} x {item.quantity} ({item.price}€)" for item in order.get_cart_items()])
+    order_contents = ", ".join([f"{item.sh_name()} de {item.sh_supplier()} x {item.quantity} ({item.price}€)" for item in order.get_cart_items()])
     address = order.address
     address_info = f"{address.complete_name}, {address.adress}, {address.detail}, {address.postal_code} {address.city}, {address.country}"
     contact = f"{address.phone_number} | {request.user.email}"
@@ -566,6 +583,48 @@ def success_vi(request):
     )
 
     response = requeste.execute()
+
+    # send mail to supplier
+    def percentage(value):
+        return value * (settings.PERCENT_ANTLY / 100)
+
+    supplierl = []
+    for i in order.get_cart_items() :
+        id = i.show_supplier_id()
+        supplier = Supplier_m.objects.get(pk=id)
+        supplierl.append(supplier)
+
+    for i in supplierl :
+        id = i.show_supplier_id()
+        iteml = order.get_item_supplier(id)
+        px = 0
+        for u in iteml :
+            px += u.price
+        supplier = Supplier_m.objects.get(pk=id)
+        user = supplier.user
+        orderr = ", ".join([f"{item.sh_name()} x {item.quantity} ({item.price}€)" for item in iteml])
+        message = f"""
+        passé le {date_ordered} 
+                
+        Adresse du client {address} 
+        
+        prix facturé au client : {px}
+        Pourcentage pris par Antly : {settings.PERCENT_ANTLY} %
+        Votre gain (les frais de port restent à votre charge) : {percentage(px)}
+        
+        Contenu de la commande :
+        {orderr}
+        
+        
+        Rappel :
+        
+        Vous devez envoyer le colis via La Poste. Ensuite, rendez-vous sur votre interface fournisseur à l'adresse "https://www.antly.fr/admin/" pour créer un "OrderTrack_m" et y renseigner votre numéro de suivi.
+        
+        Pour me contacter :
+        06 51 33 61 58
+        """
+        user.email_user(f"Antly - Nouvelle commande passée le {order.date_ordered}", message)
+
 
     context = {
         'order': order,

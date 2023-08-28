@@ -117,6 +117,7 @@
 
         <div class="col-md-6 pl-md-5">
           <h1 class="display-5 fw-bolder mb-4">{{ pack.sh_name }}</h1>
+          <p class="text-muted">Vendeur : {{ pack.sh_supplier }}</p>
           <hr />
           <div class="row mt-3">
             <div class="col-md-4">
@@ -198,7 +199,14 @@
                 />
                 <div class="card-body">
                   <h6 class="card-title">{{ ant.sh_name }}</h6>
-                  <p>{{ ant.sh_price }} €</p>
+                  <div class="row">
+                      <div class="col-md-6">
+                          <p>{{ ant.sh_price }} €</p>
+                      </div>
+                      <div class="col-md-6">
+                          <p class="text-muted">Vendeur : {{ ant.sh_supplier }}</p>
+                      </div>
+                  </div>
                 </div>
               </a>
             </div>
@@ -209,4 +217,5 @@
     </div>
   </div>
 </section>
+{% include "comment.html" %}
 {% endblock content %}

@@ -5,6 +5,8 @@ from .category import *
 from PIL import Image
 from io import BytesIO
 from django.core.files import File
+from admin_supplier.models import Supplier_m
+
 
 class Product_m(models.Model):
     """The model base for any product"""
@@ -70,9 +72,11 @@ class Ant_m(Product_m):
     localisation = models.CharField(choices=COUNTRY_CHOICES, max_length=50, blank=True, default="France")
     spece = models.CharField(choices=SPECE_CHOICES, max_length=100)
     under_spece = models.CharField(max_length=100, blank=True)
+    supplier = models.ForeignKey(Supplier_m, on_delete=models.CASCADE, related_name='ant', null=True, blank=True,
+                                 default=None)
 
     def __str__(self):
-        return f"Ant - {self.name}"
+        return f"Ant - {self.name} / {self.supplier}"
 
     def sh_name(self):
         return f"{self.name}"
@@ -114,6 +118,9 @@ class Ant_m(Product_m):
     def get_stock(self, size):
         return int(size.stock)
 
+    def sh_supplier(self):
+        return self.supplier.name
+
 
 
 
@@ -126,10 +133,21 @@ class Size_m(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2)
     product_base = models.ForeignKey(Ant_m, on_delete=models.CASCADE, related_name='sizes', null=True,
                                      default=None)
+    supplier = models.ForeignKey(Supplier_m, on_delete=models.CASCADE, related_name='sizes', null=True, blank=True,
+                                     default=None)
 
 
     def __str__(self):
         return f"{self.gyne}queen.{self.worker}w.{self.stock}stock.{self.price}€-{self.product_base}.linked"
+
+    def is_available(self):
+        return self.supplier.is_available()
+
+    def sh_supplier(self):
+        return self.supplier.name
+
+    def show_supplier_id(self):
+        return self.supplier.id
 
 
 class Other_m(Product_m):
@@ -138,9 +156,11 @@ class Other_m(Product_m):
     stock = models.PositiveIntegerField(null=True, blank=True)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     type = models.CharField(choices=TYPE_CHOICES, max_length=50, blank=True, default="accessoire")
+    supplier = models.ForeignKey(Supplier_m, on_delete=models.CASCADE, related_name='other', null=True, blank=True,
+                                 default=None)
 
     def __str__(self):
-        return f"Other - {self.name}"
+        return f"Other - {self.name} / {self.supplier}"
 
     def get_absolute_url(self):
         return reverse("other_detail_n", kwargs={"id": self.id})
@@ -164,6 +184,15 @@ class Other_m(Product_m):
     def reduce_stock(self, quantity):
         self.stock = self.stock - quantity
 
+    def is_available(self):
+        return self.supplier.is_available()
+
+    def sh_supplier(self):
+        return self.supplier.name
+
+    def show_supplier_id(self):
+        return self.supplier.id
+
 
 
 
@@ -176,7 +205,7 @@ class Pack_m(models.Model):
 
 
     def __str__(self):
-        return f"Pack - {self.size.product_base} - g{self.size.gyne} - w{self.size.worker}"
+        return f"Pack - {self.size.product_base} - g{self.size.gyne} - w{self.size.worker} / {self.size.supplier}"
 
     def sh_name(self):
         return f"Pack {self.size.product_base.sh_name()}"
@@ -237,6 +266,9 @@ class Pack_m(models.Model):
         
     def reduce_stock(self, quantity):
         self.size.stock = self.size.stock - quantity
+
+    def sh_supplier(self):
+        return self.size.supplier.name
 
 
 

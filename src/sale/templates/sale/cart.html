@@ -29,7 +29,14 @@
                                 <h6 class="card-title card-title-limit">{{ item.sh_name }}</h6>
 
                                 <p class="card-text mb-1">{{ item.sh_titlecart }}</p>
-                                <p class="card-text mb-1">{{ item.price }}€</p>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p>{{ item.price }} €</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p class="text-muted">Vendeur : {{ item.sh_supplier }}</p>
+                                    </div>
+                                </div>
                                 <p class="card-text">
                                     <form method="POST" action="{% url 'update_quantity' %}" class="d-inline">
                                         {% csrf_token %}

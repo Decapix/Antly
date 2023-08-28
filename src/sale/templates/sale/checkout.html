@@ -28,12 +28,14 @@
               {% for item in order.get_cart_items %}
               <tr>
                 <td>{{ item.sh_name }}</td>
+                <td>{{ item.sh_supplier }}</td>
                 <td>{{ item.quantity }}</td>
                 <td>{{ item.price }} €</td>
               </tr>
               {% endfor %}
               <tr>
                 <td>Transport</td>
+                <td></td>
                 <td></td>
                 <td id="shipping-costs">{{ order.shipping_costs }} €</td>
               </tr>

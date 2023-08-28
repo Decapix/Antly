@@ -3,6 +3,7 @@
 {% block account %}
 <form method="post">
         {% csrf_token %}
+    <h5>1. Mon Avis </h5>
         {{ form.text }}
         <br>
         <div id="star-container">
@@ -14,8 +15,36 @@
         </div>
         {{ form.star }}
         {{ form.shopper }}
+
+    <h5 class="mt-3">2. Sujet de l'avis </h5>
+    <p class="">*Au moins un sujet est requis.</p>
+        <div class="form-group mt-4">
+            <h6>Un vendeur :</h6>{{ form.supplier }}
+        </div>
+
+
+
+    <div class="form-group row">
+    <label for="{{ form.antly.id_for_label }}" class="col-sm-6 col-form-label"><h6>La boutique (Antly) :</h6></label>
+    <div class="col-sm-6">
+        {{ form.antly }}
+    </div>
+</div>
+
+
+
+        <div class="form-group">
+            <h6>Un produit type fourmis :</h6> {{ form.product_ant }}
+        </div>
+        <div class="form-group">
+            <h6>Un produit type accessoires : </h6>  {{ form.product_other }}
+        </div>
+        <div class="form-group">
+            <h6>Un produit type pack :</h6>  {{ form.product_pack }}
+        </div>
+
         <br>
-        <button class="btn btn-primary mt-3" type="submit">Envoyer le retour</button>
+        <button class="btn btn-primary mt-3 rounded" type="submit">Envoyer le retour</button>
     </form>
 {% endblock %}
 

@@ -1,5 +1,19 @@
 {% load static %}
 
+<!--
+     block head
+     endblock
+
+     block home
+     endblock home
+
+     block content
+     endblock content
+
+     block script
+     endblock script
+-->
+
 <!DOCTYPE html>
 <html lang="fr">
   <head>
@@ -11,17 +25,17 @@
     />
     <meta name="author" content="Antly" />
     {% if meta %}
-    <meta name="description" content="{{ meta.des }}" />
+    <meta
+      name="description"
+      content="{{ meta.des }}"
+    />
     <title>{{ meta.title }}</title>
     {% else %}
     <meta
       name="description"
       content="Bienvenue sur notre boutique en ligne de fourmis pour débutants ! Découvrez notre sélection de fondations, packs, nids et accessoires pour commencer votre élevage de fourmis. Profitez de conseils d'experts et rejoignez la communauté des passionnés de Myrmécologie."
     />
-    <title>
-      Boutique en Ligne de Fourmis pour Débutants - Fondations, Packs, Nids et
-      Accessoires | Myrmécologie
-    </title>
+    <title>Boutique en Ligne de Fourmis pour Débutants - Fondations, Packs, Nids et Accessoires | Myrmécologie</title>
     {% endif %}
     <!-- font icons -->
     <link
@@ -37,55 +51,7 @@
     <!-- Bootstrap + LeadMark main styles -->
     <link rel="stylesheet" href="{% static 'css/leadmark.css' %}" />
     {% block head %} {% endblock %}
-    <!-- Google Tag Manager -->
-  <script>
-    (function (w, d, s, l, i) {
-      w[l] = w[l] || [];
-      w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-      var f = d.getElementsByTagName(s)[0],
-        j = d.createElement(s),
-        dl = l != "dataLayer" ? "&l=" + l : "";
-      j.async = true;
-      j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-      f.parentNode.insertBefore(j, f);
-    })(window, document, "script", "dataLayer", "GTM-KBZ4KWTR");
-  </script>
-  <!-- End Google Tag Manager -->
-
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org/",
-      "@type": "WebSite",
-      "name": "Antly",
-      "url": "https://www.antly.fr/",
-    }
-    </script>
-
     <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "Antly",
-        "url": "https://www.antly.fr/",
-        "logo": "https://www.antly.fr/static/imgs/logo.5d174105a527.png",
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "telephone": "0651336158",
-          "contactType": "customer service",
-          "contactOption": "TollFree",
-          "areaServed": ["FR","CH"],
-          "availableLanguage": "fr"
-        },
-        "sameAs": [
-          "https://www.instagram.com/antly.fourmis/",
-          "https://www.youtube.com/channel/UC0PVQC_BZZjOFpQt0nItvhg",
-          "https://www.antly.fr/",
-          "https://www.facebook.com/profile.php?id=100092001896391"
-        ]
-      }
-      </script>
-
-      <script type="application/ld+json">
         {
           "@context": "https://schema.org/",
           "@type": "BreadcrumbList",
@@ -102,18 +68,8 @@
         }
         </script>
   </head>
-
   <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
-    <!-- Google Tag Manager (noscript) -->
-    <noscript
-      ><iframe
-        src="https://www.googletagmanager.com/ns.html?id=GTM-KBZ4KWTR"
-        height="0"
-        width="0"
-        style="display: none; visibility: hidden"
-      ></iframe
-    ></noscript>
-    <!-- End Google Tag Manager (noscript) -->
+
 
     <!-- page Navigation -->
     <nav
@@ -174,14 +130,14 @@
             <li class="nav-item">
               <a
                 href="{% url 'login_n' %}"
-                class="ml-4 nav-link btn btn-primary btn-sm rounded"
+                class="ml-4 nav-link btn btn-primary btn-sm rounded separate"
                 >Connexion</a
               >
             </li>
             <li class="nav-item">
               <a
                 href="{% url 'signup_n' %}"
-                class="ml-4 nav-link btn btn-primary btn-sm rounded"
+                class="ml-4 nav-link btn btn-primary btn-sm rounded separate"
                 >Inscription</a
               >
             </li>
@@ -191,7 +147,8 @@
         </div>
       </div>
     </nav>
-    {% include 'messages.html' %} {% include 'offers.html' %}
+    {% include 'messages.html' %}
+    {% include 'offers.html' %}
     <!-- End Of Second Navigation -->
     {% block home %} {% endblock home %}
 
@@ -211,6 +168,7 @@
 
             <h6 class="mb-0">Email</h6>
             <p class="mb-0">antly.fourmis@gmail.com</p>
+
 
             <p></p>
           </div>
@@ -298,28 +256,24 @@
         <!-- Page Footer -->
         <footer class="mt-5 py-4 border-top border-secondary">
           <div class="row">
-            <div class="col-md-8">
-              <p class="mb-0 small">
-                &copy;
-                <script>
-                  document.write(new Date().getFullYear());
-                </script>
-                , Created By
-                <a href="{% url 'homepage_n' %}" target="_blank" class="adown"
-                  >Antly</a
-                >
-                All rights reserved
-              </p>
-            </div>
-            <div class="col-md-4 d-flex align-items-center">
-              <p class="mb-0 small mr-2">boutique française</p>
-              <img
-                src="{% static 'imgs/france.png' %}"
-                alt="france"
-                class="mb-0 french"
-              />
-            </div>
-          </div>
+                <div class="col-md-8">
+          <p class="mb-0 small">
+            &copy;
+            <script>
+              document.write(new Date().getFullYear());
+            </script>
+            , Created By
+            <a href="{% url 'homepage_n' %}" target="_blank" class="adown"
+              >Antly.</a
+            >
+            All rights reserved
+          </p>
+                  </div>
+                <div class="col-md-4 d-flex align-items-center">
+                  <p class="mb-0 small mr-2">boutique française</p>
+                  <img src="{% static 'imgs/france.png' %}" alt="france" class="mb-0 french"/>
+                </div>
+              </div>
         </footer>
         <!-- End of Page Footer -->
       </div>
@@ -337,5 +291,6 @@
     <!-- LeadMark js -->
     <script src="{% static 'js/leadmark.js' %}"></script>
     {% block script %} {% endblock script %}
+
   </body>
 </html>

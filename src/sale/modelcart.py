@@ -12,6 +12,7 @@ from django.contrib.contenttypes.models import ContentType
 
 
 # cart
+from admin_supplier.models import Supplier_m
 
 
 class OrderItem_m(models.Model):
@@ -132,6 +133,33 @@ class OrderItem_m(models.Model):
                     size = y
             return f"{size.gyne} gyne - {size.worker} ouvrières"
 
+    def sh_supplier(self):
+        """name of supplier"""
+        # Obtenez le ContentType pour chaque modèle
+        other_m_ct = ContentType.objects.get_for_model(Other_m)
+        pack_m_ct = ContentType.objects.get_for_model(Pack_m)
+        ant_m_ct = ContentType.objects.get_for_model(Ant_m)
+
+        # Utilisez une structure conditionnelle classique pour effectuer les vérifications
+        if self.content_type == other_m_ct or self.content_type != pack_m_ct and self.content_type == ant_m_ct:
+            return self.content_object.sh_supplier()
+        elif self.content_type == pack_m_ct:
+            return self.content_object.size.sh_supplier()
+
+    def show_supplier_id(self):
+        """id of supplier"""
+        # Obtenez le ContentType pour chaque modèle
+        other_m_ct = ContentType.objects.get_for_model(Other_m)
+        pack_m_ct = ContentType.objects.get_for_model(Pack_m)
+        ant_m_ct = ContentType.objects.get_for_model(Ant_m)
+
+        # Utilisez une structure conditionnelle classique pour effectuer les vérifications
+        if self.content_type == other_m_ct or self.content_type != pack_m_ct and self.content_type == ant_m_ct:
+            return self.content_object.show_supplier_id()
+        elif self.content_type == pack_m_ct:
+            return self.content_object.size.show_supplier_id()
+
+
 
 class Order_m(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -141,7 +169,7 @@ class Order_m(models.Model):
     items = models.ManyToManyField(OrderItem_m)
     date_ordered = models.DateTimeField(auto_now=True)
     address = models.OneToOneField(Address, null=True, on_delete=models.SET_NULL)
-    order_track = models.CharField(max_length=30, null=True, blank=True)
+
 
     SHIPPING_CHOICES = [
         ('L', 'Lettre'),
@@ -216,6 +244,8 @@ class Order_m(models.Model):
             item.quantity * item.price for item in self.items.all() if item.is_ordered == True)
 
     def __str__(self):
+        if self.is_ordered :
+            return '{0} - {1} - {2}'.format(self.owner, self.date_ordered,  self.ref_code)
         return '{0} - {1}'.format(self.owner, self.ref_code)
 
     def check_stock(self):
@@ -225,6 +255,24 @@ class Order_m(models.Model):
             i.check_stock()
             it.append(i)
         return it
+
+    def get_item_supplier(self, supplier_id):
+        ele= []
+        for i in self.get_cart_items :
+            if i.show_supplier_id == supplier_id:
+                ele.append(i)
+        return ele
+
+
+
+
+class OrderTrack_m (models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    order_track = models.CharField(max_length=30, null=True, blank=True)
+    order = models.ForeignKey(Order_m, on_delete=models.CASCADE, null=True, blank=True)
+
+    def __str__(self):
+        return f"order {self.order} - {self.order_track}"
 
 
 class Transaction(models.Model):
@@ -241,7 +289,8 @@ class Transaction(models.Model):
         ordering = ['-timestamp']
 
 
-@receiver(post_save, sender=Order_m)
-def send_tracking_number(sender, instance, **kwargs):
-    if instance.order_track:  # Vérifie si le numéro de suivi n'est pas vide
-        send_tracking_number_email(instance)
+@receiver(post_save, sender=OrderTrack_m)
+def send_tracking_number(sender, instance, created, **kwargs):
+    if created:  # Vérifie si le numéro de suivi n'est pas vide
+        latest_order_track = OrderTrack_m.objects.filter(order=instance).last()
+        send_tracking_number_email(instance, latest_order_track)

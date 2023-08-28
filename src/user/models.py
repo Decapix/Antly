@@ -10,6 +10,8 @@ from sale.models import Product_m as Product
 from django.db.models.signals import post_save
 from django.conf import settings
 from django.core.validators import MaxValueValidator, MinValueValidator
+from admin_supplier.models import Supplier_m
+from sale.models import Ant_m, Other_m, Pack_m
 
 
 def sup(value):
@@ -115,6 +117,8 @@ class Shopper_m(AbstractUser):
     def __str__(self):
         return self.user_name()
 
+
+
     
     # payment methods
 
@@ -129,6 +133,9 @@ class Shopper_m(AbstractUser):
 #
 #
 # post_save.connect(post_save_profile_create, sender=settings.AUTH_USER_MODEL)
+
+
+
 
 
 class Address_m(models.Model):
@@ -154,7 +161,40 @@ class Feedback_m(models.Model):
     )
     shopper = models.ForeignKey(Shopper_m, on_delete=models.CASCADE, null=True, blank=True)
 
+    supplier =  models.ForeignKey(Supplier_m, on_delete=models.SET_NULL , null=True, blank=True)
+    antly = models.BooleanField(default=False)
+    product_ant = models.ForeignKey(Ant_m, on_delete=models.SET_NULL , null=True, blank=True)
+    product_other = models.ForeignKey(Other_m, on_delete=models.SET_NULL, null=True, blank=True)
+    product_pack = models.ForeignKey(Pack_m, on_delete=models.SET_NULL, null=True, blank=True)
+
     def __str__(self):
         return f"feedback - {self.shopper} - {self.star}/5"
+
+    def sh_subject(self):
+        subjects = []
+
+        # Vérifiez si le commentaire est lié à un fournisseur
+        if self.supplier:
+            subjects.append(f"{self.supplier.name} (vendeur)")
+
+        # Vérifiez si le commentaire est lié à antly
+        if self.antly:
+            subjects.append("Antly")
+
+        # Vérifiez si le commentaire est lié à un produit de type ant
+        if self.product_ant:
+            subjects.append(str(self.product_ant.sh_name()))
+
+        # Vérifiez si le commentaire est lié à un autre type de produit
+        if self.product_other:
+            subjects.append(str(self.product_other.sh_name()))
+
+        # Vérifiez si le commentaire est lié à un pack de produits
+        if self.product_pack:
+            subjects.append(str(self.product_pack.sh_name()))
+
+        # Retournez la liste des sujets sous forme de chaîne, séparée par des virgules
+        return ", ".join(subjects)
+
 
 

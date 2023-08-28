@@ -242,9 +242,15 @@ class Address_fo(forms.ModelForm):
 class Feedback_fo(forms.ModelForm):
     class Meta:
         model = Feedback_m
-        fields = ['text', 'star', 'shopper']
+        fields = ['text', 'star', 'shopper', 'supplier', 'antly', 'product_ant', 'product_other', 'product_pack']
         widgets = {
             'text': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Votre avis...', 'rows': 4}),
             'star': forms.HiddenInput(),
             'shopper': forms.HiddenInput(),
+            'supplier': forms.Select(attrs={'class': 'form-control'}),
+            'antly': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            'product_ant': forms.Select(attrs={'class': 'form-control'}),
+            'product_other': forms.Select(attrs={'class': 'form-control'}),
+            'product_pack': forms.Select(attrs={'class': 'form-control'}),
         }
+

@@ -20,6 +20,7 @@ from django.conf import settings
 from super.breadcrumbs import *
 
 
+
 def pdfemail(request, user):
     mail_subject = "Bienvenue chez Antly.fr - Votre Guide d'Introduction à la Myrmécologie joint"
     message = render_to_string("user/template_pdf_mail.html", {
@@ -267,35 +268,34 @@ def orders_vi(request, pk):
     orders = Order_m.objects.filter(owner=request.user, is_ordered=True)
     return render(request, 'user/orders.html', context={"user": user, "orders":orders})
 
-"""
-@login_required
-def address_vi(request, pk):
-    user = Shopper_m.objects.get(id=pk)
-    if user.address_m_set.exists():
-        if request.method == "POST":
-            form = Address_fo(request.POST)
-            if form.is_valid():
-                address = form.save(commit=False)
-                address.shopper = request.user
-                address.save()
-                return redirect(reverse('address_n', kwargs={"pk": user.id}))
-        else:
-            form = Address_fo()
-        return render(request, 'user/address.html', context={"form": form, "user": user})
 
-    else:
-        if request.method == "POST":
-            form = Address_fo(request.POST)
-            if form.is_valid():
-                address = form.save(commit=False)
-                address.shopper = request.user
-                address.save()
-                return redirect(reverse('address_n', kwargs={"pk": user.id}))
-        else:
-            form = Address_fo()
-
-        return render(request, 'user/address.html', context={"form": form})
-"""
+# @login_required
+# def address_vi(request, pk):
+#     user = Shopper_m.objects.get(id=pk)
+#     if user.address_m_set.exists():
+#         if request.method == "POST":
+#             form = Address_fo(request.POST)
+#             if form.is_valid():
+#                 address = form.save(commit=False)
+#                 address.shopper = request.user
+#                 address.save()
+#                 return redirect(reverse('address_n', kwargs={"pk": user.id}))
+#         else:
+#             form = Address_fo()
+#         return render(request, 'user/address.html', context={"form": form, "user": user})
+#
+#     else:
+#         if request.method == "POST":
+#             form = Address_fo(request.POST)
+#             if form.is_valid():
+#                 address = form.save(commit=False)
+#                 address.shopper = request.user
+#                 address.save()
+#                 return redirect(reverse('address_n', kwargs={"pk": user.id}))
+#         else:
+#             form = Address_fo()
+#
+#         return render(request, 'user/address.html', context={"form": form})
 
 @login_required
 def delete_account_vi(request, pk):

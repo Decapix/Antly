@@ -26,7 +26,14 @@
                     <img src="{{ ant.thumbnail.url }}" alt="" class="card-img-top w-100 limite-height">
                     <div class="card-body">
                         <h6 class="card-title">{{ ant.sh_name }}</h6>
-                        <p>{{ ant.sh_price }} €</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p>{{ ant.sh_price }} €</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="text-muted">Vendeur : {{ ant.sh_supplier }}</p>
+                            </div>
+                        </div>
                     </div>
                     </a>
                 </div>

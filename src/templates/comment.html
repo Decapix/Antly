@@ -1,0 +1,37 @@
+
+
+<section class="section">
+        <div class="container">
+            <h6 class="section-title text-center mb-0">Retour clients</h6>
+            <h6 class="section-subtitle mb-5 text-center">Ce que disent nos clients</h6>
+            <div class="row">
+                {% for co in comment %}
+                <div class="col-md-4 my-3 my-md-0">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="media align-items-center mb-3">
+                                <div class="media-body">
+                                    <h6 class="mt-1 mb-0">{{ co.shopper }}</h6>
+                                    <small class="text-muted mb-0" id="star">
+                                        {% for i in '12345'|make_list %}
+                                            {% with i|add:0 as int_i %}
+                                                {% if int_i <= co.star %}
+                                                    <span class="ti-star star-filled"></span>
+                                                {% else %}
+                                                    <span class="ti-star"></span>
+                                                {% endif %}
+                                            {% endwith %}
+                                        {% endfor %}
+                                    </small>
+                                </div>
+                            </div>
+                            <p class=" comment-text">{{ co.text }}</p>
+                            <p class="mb-0 comment-text"> Sujet(s) : {{ co.sh_subject }} </p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <a href="{% url 'comment_n' %}" class="btn btn-primary mt-4 ml-4 rounded">Faire un retour</a>
+        </div>
+    </section>
