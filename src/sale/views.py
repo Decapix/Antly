@@ -600,7 +600,7 @@ def success_vi(request):
         id = i.id
         iteml= []
         for e in items :
-            if e.show_supplier_id == id:
+            if e.show_supplier_id() == id:
                 iteml.append(i)
 
         px = 0
