@@ -7,6 +7,7 @@ from admin_supplier.models import Supplier_m
 from django.contrib import admin
 
 admin.site.register(Transaction)
+admin.site.register(Product_m)
 
 @admin.register(Ant_m)
 class AntAdmin(admin.ModelAdmin):
