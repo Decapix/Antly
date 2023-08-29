@@ -618,7 +618,6 @@ def success_vi(request):
         Adresse du client {address} 
         
         prix facturé au client : {px}
-        {iteml}
         Pourcentage pris par Antly : {settings.PERCENT_ANTLY} %
         Votre gain (les frais de port restent à votre charge) : {percentage(px)}
         
