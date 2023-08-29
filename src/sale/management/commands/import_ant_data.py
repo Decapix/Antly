@@ -2,13 +2,17 @@ import json
 from sale.models import Ant_m
 from admin_supplier.models import Supplier_m
 from django.core.management.base import BaseCommand
+import os
+from django.conf import settings
+
 
 class Command(BaseCommand):
     help = 'Imports ant data from a JSON file and links them to a specified supplier'
 
     def handle(self, *args, **kwargs):
         # Charger les données depuis le fichier JSON
-        with open('src/save-data/ant_data.json', 'r') as f:
+        file_path = os.path.join(settings.BASE_DIR, 'save-data', 'ant_data.json')
+        with open(file_path, 'r') as f:
             ant_data = json.load(f)
 
         # Récupérer le fournisseur avec l'ID spécifié
