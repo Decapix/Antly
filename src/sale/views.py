@@ -595,7 +595,7 @@ def success_vi(request):
         supplierl.append(supplier)
 
     for i in supplierl :
-        id = i.show_supplier_id()
+        id = i.id
         iteml = order.get_item_supplier(id)
         px = 0
         for u in iteml :
