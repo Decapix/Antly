@@ -32,6 +32,8 @@ from django.contrib.contenttypes.models import ContentType
 from super.breadcrumbs import *
 from admin_supplier.models import Supplier_m
 from user.models import Feedback_m
+from decimal import Decimal
+
 
 
 
@@ -587,7 +589,8 @@ def success_vi(request):
 
     # send mail to supplier
     def percentage(value):
-        return value * (settings.PERCENT_ANTLY / 100)
+        percentage_value = Decimal(settings.PERCENT_ANTLY) / 100
+        return value * percentage_value
 
     supplierl = []
     for y in order.get_cart_items() :
