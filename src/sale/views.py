@@ -564,7 +564,8 @@ def success_vi(request):
     # The order information you want to add
     date_ordered = order.date_ordered.strftime('%Y-%m-%d %H:%M:%S')
     customer_name = f"{address.complete_name}"
-    order_contents = ", ".join([f"{item.sh_name()} de {item.sh_supplier()} x {item.quantity} ({item.price}€)" for item in order.get_cart_items()])
+    items = order.get_cart_items()
+    order_contents = ", ".join([f"{item.sh_name()} de {item.sh_supplier()} x {item.quantity} ({item.price}€)" for item in items])
     address = order.address
     address_info = f"{address.complete_name}, {address.adress}, {address.detail}, {address.postal_code} {address.city}, {address.country}"
     contact = f"{address.phone_number} | {request.user.email}"
@@ -589,15 +590,20 @@ def success_vi(request):
         return value * (settings.PERCENT_ANTLY / 100)
 
     supplierl = []
-    for i in order.get_cart_items() :
-        id = i.show_supplier_id()
+    for y in order.get_cart_items() :
+        id = y.show_supplier_id()
         supplier = Supplier_m.objects.get(pk=id)
         supplierl.append(supplier)
 
+
     for i in supplierl :
         id = i.id
-        iteml = order.get_item_supplier(id)
-        px = 1
+        iteml= []
+        for e in items :
+            if e.show_supplier_id == id:
+                iteml.append(i)
+
+        px = 0
         for u in iteml :
             px += u.price
         supplier = Supplier_m.objects.get(pk=id)
@@ -609,6 +615,7 @@ def success_vi(request):
         Adresse du client {address} 
         
         prix facturé au client : {px}
+        {iteml}
         Pourcentage pris par Antly : {settings.PERCENT_ANTLY} %
         Votre gain (les frais de port restent à votre charge) : {percentage(px)}
         
