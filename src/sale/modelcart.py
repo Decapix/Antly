@@ -258,7 +258,7 @@ class Order_m(models.Model):
 
     def get_item_supplier(self, supplier_id):
         ele= []
-        for i in self.get_cart_items :
+        for i in self.get_cart_items() :
             if i.show_supplier_id == supplier_id:
                 ele.append(i)
         return ele
