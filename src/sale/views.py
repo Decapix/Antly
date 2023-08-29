@@ -597,7 +597,7 @@ def success_vi(request):
     for i in supplierl :
         id = i.id
         iteml = order.get_item_supplier(id)
-        px = 0
+        px = 1
         for u in iteml :
             px += u.price
         supplier = Supplier_m.objects.get(pk=id)
