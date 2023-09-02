@@ -24,7 +24,7 @@ def homepage_vi(request):
                          "Bienvenue sur notre boutique en ligne de fourmis pour débutants ! Découvrez notre sélection de fondations, packs, nids et accessoires pour commencer votre élevage de fourmis. Profitez de conseils d'experts et rejoignez la communauté des passionnés de Myrmécologie.")
     bread = [pageAccueil]
     ant = Ant_m.objects.filter(sizes__stock__gt=0, supplier__currently_available = True).distinct()
-    pack = Pack_m.objects.filter(size__stock__gt=0, supplier__currently_available = True).distinct()
+    pack = Pack_m.objects.filter(size__stock__gt=0, size__supplier__currently_available = True).distinct()
     other = Other_m.objects.filter(stock__gt=0, supplier__currently_available = True).distinct()
     comment = Feedback_m.objects.all()
     if len(comment) >= 3:
