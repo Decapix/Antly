@@ -70,7 +70,7 @@ def ant_product_vi(request):
         "Explorez notre collection de fondations de fourmis pour débutants, avec une variété d'espèces et d'origines. Démarrez votre élevage de fourmis en toute simplicité et bénéficiez d'un support professionnel. Découvrez nos offres dès maintenant !")
 
     bread = [pageAccueil, pageFourmis]
-    ant_product = Ant_m.objects.filter(sizes__stock__gt=0, supplier__currently_available = True).distinct()
+    ant_product = Ant_m.objects.filter(sizes__stock__gt=0, supplier__currently_available = True, problem=False).distinct()
     country = []
     for ant in ant_product:
         if ant.sh_localisation() not in country:
@@ -92,7 +92,7 @@ def other_product_vi(request):
         "Accessoires pour l'élevage de Fourmis - Nids, Outils et Plus | Boutique en Ligne",
 "Découvrez notre gamme complète d'accessoires pour l'élevage de fourmis, conçue pour les débutants. De la mise en place de votre nid à la maintenance de votre colonie, nos produits assurent une expérience optimale. Visitez notre boutique et découvrez nos offres !")
     bread = [pageAccueil, pageOther]
-    other_product = Other_m.objects.filter(stock__gt=0, supplier__currently_available = True).distinct()
+    other_product = Other_m.objects.filter(stock__gt=0, supplier__currently_available = True, problem=False).distinct()
     country = []
     for ant in other_product:
         if ant.type not in country:
@@ -115,7 +115,7 @@ def pack_product_vi(request):
         "Découvrez notre sélection de packs pour débutants en élevage de fourmis, incluant des fondations de différentes espèces et nids adaptés. Profitez d'un support professionnel et lancez-vous facilement dans la Myrmécologie avec nos packs complets !")
 
     bread = [pageAccueil, pagePack]
-    pack_product = Pack_m.objects.filter(size__stock__gt=0, size__supplier__currently_available = True).distinct()
+    pack_product = Pack_m.objects.filter(size__stock__gt=0, size__supplier__currently_available = True, nest__problem=False).distinct()
     country = []
     for pack in pack_product:
         if pack.sh_localisation() not in country:
