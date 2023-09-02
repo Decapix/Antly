@@ -615,7 +615,7 @@ def success_vi(request):
         message = f"""
         passé le {date_ordered} 
                 
-        Adresse du client {address} 
+        Adresse du client {address_info} 
         
         prix facturé au client : {px}
         Pourcentage pris par Antly : {settings.PERCENT_ANTLY} %
