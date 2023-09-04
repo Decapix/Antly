@@ -175,4 +175,5 @@ TYPE_CHOICES = [
     ("accessoire", "accessoire"),
     ("nourriture", "nourriture"),
     ("matériaux", "materiaux"),
+    ("élevage nourricier", "élevage nourricier")
 ]
