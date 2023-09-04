@@ -7,6 +7,8 @@ COUNTRY_CHOICES = (
     ("Afrique de l'Est", "East Africa"),
     ("Afrique de l'Ouest", "West Africa"),
     ("Afrique du Nord", "North Africa"),
+    ("Amérique du sud", "South America"),
+    ("Amérique du nord", "North America"),
     ("Algérie", "Algeria"),
     ("Australie", "Australia"),
     ("Bangladesh", "Bangladesh"),
