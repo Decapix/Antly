@@ -121,6 +121,9 @@ class Ant_m(Product_m):
     def sh_supplier(self):
         return self.supplier.name
 
+    def show_supplier_id(self):
+        return self.supplier.id
+
 
 
 
