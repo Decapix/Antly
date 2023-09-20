@@ -288,8 +288,8 @@ class Transaction(models.Model):
     def __str__(self):
         return f"{self.shopper} - {self.order}"
 
-    class Meta:
-        ordering = ['-timestamp']
+#    class Meta:
+#        ordering = ['-timestamp']
 
 
 @receiver(post_save, sender=OrderTrack_m)
