@@ -288,12 +288,12 @@ class Transaction(models.Model):
     def __str__(self):
         return f"{self.shopper} - {self.order}"
 
-#    class Meta:
-#        ordering = ['-timestamp']
+    class Meta:
+        ordering = ['-timestamp']
 
 
-@receiver(post_save, sender=OrderTrack_m)
-def send_tracking_number(sender, instance, created, **kwargs):
-    if created:  # Vérifie si le numéro de suivi n'est pas vide
-        latest_order_track = OrderTrack_m.objects.filter(order=instance).last()
-        send_tracking_number_email(instance, latest_order_track)
+#@receiver(post_save, sender=OrderTrack_m)
+#def send_tracking_number(sender, instance, created, **kwargs):
+#    if created:  # Vérifie si le numéro de suivi n'est pas vide
+#        latest_order_track = OrderTrack_m.objects.filter(order=instance).last()
+#        send_tracking_number_email(instance, latest_order_track)
