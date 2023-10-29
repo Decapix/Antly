@@ -167,6 +167,7 @@ GYNE_CHOICES = [
     ("7", "7"),
     ("10", "10"),
     ("+ 10", "+ 10"),
+    ("Gamergate", "Gamergate"),
 ]
 
 
