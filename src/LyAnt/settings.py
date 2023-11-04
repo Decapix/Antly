@@ -216,7 +216,7 @@ STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
 # PayPal 
 PAYPAL_RECEIVER_EMAIL = COMPANY_EMAIL
 PAYPAL_TEST = False
-PAYPAL_BUY_BUTTON_IMAGE = "https://res.cloudinary.com/he8kyfyn7/image/upload/v1/media/products/pay_klx49t"
+# PAYPAL_BUY_BUTTON_IMAGE = "https://res.cloudinary.com/he8kyfyn7/image/upload/v1/media/products/pay_klx49t"
 
 
 
