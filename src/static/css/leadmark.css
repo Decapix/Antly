@@ -12310,7 +12310,7 @@ top: 110px
 #paypal-button-container {
   /* Définir un style de base pour l'élément PayPal */
   transition: opacity 0.3s ease;
-  width: 100%; /* ou une valeur fixe en pixels, si applicable */
+  width: 500px; /* ou une valeur fixe en pixels, si applicable */
   
   /* Assurez-vous que l'image à l'intérieur s'adapte à ce conteneur */
   display: flex;
@@ -12323,6 +12323,5 @@ top: 110px
 #paypal-button-container.disabled {
   pointer-events: none;
   opacity: 0.5;
-  max-width: 100%;
-  height: auto;
+
 }
