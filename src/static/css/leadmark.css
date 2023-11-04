@@ -12303,3 +12303,17 @@ top: 110px
 .card :is(img) {
   border-radius: 8px 8px 0 0;
 }
+
+
+/* paypal box*/
+
+#paypal-button-container {
+  /* Définir un style de base pour l'élément PayPal */
+  transition: opacity 0.3s ease;
+}
+
+/* Vous pouvez également définir un style pour l'état désactivé si vous prévoyez de l'utiliser ailleurs dans votre CSS */
+#paypal-button-container.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}

@@ -71,7 +71,8 @@
         </div>
         <!-- strip-->
         <button class="circle btn btn-outline-primary mb-2">3</i></button>
-        <h4 class="mb-4">Paiement</h4>
+        <h4 class="">Paiement, Par carte ou paypal</h4>
+        <h6 class="mb-4">Par carte</h4>
         <!-- Affichez ici le formulaire de paiement Stripe -->
 
         <div class="form-container">
@@ -124,9 +125,10 @@
 
         <!-- endstrip-->
         <!-- paypal -->
-      <<div id="paypal-button-container">
+      <h6 class="mb-4">Paypal</h4>
+      <div id="paypal-button-container">
                 {{paypal.render}}
-              </div>
+      </div>
         
         <!--      endpaypal-->
       </div>
@@ -217,8 +219,9 @@ function enablePaypalButton() {
 
       // Désactiver le bouton de soumission et paypal
       const cardButton = document.getElementById('card-button');
+      const paypalButtonContainer = document.getElementById('paypal-button-container');
       cardButton.disabled = true;
-      disablePaypalButton();
+      paypalButtonContainer.classList.add('disabled');
 
       // Créer un paiement Intent
       const response = await fetch("{% url 'create-payment-intent' %}", {
@@ -248,7 +251,7 @@ function enablePaypalButton() {
 
           // Réactiver le bouton de soumission
           cardButton.disabled = false;
-          enablePaypalButton()
+          paypalButtonContainer.classList.remove('disabled');
       } else {
           // Rediriger vers la page de succès
           location.href = "{% url 'success_n' %}";
