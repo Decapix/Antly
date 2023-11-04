@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'storages',
     'cloudinary',
     'cloudinary_storage',
+    'paypal.standard.ipn',
 
 
     'user',
@@ -195,16 +196,6 @@ API_GOOGLE = "AIzaSyDzfwJz7M-oLbSFZwXoiXLL9kKblo_SSIE"
 
 # SESSION_EXPIRE_AT_BR0WSER_CL0SE = True  # cookies delete themselves when the window is closed
 
-# Stripe and Braintree Settings
-STRIPE_WEBHOOK_SECRET = os.environ.get('STRIPE_WEBHOOK_SECRET')
-
-STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY')
-STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
-
-# PayPal
-PAYPAL_CLIENT_ID = os.environ.get('PAYPAL_CLIENT_ID')
-PAYPAL_CLIENT_SECRET = os.environ.get('PAYPAL_CLIENT_SECRET')
-PAYPAL_MODE = 'sandbox'
 
 # company
 
@@ -214,6 +205,19 @@ COMPANY_EMAIL = "antly.fourmis@gmail.com"
 COMPANY_PHONE = "06 51 33 61 58"
 COMPANY_SIRET = "91493900400018"
 COMPANY_VAT_NUMBER = "Pas de TVA applicable"
+
+
+# Stripe and Braintree Settings
+STRIPE_WEBHOOK_SECRET = os.environ.get('STRIPE_WEBHOOK_SECRET')
+
+STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY')
+STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
+
+# PayPal 
+PAYPAL_RECEIVER_EMAIL = COMPANY_EMAIL
+PAYPAL_TEST = False
+
+
 
 
 # offer
@@ -234,3 +238,5 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
+
+

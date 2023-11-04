@@ -21,7 +21,7 @@
     <div class="row justify-content-between">
       <div class="col-md-8 pr-md-5 mb-4 mb-md-0">
         <div class="mb-5">
-          <button class="circle btn btn-outline-primary mb-2">3</i></button>
+          <button class="circle btn btn-outline-primary mb-2">2</i></button>
           <h4>Résumé de la commande</h4>
           <table class="table table-striped">
             <tbody>
@@ -70,7 +70,7 @@
           {% endif %}
         </div>
         <!-- strip-->
-        <button class="circle btn btn-outline-primary mb-2">4</i></button>
+        <button class="circle btn btn-outline-primary mb-2">3</i></button>
         <h4 class="mb-4">Paiement</h4>
         <!-- Affichez ici le formulaire de paiement Stripe -->
 
@@ -123,11 +123,12 @@
         </div>
 
         <!-- endstrip-->
-        <!-- paypal 
-                <div id="paypal-button-container"></div>
-                <input type="hidden" name="csrfmiddlewaretokenn" value="{% csrf_token %}" >
+        <!-- paypal -->
+      <<div id="paypal-button-container">
+                {{paypal.render}}
+              </div>
         
-                endpaypal-->
+        <!--      endpaypal-->
       </div>
 
       <div class="col-md-4 pl-md-5">
@@ -151,7 +152,7 @@
 
               {% if letter_shipping_possible %}
               <div class="mt-5 mb-4 shipping-method">
-                  <button class="circle btn btn-outline-primary mb-2">2</i></button>
+                  <button class="circle btn btn-outline-primary mb-2">1.5</i></button>
                   <h4 class="mb-3 shipping-method__title">Méthode de livraison</h4>
                   <label for="shipping_type" class="shipping-method__label">Type d'envoi:</label>
                   <select name="shipping_type" id="shipping_type" class="shipping-method__select">
@@ -194,14 +195,30 @@
       }
   });
 
+  function disablePaypalButton() {
+  const paypalButtonContainer = document.getElementById('paypal-button-container');
+  // Désactiver tous les événements clic sur le conteneur, par exemple
+  paypalButtonContainer.style.pointerEvents = 'none';
+  // Vous pouvez également ajuster l'opacité pour indiquer visuellement que le bouton est désactivé
+  paypalButtonContainer.style.opacity = '0.5';
+};
+
+// Pour réactiver le bouton
+function enablePaypalButton() {
+  const paypalButtonContainer = document.getElementById('paypal-button-container');
+  paypalButtonContainer.style.pointerEvents = 'auto';
+  paypalButtonContainer.style.opacity = '1';
+};
+
   // Gérer la soumission du formulaire de paiement
   const paymentForm = document.getElementById('payment-form');
   paymentForm.addEventListener('submit', async function (event) {
       event.preventDefault();
 
-      // Désactiver le bouton de soumission
+      // Désactiver le bouton de soumission et paypal
       const cardButton = document.getElementById('card-button');
       cardButton.disabled = true;
+      disablePaypalButton();
 
       // Créer un paiement Intent
       const response = await fetch("{% url 'create-payment-intent' %}", {
@@ -231,6 +248,7 @@
 
           // Réactiver le bouton de soumission
           cardButton.disabled = false;
+          enablePaypalButton()
       } else {
           // Rediriger vers la page de succès
           location.href = "{% url 'success_n' %}";
@@ -288,49 +306,6 @@
 
 
 
-
-  // Paypal
-  var csrfToken = document.querySelector('[name=csrfmiddlewaretokenn]').value;
-  paypal.Buttons({
-      style: {
-          shape: 'rect',
-          color: 'blue',
-          layout: 'vertical',
-          label: 'paypal',
-      },
-      createOrder: function(data, actions) {
-          // Appeler votre serveur pour configurer la transaction
-          return fetch("{% url 'create-paypal-payment' %}", {
-              method: 'post',
-              headers: {
-                  'content-type': 'application/json',
-                  'X-CSRFToken': csrfToken  // Ajoutez cette ligne
-              },
-          }).then(function(res) {
-              return res.json();
-          }).then(function(data) {
-              return data.orderID; // Utilisez l'ID de la commande renvoyé par votre serveur
-          });
-      },
-      onApprove: function(data, actions) {
-          // Appeler votre serveur pour finaliser la transaction
-          return fetch('/commande/process-paypal-payment/', {
-              method: 'post',
-              headers: {
-                  'content-type': 'application/json'
-              },
-              body: JSON.stringify({
-                  orderID: data.orderID
-              })
-          }).then(function(res) {
-              return res.json();
-          }).then(function(details) {
-              alert('Transaction completed by ' + details.payer.name.given_name);
-              // Redirigez l'utilisateur vers une page de réussite
-              window.location.href = "/commande/success/";
-          });
-      }
-  }).render('#paypal-button-container'); // Affiche le bouton PayPal
 </script>
 
 <script src="{% static 'vendors/bootstrap/bootstrap.bundle.min.js' %}"></script>

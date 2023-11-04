@@ -27,4 +27,5 @@ urlpatterns = [
     path('utilisateur/', include("user.urls")),
     path('produit/', include("sale.urls")),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+    path('', include('paypal.standard.ipn'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

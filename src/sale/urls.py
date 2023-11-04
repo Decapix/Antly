@@ -18,8 +18,8 @@ urlpatterns = [
     path("commande/create-payment-intent/", createpayment, name="create-payment-intent"),
     path("commande/webhook/", webhook_vi, name="webhook"),
     path('facture/<str:order_id>/', generate_invoice_pdf, name='facture_pdf'),
-    path('commande/create-paypal-payment/', create_paypal_payment, name="create-paypal-payment"),
-    path('commande/process-paypal-payment/',process_paypal_payment, name="process-paypal-payment"),
+    # path('commande/create-paypal-payment/', create_paypal_payment, name="create-paypal-payment"),
+    # path('commande/process-paypal-payment/',process_paypal_payment, name="process-paypal-payment"),
 
     ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

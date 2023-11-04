@@ -27,12 +27,12 @@ from django.http import FileResponse
 from reportlab.pdfgen import canvas
 from django.templatetags.static import static as stat
 from django.contrib.staticfiles import finders
-from .paypal import create_paypal_transaction, execute_paypal_transaction
 from django.contrib.contenttypes.models import ContentType
 from super.breadcrumbs import *
 from admin_supplier.models import Supplier_m
 from user.models import Feedback_m
 from decimal import Decimal
+from paypal.standard.forms import PayPalPaymentsForm
 
 
 
@@ -486,11 +486,25 @@ def checkout_vi(request):
         The rendered checkout view with context data or a JSON response with new address data.
     """
     bread = [pageAccueil, pagePanier, pageCheckout]
+    host = request.get_host()
 
     existing_order = get_user_pending_order(request)
     existing_order.shipping_type = "C"
 
     form = Address_fo()
+
+    paypal_checkout = {
+        'business': settings.PAYPAL_RECEIVER_EMAIL,
+        'amount': existing_order.get_cart_total(),
+        'item_name': request.user,
+        'invoice': uuid.uuid4(),
+        'currency_code': 'EUR',
+        'notify_url': f"http://{host}{reverse('paypal-ipn')}",
+        'return_url': f"http://{host}{reverse('produit/commande/success/')}",
+        'cancel_url': f"http://{host}{reverse('produit/commande/checkout/')}",
+    }
+
+    paypal_payment = PayPalPaymentsForm(initial=paypal_checkout)
 
     if request.method == "POST":
         form = Address_fo(request.POST)
@@ -521,10 +535,45 @@ def checkout_vi(request):
         "STRIPE_PUBLIC_KEY": os.environ.get('STRIPE_PUBLISHABLE_KEY'),
         "user": request.user,
         "letter_shipping_possible": existing_order.shipping_possible(),
-        "bread":bread
+        "bread":bread,
+        'paypal': paypal_payment
     }
 
     return render(request, "sale/checkout.html", context)
+
+
+def CheckoutPaypal_vi(request, product_id):
+
+    order = get_user_pending_order(request)
+
+    # Calculate the total order amount in cents
+    amount = int(order.get_cart_total()) * 100
+
+    # Ensure the total order amount is greater than zero
+    if amount <= 0:
+        return HttpResponse("Le montant total de la commande doit être supérieur à zéro.", status=400)
+
+    host = request.get_host()
+
+    paypal_checkout = {
+        'business': settings.PAYPAL_RECEIVER_EMAIL,
+        'amount': amount,
+        'item_name': request.user,
+        'invoice': uuid.uuid4(),
+        'currency_code': 'EUR',
+        'notify_url': f"http://{host}{reverse('paypal-ipn')}",
+        'return_url': f"http://{host}{reverse('payment-success', kwargs = {'product_id': product.id})}",
+        'cancel_url': f"http://{host}{reverse('payment-failed', kwargs = {'product_id': product.id})}",
+    }
+
+    paypal_payment = PayPalPaymentsForm(initial=paypal_checkout)
+
+    context = {
+        'product': order,
+        'paypal': paypal_payment
+    }
+
+    return render(request, 'checkout.html', context)
 
 
 @login_required
@@ -794,6 +843,8 @@ def webhook_vi(request):
 
 
 
+
+# paypal 
 def create_paypal_payment(request):
     # Récupérez les détails de la commande de l'utilisateur
     order = get_user_pending_order(request)
@@ -859,6 +910,8 @@ def process_paypal_payment(request):
         # Redirigez l'utilisateur vers la page de paiement s'il y a eu un problème
         messages.error("la transaction a échoué")
         return redirect('checkout_n')
+
+
 
 
 @login_required
