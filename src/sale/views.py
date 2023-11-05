@@ -500,8 +500,8 @@ def checkout_vi(request):
         'invoice': uuid.uuid4(),
         'currency_code': 'EUR',
         'notify_url': f"http://{host}{reverse('paypal-ipn')}",
-        'return_url': f"http://{host}{'produit/commande/success/'}",
-        'cancel_url': f"http://{host}{'produit/commande/checkout/'}",
+        'return_url': f"http://{host}{'/produit/commande/success/'}",
+        'cancel_url': f"http://{host}{'/produit/commande/checkout/'}",
     }
 
     paypal_payment = PayPalPaymentsForm(initial=paypal_checkout)
