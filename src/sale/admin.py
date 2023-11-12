@@ -191,7 +191,7 @@ class OrderTrackAdmin(admin.ModelAdmin):
     def get_orders_for_supplier(self, supplier):
         # Obtenir toutes les commandes qui contiennent au moins un produit du fournisseur
         order_ids = []
-        for order in Order_m.objects.all():
+        for order in Order_m.objects.filter(is_ordered=True):
             for item in order.items.all():
                 if hasattr(item.content_object, 'supplier') and item.content_object.supplier == supplier:
                     order_ids.append(order.id)

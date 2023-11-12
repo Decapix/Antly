@@ -200,11 +200,15 @@ class Other_m(Product_m):
 
 
 class Pack_m(models.Model):
-    """The model base for ant pack"""
+    """The model base for ant pack""" 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     nest = models.ForeignKey(Other_m, on_delete=models.CASCADE, related_name='pack', null=True, default=None)
     price = models.DecimalField(max_digits=6, decimal_places=2, default=20)
     size = models.OneToOneField(Size_m, null=True, on_delete=models.CASCADE)
+    thumbnail_1 = models.ImageField(upload_to="products", null=True, blank=True)
+    thumbnail_2 = models.ImageField(upload_to="products", null=True, blank=True)
+    thumbnail_3 = models.ImageField(upload_to="products", null=True, blank=True)
+    thumbnail_4 = models.ImageField(upload_to="products", null=True, blank=True)
 
 
     def __str__(self):
@@ -217,7 +221,13 @@ class Pack_m(models.Model):
         return self.price
 
     def thumbnail_url(self):
-        return self.size.product_base.thumbnail.url
+        # Vérifier si thumbnail_1 a une image associée
+        if self.thumbnail_1 and hasattr(self.thumbnail_1, 'url'):
+            # Si oui, retourner l'URL de thumbnail_1
+            return self.thumbnail_1.url
+        else:
+            # Sinon, retourner l'URL de self.size.product_base.thumbnail
+            return self.size.product_base.thumbnail.url
 
     def sh_spece(self):
         return self.size.product_base.spece

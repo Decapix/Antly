@@ -139,7 +139,7 @@ def product_pack_detail_vi(request, id):
     Returns:
         The rendered pack product detail view with context data.
     """
-    description_pack = "Le pack contient le nid, la fondation, une pince à épiler, une seringue, un morceau de 10 cm de tuyau pour les liaisons et une pipette"
+    # description_pack = "Le pack contient le nid, la fondation, une pince à épiler, une seringue, un morceau de 10 cm de tuyau pour les liaisons et une pipette"
     user = request.user
     pack_product = get_object_or_404(Pack_m, id=id)
     nest = pack_product.nest
@@ -167,7 +167,7 @@ def product_pack_detail_vi(request, id):
                                list(Pack_m.objects.filter(size__stock__gt=0).distinct()), list(Other_m.objects.filter(stock__gt=0).distinct()) )
 
     context = {"pack": pack_product, "price": price, "ant": ant_product, "offer_ant": offer_ant, 'meta': metat,
-               "nest": nest, "description_pack": description_pack, "bread": bread, "comment":comment}
+               "nest": nest, "bread": bread, "comment":comment}
     if request.method == 'POST':
         quantity = request.POST.get('quantity')
         # Check if the size is available
@@ -542,38 +542,6 @@ def checkout_vi(request):
     return render(request, "sale/checkout.html", context)
 
 
-def CheckoutPaypal_vi(request, product_id):
-
-    order = get_user_pending_order(request)
-
-    # Calculate the total order amount in cents
-    amount = int(order.get_cart_total()) * 100
-
-    # Ensure the total order amount is greater than zero
-    if amount <= 0:
-        return HttpResponse("Le montant total de la commande doit être supérieur à zéro.", status=400)
-
-    host = request.get_host()
-
-    paypal_checkout = {
-        'business': settings.PAYPAL_RECEIVER_EMAIL,
-        'amount': amount,
-        'item_name': request.user,
-        'invoice': uuid.uuid4(),
-        'currency_code': 'EUR',
-        'notify_url': f"http://{host}{reverse('paypal-ipn')}",
-        'return_url': f"http://{host}{reverse('payment-success', kwargs = {'product_id': product.id})}",
-        'cancel_url': f"http://{host}{reverse('payment-failed', kwargs = {'product_id': product.id})}",
-    }
-
-    paypal_payment = PayPalPaymentsForm(initial=paypal_checkout)
-
-    context = {
-        'product': order,
-        'paypal': paypal_payment
-    }
-
-    return render(request, 'checkout.html', context)
 
 
 @login_required
@@ -638,7 +606,7 @@ def success_vi(request):
 
     # send mail to supplier
     def percentage(value):
-        percentage_value = Decimal(settings.PERCENT_ANTLY) / 100
+        percentage_value = Decimal(100 - settings.PERCENT_ANTLY) / 100
         return value * percentage_value
 
     supplierl = []
@@ -672,6 +640,9 @@ def success_vi(request):
         
         Contenu de la commande :
         {orderr}
+
+        contact : 
+        {contact}
         
         
         Rappel :

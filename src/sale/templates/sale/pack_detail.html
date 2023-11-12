@@ -22,6 +22,35 @@
         <div class="col-md-6 pr-md-5 mb-4 mb-md-0">
           <!-- image -->
           <div id="large-image" class="mb-3 big">
+            {% if pack.thumbnail_1 %}
+            <img
+              class="card-img-top mb-1"
+              src="{{ pack.thumbnail_1.url }}"
+              alt="Image pack"
+              onmouseover="changeLargeImage(this)"
+            />
+            {% endif %} {% if pack.thumbnail_1 %}
+            <img
+              class="card-img-top mb-1"
+              src="{{ pack.thumbnail_1.url }}"
+              alt="Image pack"
+              onmouseover="changeLargeImage(this)"
+            />
+            {% endif %} {% if pack.thumbnail_1 %}
+            <img
+              class="card-img-top mb-1"
+              src="{{ pack.thumbnail_1.url }}"
+              alt="Image pack"
+              onmouseover="changeLargeImage(this)"
+            />
+            {% endif %} {% if pack.thumbnail_1 %}
+            <img
+              class="card-img-top mb-1"
+              src="{{ pack.thumbnail_1.url }}"
+              alt="Image pack"
+              onmouseover="changeLargeImage(this)"
+            />
+            {% endif %} 
             <img
               src="{{ ant.thumbnail.url }}"
               class="card-img-top w-100 default-image"
@@ -38,6 +67,35 @@
           </div>
 
           <div id="small-images">
+            {% if pack.thumbnail_1 %}
+            <img
+              class="card-img-top mb-1"
+              src="{{ pack.thumbnail_1.url }}"
+              alt="Image pack"
+              onmouseover="changeLargeImage(this)"
+            />
+            {% endif %} {% if pack.thumbnail_1 %}
+            <img
+              class="card-img-top mb-1"
+              src="{{ pack.thumbnail_1.url }}"
+              alt="Image pack"
+              onmouseover="changeLargeImage(this)"
+            />
+            {% endif %} {% if pack.thumbnail_1 %}
+            <img
+              class="card-img-top mb-1"
+              src="{{ pack.thumbnail_1.url }}"
+              alt="Image pack"
+              onmouseover="changeLargeImage(this)"
+            />
+            {% endif %} {% if pack.thumbnail_1 %}
+            <img
+              class="card-img-top mb-1"
+              src="{{ pack.thumbnail_1.url }}"
+              alt="Image pack"
+              onmouseover="changeLargeImage(this)"
+            />
+            {% endif %} 
             <img
               class="card-img-top mb-1"
               src="{{ ant.thumbnail.url }}"
@@ -147,7 +205,7 @@
                 </div>
             </div>
             <div>
-              <p>{{ description_pack|format_description|safe }}</p>
+<!--               <p>{{ description_pack|format_description|safe }}</p> -->
               <p>{{ ant.description|format_description|safe }}</p>
               <p>{{ nest.description|format_description|safe }}</p>
             </div>
