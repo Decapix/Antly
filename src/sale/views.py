@@ -684,7 +684,7 @@ def success_vi(request, id):
 
             # Save the transaction
             transaction.save()
-            
+
     context = {
         'order': order,
         'user': request.user
@@ -814,7 +814,7 @@ def order_ordered_vi(request, id):
     """all operation to do after after sucess"""
 
     order = Order_m.objects.get(id=id)
-    if order.is_ordered :
+    if not order.is_ordered :
 
         # Get the user's last order
         address = order.address
