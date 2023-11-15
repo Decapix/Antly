@@ -254,7 +254,7 @@ function enablePaypalButton() {
           paypalButtonContainer.classList.remove('disabled');
       } else {
           // Rediriger vers la page de succès
-          location.href = "{% url 'success_n' %}";
+          location.href = "{% url 'success_n' order.id %}";
       }
   });
 

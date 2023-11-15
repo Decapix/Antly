@@ -500,7 +500,7 @@ def checkout_vi(request):
         'invoice': uuid.uuid4(),
         'currency_code': 'EUR',
         'notify_url': f"http://{host}{reverse('paypal-ipn')}",
-        'return_url': f"http://{host}{'/produit/commande/success/'}",
+        'return_url': f"http://{host}{f'/produit/commande/success/{existing_order.id}'}",
         'cancel_url': f"http://{host}{'/produit/commande/checkout/'}",
     }
 
@@ -545,7 +545,7 @@ def checkout_vi(request):
 
 
 @login_required
-def success_vi(request):
+def success_vi(request, id):
     """
     Render the success view after a successful order and send an order email.
 
@@ -555,105 +555,10 @@ def success_vi(request):
     Returns:
         The rendered success view with context data.
     """
+
+    order_ordered_vi(request, id)
     # Get the user's last order
-    order = Order_m.objects.filter(owner=request.user).order_by('-date_ordered').first()
-    address = order.address
-    orderEmail(request, request.user, request.user.email, order)
-
-    # Check if the order exists
-    if not order:
-        messages.error(request, "No order found.")
-        return redirect('checkout_n')
-
-    # Set up the credentials
-    credentials = service_account.Credentials.from_service_account_file(
-        settings.BASE_DIR / "google_json/credentials.json",
-        scopes=['https://www.googleapis.com/auth/spreadsheets']
-    )
-
-    # Create a client object to interact with the API
-    sheets = build('sheets', 'v4', credentials=credentials)
-
-    # Your Google Sheets spreadsheet ID
-    spreadsheet_id = '19amsgc6XnQI-zJ1tZU_ZyIilywxTi6xwupygYH2SZGU'
-
-    # The tab name where you want to add the order information
-    sheet_name = 'order'
-
-    # The order information you want to add
-    date_ordered = order.date_ordered.strftime('%Y-%m-%d %H:%M:%S')
-    customer_name = f"{address.complete_name}"
-    items = order.get_cart_items()
-    order_contents = ", ".join([f"{item.sh_name()} de {item.sh_supplier()} x {item.quantity} ({item.price}€)" for item in items])
-    address = order.address
-    address_info = f"{address.complete_name}, {address.adress}, {address.detail}, {address.postal_code} {address.city}, {address.country}"
-    contact = f"{address.phone_number} | {request.user.email}"
-    to = sum(i.price for i in order.get_cart_items())
-    total = f"{to}"
-    total_ship = f"{to + order.shipping_costs()}"
-    order_data = [date_ordered, customer_name, order_contents, address_info, contact, total, total_ship]
-
-    # Add the order information to the spreadsheet
-    requeste = sheets.spreadsheets().values().append(
-        spreadsheetId=spreadsheet_id,
-        range=f'{sheet_name}!A1',
-        valueInputOption='RAW',
-        insertDataOption='INSERT_ROWS',
-        body={'values': [order_data]}
-    )
-
-    response = requeste.execute()
-
-    # send mail to supplier
-    def percentage(value):
-        percentage_value = Decimal(100 - settings.PERCENT_ANTLY) / 100
-        return value * percentage_value
-
-    supplierl = []
-    for y in order.get_cart_items() :
-        id = y.show_supplier_id()
-        supplier = Supplier_m.objects.get(pk=id)
-        supplierl.append(supplier)
-
-
-    for i in supplierl :
-        id = i.id
-        iteml= []
-        for e in items :
-            if e.show_supplier_id() == id:
-                iteml.append(e)
-
-        px = 0
-        for u in iteml :
-            px += u.price
-        supplier = Supplier_m.objects.get(pk=id)
-        user = supplier.user
-        orderr = ", ".join([f"{item.sh_name()} x {item.quantity} ({item.price}€)" for item in iteml])
-        message = f"""
-        passé le {date_ordered} 
-                
-        Adresse du client {address_info} 
-        
-        prix facturé au client : {px}
-        Pourcentage pris par Antly : {settings.PERCENT_ANTLY} %
-        Votre gain (les frais de port restent à votre charge) : {percentage(px)}
-        
-        Contenu de la commande :
-        {orderr}
-
-        contact : 
-        {contact}
-        
-        
-        Rappel :
-        
-        Vous devez envoyer le colis via La Poste. Ensuite, rendez-vous sur votre interface fournisseur à l'adresse "https://www.antly.fr/admin/" pour créer un "OrderTrack_m" et y renseigner votre numéro de suivi.
-        
-        Pour me contacter :
-        06 51 33 61 58
-        """
-        user.email_user(f"Antly - Nouvelle commande passée le {order.date_ordered}", message)
-
+    order = Order_m.objects.get(id=id)
 
     context = {
         'order': order,
@@ -774,115 +679,141 @@ def webhook_vi(request):
         # Invalid signature
         return HttpResponse(status=400)
 
-    # Handle the event if it's a successful payment intent
-    if event.type == "payment_intent.succeeded":
-        payment_intent = event.data.object
-        order_id = payment_intent.metadata["order_id"]
-
-        # Get the order and user profile associated with the payment intent
-        order_to_purchase = Order_m.objects.get(id=order_id)
-        profile_id = payment_intent.metadata['profile_id']
-        user_profile = Profile.objects.get(id=profile_id)
-
-        # Update the placed order
-        order_to_purchase.is_ordered = True
-        order_to_purchase.date_ordered = timezone.now().date()
-        order_to_purchase.save()
-
-        # Get all items in the order (generates a queryset)
-        order_items = order_to_purchase.items.all()
-
-        # Update order items
-        order_items.update(is_ordered=True)
-
-        # Reduce stock for each item in the order
-        for item in order_items:
-            item.reduce_stock()
-
-        # Create a transaction
-        transaction = Transaction(shopper=user_profile,
-                                  order=order_to_purchase,
-                                  success=True)
-
-        # Save the transaction
-        transaction.save()
-    
-    else :
-        pass 
-
     return HttpResponse(status=200)
 
 
 
 
-# paypal 
-def create_paypal_payment(request):
-    # Récupérez les détails de la commande de l'utilisateur
-    order = get_user_pending_order(request)
+def order_ordered_vi(request, id):
 
-    # Créez la transaction PayPal
-    payment = create_paypal_transaction(order)
+    """all operation to do after after sucess"""
 
-    # Si la création de la transaction a échoué, handle the failure
-    if payment is None:
-        # Handle failure here. Maybe redirect to an error page, or log the error.
-        return
+    order = Order_m.objects.get(id=id)
+    if order.is_ordered :
 
-    # Récupérez l'URL de redirection de PayPal
-    paypal_url = next(link.href for link in payment.links if link.rel == 'approval_url')
+        # Get the user's last order
+        order = Order_m.objects.filter(owner=request.user).order_by('-date_ordered').first()
+        address = order.address
+        orderEmail(request, request.user, request.user.email, order)
 
-    # Renvoyez l'URL à votre front-end
-    return redirect(paypal_url)
+        # Check if the order exists
+        if not order:
+            messages.error(request, "No order found.")
+            return redirect('checkout_n')
+
+        # Set up the credentials
+        credentials = service_account.Credentials.from_service_account_file(
+            settings.BASE_DIR / "google_json/credentials.json",
+            scopes=['https://www.googleapis.com/auth/spreadsheets']
+        )
+
+        # Create a client object to interact with the API
+        sheets = build('sheets', 'v4', credentials=credentials)
+
+        # Your Google Sheets spreadsheet ID
+        spreadsheet_id = '19amsgc6XnQI-zJ1tZU_ZyIilywxTi6xwupygYH2SZGU'
+
+        # The tab name where you want to add the order information
+        sheet_name = 'order'
+
+        # The order information you want to add
+        date_ordered = order.date_ordered.strftime('%Y-%m-%d %H:%M:%S')
+        customer_name = f"{address.complete_name}"
+        items = order.get_cart_items()
+        order_contents = ", ".join([f"{item.sh_name()} de {item.sh_supplier()} x {item.quantity} ({item.price}€)" for item in items])
+        address = order.address
+        address_info = f"{address.complete_name}, {address.adress}, {address.detail}, {address.postal_code} {address.city}, {address.country}"
+        contact = f"{address.phone_number} | {request.user.email}"
+        to = sum(i.price for i in order.get_cart_items())
+        total = f"{to}"
+        total_ship = f"{to + order.shipping_costs()}"
+        order_data = [date_ordered, customer_name, order_contents, address_info, contact, total, total_ship]
+
+        # Add the order information to the spreadsheet
+        requeste = sheets.spreadsheets().values().append(
+            spreadsheetId=spreadsheet_id,
+            range=f'{sheet_name}!A1',
+            valueInputOption='RAW',
+            insertDataOption='INSERT_ROWS',
+            body={'values': [order_data]}
+        )
+
+        response = requeste.execute()
+
+        # send mail to supplier
+        def percentage(value):
+            percentage_value = Decimal(100 - settings.PERCENT_ANTLY) / 100
+            return value * percentage_value
+
+        supplierl = []
+        for y in order.get_cart_items() :
+            id = y.show_supplier_id()
+            supplier = Supplier_m.objects.get(pk=id)
+            supplierl.append(supplier)
 
 
-def process_paypal_payment(request):
-    # Récupérez les informations de paiement de la requête
-    payment_id = request.GET.get('paymentId')
-    payer_id = request.GET.get('PayerID')
+        for i in supplierl :
+            id = i.id
+            iteml= []
+            for e in items :
+                if e.show_supplier_id() == id:
+                    iteml.append(e)
 
-    # Exécutez la transaction PayPal
-    payment = execute_paypal_transaction(payment_id, payer_id)
+            px = 0
+            for u in iteml :
+                px += u.price
+            supplier = Supplier_m.objects.get(pk=id)
+            user = supplier.user
+            orderr = ", ".join([f"{item.sh_name()} x {item.quantity} ({item.price}€)" for item in iteml])
+            message = f"""
+            passé le {date_ordered} 
+                    
+            Adresse du client {address_info} 
+            
+            prix facturé au client : {px}
+            Pourcentage pris par Antly : {settings.PERCENT_ANTLY} %
+            Votre gain (les frais de port restent à votre charge) : {percentage(px)}
+            
+            Contenu de la commande :
+            {orderr}
 
-    # Vérifiez que le paiement a été effectué avec succès
-    if payment.state == 'approved':
-        # Effectuez des actions supplémentaires, comme l'envoi d'e-mails
-        # Get the order and user profile associated with the payment intent
-        order_to_purchase = get_user_pending_order(request)
-        user_profile = request.user
-
-        # Update the placed order
-        order_to_purchase.is_ordered = True
-        order_to_purchase.date_ordered = timezone.now().date()
-        order_to_purchase.save()
-
-        # Get all items in the order (generates a queryset)
-        order_items = order_to_purchase.items.all()
-
-        # Update order items
-        order_items.update(is_ordered=True)
-
-        # Reduce stock for each item in the order
-        for item in order_items:
-            for size in item.size.all():
-                size.stock -= item.quantity
-                size.save()
-
-        # Create a transaction
-        transaction = Transaction(shopper=user_profile,
-                                  order=order_to_purchase,
-                                  success=True)
-
-        # Save the transaction
-        transaction.save()
-
-        # Redirigez l'utilisateur vers une page de succès
-        return redirect('success_n')
-    else:
-        # Redirigez l'utilisateur vers la page de paiement s'il y a eu un problème
-        messages.error("la transaction a échoué")
-        return redirect('checkout_n')
+            contact : 
+            {contact}
+            
+            
+            Rappel :
+            
+            Vous devez envoyer le colis via La Poste. Ensuite, rendez-vous sur votre interface fournisseur à l'adresse "https://www.antly.fr/admin/" pour créer un "OrderTrack_m" et y renseigner votre numéro de suivi.
+            
+            Pour me contacter :
+            06 51 33 61 58
+            """
+            user.email_user(f"Antly - Nouvelle commande passée le {order.date_ordered}", message)
 
 
+
+                # Update the placed order
+            order.is_ordered = True
+            order.date_ordered = timezone.now().date()
+            order.save()
+
+            # Get all items in the order (generates a queryset)
+            order_items = order.items.all()
+
+            # Update order items
+            order_items.update(is_ordered=True)
+
+            # Reduce stock for each item in the order
+            for item in order_items:
+                item.reduce_stock()
+
+            # Create a transaction
+            transaction = Transaction(shopper=request.user,
+                                    order=order,
+                                    success=True)
+
+            # Save the transaction
+            transaction.save()
 
 
 @login_required
