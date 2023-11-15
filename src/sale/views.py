@@ -692,7 +692,6 @@ def order_ordered_vi(request, id):
     if order.is_ordered :
 
         # Get the user's last order
-        order = Order_m.objects.filter(owner=request.user).order_by('-date_ordered').first()
         address = order.address
         orderEmail(request, request.user, request.user.email, order)
 
