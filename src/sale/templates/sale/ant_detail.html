@@ -8,7 +8,8 @@
     "@type": "Product", 
     "name": "{{ant.name}}",
     "image": "{{ant.thumbnail.url}}",
-    "description": "{{ ant.description|format_description|safe }}"
+    "description": "{{ ant.description|format_description|safe }}",
+    "price": "{{ other.sh_price }}",
   }
   </script>
 {% endblock %}
