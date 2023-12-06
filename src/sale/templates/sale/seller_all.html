@@ -23,7 +23,7 @@
   
   <section class="section" id="testmonial">
     <div class="container">
-        <div class="row">
+        <div class="row mb-3">
             {% for s in suppliers %}
                 <div class="col-md-6 my-3 my-md-0">
                     <a href="{% url 'seller_n' s.id %}">
@@ -42,8 +42,6 @@
                     </a>
                 </div>
             {% endfor %}
-
-            
         </div>
     </div>
 </section>
