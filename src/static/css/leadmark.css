@@ -12322,17 +12322,15 @@ top: 110px
 
 
 .circle-image {
-  width: 15rem;        /* Largeur fixe */
-  height: 15rem;       /* Hauteur fixe */
+  width: 100px;        /* Largeur fixe du cercle */
+  height: 100px;       /* Hauteur fixe du cercle */
   border-radius: 50%;  /* Rend le div circulaire */
   overflow: hidden;    /* Cache les parties de l'image qui débordent */
   display: flex;       /* Utilisé pour centrer l'image dans le div */
   justify-content: center; /* Centre horizontalement l'image */
-  align-items: center; /* Centre verticalement l'image */
 }
 
 .circle-image img {
-  flex-shrink: 0; /* Empêche l'image de se réduire */
-  min-width: 100%; /* S'assure que l'image couvre toute la largeur */
-  min-height: 100%; /* S'assure que l'image couvre toute la hauteur */
+  height: 100%;      /* Hauteur de l'image égale à celle du cercle */
+  width: auto;       /* Largeur automatique pour éviter la déformation */
 }
