@@ -32,8 +32,8 @@ def homepage_vi(request):
     if len(comment) >= 3:
         comment = random_three_elements(list(comment))
     product = list(ant) + list(pack) + list(other)
-    if len(product) > 20:
-        product = product[:20]
+    if len(product) > 18:
+        product = product[:18]
     # offer
     offers = None
     if not request.session.get('offer_shown', False):
