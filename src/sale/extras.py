@@ -109,8 +109,3 @@ def get_products_for_supplier(supplier_id):
     product = list(ants) + list(packs) + list(others)
 
     return product
-
-
-    ant = Ant_m.objects.filter(sizes__stock__gt=0, supplier__currently_available = True).distinct()
-    pack = Pack_m.objects.filter(size__stock__gt=0, size__supplier__currently_available = True).distinct()
-    other = Other_m.objects.filter(stock__gt=0, supplier__currently_available = True).distinct()
