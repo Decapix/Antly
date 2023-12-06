@@ -10,6 +10,7 @@ from django.template import loader
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET
 from .breadcrumbs import *
+from django.conf import settings
 
 
 def random_three_elements(input_list):
@@ -38,6 +39,8 @@ def homepage_vi(request):
         offers = Offer_m.objects.filter(active=True)
         request.session['offer_shown'] = True
         request.session.modified = True
+    if settings.WINTER :
+        messages.success(request, "Attention, nous sommes en hiver : les décès dus au froid pendant la livraison ne sont plus remboursés. La livraison est effectuée avec une chaufferette.")
     return render(request, 'super/homepage.html', context={"product": product, "meta": metat, "comment": comment, "offers": offers, "bread": bread})
 
 

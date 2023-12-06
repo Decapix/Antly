@@ -500,7 +500,7 @@ def checkout_vi(request):
         'invoice': uuid.uuid4(),
         'currency_code': 'EUR',
         'notify_url': f"http://{host}{reverse('paypal-ipn')}",
-        'return_url': f"http://{host}{f'/produit/commande/success/{existing_order.id}'}",
+        'return_url': f"http://{host}{'/produit/commande/success/'}{existing_order.id}",
         'cancel_url': f"http://{host}{'/produit/commande/checkout/'}",
     }
 
@@ -528,6 +528,9 @@ def checkout_vi(request):
             return JsonResponse(address_json)
         else:
             messages.error(request, "Le formulaire d'adresse est invalide.")
+
+    if settings.WINTER :
+        messages.success(request, "Attention, nous sommes en hiver : les décès dus au froid pendant la livraison ne sont plus remboursés. La livraison est effectuée avec une chaufferette.")
 
     context = {
         'order': existing_order,
@@ -813,6 +816,14 @@ def order_ordered_vi(request, id):
             # Save the transaction
             transaction.save()
 
+
+
+
+# seller page 
+
+def seller_vi(request, id):
+    
+    pass
 
 @login_required
 def generate_invoice_pdf(request, order_id):

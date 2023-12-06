@@ -10,6 +10,7 @@
     "image": "{{ant.thumbnail.url}}",
     "description": "{{ ant.description|format_description|safe }}",
     "price": "{{ other.sh_price }}",
+    "variation": "{{ ant.get_sizes_wiq }}"
   }
   </script>
 {% endblock %}
