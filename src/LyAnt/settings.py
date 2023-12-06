@@ -232,7 +232,6 @@ PERCENT_ANTLY = 15
 
 # storage
 
-
 # Configuration pour utiliser SSL/TLS avec Heroku et Cloudflare (https)
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

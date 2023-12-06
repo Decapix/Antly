@@ -9,6 +9,7 @@ from django.core.mail import EmailMessage
 from django.conf import settings
 from django.utils import timezone
 from datetime import timedelta
+from .models import Supplier_m, Ant_m, Other_m, Pack_m
 
 
 
@@ -91,3 +92,20 @@ def offer_other_func(other_product, l1, l2, l3):
 
 
 
+def get_products_for_supplier(supplier_id):
+    # Récupérer l'instance du fournisseur
+    supplier = Supplier_m.objects.get(id=supplier_id)
+
+    # Récupérer les produits 'ant' associés
+    ants = Ant_m.objects.filter(supplier=supplier)
+
+    # Récupérer les produits 'other' associés
+    others = Other_m.objects.filter(supplier=supplier)
+
+    # Récupérer les produits 'pack' associés
+    # Pour éviter l'importation circulaire, utilisez l'identifiant du fournisseur directement
+    packs = Pack_m.objects.filter(size__supplier=supplier)
+
+    product = list(ants) + list(packs) + list(others)
+
+    return product

@@ -13,6 +13,7 @@ from .breadcrumbs import *
 from django.conf import settings
 
 
+
 def random_three_elements(input_list):
     if len(input_list) < 3:
         raise ValueError("La liste doit contenir au moins trois éléments.")

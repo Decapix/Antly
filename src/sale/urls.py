@@ -20,7 +20,8 @@ urlpatterns = [
     path('facture/<str:order_id>/', generate_invoice_pdf, name='facture_pdf'),
     # path('commande/create-paypal-payment/', create_paypal_payment, name="create-paypal-payment"),
     # path('commande/process-paypal-payment/',process_paypal_payment, name="process-paypal-payment"),
-    path("seller/<str:id>", seller_vi, name="seller_n"),
+    path('seller/<str:id>/', seller_vi, name="seller_n"),
+    path('seller/', seller_all_vi, name="seller_all_n"),
 
     ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

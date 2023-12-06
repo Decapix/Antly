@@ -88,7 +88,10 @@
 
        <div class="col-md-6 pl-md-5">
           <h1 class="display-5 fw-bolder mb-4">{{ ant.name }}</h1>
-          <p class="text-muted">Vendeur : {{ ant.sh_supplier }}</p>
+          <a class="" href="{% url 'seller_n' ant.show_supplier_id %}">
+            <p class="text-muted">Vendeur : {{ ant.sh_supplier }}</p>
+          </a>
+
           <hr />
           <div class="row mt-3">
             <div class="col-md-4">
@@ -174,30 +177,10 @@
 
       <div id="offer_ant">
         <div class="row">
-          {% for ant in offer_ant %}
-          <div class="col-md-4">
-            <div class="card border-0 mb-4">
-              <a href="{{ ant.get_absolute_url }}">
-                <img
-                  src="{{ ant.thumbnail_url }}"
-                  alt=""
-                  class="card-img-top w-100 limite-height"
-                />
-                <div class="card-body">
-                  <h6 class="card-title">{{ ant.sh_name }}</h6>
-                  <div class="row">
-                      <div class="col-md-6">
-                          <p>{{ ant.sh_price }} €</p>
-                      </div>
-                      <div class="col-md-6">
-                          <p class="text-muted">Vendeur : {{ ant.sh_supplier }}</p>
-                      </div>
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
-          {% endfor %}
+
+          {% for varproduct in offer_ant %}   
+            {% include '_product_card.html' %}
+        {% endfor %}
         </div>
       </div>
     </div>

@@ -528,7 +528,7 @@ def checkout_vi(request):
             return JsonResponse(address_json)
         else:
             messages.error(request, "Le formulaire d'adresse est invalide.")
-
+            
     if settings.WINTER :
         messages.success(request, "Attention, nous sommes en hiver : les décès dus au froid pendant la livraison ne sont plus remboursés. La livraison est effectuée avec une chaufferette.")
 
@@ -818,12 +818,32 @@ def order_ordered_vi(request, id):
 
 
 
-
-# seller page 
-
 def seller_vi(request, id):
+    pageSellerDetails = Page("Vendeur détaille", '/seller/', 2, id)
+    bread = [pageVendeur, pageSellerDetails]
+    products = get_products_for_supplier(id)
+    supplier = Supplier_m.objects.get(id=id)
     
-    pass
+    context = {
+        'product': products,
+        'seller': supplier,
+        'bread': bread
+    }
+    return render(request, 'sale/seller.html', context)
+
+
+def seller_all_vi(request):
+    bread = [pageVendeur]
+    available_suppliers = Supplier_m.objects.filter(currently_available=True)
+
+
+    context = {
+        'suppliers': available_suppliers,
+        'bread': bread
+    }
+    return render(request, 'sale/seller_all.html', context)
+
+
 
 @login_required
 def generate_invoice_pdf(request, order_id):

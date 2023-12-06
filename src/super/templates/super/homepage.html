@@ -84,7 +84,7 @@
 <section class="section" id="about">
     <div class="container">
         <div class="row">
-            {% for p in product %}
+            <!-- {% for p in product %}
             <div class="col-md-4">
                 <div class="card border-0 mb-4">
                     <a class= "exemple" href="{{ p.get_absolute_url }}">
@@ -96,13 +96,17 @@
                                 <p>{{ p.sh_price }} €</p>
                             </div>
                             <div class="col-md-6">
-                                <p class="text-muted">Vendeur : {{ p.sh_supplier }}</p>
+                                <a href="{% url 'seller_n' p.show_supplier_id%}"><p class="text-muted">Vendeur : {{ p.sh_supplier }}</p></a>
                             </div>
                         </div>
                     </div>
                     </a>
                 </div>
             </div>
+            {% endfor %} -->
+
+            {% for varproduct in product %}   
+                {% include '_product_card.html' %}
             {% endfor %}
         </div>
         </div>

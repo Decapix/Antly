@@ -1,0 +1,67 @@
+{% extends "index.html" %}{% load custom_filters %} {% load static %} 
+
+
+{% block content %}
+
+<section class="section mt-10 if_hidden" id="about">
+    <div class="container">
+  
+        <div class="row justify-content-between">
+          <div class="col-md-6 pr-md-5 mb-4 mb-md-0">
+              <h6 class="section-title mb-0">Les vendeurs</h6>
+              <h6 class="section-subtitle mb-4">Les vendeurs d'Antly</h6>
+  
+              <p>Antly réunit des vendeurs experts en myrmécologie, offrant une gamme de fourmis, d'accessoires et de packs pour tous les niveaux. Nos vendeurs, sélectionnés pour leur savoir-faire et la qualité de leurs produits, s'engagent pour le bien-être des fourmis. Antly est la destination idéale pour une expérience d'achat fiable et spécialisée dans l'univers captivant des fourmis.</p>
+            </div>
+          <div class="col-md-6 pl-md-5">
+              <img src="{% static 'sale/imgs/about-seller.webp' %}" alt="egor-kamelev" class="w-100 shadow-sm">
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="section" id="testmonial">
+    <div class="container">
+        <div class="row">
+            {% for s in suppliers %}
+                <div class="col-md-6 my-3 my-md-0">
+                    <a href="{% url 'seller_n' s.id %}">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="media align-items-center mb-3">
+                                    <img class="mr-3 rounded" src="{{ s.thumbnail_url }}" alt="">
+                                    <div class="media-body">
+                                        <h6 class="mt-1 mb-0">{{ s.name }}</h6>
+                                        <small class="text-muted mb-0">{{ s.country }}</small>     
+                                    </div>
+                                </div>
+                                <p class="mb-0 comment-text">{{ s.description }}</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+
+            
+        </div>
+    </div>
+</section>
+
+
+
+{% endblock content %}
+
+
+{% block script %}
+<script>
+
+    document.querySelectorAll('.comment-text').forEach(element => {
+        const fullText = element.innerHTML;
+
+        if (fullText.length > 100) {
+            element.innerHTML = fullText.substring(0, 100) + '...';
+        }
+    });
+</script>
+{% endblock %}

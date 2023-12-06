@@ -283,6 +283,9 @@ class Pack_m(models.Model):
     def sh_supplier(self):
         return self.size.supplier.name
 
+    def show_supplier_id(self):
+        return self.size.supplier.id
+
 
 
 

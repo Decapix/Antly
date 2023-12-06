@@ -70,14 +70,16 @@
   </head>
   <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
 
-  
-    <!-- page Navigation -->
 
+    <!-- page Navigation -->
     <nav
       class="navbar custom-navbar navbar-expand-md navbar-light fixed-top"
       data-spy="affix"
       data-offset-top="10"
     >
+    <!-- si on est en hivers // if we are in winter -->
+    <!--  -->
+
       <div class="container">
         <a class="navbar-brand" href="{% url 'homepage_n' %}">
           <img src="{% static 'imgs/logo.png' %}" alt="Antly - logo" />
@@ -110,6 +112,13 @@
                 >Accessoires</a
               >
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'seller_all_n' %}"
+                >Les vendeurs</a
+              >
+            </li>
+
+            
 
             {% if user.is_authenticated %}
             <li class="nav-item">

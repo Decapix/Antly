@@ -1,0 +1,15 @@
+<!-- _product_card.html -->
+<div class="col-md-4">
+    <div class="card border-0 mb-4">
+        <a class="exemple" href="{{ varproduct.get_absolute_url }}">
+            <img src="{{ varproduct.thumbnail_url }}" alt="" class="card-img-top w-100 limite-height">
+            <div class="card-body">
+                <h6 class="card-title">{{ varproduct.sh_name }}</h6>
+                    <p>{{ varproduct.sh_price }} €</p>
+                    <a class="" href="{% url 'seller_n' varproduct.show_supplier_id %}">
+                         <p class="text-muted">Vendeur : {{ varproduct.sh_supplier }}</p>
+                    </a>
+            </div>
+        </a>
+    </div>
+</div>

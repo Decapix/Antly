@@ -1,4 +1,33 @@
-<div>
+{% extends "index.html" %}{% load custom_filters %} {% load static %} 
+{% block content %}
 
-    
-</div>
+<section class="section mt-10 " id="about">
+    <div class="container">
+  
+        <div class="row justify-content-between">
+          <div class="col-md-4 pl-md-5">
+                <img src="{{seller.thumbnail_url}}" alt="egor-kamelev" class="w-100 rounded-pill shadow-sm">
+          </div>
+
+          <div class="col-md-8 pr-md-5 mb-4 mb-md-0">
+              <h6 class="section-title mb-0">{{seller.name}}</h6>
+              <h6 class="section-subtitle mb-4">{{seller.country}}</h6>
+  
+              <p>{{ seller.description|format_description|safe }}</p>
+          </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section" id="about">
+    <div class="container">
+        <div class="row">
+            {% for varproduct in product %}   
+                {% include '_product_card.html' %}
+            {% endfor %}
+        </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
