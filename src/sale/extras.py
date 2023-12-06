@@ -97,15 +97,16 @@ def get_products_for_supplier(supplier_id):
     supplier = Supplier_m.objects.get(id=supplier_id)
 
     # Récupérer les produits 'ant' associés
-    ants = Ant_m.objects.filter(supplier=supplier)
+    ants = Ant_m.objects.filter(supplier=supplier, sizes__stock__gt=0, supplier__currently_available = True).distinct()
 
     # Récupérer les produits 'other' associés
-    others = Other_m.objects.filter(supplier=supplier)
+    others = Other_m.objects.filter(supplier=supplier, size__stock__gt=0, size__supplier__currently_available = True).distinct()
 
     # Récupérer les produits 'pack' associés
     # Pour éviter l'importation circulaire, utilisez l'identifiant du fournisseur directement
-    packs = Pack_m.objects.filter(size__supplier=supplier)
+    packs = Pack_m.objects.filter(size__supplier=supplier,  size__supplier__currently_available = True).distinct()
 
     product = list(ants) + list(packs) + list(others)
 
     return product
+
