@@ -12322,8 +12322,8 @@ top: 110px
 
 
 .circle-image {
-  width: 100px;        /* Largeur fixe du cercle */
-  height: 100px;       /* Hauteur fixe du cercle */
+  width: 15rem;        /* Largeur fixe du cercle */
+  height: 15rem;       /* Hauteur fixe du cercle */
   border-radius: 50%;  /* Rend le div circulaire */
   overflow: hidden;    /* Cache les parties de l'image qui débordent */
   display: flex;       /* Utilisé pour centrer l'image dans le div */
