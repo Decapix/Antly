@@ -2,6 +2,14 @@ from django.contrib import admin
 from .models import Supplier_m
 
 class SupplierAdmin(admin.ModelAdmin):
+    def get_form(self, request, obj=None, **kwargs):
+        if not request.user.is_superuser:
+            # Restreindre les champs pour les utilisateurs non-superutilisateurs
+            self.exclude = ['user']
+        else:
+            # Les superutilisateurs ont accès à tous les champs
+            self.exclude = []
+        return super(SupplierAdmin, self).get_form(request, obj, **kwargs)
     def get_queryset(self, request):
         qs = super(SupplierAdmin, self).get_queryset(request)
         if request.user.is_superuser:

@@ -98,7 +98,7 @@ class Supplier_m(models.Model):
     currently_available = models.BooleanField(default=True)
     thumbnail = models.ImageField(upload_to="products", null=True, blank=True)
     description = models.TextField(max_length=3000,  null=True, blank=True)
-    country = models.CharField(max_length=25, choices=COUNTRY_CHOICES, default="1")
+    country = models.CharField(max_length=25, choices=COUNTRY_CHOICES, default="France")
 
     def __str__(self):
         return '{0} - {1}'.format(self.name, self.id)
