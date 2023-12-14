@@ -69,6 +69,7 @@ SITE_ID = 1
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',  # translation
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -112,6 +113,31 @@ DATABASES = {
     }
 }
 
+if not DEBUG :
+    #heroku
+    DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'antly-projectdata-base',
+        'USER': 'antly-projectuser',
+        'PASSWORD': ":)Solenops1s<$o",
+        'HOST': '35.205.253.192',
+        'PORT': '5432',
+    }
+    }
+    
+else:
+    #local
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'antlydatabase3',
+            'USER': 'postgres',
+            'PASSWORD': ':)solenopsIs<$o',
+            'HOST': 'localhost',
+            'PORT': '5432',
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -135,13 +161,27 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'fr-fr'
+
+LANGUAGE_CODE = 'fr'
 
 TIME_ZONE = 'Europe/Paris'
 
 USE_I18N = True
 
 USE_TZ = True
+
+USE_L10N = True
+
+LANGUAGES = [
+    ('fr', 'French'),
+    ('de', 'German'),
+    ('es', 'Spanish'),
+    ('en', 'English'),
+]
+
+LOCALE_PATHS = (
+    BASE_DIR / 'locale', 
+)
 
 
 # Static files (CSS, JavaScript, Images)
