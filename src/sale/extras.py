@@ -10,7 +10,8 @@ from django.conf import settings
 from django.utils import timezone
 from datetime import timedelta
 from .models import Supplier_m, Ant_m, Other_m, Pack_m
-
+import requests
+import json
 
 
 
@@ -97,15 +98,112 @@ def get_products_for_supplier(supplier_id):
     supplier = Supplier_m.objects.get(id=supplier_id)
 
     # Récupérer les produits 'ant' associés
-    ants = Ant_m.objects.filter(supplier=supplier, sizes__stock__gt=0, supplier__currently_available = True).distinct()
+    ants = Ant_m.objects.filter(supplier=supplier)
 
     # Récupérer les produits 'other' associés
-    others = Other_m.objects.filter(supplier=supplier, stock__gt=0, supplier__currently_available = True).distinct()
+    others = Other_m.objects.filter(supplier=supplier)
 
     # Récupérer les produits 'pack' associés
     # Pour éviter l'importation circulaire, utilisez l'identifiant du fournisseur directement
-    packs = Pack_m.objects.filter(size__supplier=supplier,  size__supplier__currently_available = True).distinct()
+    packs = Pack_m.objects.filter(size__supplier=supplier)
 
     product = list(ants) + list(packs) + list(others)
 
     return product
+
+
+
+def calculer_frais_envoi(adresse_acheteur, adresse_vendeur, poids, dimensions):
+    url = "https://onlinetools.ups.com/ship/v1/rating/Rate"
+    headers = {
+        "Content-Type": "application/json",
+        "Username": "VOTRE_NOM_UTILISATEUR_UPS",
+        "Password": "VOTRE_MOT_DE_PASSE_UPS",
+        "AccessLicenseNumber": "VOTRE_CLE_ACCESS_UPS"
+    }
+
+    # Construire la requête en suivant la structure attendue par l'API UPS
+    # Notez que cette structure doit être adaptée en fonction de vos besoins spécifiques et des données disponibles
+    body = {
+        "RateRequest": {
+            "Shipment": {
+                "Shipper": {
+                    "Address": {
+                        "PostalCode": adresse_vendeur['code_postal'],
+                        "CountryCode": adresse_vendeur['pays']
+                    }
+                },
+                "ShipTo": {
+                    "Address": {
+                        "PostalCode": adresse_acheteur['code_postal'],
+                        "CountryCode": adresse_acheteur['pays']
+                    }
+                },
+                "ShipFrom": {
+                    "Address": {
+                        "PostalCode": adresse_vendeur['code_postal'],
+                        "CountryCode": adresse_vendeur['pays']
+                    }
+                },
+                "Package": {
+                    "PackagingType": {
+                        "Code": "02"
+                    },
+                    "Dimensions": dimensions,
+                    "PackageWeight": {
+                        "UnitOfMeasurement": {
+                            "Code": "KGS"
+                        },
+                        "Weight": poids
+                    }
+                }
+            }
+        }
+    }
+
+    response = requests.post(url, json=body, headers=headers)
+    if response.status_code == 200:
+        return response.json()
+    else:
+        return None
+
+
+
+def easypostcalcul ():
+
+    client = easypost.EasyPostClient(settings.EASYPOST_API_TEST)
+    print("clienttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt", client)
+
+    shipment_details = {
+    "to_address": {
+        "name": "Dr. Steve Brule",
+        "street1": "179 N Harbor Dr",
+        "city": "Redondo Beach",
+        "state": "CA",
+        "zip": "90277",
+        "country": "US",
+        "phone": "4153334444",
+        "email": "dr_steve_brule@gmail.com",
+    },
+    "from_address": {
+        "name": "EasyPost",
+        "street1": "417 Montgomery Street",
+        "street2": "5th Floor",
+        "city": "San Francisco",
+        "state": "CA",
+        "zip": "94104",
+        "country": "US",
+        "phone": "4153334444",
+        "email": "support@easypost.com",
+    },
+    "parcel": {
+        "length": 20.2,
+        "width": 10.9,
+        "height": 5,
+        "weight": 65.9,
+    },
+    }
+
+    rates = client.beta_rate.retrieve_stateless_rates(**shipment_details)
+
+    print("rates", rates)

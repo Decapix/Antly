@@ -1,55 +1,55 @@
-{% extends "index.html" %} {% load custom_filters_super %} {% block content %}
+{% extends "index.html" %}{% load i18n %} {% load custom_filters_super %} {% block content %}
 {%include "space.html" %}
 
 <section class="section" id="about">
   <div class="container">
     <div class="row justify-content-between">
-      <div class="col-md-4 pr-md-5 mb-4 mb-md-0">
-        <h6 class="section-title mb-0">Information</h6>
+      <div class="col-md-4 pr-md-5 mb-4 mb-md-0" >
+        <h6 class="section-title mb-0">{% blocktrans %}Information{% endblocktrans %}</h6>
         <h6 class="section-subtitle mb-4">
-          Toutes les informations de la boutique
+          {% blocktrans %}Toutes les informations de la boutique{% endblocktrans %}
         </h6>
 
         <ul class="">
-          <li>
-            <a class="" href="{% url 'information_n'%}#send">Livraison</a>
+          <li >
+            <a class="" href="{% url 'information_n'%}#send">{% blocktrans %}Livraison{% endblocktrans %}</a>
           </li>
           <li>
             <a class="" href="{% url 'information_n' %}#paymentmethod"
-              >Modes de paiement</a
+              >{% blocktrans %}Modes de paiement{% endblocktrans %}</a
             >
           </li>
           <li>
             <a class="" href="{% url 'information_n' %}#termsofuse"
-              >Conditions d'utilisation</a
+              >{% blocktrans %}Conditions d'utilisation{% endblocktrans %}</a
             >
           </li>
           <li>
             <a class="" href="{% url 'information_n' %}#privacy"
-              >Confidentialité</a
+              >{% blocktrans %}Confidentialité{% endblocktrans %}</a
             >
           </li>
           <li>
-            <a class="" href="{% url 'information_n' %}#cookies">Cookies</a>
+            <a class="" href="{% url 'information_n' %}#cookies">{% blocktrans %}Cookies{% endblocktrans %}</a>
           </li>
           <li>
             <a class="" href="{% url 'information_n' %}#privacy"
-              >Mention légale</a
+              >{% blocktrans %}Mention légale{% endblocktrans %}</a
             >
           </li>
           <li>
             <a class="" href="{% url 'information_n' %}#shipping"
-              >Expédition et retours</a
+              >{% blocktrans %}Expédition et retours{% endblocktrans %}</a
             >
           </li>
           <li>
-            <a class="" href="{% url 'information_n' %}#who">Qui sommes nous</a>
+            <a class="" href="{% url 'information_n' %}#who">{% blocktrans %}Qui sommes nous{% endblocktrans %}</a>
           </li>
           <li>
-            <a class="" href="{% url 'information_n' %}#offers">Nos offres</a>
+            <a class="" href="{% url 'information_n' %}#offers">{% blocktrans %}Nos offres{% endblocktrans %}</a>
           </li>
           <li>
-            <a class="" href="{% url 'information_n' %}#contact">Contact</a>
+            <a class="" href="{% url 'information_n' %}#contact">{% blocktrans %}Contact{% endblocktrans %}</a>
           </li>
         </ul>
 
@@ -62,33 +62,33 @@
             <a name="send"></a>
             {% include "space.html" %}
             <div class="">
-              <h5>La livraison</h5>
+              <h5>{% blocktrans %}La livraison{% endblocktrans %}</h5>
               <p class="mb-2">
-                Nous sommes heureux de vous informer que tous les articles
+                {% blocktrans %}Nous sommes heureux de vous informer que tous les articles
                 commandés sur notre boutique seront envoyés avec soin et
                 rapidité. Pour assurer une livraison sûre et rapide, nous
-                proposons deux options d'envoi : UPS ou La Poste.
+                proposons deux options d'envoi : UPS ou La Poste.{% endblocktrans %}
               </p>
               <p class="mb-2">
-                Selon votre préférence, vous pouvez choisir l'option qui vous
+                {% blocktrans %}Selon votre préférence, vous pouvez choisir l'option qui vous
                 convient le mieux lors de votre commande. Si vous habitez dans
                 une zone où il fait froid, nous vous proposons également
                 l'option de l'envoi avec une chaufferette pour protéger vos
-                fourmis durant le voyage.
+                fourmis durant le voyage.{% endblocktrans %}
               </p>
               <p>
-                Nous espérons que ces informations vous seront utiles et nous
+                {% blocktrans %}Nous espérons que ces informations vous seront utiles et nous
                 sommes impatients de vous envoyer votre commande dès que
                 possible. Si vous avez des questions supplémentaires, n'hésitez
-                pas à nous contacter. Nous sommes là pour vous aider.
+                pas à nous contacter. Nous sommes là pour vous aider.{% endblocktrans %}
               </p>
             </div>
             <a name="paymentmethod"></a>
             {% include "space.html" %}
             <div class="">
-              <h5>Modes de paiement</h5>
+              <h5>{% blocktrans %}Modes de paiement{% endblocktrans %}</h5>
               <p>
-                Notre boutique accepte plusieurs méthodes de paiement afin de
+                {% blocktrans %}Notre boutique accepte plusieurs méthodes de paiement afin de
                 vous offrir un maximum de flexibilité et de convenance. Vous
                 pouvez régler vos achats par carte de crédit ou de débit, par
                 virement bancaire ou encore par portefeuille électronique. Nous
@@ -99,15 +99,15 @@
                 possibilité de régler par virement bancaire pour ceux qui
                 préfèrent cette méthode de paiement. N'hésitez pas à nous
                 contacter si vous avez des questions sur les méthodes de
-                paiement acceptées dans notre boutique.
+                paiement acceptées dans notre boutique.{% endblocktrans %}
               </p>
             </div>
             <a name="termsofuse"></a>
             {% include "space.html" %}
             <div class="">
-              <h5>Conditions d'utilisation</h5>
+              <h5>{% blocktrans %}Conditions d'utilisation{% endblocktrans %}</h5>
               <p>
-                En accédant à notre site et en utilisant nos services, vous
+                {% blocktrans %}En accédant à notre site et en utilisant nos services, vous
                 acceptez les conditions d'utilisation suivantes. Nous nous
                 réservons le droit de modifier ces conditions à tout moment et
                 vous encourageons à les consulter régulièrement. En utilisant
@@ -117,15 +117,15 @@
                 réservons le droit de retirer tout contenu que nous jugeons
                 inapproprié sans préavis. Si vous avez des questions sur les
                 conditions d'utilisation de notre site, n'hésitez pas à nous
-                contacter.
+                contacter.{% endblocktrans %}
               </p>
             </div>
             <a name="privacy"></a>
             {% include "space.html" %}
             <div class="">
-              <h5>Confidentialité</h5>
+              <h5>{% blocktrans %}Confidentialité{% endblocktrans %}</h5>
               <p>
-                Nous sommes conscients de l'importance de la confidentialité
+                {% blocktrans %}Nous sommes conscients de l'importance de la confidentialité
                 pour nos clients et c'est pour cette raison que nous prenons
                 toutes les mesures nécessaires pour protéger vos données
                 personnelles. Nous ne partagerons jamais vos informations avec
@@ -136,77 +136,77 @@
                 offrir un service de qualité. Si vous avez des questions sur la
                 façon dont nous traitons vos données, n'hésitez pas à nous
                 contacter. Nous sommes toujours à votre disposition pour
-                répondre à vos préoccupations en matière de confidentialité.
+                répondre à vos préoccupations en matière de confidentialité.{% endblocktrans %}
               </p>
-              <h6>Cookies</h6>
+              <h6>{% blocktrans %}Cookies{% endblocktrans %}</h6>
               <p>
-                Nous ne récoltons aucune de vos données sans votre accord. Nous
+                {% blocktrans %}Nous ne récoltons aucune de vos données sans votre accord. Nous
                 guarentissons la protection de vos appareils en ne mettant aucun
-                cookie su notre site.
+                cookie su notre site.{% endblocktrans %}
               </p>
             </div>
             <a name="cookies"></a>
             {% include "space.html" %}
             <div class="">
-              <h5>Devenir vendeur</h5>
+              <h5>{% blocktrans %}Devenir vendeur{% endblocktrans %}</h5>
               <p>
-                Rejoignez-nous en tant que vendeur chez Antly et mettez en avant vos colonies,
+                {% blocktrans %}Rejoignez-nous en tant que vendeur chez Antly et mettez en avant vos colonies,
                 vos nids ainsi que toute une gamme de produits associés à la myrmécologie. Pour plus d'informations et
-                pour vous inscrire en tant que vendeur, n'hésitez pas à nous contacter au 06 51 33 61 58.
+                pour vous inscrire en tant que vendeur, n'hésitez pas à nous contacter au 06 51 33 61 58.{% endblocktrans %}
               </p>
             </div>
             <a name="mention"></a>
             {% include "space.html" %}
             <div class="">
-              <h5>Mention légale</h5>
-              <h6>Identité de l'entreprise :</h6>
+              <h5>{% blocktrans %}Mention légale{% endblocktrans %}</h5>
+              <h6>{% blocktrans %}Identité de l'entreprise :{% endblocktrans %}</h6>
               <ul>
-                <li>Nom de l'entreprise : Antly</li>
-                <li>Forme juridique : Micro entreprise</li>
+                <li>{% blocktrans %}Nom de l'entreprise : Antly{% endblocktrans %}</li>
+                <li>{% blocktrans %}Forme juridique : Micro entreprise{% endblocktrans %}</li>
                 <li>
-                  Adresse du siège social : 8 chemin des maraîchers Tresserve
-                  73100 France
+                  {% blocktrans %}Adresse du siège social : 8 chemin des maraîchers Tresserve
+                  73100 France{% endblocktrans %}
                 </li>
-                <li>Numéro de téléphone : 06 51 33 61 58</li>
-                <li>Adresse e-mail : antly.fourmis@gmail.com</li>
-                <li>Numéro d'immatriculation : 914 939 004 00018</li>
+                <li>{% blocktrans %}Numéro de téléphone : 06 51 33 61 58{% endblocktrans %}</li>
+                <li>{% blocktrans %}Adresse e-mail : antly.fourmis@gmail.com{% endblocktrans %}</li>
+                <li>{% blocktrans %}Numéro d'immatriculation : 914 939 004 00018{% endblocktrans %}</li>
               </ul>
 
-              <h6>Responsable de la publication :</h6>
-              <p>Nom et prénom du responsable : Louka Pesic</p>
+              <h6>{% blocktrans %}Responsable de la publication :{% endblocktrans %}</h6>
+              <p>{% blocktrans %}Nom et prénom du responsable : Louka Pesic{% endblocktrans %}</p>
 
-              <h6>Hébergement du site :</h6>
+              <h6>{% blocktrans %}Hébergement du site :{% endblocktrans %}</h6>
               <ul>
-                <li>Nom de l'hébergeur : Google cloud</li>
+                <li>{% blocktrans %}Nom de l'hébergeur : Google cloud{% endblocktrans %}</li>
               </ul>
-              <h6>Propriété intellectuelle :</h6>
+              <h6>{% blocktrans %}Propriété intellectuelle :{% endblocktrans %}</h6>
               <p>
-                Le contenu de ce site internet (textes, images, vidéos, etc.)
+                {% blocktrans %}Le contenu de ce site internet (textes, images, vidéos, etc.)
                 est la propriété exclusive de Antly et est protégé par les lois
                 françaises sur la propriété intellectuelle. Toute reproduction,
                 distribution, modification ou exploitation de ce contenu sans
-                autorisation écrite de Antly est strictement interdite.
+                autorisation écrite de Antly est strictement interdite.{% endblocktrans %}
               </p>
 
-              <h6>TVA :</h6>
-              <p>Numéro de TVA intracommunautaire : FR70914939004</p>
+              <h6>{% blocktrans %}TVA :{% endblocktrans %}</h6>
+              <p>{% blocktrans %}Numéro de TVA intracommunautaire :{% endblocktrans %} FR70914939004</p>
 
-              <h6>SIRET :</h6>
-              <p>Numéro SIRET : 914 939 004</p>
+              <h6>{% blocktrans %}SIRET :{% endblocktrans %}</h6>
+              <p>{% blocktrans %}Numéro SIRET : 914 939 004{% endblocktrans %}</p>
 
-              <h6>Conditions générales de vente :</h6>
+              <h6>{% blocktrans %}Conditions générales de vente :{% endblocktrans %}</h6>
               <p>
-                Les conditions générales de vente de Antly sont consultables sur
-                la page suivante : <a href="{%url 'cgv_n'%}">CGV</a>. En passant commande sur ce site internet,
-                vous acceptez ces conditions générales de vente.
+                {% blocktrans %}Les conditions générales de vente de Antly sont consultables sur
+                la page suivante : {% endblocktrans %}<a href="{%url 'cgv_n'%}">CGV</a>.{% blocktrans %} En passant commande sur ce site internet,
+                vous acceptez ces conditions générales de vente.{% endblocktrans %}
               </p>
             </div>
             <a name="shipping"></a>
             {% include "space.html" %}
             <div class="">
-              <h5>Expédition et retours</h5>
+              <h5>{% blocktrans %}Expédition et retours{% endblocktrans %}</h5>
               <p class="mb-2">
-                Pour les expéditions, nous travaillons avec plusieurs
+                {% blocktrans %}Pour les expéditions, nous travaillons avec plusieurs
                 transporteurs afin de vous offrir le meilleur service possible.
                 Nous mettons un soin particulier à l'emballage de nos produits
                 pour assurer leur sécurité pendant le transport. Cependant, nous
@@ -214,11 +214,11 @@
                 transporteur durant le voyage. Si vous recevez un produit
                 endommagé, veuillez nous le signaler dans les plus brefs délais
                 et nous ferons le nécessaire pour vous rembourser ou vous
-                envoyer un nouveau produit.
+                envoyer un nouveau produit.{% endblocktrans %}
               </p>
 
               <p>
-                Malheureusement, nous ne faisons pas de retours pour des raisons
+                {% blocktrans %}Malheureusement, nous ne faisons pas de retours pour des raisons
                 éthiques. En effet, nos fourmis sont des êtres vivants et il
                 serait trop dangereux pour elles de les renvoyer en arrière.
                 Cependant, si votre colonie de fourmis vient à décéder pendant
@@ -229,15 +229,15 @@
                 transporteur, nous vous rembourserons la totalité de la valeur
                 de votre commande. Si vous avez des questions ou des inquiétudes
                 concernant l'expédition ou les retours, n'hésitez pas à nous
-                contacter. Nous serons heureux de vous aider.
+                contacter. Nous serons heureux de vous aider.{% endblocktrans %}
               </p>
             </div>
             <a name="who"></a>
             {% include "space.html" %}
             <div class="">
-              <h5>Qui sommes nous</h5>
+              <h5>{% blocktrans %}Qui sommes nous{% endblocktrans %}</h5>
               <p>
-                Notre boutique en ligne est spécialisée dans les fourmis pour
+                {% blocktrans %}Notre boutique en ligne est spécialisée dans les fourmis pour
                 débutants. Nous sommes une équipe passionnée par ces petits
                 êtres et soucieuse de leur bien-être. C'est pour cette raison
                 que nous faisons tout notre possible pour leur offrir les
@@ -247,7 +247,7 @@
                 pas à nous contacter si vous avez des questions ou si vous
                 souhaitez plus d'informations sur nos produits et services. Nous
                 sommes impatients de vous accueillir dans notre boutique en
-                ligne !
+                ligne !{% endblocktrans %}
               </p>
             </div>
             <a name="offers"></a>
@@ -255,23 +255,23 @@
             <div class="">
               <h5>Nos offres</h5>
               {% if offers.exists %}
-              <p class="mb-5">Voici nos offres du moment :</p>
+              <p class="mb-5">{% blocktrans %}Voici nos offres du moment :{% endblocktrans %}</p>
               {% for of in offers %}
               <div class="mb-4">
                 <h6>• {{ of.message}}</h6>
                 <p>{{of.text|format_description|safe}}</p>
               </div>
               {% endfor %} {% else %}
-              <p>Nous n'avons pas d'offre disponible pour le moment</p>
+              <p>{% blocktrans %}Nous n'avons pas d'offre disponible pour le moment{% endblocktrans %}</p>
               {% endif %}
             </div>
             <a name="contact"></a>
             {% include "space.html" %}
             <div class="">
-              <h5>Contact</h5>
+              <h5>{% blocktrans %}Contact{% endblocktrans %}</h5>
               <p>
-                Vous pouvez nous contacter en utilisant les informations
-                suivantes :
+                {% blocktrans %}Vous pouvez nous contacter en utilisant les informations
+                suivantes :{% endblocktrans %}
               </p>
               <ul>
                 <li>Numéro de téléphone : 06 51 33 61 58</li>
@@ -282,11 +282,11 @@
                 <li>Twitter : @antly</li>
               </ul>
               <p>
-                Nous sommes actifs sur tous ces réseaux et vous pouvez nous
+                {% blocktrans %}Nous sommes actifs sur tous ces réseaux et vous pouvez nous
                 suivre pour rester informé de nos dernières vidéos et
                 publications. N'hésitez pas à nous envoyer un message si vous
                 avez des questions ou besoin d'aide. Nous sommes là pour vous
-                aider à trouver la colonie de fourmis parfaite pour vous.
+                aider à trouver la colonie de fourmis parfaite pour vous.{% endblocktrans %}
               </p>
             </div>
           </div>

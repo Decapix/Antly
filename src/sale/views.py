@@ -509,6 +509,9 @@ def checkout_vi(request):
     if request.method == "POST":
         form = Address_fo(request.POST)
         if form.is_valid():
+
+            easypostcalcul()
+
             new_address = form.save(commit=False)
             new_address.save()
 
@@ -819,6 +822,8 @@ def order_ordered_vi(request, id):
 
 
 def seller_vi(request, id):
+
+    
     pageSellerDetails = Page("Vendeur détaille", '/seller/', 2, id)
     bread = [pageVendeur, pageSellerDetails]
     products = get_products_for_supplier(id)
@@ -833,6 +838,11 @@ def seller_vi(request, id):
 
 
 def seller_all_vi(request):
+
+    metat = MetaTemplate(
+        "Fondations de Fourmis pour Débutants - Achat et Vente de Colonies de Fourmis | Boutique en Ligne",
+        "Explorez notre collection de fondations de fourmis pour débutants, avec une variété d'espèces et d'origines. Démarrez votre élevage de fourmis en toute simplicité et bénéficiez d'un support professionnel. Découvrez nos offres dès maintenant !")
+
     bread = [pageVendeur]
     available_suppliers = Supplier_m.objects.filter(currently_available=True)
 

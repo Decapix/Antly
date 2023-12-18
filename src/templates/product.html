@@ -1,4 +1,4 @@
-{% extends "index.html" %} {% load static %} {% block content %}
+{% extends "index.html" %}{% load i18n %} {% load static %} {% block content %}
 
 <section class="section mt-10 if_hidden" id="about">
   <div class="container">
@@ -11,7 +11,7 @@
     <div class="if_hidden">
               <div class="filters mb-5">
                 <a href="#" data-filter=".new" class="active">
-                    tout
+                  {% blocktrans %}tout{% endblocktrans %}
                 </a>
                 {% for cou in country %}
                 <a href="#" data-filter=".{{cou}}">

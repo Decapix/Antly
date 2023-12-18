@@ -1,5 +1,4 @@
-{% extends "index.html" %}
-{% load static %}
+{% extends "index.html" %}{% load i18n %}
 
 {% block content %}
 
@@ -7,8 +6,8 @@
 
 <section class="section" id="about">
         <div class="container">
-                    <h6 class="section-title mb-0">Panier</h6>
-                    <h6 class="section-subtitle mb-4">Ma commande</h6>
+                    <h6 class="section-title mb-0">{% blocktrans %}Panier{% endblocktrans %}</h6>
+                    <h6 class="section-subtitle mb-4">{% blocktrans %}Ma commande{% endblocktrans %}</h6>
         </div>
 </section>
 
@@ -34,13 +33,13 @@
                                         <p>{{ item.price }} €</p>
                                     </div>
                                     <div class="col-md-6">
-                                        <p class="text-muted">Vendeur : {{ item.sh_supplier }}</p>
+                                        <p class="text-muted">{% blocktrans %}Vendeur{% endblocktrans %} : {{ item.sh_supplier }}</p>
                                     </div>
                                 </div>
                                 <p class="card-text">
                                     <form method="POST" action="{% url 'update_quantity' %}" class="d-inline">
                                         {% csrf_token %}
-                                        {{ item.quantity }} unitées
+                                        {{ item.quantity }} {% blocktrans %}unitées{% endblocktrans %}
                                         <input type="hidden" name="item_id" value="{{ item.id }}">
                                         <button type="submit" name="new_quantity" value="{{ item.quantity|add:'-1' }}" class="btn btn-sm btn-outline-secondary">-</button>
                                         <button type="submit" name="new_quantity" value="{{ item.quantity|add:'1' }}" class="btn btn-sm btn-outline-secondary">+</button>

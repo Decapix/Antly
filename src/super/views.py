@@ -1,3 +1,4 @@
+from django.utils.translation import gettext as _
 import random
 from django.contrib import messages
 from django.shortcuts import render
@@ -11,6 +12,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET
 from .breadcrumbs import *
 from django.conf import settings
+
 
 
 
@@ -32,8 +34,8 @@ def homepage_vi(request):
     if len(comment) >= 3:
         comment = random_three_elements(list(comment))
     product = list(ant) + list(pack) + list(other)
-    if len(product) > 18:
-        product = product[:18]
+    if len(product) > 20:
+        product = product[:20]
     # offer
     offers = None
     if not request.session.get('offer_shown', False):

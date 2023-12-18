@@ -1,4 +1,4 @@
-{% extends "index.html" %} {% load custom_filters %} {% load static %}
+{% extends "index.html" %}{% load i18n %} {% load custom_filters %} {% load static %}
 
 
 {% block head %} 
@@ -86,7 +86,7 @@
         <div class="col-md-6 pl-md-5">
           <h1 class="display-5 fw-bolder mb-4">{{ other.name }}</h1>
           <a class="" href="{% url 'seller_n' other.show_supplier_id %}">
-            <p class="text-muted">Vendeur : {{ other.sh_supplier }}</p>
+            <p class="text-muted">{% blocktrans %}Vendeur{% endblocktrans %} : {{ other.sh_supplier }}</p>
           </a>
           <hr />
           <div class="row mt-3">

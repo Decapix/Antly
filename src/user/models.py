@@ -76,25 +76,25 @@ class CustomUserManager(BaseUserManager):
         extra_fields.setdefault('is_active', True)
 
         if extra_fields.get('is_staff') is not True:
-            raise ValueError(_('Superuser must have is_staff=True.'))
+            raise ValueError(('Superuser must have is_staff=True.'))
         if extra_fields.get('is_superuser') is not True:
-            raise ValueError(_('Superuser must have is_superuser=True.'))
+            raise ValueError(('Superuser must have is_superuser=True.'))
         return self.create_user(email, password, **extra_fields)
 
 
 class Shopper_m(AbstractUser):
     username_validator = UnicodeUsernameValidator()
-    email = models.EmailField(_('email address'), unique=True)
+    email = models.EmailField(('email address'), unique=True)
 
     username = models.CharField(
-        _("username"),
+        ("username"),
         max_length=150,
-        help_text=_(
+        help_text=(
             "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
         ),
         validators=[username_validator],
         error_messages={
-            "unique": _("A user with that username already exists."),
+            "unique": ("A user with that username already exists."),
         },
         null = True, blank = True
     )

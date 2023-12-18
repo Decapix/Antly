@@ -1,4 +1,4 @@
-{% extends "index.html" %} {% load static %} {% block head %}
+{% extends "index.html" %}{% load i18n %} {% load static %} {% block head %}
 <link
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
@@ -19,10 +19,52 @@
 <section class="section" id="blog">
   <div class="container">
     <div class="row justify-content-between">
+
+      <div class="col-md-4">
+        <!-- adress-->
+
+        <div class="">
+          <div class="">
+            <form id="new-address-form" method="post">
+              {% csrf_token %}
+              <div class="form-group shipping-method">
+                <button class="circle btn btn-outline-primary mb-2">1</i></button>
+                <h4>{% blocktrans %}Adresse de livraison{% endblocktrans %}</h4>
+                <div>{{form.country}}</div>
+                <div>{{form.complete_name}}</div>
+                <div>{{form.phone_number}}</div>
+                <div>{{form.adress}}</div>
+                <div>{{form.detail}}</div>
+                <div>{{form.postal_code}}</div>
+                <div>{{form.city}}</div>
+              </div>
+
+              {% if letter_shipping_possible %}
+              <div class="mt-5 mb-4 shipping-method">
+                  <button class="circle btn btn-outline-primary mb-2">1.5</i></button>
+                  <h4 class="mb-3 shipping-method__title">{% blocktrans %}Méthode de livraison{% endblocktrans %}</h4>
+                  <label for="shipping_type" class="shipping-method__label">Type d'envoi:</label>
+                  <select name="shipping_type" id="shipping_type" class="shipping-method__select">
+                      <option value="L">{% blocktrans %}Lettre - 3€{% endblocktrans %}</option>
+                      <option value="C">{% blocktrans %}Colis - 5€{% endblocktrans %}</option>
+                  </select>
+              </div>
+              {% endif %}
+
+
+              <input class="btn btn-primary mr-4 rounded" type="submit" />
+            </form>
+          </div>
+        </div>
+        <div id="chosen-address" class="mt-4">
+          <!-- afficher l'adresse choisie-->
+        </div>
+      </div>
+
       <div class="col-md-8 pr-md-5 mb-4 mb-md-0">
         <div class="mb-5">
           <button class="circle btn btn-outline-primary mb-2">2</i></button>
-          <h4>Résumé de la commande</h4>
+          <h4>{% blocktrans %}Résumé de la commande{% endblocktrans %}</h4>
           <table class="table table-striped">
             <tbody>
               {% for item in order.get_cart_items %}
@@ -34,14 +76,14 @@
               </tr>
               {% endfor %}
               <tr>
-                <td>Transport</td>
+                <td>{% blocktrans %}Transport{% endblocktrans %}</td>
                 <td></td>
                 <td></td>
                 <td id="shipping-costs">{{ order.shipping_costs }} €</td>
               </tr>
 
               {% if order.gift %}
-              <td>Colonie offerte</td>
+              <td>{% blocktrans %}Colonie offerte{% endblocktrans %}</td>
               <td>1</td>
               <td>0 €</td>
               {% endif %}
@@ -49,7 +91,7 @@
 
             <tfoot>
               <tr>
-                <th scope="col">Total de la commande</th>
+                <th scope="col">{% blocktrans %}Total de la commande{% endblocktrans %}</th>
                 <th scope="col" class="total_px">
                   {{ order.get_cart_total }} €
                 </th>
@@ -61,9 +103,9 @@
             <i class="ti-star"></i>
             <div class="description-pop">
               <p>
-                La colonie offerte est une colonie, sélectionnée au hasard,
+                {% blocktrans %}La colonie offerte est une colonie, sélectionnée au hasard,
                 parmi tous nos stocks. Nous l’ajoutons à votre commande en plus
-                des articles que vous avez choisi.
+                des articles que vous avez choisi.{% endblocktrans %}
               </p>
             </div>
           </button>
@@ -71,15 +113,15 @@
         </div>
         <!-- strip-->
         <button class="circle btn btn-outline-primary mb-2">3</i></button>
-        <h4 class="">Paiement, Par carte ou paypal</h4>
-        <h6 class="mb-4">Par carte</h4>
+        <h4 class="">{% blocktrans %}Paiement, Par carte ou paypal{% endblocktrans %}</h4>
+        <h6 class="mb-4">{% blocktrans %}Par carte{% endblocktrans %}</h4>
         <!-- Affichez ici le formulaire de paiement Stripe -->
 
         <div class="form-container">
           <form id="payment-form" method="POST">
             {% csrf_token %}
             <div class="form-group">
-              <label for="card-holder-name">Nom du titulaire de la carte</label>
+              <label for="card-holder-name">{% blocktrans %}Nom du titulaire de la carte{% endblocktrans %}</label>
               <input
                 type="text"
                 class="form-control"
@@ -89,7 +131,7 @@
             </div>
 
             <div class="form-group">
-              <label for="card-element">Informations de la carte</label>
+              <label for="card-element">{% blocktrans %}Informations de la carte{% endblocktrans %}</label>
               <div id="card-element" class="form-control"></div>
               <div id="card-errors" role="alert" class="text-danger"></div>
             </div>
@@ -107,7 +149,7 @@
                   id="card-button"
                   disabled
                 >
-                  Payer
+                  {% blocktrans %}Payer{% endblocktrans %}
                 </button>
               </div>
               <div class="col-md-4">
@@ -131,47 +173,6 @@
       </div>
         
         <!--      endpaypal-->
-      </div>
-
-      <div class="col-md-4 pl-md-5">
-        <!-- adress-->
-
-        <div class="">
-          <div class="">
-            <form id="new-address-form" method="post">
-              {% csrf_token %}
-              <div class="form-group shipping-method">
-                <button class="circle btn btn-outline-primary mb-2">1</i></button>
-                <h4>Adresse de livraison</h4>
-                <div>{{form.country}}</div>
-                <div>{{form.complete_name}}</div>
-                <div>{{form.phone_number}}</div>
-                <div>{{form.adress}}</div>
-                <div>{{form.detail}}</div>
-                <div>{{form.postal_code}}</div>
-                <div>{{form.city}}</div>
-              </div>
-
-              {% if letter_shipping_possible %}
-              <div class="mt-5 mb-4 shipping-method">
-                  <button class="circle btn btn-outline-primary mb-2">1.5</i></button>
-                  <h4 class="mb-3 shipping-method__title">Méthode de livraison</h4>
-                  <label for="shipping_type" class="shipping-method__label">Type d'envoi:</label>
-                  <select name="shipping_type" id="shipping_type" class="shipping-method__select">
-                      <option value="L">Lettre - 3€</option>
-                      <option value="C">Colis - 5€</option>
-                  </select>
-              </div>
-              {% endif %}
-
-
-              <input class="btn btn-primary mr-4 rounded" type="submit" />
-            </form>
-          </div>
-        </div>
-        <div id="chosen-address" class="mt-4">
-          <!-- afficher l'adresse choisie-->
-        </div>
       </div>
     </div>
   </div>

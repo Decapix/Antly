@@ -1,4 +1,4 @@
-{% extends "index.html" %}
+{% extends "index.html" %}{% load i18n %}
 
 {% block content %}
 {% include "space.html" %}
@@ -8,20 +8,20 @@
     <div class="container">
         <div class="row justify-content-between">
                 <div class="col-md-6 pr-md-5 mb-4 mb-md-0">
-                    <h6 class="section-title mb-0">Mon compte</h6>
-                    <h6 class="section-subtitle mb-4">Informations du compte</h6>
+                    <h6 class="section-title mb-0">{% blocktrans %}Mon compte{% endblocktrans %}</h6>
+                    <h6 class="section-subtitle mb-4">{% blocktrans %}Informations du compte{% endblocktrans %}</h6>
 
                <td>
                   <ul class="list-unstyled">
 
                         <ul>
-                            <li><a class="" href="{% url 'dashboard_n' user.id %}">Tableau de bord</a></li>
-                            <li><a class="" href="{% url 'orders_n' user.id %}">Mes commandes</a></li>
-                            <li><a class="" href="{% url 'comment_n' %}">Mettre un commentaire</a></li>
-                            <li><a class="" href="{% url 'detail_n' user.id %}">Information personnel</a></li>
-                            <li><a class="" href="{% url 'resources_n' user.id %}">Ressources</a></li>
-                            <li><a class="" href="{% url 'delete_account_n' user.id %}">Supprimer mon compte</a></li>
-                            <li><a class="" href="{% url 'logout_n' %}">Déconnexion</a></li>
+                            <li><a class="" href="{% url 'dashboard_n' user.id %}">{% blocktrans %}Tableau de bord{% endblocktrans %}</a></li>
+                            <li><a class="" href="{% url 'orders_n' user.id %}">{% blocktrans %}Mes commandes{% endblocktrans %}</a></li>
+                            <li><a class="" href="{% url 'comment_n' %}">{% blocktrans %}Mettre un commentaire{% endblocktrans %}</a></li>
+                            <li><a class="" href="{% url 'detail_n' user.id %}">{% blocktrans %}Information personnel{% endblocktrans %}</a></li>
+                            <li><a class="" href="{% url 'resources_n' user.id %}">{% blocktrans %}Ressources{% endblocktrans %}</a></li>
+                            <li><a class="" href="{% url 'delete_account_n' user.id %}">{% blocktrans %}Supprimer mon compte{% endblocktrans %}</a></li>
+                            <li><a class="" href="{% url 'logout_n' %}">{% blocktrans %}Déconnexion{% endblocktrans %}</a></li>
 
                         </ul>
 

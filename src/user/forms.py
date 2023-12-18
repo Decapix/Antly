@@ -56,7 +56,7 @@ class Login_fo(forms.Form):
     )
 
     password = forms.CharField(
-        label="mot de passe",
+        label=_("Mot de passe"),
         strip=False,
         widget=forms.PasswordInput(
             attrs={"autocomplete": "current-password", 'class': 'form-control', 'placeholder': 'Password'}),
@@ -64,10 +64,9 @@ class Login_fo(forms.Form):
 
     error_messages = {
         "invalid_login": _(
-            "Please enter a correct %(email)s and password. Note that both "
-            "fields may be case-sensitive."
+            "Veuillez saisir un %(email)s et un mot de passe corrects. Notez que les deux peuvent être sensibles à la casse."
         ),
-        "inactive": _("This account is inactive."),
+        "inactive": _("Ce compte est inactif."),
     }
 
     def __init__(self, request=None, *args, **kwargs):
@@ -166,19 +165,19 @@ class Detail_fo(forms.ModelForm):
 
 class UpdatePassword_fo(PasswordChangeForm):
     new_password1 = forms.CharField(
-        label=_("New password"),
+        label=_("Nouveau mot de passe"),
         widget=forms.PasswordInput(attrs={"autocomplete": "new-password", "id": "password2", "class": "form-control"}),
         strip=False,
         help_text=password_validation.password_validators_help_text_html(),
     )
     new_password2 = forms.CharField(
-        label=_("New password confirmation"),
+        label=_("Confirmation Nouveau mot de passe"),
         strip=False,
         widget=forms.PasswordInput(attrs={"autocomplete": "new-password", "id": "password3", "class": "form-control"}),
     )
 
     old_password = forms.CharField(
-        label=_("Old password"),
+        label=_("Encien mot de passe"),
         strip=False,
         widget=forms.PasswordInput(
             attrs={"autocomplete": "current-password", "autofocus": True, "id": "password1", "class": "form-control"}
@@ -188,14 +187,14 @@ class UpdatePassword_fo(PasswordChangeForm):
 
 class NewPassword_fo(SetPasswordForm):
     new_password1 = forms.CharField(
-        label=_("New password"),
+        label=_("Nouveau mot de passe"),
         widget=forms.PasswordInput(
             attrs={"autocomplete": "new-password", "class": "form-control", "id": "password1", }),
         strip=False,
         help_text=password_validation.password_validators_help_text_html(),
     )
     new_password2 = forms.CharField(
-        label=_("New password confirmation"),
+        label=_("Confirmation Nouveau mot de passe"),
         strip=False,
         widget=forms.PasswordInput(
             attrs={"autocomplete": "new-password", "class": "form-control", "id": "password2", }),

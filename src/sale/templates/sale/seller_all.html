@@ -1,4 +1,4 @@
-{% extends "index.html" %}{% load custom_filters %} {% load static %} 
+{% extends "index.html" %}{% load i18n %}{% load custom_filters %} {% load static %} 
 
 
 {% block content %}
@@ -8,10 +8,10 @@
   
         <div class="row justify-content-between">
           <div class="col-md-6 pr-md-5 mb-4 mb-md-0">
-              <h6 class="section-title mb-0">Les vendeurs</h6>
-              <h6 class="section-subtitle mb-4">Les vendeurs d'Antly</h6>
+              <h6 class="section-title mb-0">{% blocktrans %}Les vendeurs{% endblocktrans %}</h6>
+              <h6 class="section-subtitle mb-4">{% blocktrans %}Les vendeurs d'Antly{% endblocktrans %}</h6>
   
-              <p>Antly réunit des vendeurs experts en myrmécologie, offrant une gamme de fourmis, d'accessoires et de packs pour tous les niveaux. Nos vendeurs, sélectionnés pour leur savoir-faire et la qualité de leurs produits, s'engagent pour le bien-être des fourmis. Antly est la destination idéale pour une expérience d'achat fiable et spécialisée dans l'univers captivant des fourmis.</p>
+              <p>{% blocktrans %}Antly réunit des vendeurs experts en myrmécologie, offrant une gamme de fourmis, d'accessoires et de packs pour tous les niveaux. Nos vendeurs, sélectionnés pour leur savoir-faire et la qualité de leurs produits, s'engagent pour le bien-être des fourmis. Antly est la destination idéale pour une expérience d'achat fiable et spécialisée dans l'univers captivant des fourmis.{% endblocktrans %}</p>
             </div>
           <div class="col-md-6 pl-md-5">
               <img src="{% static 'sale/imgs/about-seller.webp' %}" alt="egor-kamelev" class="w-100 shadow-sm">
@@ -23,7 +23,7 @@
   
   <section class="section" id="testmonial">
     <div class="container">
-        <div class="row">
+        <div class="row mb-3">
             {% for s in suppliers %}
                 <div class="col-md-6 my-3 my-md-2">
                     <a href="{% url 'seller_n' s.id %}">
@@ -42,6 +42,8 @@
                     </a>
                 </div>
             {% endfor %}
+
+            
         </div>
     </div>
 </section>

@@ -1,4 +1,4 @@
-{% extends "index.html" %} {% load custom_filters %} {% load static %} 
+{% extends "index.html" %}{% load i18n %} {% load custom_filters %} {% load static %} 
 
 
 {% block head %} 
@@ -149,7 +149,7 @@
           <h1 class="display-5 fw-bolder mb-4">{{ pack.sh_name }}</h1>
 
           <a class="" href="{% url 'seller_n' pack.show_supplier_id %}">
-            <p class="text-muted">Vendeur : {{ pack.sh_supplier }}</p>
+            <p class="text-muted">{% blocktrans %}Vendeur{% endblocktrans %} : {{ pack.sh_supplier }}</p>
           </a>
           <hr />
           <div class="row mt-3">
@@ -166,14 +166,14 @@
                   <td>
                     <ul>
                       {% if ant.spece %}
-                      <li>Espèce : {{ ant.sh_spece }} {{ ant.under_spece }}</li>
+                      <li>{% blocktrans %}Espèce{% endblocktrans %} : {{ ant.sh_spece }} {{ ant.under_spece }}</li>
                       {% endif %} {% if ant.sh_localisation %}
-                      <li>Localisation : {{ ant.sh_localisation }}</li>
+                      <li>{% blocktrans %}Localisation {% endblocktrans %}: {{ ant.sh_localisation }}</li>
                       {% endif %}
-                      <li>Nombre de gyne : {{ pack.size.gyne }}</li>
-                      <li>Nombre d'ouvrière : {{ pack.size.worker }}</li>
+                      <li>{% blocktrans %}Nombre de gyne {% endblocktrans %}: {{ pack.size.gyne }}</li>
+                      <li>{% blocktrans %}Nombre d'ouvrière {% endblocktrans %}: {{ pack.size.worker }}</li>
                       {% if pack.nest_size %}
-                      <li>Taille du nid : {{ nest.name }}</li>
+                      <li>{% blocktrans %}Taille du nid {% endblocktrans %}: {{ nest.name }}</li>
                       {% endif %}
                     </ul>
                   </td>

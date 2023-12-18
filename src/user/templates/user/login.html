@@ -1,5 +1,4 @@
-{% extends "index.html" %}
-{% load static %}
+{% extends "index.html" %}{% load i18n %}
 
 {% block content %}
     <section id="portfolio" class="section portfolio-section">
@@ -14,11 +13,11 @@
          <div class="col-md-6 shipping-method">
              <form action="" method="post">
                  {% csrf_token %}
-                <h6 class="section-secondary-title">Connexion</h6>
+                <h6 class="section-secondary-title">{% blocktrans %}Connexion{% endblocktrans %}</h6>
                 <div class="form-group">
                     <div>
                         <p>
-                            <label for="email">Email</label>
+                            <label for="email">{% blocktrans %}Email{% endblocktrans %}</label>
                             <input type="email" class="form-control" id="email" placeholder="Email address" name="email">
                         </p>
                     </div>
@@ -31,8 +30,8 @@
                  {% if request.GET.next %}
                     <input type="hidden" name="next" value="{{request.GET.next}}">
                  {% endif %}
-                 <button class="btn btn-primary" type="submit">Connexion</button>
-                 <a href="{% url 'password_reset_request_n' %}" class="btn btn-info btn-sm ml-5">mot de passe oublié</a>
+                 <button class="btn btn-primary" type="submit">{% blocktrans %}Connexion{% endblocktrans %}</button>
+                 <a href="{% url 'password_reset_request_n' %}" class="btn btn-info btn-sm ml-5">{% blocktrans %}mot de passe oublié{% endblocktrans %}</a>
              </form>
       </div>
     <div class="col-md-6">

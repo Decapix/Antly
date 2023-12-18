@@ -1,8 +1,4 @@
-{% extends "index.html" %}
-
-{% load static %}
-
-
+{% extends "index.html" %}{% load i18n %}
 
 
 
@@ -12,15 +8,15 @@
 <section class="section" id="service">
         <div class="container">
             <div class="if_hidden ">
-                <h3 class="mb-2">Choisissez Votre Espèce de Fourmis Idéale</h3>
-                <h5 class="mb-3">Guide d'Élevage de Fourmis pour Débutants et Experts</h5>
-                <p>Bienvenue sur Antly, votre source de confiance pour l'élevage de fourmis. Que vous soyez un débutant
+                <h3 class="mb-2">{% blocktrans %}Choisissez Votre Espèce de Fourmis Idéale{% endblocktrans %}</h3>
+                <h5 class="mb-3">{% blocktrans %}Guide d'Élevage de Fourmis pour Débutants et Experts{% endblocktrans %}</h5>
+                <p>{% blocktrans %}Bienvenue sur Antly, votre source de confiance pour l'élevage de fourmis. Que vous soyez un débutant
                     ou un éleveur expérimenté, notre guide d'identification des espèces vous aidera à choisir l'espèce
                     de fourmis parfaite pour vous. Faites votre choix en fonction de la taille, de la couleur, du niveau
                     d'élevage et plus encore pour répondre à vos besoins spécifiques en matière d'élevage de fourmis.
                     Notre objectif est de rendre l'élevage de fourmis accessible à tous et de fournir une ressource
                     précieuse pour notre communauté. Avec Antly, vous n'êtes jamais seuls dans votre aventure d'élevage
-                    de fourmis. Commencez dès aujourd'hui votre passionnante expérience d'élevage de fourmis.</p>
+                    de fourmis. Commencez dès aujourd'hui votre passionnante expérience d'élevage de fourmis.{% endblocktrans %}</p>
             </div>
         </div>
 </section>
@@ -31,93 +27,93 @@
                  {% csrf_token %}
             <div id="form-niveau">
                 <div class="form-group">
-                    <h3>Niveau de connaissance</h3>
+                    <h3>{% blocktrans %}Niveau de connaissance{% endblocktrans %}</h3>
                     <div class="form-check ml-4">
                         <input class="form-check-input" type="radio" name="niveau" value="debutant">
-                        <label class="form-check-label" for="debutant">Débutant</label>
+                        <label class="form-check-label" for="debutant">{% blocktrans %}Débutant{% endblocktrans %}</label>
                     </div>
                     <div class="form-check ml-4">
                         <input class="form-check-input" type="radio" name="niveau" value="intermediaire">
-                        <label class="form-check-label" for="intermediaire">Intermédiaire</label>
+                        <label class="form-check-label" for="intermediaire">{% blocktrans %}Intermédiaire{% endblocktrans %}</label>
                     </div>
                     <div class="form-check ml-4">
                         <input class="form-check-input" type="radio" name="niveau" value="experimente">
-                        <label class="form-check-label" for="experimente">Expérimenté</label>
+                        <label class="form-check-label" for="experimente">{% blocktrans %}Expérimenté{% endblocktrans %}</label>
                     </div>
                 </div>
             </div>
 
             <!-- formulaire pour les débutants -->
             <div id="form-debutant" style="display: none;">
-                <h3>Informations sur l'espèce de fourmis</h3>
+                <h3>{% blocktrans %}Informations sur l'espèce de fourmis{% endblocktrans %}</h3>
                 <div id="size-deb" class="form-group">
-                    <h4>Taille de l'espèce</h4>
+                    <h4>{% blocktrans %}Taille de l'espèce{% endblocktrans %}</h4>
                     <div class="form-check ml-4">
                         <input class="form-check-input" type="radio" name="taille" value="true">
-                        <label class="form-check-label" for="grosse">Grosse</label>
+                        <label class="form-check-label" for="grosse">Grosse{% endblocktrans %}</label>
                     </div>
                     <div class="form-check ml-4">
                         <input class="form-check-input" type="radio" name="taille" value="false">
-                        <label class="form-check-label" for="petite">Petite</label>
+                        <label class="form-check-label" for="petite">{% blocktrans %}Petite{% endblocktrans %}</label>
                     </div>
                     <div class="form-check ml-4 text-info">
                         <input class="form-check-input" type="radio" name="taille" value="none">
-                        <label class="form-check-label" for="sans importance">Sans importance</label>
+                        <label class="form-check-label" for="sans importance">{% blocktrans %}Sans importance{% endblocktrans %}</label>
                     </div>
                 </div>
 
                 <!-- Formulaire couleur -->
                 <div id="color-deb">
-                    <h4>Couleur de l'espèce</h4>
+                    <h4>{% blocktrans %}Couleur de l'espèce{% endblocktrans %}</h4>
                     <div class="form-check ml-4">
                         <input class="form-check-input" type="radio" name="couleur" value="true">
-                        <label class="form-check-label" for="colore">Coloré</label>
+                        <label class="form-check-label" for="colore">{% blocktrans %}Coloré{% endblocktrans %}</label>
                     </div>
                     <div class="form-check ml-4">
                         <input class="form-check-input" type="radio" name="couleur" value="false">
-                        <label class="form-check-label" for="noir">Noir</label>
+                        <label class="form-check-label" for="noir">{% blocktrans %}Noir{% endblocktrans %}</label>
                     </div>
                     <div class="form-check ml-4 text-info">
                         <input class="form-check-input" type="radio" name="couleur" value="none">
-                        <label class="form-check-label" for="sans importance">Sans importance</label>
+                        <label class="form-check-label" for="sans importance">{% blocktrans %}Sans importance{% endblocktrans %}</label>
                     </div>
                 </div>
 
 
                 <!-- Formulaire localisation -->
                 <div id="location-deb">
-                    <h4>Localisation de l'espèce</h4>
+                    <h4>{% blocktrans %}Localisation de l'espèce{% endblocktrans %}</h4>
                     <div class="form-check ml-4">
                         <input class="form-check-input" type="checkbox" name="localisation" value="Europe du Sud">
-                        <label class="form-check-label" for="Europe du Sud">Europe du Sud</label>
+                        <label class="form-check-label" for="Europe du Sud">{% blocktrans %}Europe du Sud{% endblocktrans %}</label>
                     </div>
                     <div class="form-check ml-4">
                         <input class="form-check-input" type="checkbox" name="localisation" value="Europe du Nord">
-                        <label class="form-check-label" for="Europe du Nord">Europe du Nord</label>
+                        <label class="form-check-label" for="Europe du Nord">{% blocktrans %}Europe du Nord{% endblocktrans %}</label>
                     </div>
                     <div class="form-check ml-4">
                         <input class="form-check-input" type="checkbox" name="localisation" value="Asie">
-                        <label class="form-check-label" for="Asie">Asie</label>
+                        <label class="form-check-label" for="Asie">{% blocktrans %}Asie{% endblocktrans %}</label>
                     </div>
                     <div class="form-check ml-4">
                         <input class="form-check-input" type="checkbox" name="localisation" value="Amérique du Sud">
-                        <label class="form-check-label" for="Amérique du Sud">Amérique du Sud</label>
+                        <label class="form-check-label" for="Amérique du Sud">{% blocktrans %}Amérique du Sud{% endblocktrans %}</label>
                     </div>
                     <div class="form-check ml-4">
                         <input class="form-check-input" type="checkbox" name="localisation" value="Amérique du Nord">
-                        <label class="form-check-label" for="Amérique du Nord">Amérique du Nord</label>
+                        <label class="form-check-label" for="Amérique du Nord">{% blocktrans %}Amérique du Nord{% endblocktrans %}</label>
                     </div>
                     <div class="form-check ml-4">
                         <input class="form-check-input" type="checkbox" name="localisation" value="Australie">
-                        <label class="form-check-label" for="Australie">Australie</label>
+                        <label class="form-check-label" for="Australie">{% blocktrans %}Australie{% endblocktrans %}</label>
                     </div>
                     <div class="form-check ml-4">
                         <input class="form-check-input" type="checkbox" name="localisation" value="Afrique">
-                        <label class="form-check-label" for="Afrique">Afrique</label>
+                        <label class="form-check-label" for="Afrique">{% blocktrans %}Afrique{% endblocktrans %}</label>
                     </div>
                     <div class="form-check ml-4 text-info">
                         <input class="form-check-input" type="checkbox" name="localisation" value="sans importance">
-                        <label class="form-check-label" for="sans importance">Sans importance</label>
+                        <label class="form-check-label" for="sans importance">{% blocktrans %}Sans importance{% endblocktrans %}</label>
                     </div>
                 </div>
             </div>
@@ -126,109 +122,109 @@
 
             <!-- formulaire pour les intermédiaires et expérimentés -->
             <div id="form-experimente" style="display: none;">
-                <h3>Informations sur l'espèce de fourmis</h3>
+                <h3>{% blocktrans %}Informations sur l'espèce de fourmis{% endblocktrans %}</h3>
 
                 <!-- Formulaire activité -->
                 <div id="activity-exp">
-                    <h4>Activité de la colonie</h4>
+                    <h4>{% blocktrans %}Activité de la colonie{% endblocktrans %}</h4>
                     <div class="form-check ml-4">
                         <input class="form-check-input" type="radio" name="activite" value="true">
-                        <label class="form-check-label" for="forte activité">Forte activité</label>
+                        <label class="form-check-label" for="forte activité">{% blocktrans %}Forte activité{% endblocktrans %}</label>
                     </div>
                     <div class="form-check ml-4">
                         <input class="form-check-input" type="radio" name="activite" value="false">
-                        <label class="form-check-label" for="basse activité">Basse activité</label>
+                        <label class="form-check-label" for="basse activité">{% blocktrans %}Basse activité{% endblocktrans %}</label>
                     </div>
                     <div class="form-check ml-4 text-info">
                         <input class="form-check-input" type="radio" name="activite" value="none">
-                        <label class="form-check-label" for="sans importance">Sans importance</label>
+                        <label class="form-check-label" for="sans importance">{% blocktrans %}Sans importance{% endblocktrans %}</label>
                     </div>
                 </div>
 
                 <div id="size-exp">
-                    <h4>Taille de l'espèce</h4>
+                    <h4>{% blocktrans %}Taille de l'espèce{% endblocktrans %}</h4>
                     <div class="form-check ml-4">
                         <input class="form-check-input" type="radio" name="taille" value="true">
-                        <label class="form-check-label" for="grosse">Grosse</label>
+                        <label class="form-check-label" for="grosse">{% blocktrans %}Grosse{% endblocktrans %}</label>
                     </div>
                     <div class="form-check ml-4">
                         <input class="form-check-input" type="radio" name="taille" value="false">
-                        <label class="form-check-label" for="petite">Petite</label>
+                        <label class="form-check-label" for="petite">{% blocktrans %}Petite{% endblocktrans %}</label>
                     </div>
                     <div class="form-check ml-4 text-info">
                         <input class="form-check-input" type="radio" name="taille" value="none">
-                        <label class="form-check-label" for="sans importance">Sans importance</label>
+                        <label class="form-check-label" for="sans importance">{% blocktrans %}Sans importance{% endblocktrans %}</label>
                     </div>
                 </div>
 
                 <!-- Formulaire couleur -->
                 <div id="color-exp">
-                    <h4>Couleur de l'espèce</h4>
+                    <h4>{% blocktrans %}Couleur de l'espèce{% endblocktrans %}</h4>
                     <div class="form-check ml-4">
                         <input class="form-check-input" type="radio" name="couleur" value="true">
-                        <label class="form-check-label" for="colore">Coloré</label>
+                        <label class="form-check-label" for="colore">{% blocktrans %}Coloré{% endblocktrans %}</label>
                     </div>
                     <div class="form-check ml-4">
                         <input class="form-check-input" type="radio" name="couleur" value="false">
-                        <label class="form-check-label" for="noir">Noir</label>
+                        <label class="form-check-label" for="noir">{% blocktrans %}Noir{% endblocktrans %}</label>
                     </div>
                     <div class="form-check ml-4 text-info">
                         <input class="form-check-input" type="radio" name="couleur" value="none">
-                        <label class="form-check-label" for="noir">Sans importance</label>
+                        <label class="form-check-label" for="noir">{% blocktrans %}Sans importance{% endblocktrans %}</label>
                     </div>
                 </div>
 
                 <!-- Formulaire type de nid -->
                 <div id="nest-exp">
-                    <h4>Type de nid</h4>
+                    <h4>{% blocktrans %}Type de nid{% endblocktrans %}</h4>
                     <div class="form-check ml-4">
                         <input class="form-check-input" type="radio" name="nid" value="true">
-                        <label class="form-check-label" for="sec">Sec</label>
+                        <label class="form-check-label" for="sec">{% blocktrans %}Sec{% endblocktrans %}</label>
                     </div>
                     <div class="form-check ml-4">
                         <input class="form-check-input" type="radio" name="nid" value="false">
-                        <label class="form-check-label" for="humide">Humide</label>
+                        <label class="form-check-label" for="humide">{% blocktrans %}Humide{% endblocktrans %}</label>
                     </div>
                     <div class="form-check ml-4 text-info" >
                         <input class="form-check-input" type="radio" name="nid" value="none">
-                        <label class="form-check-label" for="sans importance">Sans importance</label>
+                        <label class="form-check-label" for="sans importance">{% blocktrans %}Sans importance{% endblocktrans %}</label>
                     </div>
                 </div>
 
                 <!-- Formulaire localisation -->
                 <div id="location-exp">
-                    <h4>Localisation de l'espèce</h4>
+                    <h4>{% blocktrans %}Localisation de l'espèce{% endblocktrans %}</h4>
                     <div class="form-check ml-4">
                         <input class="form-check-input" type="checkbox" name="localisation" value="Europe du Sud">
-                        <label class="form-check-label" for="Europe du Sud">Europe du Sud</label>
+                        <label class="form-check-label" for="Europe du Sud">{% blocktrans %}Europe du Sud{% endblocktrans %}</label>
                     </div>
                     <div class="form-check ml-4">
                         <input class="form-check-input" type="checkbox" name="localisation" value="Europe du Nord">
-                        <label class="form-check-label" for="Europe du Nord">Europe du Nord</label>
+                        <label class="form-check-label" for="Europe du Nord">{% blocktrans %}Europe du Nord{% endblocktrans %}</label>
                     </div>
                     <div class="form-check ml-4">
                         <input class="form-check-input" type="checkbox" name="localisation" value="Asie">
-                        <label class="form-check-label" for="Asie">Asie</label>
+                        <label class="form-check-label" for="Asie">{% blocktrans %}Asie{% endblocktrans %}</label>
                     </div>
                     <div class="form-check ml-4">
                         <input class="form-check-input" type="checkbox" name="localisation" value="Amérique du Sud">
-                        <label class="form-check-label" for="Amérique du Sud">Amérique du Sud</label>
+                        <label class="form-check-label" for="Amérique du Sud">{% blocktrans %}Amérique du Sud{% endblocktrans %}</label>
                     </div>
                     <div class="form-check ml-4">
                         <input class="form-check-input" type="checkbox" name="localisation" value="Amérique du Nord">
-                        <label class="form-check-label" for="Amérique du Nord">Amérique du Nord</label>
+                        <label class="form-check-label" for="Amérique du Nord">{% blocktrans %}Amérique du Nord{% endblocktrans %}</label>
                     </div>
                     <div class="form-check ml-4">
                         <input class="form-check-input" type="checkbox" name="localisation" value="Australie">
-                        <label class="form-check-label" for="Australie">Australie</label>
+                        <label class="form-check-label" for="Australie">{% blocktrans %}Australie{% endblocktrans %}</label>
                     </div>
                     <div class="form-check ml-4">
                         <input class="form-check-input" type="checkbox" name="localisation" value="Afrique">
-                        <label class="form-check-label" for="Afrique">Afrique</label>
+                        <label class="form-check-label" for="Afrique">{% blocktrans %}Afrique{% endblocktrans %}</label>
                     </div>
                     <div class="form-check ml-4 text-info">
                         <input class="form-check-input" type="checkbox" name="localisation" value="sans importance">
-                        <label class="form-check-label" for="sans importance">Sans importance</label>
+                        <label class="form-check-label" for="sans importance">{% blocktrans %}Sans importance{% endblocktrans %}</label>
                     </div>
                 </div>
                 </div>
@@ -237,11 +233,11 @@
 
         <div style="display: none;" id="show-specie">
             <div class="mt-4">
-                <h6>Les espèces qui pourraient vous correspondre</h6>
+                <h6>{% blocktrans %}Les espèces qui pourraient vous correspondre{% endblocktrans %}</h6>
                 <div id="specie-corespond" class="mt-4"><!-- afficher l'adresse choisie--></div>
             </div>
             <div class="mt-2">
-                <h6>Les espèces que nous avons en stock actuellement</h6>
+                <h6>{% blocktrans %}Les espèces que nous avons en stock actuellement{% endblocktrans %}</h6>
                 <div id="specie-in-stock" class="mt-4"><!-- afficher l'adresse choisie--></div>
             </div>
         </div>

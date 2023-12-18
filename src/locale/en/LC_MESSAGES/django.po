@@ -1,0 +1,1158 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-18 13:56+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\sale\templates\sale\ant_detail.html:92 .\sale\templates\sale\cart.html:36
+#: .\sale\templates\sale\other_detail.html:89
+#: .\sale\templates\sale\pack_detail.html:152
+msgid "Vendeur"
+msgstr "Seller"
+
+#: .\sale\templates\sale\ant_detail.html:114
+msgid "gyne"
+msgstr "queen"
+
+#: .\sale\templates\sale\ant_detail.html:114
+msgid "ouvrière"
+msgstr "worker"
+
+#: .\sale\templates\sale\ant_product.html:7 .\templates\index.html:107
+msgid "Les fourmis"
+msgstr "Ants"
+
+#: .\sale\templates\sale\ant_product.html:8
+msgid "Les fourmis d'europe"
+msgstr "European ants"
+
+#: .\sale\templates\sale\ant_product.html:9
+#, fuzzy
+#| msgid ""
+#| "Crée votre univers minuscule chez vous. Optez pour une fondation et "
+#| "introduisez les dans un environnement qui vous inspire, vous être libres "
+#| "de votre imagination !"
+msgid ""
+"Créez votre univers minuscule chez vous. Optez pour une fondation et "
+"introduisez les dans un environnement qui vous inspire, laissez-vous guider "
+"par votre imagination !"
+msgstr ""
+"Create your own miniature universe at home. Choose a foundation and "
+"introduce them into an environment that inspires you, you are free to use "
+"your imagination!"
+
+#: .\sale\templates\sale\cart.html:9 .\templates\index.html:135
+msgid "Panier"
+msgstr "Cart"
+
+#: .\sale\templates\sale\cart.html:10
+msgid "Ma commande"
+msgstr "My order"
+
+#: .\sale\templates\sale\cart.html:42
+msgid "unitées"
+msgstr "units"
+
+#: .\sale\templates\sale\checkout.html:32
+msgid "Adresse de livraison"
+msgstr "Shipping address"
+
+#: .\sale\templates\sale\checkout.html:45
+msgid "Méthode de livraison"
+msgstr "Shipping method"
+
+#: .\sale\templates\sale\checkout.html:48
+msgid "Lettre - 3€"
+msgstr "Letter - €3"
+
+#: .\sale\templates\sale\checkout.html:49
+msgid "Colis - 5€"
+msgstr "Parcel - €5"
+
+#: .\sale\templates\sale\checkout.html:67
+msgid "Résumé de la commande"
+msgstr "Order summary"
+
+#: .\sale\templates\sale\checkout.html:79
+msgid "Transport"
+msgstr "Shipping"
+
+#: .\sale\templates\sale\checkout.html:86
+msgid "Colonie offerte"
+msgstr "Free colony"
+
+#: .\sale\templates\sale\checkout.html:94
+msgid "Total de la commande"
+msgstr "Total order"
+
+#: .\sale\templates\sale\checkout.html:106
+msgid ""
+"La colonie offerte est une colonie, sélectionnée au hasard,\n"
+"                parmi tous nos stocks. Nous l’ajoutons à votre commande en "
+"plus\n"
+"                des articles que vous avez choisi."
+msgstr ""
+
+#: .\sale\templates\sale\checkout.html:116
+#, fuzzy
+#| msgid "Payment, By card or paypal"
+msgid "Paiement, Par carte ou paypal"
+msgstr "Payment, By card or PayPal"
+
+#: .\sale\templates\sale\checkout.html:117
+msgid "Par carte"
+msgstr ""
+
+#: .\sale\templates\sale\checkout.html:124
+msgid "Nom du titulaire de la carte"
+msgstr ""
+
+#: .\sale\templates\sale\checkout.html:134
+#, fuzzy
+#| msgid "Informations du compte"
+msgid "Informations de la carte"
+msgstr "Account information"
+
+#: .\sale\templates\sale\checkout.html:152
+msgid "Payer"
+msgstr ""
+
+#: .\sale\templates\sale\other_product.html:7
+msgid "Les produits annexes"
+msgstr "Additional products"
+
+#: .\sale\templates\sale\other_product.html:8
+msgid "Tout le nécessaire pour élever vos fourmis"
+msgstr "Everything you need to raise your ants"
+
+#: .\sale\templates\sale\other_product.html:9
+msgid ""
+"Équipez-vous comme un véritable myrmécologue avec notre sélection "
+"d'accessoires pour fourmis. Des nids de fourmis aux seringues, en passant "
+"par les pinces à épiler et les Abreuvoirs, vous trouverez tout ce dont vous "
+"avez besoin pour prendre soin de votre colonie. Idéales pour les débutants, "
+"ces fournitures vous permettront d'élever vos fourmis dans des conditions "
+"optimales."
+msgstr ""
+"Equip yourself like a true myrmecologist with our selection of ant "
+"accessories. From ant nests to syringes, including tweezers and water "
+"dispensers, you will find everything you need to take care of your colony. "
+"Ideal for beginners, these supplies will allow you to raise your ants in "
+"optimal conditions."
+
+#: .\sale\templates\sale\pack_detail.html:169
+msgid "Espèce"
+msgstr "Species"
+
+#: .\sale\templates\sale\pack_detail.html:171
+msgid "Localisation "
+msgstr "Location"
+
+#: .\sale\templates\sale\pack_detail.html:173
+msgid "Nombre de gyne "
+msgstr "Number of queens"
+
+#: .\sale\templates\sale\pack_detail.html:174
+msgid "Nombre d'ouvrière "
+msgstr "Number of workers"
+
+#: .\sale\templates\sale\pack_detail.html:176
+msgid "Taille du nid "
+msgstr "Nest size"
+
+#: .\sale\templates\sale\pack_product.html:7
+#: .\super\templates\super\homepage.html:41 .\templates\index.html:112
+msgid "Les packs"
+msgstr "The packs"
+
+#: .\sale\templates\sale\pack_product.html:8
+msgid "Tout ce qu'il faut pour débuter"
+msgstr "Everything you need to start"
+
+#: .\sale\templates\sale\pack_product.html:10
+msgid ""
+"Commencez tout de suite et facilitez vous la vie ! Avec les packs complets, "
+"élevez en toute tranquilité vos futures fourmis."
+msgstr ""
+"Start right away and make your life easier! With complete packs, raise your "
+"future ants with peace of mind."
+
+#: .\sale\templates\sale\seller_all.html:11 .\templates\index.html:122
+msgid "Les vendeurs"
+msgstr "The sellers"
+
+#: .\sale\templates\sale\seller_all.html:12
+msgid "Les vendeurs d'Antly"
+msgstr "Antly's sellers"
+
+#: .\sale\templates\sale\seller_all.html:14
+msgid ""
+"Antly réunit des vendeurs experts en myrmécologie, offrant une gamme de "
+"fourmis, d'accessoires et de packs pour tous les niveaux. Nos vendeurs, "
+"sélectionnés pour leur savoir-faire et la qualité de leurs produits, "
+"s'engagent pour le bien-être des fourmis. Antly est la destination idéale "
+"pour une expérience d'achat fiable et spécialisée dans l'univers captivant "
+"des fourmis."
+msgstr ""
+"Antly brings together expert sellers in myrmecology, offering a range of "
+"ants, accessories, and packs for all levels. Our sellers, selected for their "
+"expertise and the quality of their products, are committed to the well-being "
+"of ants. Antly is the ideal destination for a reliable and specialized "
+"shopping experience in the captivating world of ants."
+
+#: .\sale\templates\sale\success.html:7
+msgid "Merci pour votre commande !"
+msgstr "Thank you for your order!"
+
+#: .\sale\templates\sale\success.html:15
+#, python-format
+msgid ""
+"Toute l'équipe d'Antly vous remercie sincèrement pour votre commande (numéro "
+"de commande : %(order.ref_code)s). Nous sommes ravis de vous compter parmi "
+"nos clients et nous sommes impatients de vous aider à démarrer ou à agrandir "
+"votre élevage de fourmis.\n"
+msgstr ""
+"The entire Antly team sincerely thanks you for your order (order number: "
+"%(order.ref_code)s). We are delighted to have you as our customer and look "
+"forward to helping you start or expand your ant breeding.\n"
+
+#: .\sale\templates\sale\success.html:17
+msgid "Voici un récapitulatif de votre commande :"
+msgstr "Here is a summary of your order:"
+
+#: .\sale\templates\sale\success.html:24
+msgid "Total "
+msgstr "Total"
+
+#: .\sale\templates\sale\success.html:26
+msgid "Adresse de livraison :"
+msgstr "Shipping address:"
+
+#: .\sale\templates\sale\success.html:35
+msgid ""
+"Nous nous engageons à expédier votre commande dans les plus brefs délais. "
+"Vous recevrez un e-mail de confirmation avec les informations de suivi dès "
+"que votre colis sera en route."
+msgstr ""
+"We are committed to shipping your order as soon as possible. You will "
+"receive a confirmation email with tracking information as soon as your "
+"package is on its way."
+
+#: .\sale\templates\sale\success.html:36
+msgid ""
+"Si vous avez des questions concernant votre commande ou si vous avez besoin "
+"d'aide pour votre élevage de fourmis, n'hésitez pas à nous contacter à antly."
+"fourmis@gmail.com ou via les réseau sociaux de contact sur notre site web. "
+"Notre équipe de spécialistes est à votre disposition pour vous assister et "
+"vous fournir des conseils personnalisés."
+msgstr ""
+"If you have any questions regarding your order or need assistance with your "
+"ant breeding, please feel free to contact us at antly.ants@gmail.com or "
+"through the contact networks on our website. Our team of specialists is at "
+"your disposal to assist you and provide personalized advice."
+
+#: .\sale\templates\sale\success.html:37
+msgid ""
+"Nous espérons que vous serez pleinement satisfait(e) de votre achat et que "
+"votre expérience avec Antly sera agréable et enrichissante. N'hésitez pas à "
+"partager vos découvertes et vos réussites avec notre communauté sur les "
+"réseaux sociaux en utilisant le hashtag #Antly."
+msgstr ""
+"We hope you will be fully satisfied with your purchase and that your "
+"experience with Antly will be pleasant and rewarding. Feel free to share "
+"your discoveries and successes with our community on social media using the "
+"hashtag #Antly."
+
+#: .\sale\templates\sale\success.html:38
+msgid ""
+"Encore merci de votre confiance et bonne découverte du monde fascinant des "
+"fourmis !"
+msgstr ""
+"Thank you again for your trust and enjoy discovering the fascinating world "
+"of ants!"
+
+#: .\sale\templates\sale\success.html:39
+msgid "Cordialement,"
+msgstr "Sincerely,"
+
+#: .\sale\templates\sale\success.html:40
+msgid "L'équipe Antly"
+msgstr "The Antly Team"
+
+#: .\sale\templates\sale\success.html:42
+msgid "Récupérer ma facture"
+msgstr "Retrieve my invoice"
+
+#: .\super\templates\super\homepage.html:10
+msgid "La précision a l'état naturel"
+msgstr "Precision in its natural state"
+
+#: .\super\templates\super\homepage.html:25
+msgid "Nos domaines d'expertise"
+msgstr "Our areas of expertise"
+
+#: .\super\templates\super\homepage.html:26
+#, fuzzy
+#| msgid "Les espèces qui pourraient vous correspondre"
+msgid "Optez pour les fourmis qui vous corespondent"
+msgstr "Species that could match you"
+
+#: .\super\templates\super\homepage.html:32
+msgid "Les fondations"
+msgstr "The Foundations"
+
+#: .\super\templates\super\homepage.html:33
+msgid ""
+"Crée votre univers minuscule chez vous. Optez pour une fondation et "
+"introduisez les dans un environnement qui vous inspire, vous être libres de "
+"votre imagination !"
+msgstr ""
+"Create your own miniature universe at home. Choose a foundation and "
+"introduce them into an environment that inspires you, you are free to use "
+"your imagination!"
+
+#: .\super\templates\super\homepage.html:34
+msgid "Voir les fondations"
+msgstr "See the Foundations"
+
+#: .\super\templates\super\homepage.html:42
+#, fuzzy
+#| msgid ""
+#| "Commencer tout de suite et facilitez vous la vie ! Avec nos pack "
+#| "complets, élevez en outes tranquillité vos future fourmis."
+msgid ""
+"Commencer tout de suite et facilitez vous la vie ! Avec nos pack complets, "
+"élevez en outes tranqulité vos future fourmis."
+msgstr ""
+"Start right away and make your life easier! With our complete packs, "
+"peacefully raise your future ants."
+
+#: .\super\templates\super\homepage.html:43
+msgid "Voir les packs"
+msgstr "See the Packs"
+
+#: .\super\templates\super\homepage.html:61
+#: .\super\templates\super\specie_form.html:11
+msgid "Choisissez Votre Espèce de Fourmis Idéale"
+msgstr "Choose Your Ideal Ant Species"
+
+#: .\super\templates\super\homepage.html:62
+msgid ""
+"Découvrez le fascinant monde de l'élevage de fourmis avec Antly ! Que vous "
+"soyez débutant ou expert, nous\n"
+"                avons l'espèce parfaite pour vous. <strong>Notre guide "
+"interactif</strong>  vous aidera à trouver l'espèce idéale adaptée\n"
+"                à vos préférences en matière de taille, de couleur, et bien "
+"plus encore. Plongez dans l'aventure dès\n"
+"                maintenant, votre colonie de fourmis vous attend !"
+msgstr ""
+"Discover the fascinating world of ant farming with Antly! Whether you are a "
+"beginner or an expert, we\n"
+"                have the perfect species for you. <strong>Our interactive "
+"guide</strong> will help you find the ideal species\n"
+"                tailored to your preferences in terms of size, color, and "
+"much more. Dive into the adventure right now, your ant colony is waiting for "
+"you!"
+
+#: .\super\templates\super\homepage.html:66
+msgid "ici"
+msgstr "here"
+
+#: .\super\templates\super\homepage.html:114 .\templates\comment.html:5
+msgid "Retour clients"
+msgstr "Customer Feedback"
+
+#: .\super\templates\super\homepage.html:115 .\templates\comment.html:6
+msgid "Ce que disent nos clients"
+msgstr "What Our Customers Say"
+
+#: .\super\templates\super\homepage.html:145
+msgid "Faire un retour"
+msgstr "Give Feedback"
+
+#: .\super\templates\super\information.html:8
+msgid "Information"
+msgstr "Information"
+
+#: .\super\templates\super\information.html:10
+msgid "Toutes les informations de la boutique"
+msgstr "All the information of the shop"
+
+#: .\super\templates\super\information.html:15 .\templates\index.html:201
+msgid "Livraison"
+msgstr "Delivery"
+
+#: .\super\templates\super\information.html:19
+#: .\super\templates\super\information.html:89 .\templates\index.html:208
+msgid "Modes de paiement"
+msgstr "Payment Methods"
+
+#: .\super\templates\super\information.html:24
+#: .\super\templates\super\information.html:108 .\templates\index.html:215
+msgid "Conditions d'utilisation"
+msgstr "Terms of Use"
+
+#: .\super\templates\super\information.html:29
+#: .\super\templates\super\information.html:126 .\templates\index.html:222
+msgid "Confidentialité"
+msgstr "Privacy"
+
+#: .\super\templates\super\information.html:33
+#: .\super\templates\super\information.html:141
+msgid "Cookies"
+msgstr "Cookies"
+
+#: .\super\templates\super\information.html:37
+#: .\super\templates\super\information.html:161 .\templates\index.html:257
+msgid "Mention légale"
+msgstr "Legal Notice"
+
+#: .\super\templates\super\information.html:42
+#: .\super\templates\super\information.html:207 .\templates\index.html:240
+msgid "Expédition et retours"
+msgstr "Shipping and Returns"
+
+#: .\super\templates\super\information.html:46
+#: .\super\templates\super\information.html:238 .\templates\index.html:245
+msgid "Qui sommes nous"
+msgstr "Who We Are"
+
+#: .\super\templates\super\information.html:49 .\templates\index.html:264
+msgid "Nos offres"
+msgstr "Our Offers"
+
+#: .\super\templates\super\information.html:52
+#: .\super\templates\super\information.html:271 .\templates\index.html:250
+msgid "Contact"
+msgstr "Contact"
+
+#: .\super\templates\super\information.html:65
+msgid "La livraison"
+msgstr "Delivery"
+
+#: .\super\templates\super\information.html:67
+msgid ""
+"Nous sommes heureux de vous informer que tous les articles\n"
+"                commandés sur notre boutique seront envoyés avec soin et\n"
+"                rapidité. Pour assurer une livraison sûre et rapide, nous\n"
+"                proposons deux options d'envoi : UPS ou La Poste."
+msgstr ""
+"We are pleased to inform you that all items\n"
+"                ordered from our shop will be shipped with care and\n"
+"                speed. To ensure safe and prompt delivery, we offer two\n"
+"                shipping options: UPS or La Poste."
+
+#: .\super\templates\super\information.html:73
+msgid ""
+"Selon votre préférence, vous pouvez choisir l'option qui vous\n"
+"                convient le mieux lors de votre commande. Si vous habitez "
+"dans\n"
+"                une zone où il fait froid, nous vous proposons également\n"
+"                l'option de l'envoi avec une chaufferette pour protéger vos\n"
+"                fourmis durant le voyage."
+msgstr ""
+"According to your preference, you can choose the option that suits you\n"
+"                best when placing your order. If you live in a cold area, "
+"we\n"
+"                also offer the option of sending with a heater to protect\n"
+"                your ants during the journey."
+
+#: .\super\templates\super\information.html:80
+msgid ""
+"Nous espérons que ces informations vous seront utiles et nous\n"
+"                sommes impatients de vous envoyer votre commande dès que\n"
+"                possible. Si vous avez des questions supplémentaires, "
+"n'hésitez\n"
+"                pas à nous contacter. Nous sommes là pour vous aider."
+msgstr ""
+"We hope this information will be helpful to you, and we\n"
+"                look forward to sending your order as soon as\n"
+"                possible. If you have any additional questions, please do\n"
+"                not hesitate to contact us. We are here to assist you."
+
+#: .\super\templates\super\information.html:91
+msgid ""
+"Notre boutique accepte plusieurs méthodes de paiement afin de\n"
+"                vous offrir un maximum de flexibilité et de convenance. "
+"Vous\n"
+"                pouvez régler vos achats par carte de crédit ou de débit, "
+"par\n"
+"                virement bancaire ou encore par portefeuille électronique. "
+"Nous\n"
+"                acceptons toutes les cartes de crédit et de débit courantes, "
+"y\n"
+"                compris Visa, Mastercard et American Express. Si vous "
+"préférez\n"
+"                utiliser un portefeuille électronique, nous acceptons "
+"également\n"
+"                les paiements par PayPal et Apple Pay. Nous offrons "
+"également la\n"
+"                possibilité de régler par virement bancaire pour ceux qui\n"
+"                préfèrent cette méthode de paiement. N'hésitez pas à nous\n"
+"                contacter si vous avez des questions sur les méthodes de\n"
+"                paiement acceptées dans notre boutique."
+msgstr ""
+"Our shop accepts multiple payment methods to\n"
+"                provide you with maximum flexibility and convenience. You\n"
+"                can pay for your purchases with a credit or debit card, by\n"
+"                bank transfer, or through an electronic wallet. We accept\n"
+"                all major credit and debit cards, including Visa, "
+"Mastercard,\n"
+"                and American Express. If you prefer to use an electronic\n"
+"                wallet, we also accept payments via PayPal and Apple Pay. "
+"We\n"
+"                also offer the option to pay by bank transfer for those who\n"
+"                prefer this payment method. Feel free to contact us if you\n"
+"                have any questions about the payment methods accepted in "
+"our\n"
+"                shop."
+
+#: .\super\templates\super\information.html:110
+msgid ""
+"En accédant à notre site et en utilisant nos services, vous\n"
+"                acceptez les conditions d'utilisation suivantes. Nous nous\n"
+"                réservons le droit de modifier ces conditions à tout moment "
+"et\n"
+"                vous encourageons à les consulter régulièrement. En "
+"utilisant\n"
+"                notre site, vous acceptez de respecter toutes les lois et\n"
+"                réglementations en vigueur. Vous n'avez pas le droit de "
+"diffuser\n"
+"                du contenu illégal ou offensant sur notre site. Nous nous\n"
+"                réservons le droit de retirer tout contenu que nous jugeons\n"
+"                inapproprié sans préavis. Si vous avez des questions sur "
+"les\n"
+"                conditions d'utilisation de notre site, n'hésitez pas à "
+"nous\n"
+"                contacter."
+msgstr ""
+"By accessing our website and using our services, you agree to the following "
+"terms of use. We reserve the right to modify these terms at any time and "
+"encourage you to check them regularly. By using our website, you agree to "
+"comply with all applicable laws and regulations. You are not allowed to "
+"distribute illegal or offensive content on our site. We reserve the right to "
+"remove any content we deem inappropriate without notice. If you have any "
+"questions about our website's terms of use, please feel free to contact us."
+
+#: .\super\templates\super\information.html:128
+msgid ""
+"Nous sommes conscients de l'importance de la confidentialité\n"
+"                pour nos clients et c'est pour cette raison que nous "
+"prenons\n"
+"                toutes les mesures nécessaires pour protéger vos données\n"
+"                personnelles. Nous ne partagerons jamais vos informations "
+"avec\n"
+"                des tiers sans votre consentement explicite et nous "
+"utilisons\n"
+"                des méthodes de chiffrement pour protéger vos données "
+"pendant\n"
+"                leur transmission. Nous vous demandons seulement les\n"
+"                informations nécessaires pour traiter votre commande et "
+"vous\n"
+"                offrir un service de qualité. Si vous avez des questions sur "
+"la\n"
+"                façon dont nous traitons vos données, n'hésitez pas à nous\n"
+"                contacter. Nous sommes toujours à votre disposition pour\n"
+"                répondre à vos préoccupations en matière de confidentialité."
+msgstr ""
+"We are aware of the importance of privacy for our customers, and for this "
+"reason, we take all necessary measures to protect your personal data. We "
+"will never share your information with third parties without your explicit "
+"consent, and we use encryption methods to protect your data during "
+"transmission. We only ask for the necessary information to process your "
+"order and provide you with quality service. If you have any questions about "
+"how we handle your data, please do not hesitate to contact us. We are always "
+"available to address your privacy concerns."
+
+#: .\super\templates\super\information.html:143
+msgid ""
+"Nous ne récoltons aucune de vos données sans votre accord. Nous\n"
+"                guarentissons la protection de vos appareils en ne mettant "
+"aucun\n"
+"                cookie su notre site."
+msgstr ""
+"We do not collect any of your data without your consent. We guarantee the "
+"protection of your devices by not placing any cookies on our site."
+
+#: .\super\templates\super\information.html:151 .\templates\index.html:229
+msgid "Devenir vendeur"
+msgstr "Become a seller"
+
+#: .\super\templates\super\information.html:153
+msgid ""
+"Rejoignez-nous en tant que vendeur chez Antly et mettez en avant vos "
+"colonies,\n"
+"                vos nids ainsi que toute une gamme de produits associés à la "
+"myrmécologie. Pour plus d'informations et\n"
+"                pour vous inscrire en tant que vendeur, n'hésitez pas à nous "
+"contacter au 06 51 33 61 58."
+msgstr ""
+"Join us as a seller at Antly and showcase your colonies, nests, and a range "
+"of products related to myrmecology. For more information and to register as "
+"a seller, feel free to contact us at 06 51 33 61 58."
+
+#: .\super\templates\super\information.html:162
+msgid "Identité de l'entreprise :"
+msgstr "Company Identity:"
+
+#: .\super\templates\super\information.html:164
+msgid "Nom de l'entreprise : Antly"
+msgstr "Company Name: Antly"
+
+#: .\super\templates\super\information.html:165
+msgid "Forme juridique : Micro entreprise"
+msgstr "Legal Form: Micro Enterprise"
+
+#: .\super\templates\super\information.html:167
+msgid ""
+"Adresse du siège social : 8 chemin des maraîchers Tresserve\n"
+"                  73100 France"
+msgstr ""
+"Registered Office Address: 8 chemin des maraîchers Tresserve\n"
+"                  73100 France"
+
+#: .\super\templates\super\information.html:170
+msgid "Numéro de téléphone : 06 51 33 61 58"
+msgstr "Phone Number: 06 51 33 61 58"
+
+#: .\super\templates\super\information.html:171
+msgid "Adresse e-mail : antly.fourmis@gmail.com"
+msgstr "Email Address: antly.ants@gmail.com"
+
+#: .\super\templates\super\information.html:172
+msgid "Numéro d'immatriculation : 914 939 004 00018"
+msgstr "Registration Number: 914 939 004 00018"
+
+#: .\super\templates\super\information.html:175
+msgid "Responsable de la publication :"
+msgstr "Publication Manager:"
+
+#: .\super\templates\super\information.html:176
+msgid "Nom et prénom du responsable : Louka Pesic"
+msgstr "Name and Surname of the Responsible: Louka Pesic"
+
+#: .\super\templates\super\information.html:178
+msgid "Hébergement du site :"
+msgstr "Website Hosting:"
+
+#: .\super\templates\super\information.html:180
+msgid "Nom de l'hébergeur : Google cloud"
+msgstr "Host name: Google Cloud"
+
+#: .\super\templates\super\information.html:182
+msgid "Propriété intellectuelle :"
+msgstr "Intellectual Property:"
+
+#: .\super\templates\super\information.html:184
+msgid ""
+"Le contenu de ce site internet (textes, images, vidéos, etc.)\n"
+"                est la propriété exclusive de Antly et est protégé par les "
+"lois\n"
+"                françaises sur la propriété intellectuelle. Toute "
+"reproduction,\n"
+"                distribution, modification ou exploitation de ce contenu "
+"sans\n"
+"                autorisation écrite de Antly est strictement interdite."
+msgstr ""
+"The content of this website (text, images, videos, etc.)\n"
+"                is the exclusive property of Antly and is protected by "
+"French\n"
+"                intellectual property laws. Any reproduction, distribution, "
+"modification,\n"
+"                or exploitation of this content without written permission "
+"from Antly is strictly prohibited."
+
+#: .\super\templates\super\information.html:191
+msgid "TVA :"
+msgstr "VAT:"
+
+#: .\super\templates\super\information.html:192
+msgid "Numéro de TVA intracommunautaire :"
+msgstr "Intracommunity VAT number:"
+
+#: .\super\templates\super\information.html:194
+msgid "SIRET :"
+msgstr "SIRET:"
+
+#: .\super\templates\super\information.html:195
+msgid "Numéro SIRET : 914 939 004"
+msgstr "SIRET number: 914 939 004"
+
+#: .\super\templates\super\information.html:197
+msgid "Conditions générales de vente :"
+msgstr "Terms and Conditions of Sale:"
+
+#: .\super\templates\super\information.html:199
+msgid ""
+"Les conditions générales de vente de Antly sont consultables sur\n"
+"                la page suivante : "
+msgstr ""
+"The terms and conditions of sale of Antly can be found on\n"
+"                the following page: "
+
+#: .\super\templates\super\information.html:200
+msgid ""
+" En passant commande sur ce site internet,\n"
+"                vous acceptez ces conditions générales de vente."
+msgstr ""
+"By placing an order on this website,\n"
+"                you accept these terms and conditions of sale."
+
+#: .\super\templates\super\information.html:209
+msgid ""
+"Pour les expéditions, nous travaillons avec plusieurs\n"
+"                transporteurs afin de vous offrir le meilleur service "
+"possible.\n"
+"                Nous mettons un soin particulier à l'emballage de nos "
+"produits\n"
+"                pour assurer leur sécurité pendant le transport. Cependant, "
+"nous\n"
+"                ne sommes pas responsables des dommages causés par le\n"
+"                transporteur durant le voyage. Si vous recevez un produit\n"
+"                endommagé, veuillez nous le signaler dans les plus brefs "
+"délais\n"
+"                et nous ferons le nécessaire pour vous rembourser ou vous\n"
+"                envoyer un nouveau produit."
+msgstr ""
+"For shipments, we work with multiple\n"
+"                carriers to provide you with the best possible service.\n"
+"                We take special care in packaging our products to ensure "
+"their safety\n"
+"                during transport. However, we are not responsible for "
+"damages caused by\n"
+"                the carrier during transit. If you receive a damaged\n"
+"                product, please report it to us as soon as possible, and we\n"
+"                will take the necessary steps to refund or replace the\n"
+"                product."
+
+#: .\super\templates\super\information.html:221
+msgid ""
+"Malheureusement, nous ne faisons pas de retours pour des raisons\n"
+"                éthiques. En effet, nos fourmis sont des êtres vivants et "
+"il\n"
+"                serait trop dangereux pour elles de les renvoyer en "
+"arrière.\n"
+"                Cependant, si votre colonie de fourmis vient à décéder "
+"pendant\n"
+"                le transport, nous vous rembourserons la moitié de sa "
+"valeur.\n"
+"                Pour cela, vous devrez nous fournir des preuves (photos) de "
+"la\n"
+"                mortalité de la colonie. Pour les produits matériels, si "
+"vous ne\n"
+"                recevez pas votre commande en raison d'un problème avec le\n"
+"                transporteur, nous vous rembourserons la totalité de la "
+"valeur\n"
+"                de votre commande. Si vous avez des questions ou des "
+"inquiétudes\n"
+"                concernant l'expédition ou les retours, n'hésitez pas à "
+"nous\n"
+"                contacter. Nous serons heureux de vous aider."
+msgstr ""
+"Unfortunately, we do not accept returns for ethical\n"
+"                reasons. Our ants are living beings, and it would be too "
+"dangerous to\n"
+"                send them back. However, if your ant colony dies during\n"
+"                transport, we will refund you half of its value. To do so, "
+"you will\n"
+"                need to provide us with evidence (photos) of the colony's "
+"mortality.\n"
+"                For physical products, if you do not receive your order due "
+"to an\n"
+"                issue with the carrier, we will refund the full value of "
+"your order.\n"
+"                If you have any questions or concerns regarding shipping or\n"
+"                returns, please do not hesitate to contact us. We will be\n"
+"                happy to assist you."
+
+#: .\super\templates\super\information.html:240
+msgid ""
+"Notre boutique en ligne est spécialisée dans les fourmis pour\n"
+"                débutants. Nous sommes une équipe passionnée par ces petits\n"
+"                êtres et soucieuse de leur bien-être. C'est pour cette "
+"raison\n"
+"                que nous faisons tout notre possible pour leur offrir les\n"
+"                meilleures conditions de vie possibles. Nous sommes "
+"également là\n"
+"                pour vous aider, débutants ou non, à découvrir le monde\n"
+"                fascinant des fourmis et à en prendre soin au mieux. "
+"N'hésitez\n"
+"                pas à nous contacter si vous avez des questions ou si vous\n"
+"                souhaitez plus d'informations sur nos produits et services. "
+"Nous\n"
+"                sommes impatients de vous accueillir dans notre boutique en\n"
+"                ligne !"
+msgstr ""
+"Our online store specializes in ants for beginners. We are a team passionate "
+"about these small creatures and concerned about their well-being. That's why "
+"we do our best to provide them with the best possible living conditions. We "
+"are also here to help you, whether you are a beginner or not, discover the "
+"fascinating world of ants and take care of them to the best of your ability. "
+"Feel free to contact us if you have any questions or if you want more "
+"information about our products and services. We look forward to welcoming "
+"you to our online store!"
+
+#: .\super\templates\super\information.html:258
+msgid "Voici nos offres du moment :"
+msgstr "Here are our current offers:"
+
+#: .\super\templates\super\information.html:265
+msgid "Nous n'avons pas d'offre disponible pour le moment"
+msgstr "We do not have any offers available at the moment."
+
+#: .\super\templates\super\information.html:273
+msgid ""
+"Vous pouvez nous contacter en utilisant les informations\n"
+"                suivantes :"
+msgstr "You can contact us using the following information:"
+
+#: .\super\templates\super\information.html:285
+msgid ""
+"Nous sommes actifs sur tous ces réseaux et vous pouvez nous\n"
+"                suivre pour rester informé de nos dernières vidéos et\n"
+"                publications. N'hésitez pas à nous envoyer un message si "
+"vous\n"
+"                avez des questions ou besoin d'aide. Nous sommes là pour "
+"vous\n"
+"                aider à trouver la colonie de fourmis parfaite pour vous."
+msgstr ""
+"We are active on all of these networks, and you can follow us to stay "
+"updated on our latest videos and publications. Don't hesitate to send us a "
+"message if you have any questions or need assistance. We are here to help "
+"you find the perfect ant colony for you."
+
+#: .\super\templates\super\specie_form.html:12
+msgid "Guide d'Élevage de Fourmis pour Débutants et Experts"
+msgstr "Ant Raising Guide for Beginners and Experts"
+
+#: .\super\templates\super\specie_form.html:13
+msgid ""
+"Bienvenue sur Antly, votre source de confiance pour l'élevage de fourmis. "
+"Que vous soyez un débutant\n"
+"                    ou un éleveur expérimenté, notre guide d'identification "
+"des espèces vous aidera à choisir l'espèce\n"
+"                    de fourmis parfaite pour vous. Faites votre choix en "
+"fonction de la taille, de la couleur, du niveau\n"
+"                    d'élevage et plus encore pour répondre à vos besoins "
+"spécifiques en matière d'élevage de fourmis.\n"
+"                    Notre objectif est de rendre l'élevage de fourmis "
+"accessible à tous et de fournir une ressource\n"
+"                    précieuse pour notre communauté. Avec Antly, vous n'êtes "
+"jamais seuls dans votre aventure d'élevage\n"
+"                    de fourmis. Commencez dès aujourd'hui votre passionnante "
+"expérience d'élevage de fourmis."
+msgstr ""
+"Welcome to Antly, your trusted source for ant raising. Whether you're a "
+"beginner\n"
+"                    or an experienced breeder, our species identification "
+"guide will help you choose the perfect ant species for you. Make your choice "
+"based on size, color, breeding level, and more to meet your specific ant-"
+"raising needs.\n"
+"                    Our goal is to make ant raising accessible to everyone "
+"and provide a valuable resource\n"
+"                    for our community. With Antly, you're never alone in "
+"your ant-raising adventure. Start your exciting\n"
+"                    ant-raising experience today."
+
+#: .\super\templates\super\specie_form.html:30
+msgid "Niveau de connaissance"
+msgstr "Knowledge Level"
+
+#: .\super\templates\super\specie_form.html:33
+msgid "Débutant"
+msgstr "Beginner"
+
+#: .\super\templates\super\specie_form.html:37
+msgid "Intermédiaire"
+msgstr "Intermediate"
+
+#: .\super\templates\super\specie_form.html:41
+msgid "Expérimenté"
+msgstr "Experienced"
+
+#: .\super\templates\super\specie_form.html:48
+#: .\super\templates\super\specie_form.html:125
+msgid "Informations sur l'espèce de fourmis"
+msgstr "Ant Species Information"
+
+#: .\super\templates\super\specie_form.html:50
+#: .\super\templates\super\specie_form.html:145
+msgid "Taille de l'espèce"
+msgstr "Species Size"
+
+#: .\super\templates\super\specie_form.html:57
+#: .\super\templates\super\specie_form.html:152
+msgid "Petite"
+msgstr "Small"
+
+#: .\super\templates\super\specie_form.html:61
+#: .\super\templates\super\specie_form.html:78
+#: .\super\templates\super\specie_form.html:116
+#: .\super\templates\super\specie_form.html:140
+#: .\super\templates\super\specie_form.html:156
+#: .\super\templates\super\specie_form.html:173
+#: .\super\templates\super\specie_form.html:190
+#: .\super\templates\super\specie_form.html:227
+msgid "Sans importance"
+msgstr "Not Important"
+
+#: .\super\templates\super\specie_form.html:67
+#: .\super\templates\super\specie_form.html:162
+msgid "Couleur de l'espèce"
+msgstr "Species Color"
+
+#: .\super\templates\super\specie_form.html:70
+#: .\super\templates\super\specie_form.html:165
+msgid "Coloré"
+msgstr "Colorful"
+
+#: .\super\templates\super\specie_form.html:74
+#: .\super\templates\super\specie_form.html:169
+msgid "Noir"
+msgstr "Black"
+
+#: .\super\templates\super\specie_form.html:85
+#: .\super\templates\super\specie_form.html:196
+msgid "Localisation de l'espèce"
+msgstr "Species Location"
+
+#: .\super\templates\super\specie_form.html:88
+#: .\super\templates\super\specie_form.html:199
+msgid "Europe du Sud"
+msgstr "Southern Europe"
+
+#: .\super\templates\super\specie_form.html:92
+#: .\super\templates\super\specie_form.html:203
+msgid "Europe du Nord"
+msgstr "Northern Europe"
+
+#: .\super\templates\super\specie_form.html:96
+#: .\super\templates\super\specie_form.html:207
+msgid "Asie"
+msgstr "Asia"
+
+#: .\super\templates\super\specie_form.html:100
+#: .\super\templates\super\specie_form.html:211
+msgid "Amérique du Sud"
+msgstr "South America"
+
+#: .\super\templates\super\specie_form.html:104
+#: .\super\templates\super\specie_form.html:215
+msgid "Amérique du Nord"
+msgstr "North America"
+
+#: .\super\templates\super\specie_form.html:108
+#: .\super\templates\super\specie_form.html:219
+msgid "Australie"
+msgstr "Australia"
+
+#: .\super\templates\super\specie_form.html:112
+#: .\super\templates\super\specie_form.html:223
+msgid "Afrique"
+msgstr "Africa"
+
+#: .\super\templates\super\specie_form.html:129
+msgid "Activité de la colonie"
+msgstr "Colony Activity"
+
+#: .\super\templates\super\specie_form.html:132
+msgid "Forte activité"
+msgstr "High Activity"
+
+#: .\super\templates\super\specie_form.html:136
+msgid "Basse activité"
+msgstr "Low Activity"
+
+#: .\super\templates\super\specie_form.html:148
+msgid "Grosse"
+msgstr "Large"
+
+#: .\super\templates\super\specie_form.html:179
+msgid "Type de nid"
+msgstr "Nest Type"
+
+#: .\super\templates\super\specie_form.html:182
+msgid "Sec"
+msgstr "Dry"
+
+#: .\super\templates\super\specie_form.html:186
+msgid "Humide"
+msgstr "Wet"
+
+#: .\super\templates\super\specie_form.html:236
+msgid "Les espèces qui pourraient vous correspondre"
+msgstr "Species that could match you"
+
+#: .\super\templates\super\specie_form.html:240
+msgid "Les espèces que nous avons en stock actuellement"
+msgstr "Species currently in stock"
+
+#: .\templates\account.html:11 .\templates\index.html:131
+msgid "Mon compte"
+msgstr "My account"
+
+#: .\templates\account.html:12
+msgid "Informations du compte"
+msgstr "Account information"
+
+#: .\templates\account.html:18
+msgid "Tableau de bord"
+msgstr "Dashboard"
+
+#: .\templates\account.html:19
+msgid "Mes commandes"
+msgstr "My orders"
+
+#: .\templates\account.html:20
+msgid "Mettre un commentaire"
+msgstr "Leave a comment"
+
+#: .\templates\account.html:21
+msgid "Information personnel"
+msgstr "Personal information"
+
+#: .\templates\account.html:22
+msgid "Ressources"
+msgstr "Resources"
+
+#: .\templates\account.html:23
+msgid "Supprimer mon compte"
+msgstr "Delete my account"
+
+#: .\templates\account.html:24
+msgid "Déconnexion"
+msgstr "Logout"
+
+#: .\templates\index.html:39
+msgid ""
+"Boutique en Ligne de Fourmis pour Débutants - Fondations, Packs, Nids et "
+"Accessoires | Myrmécologie"
+msgstr ""
+"Online Ant Store for Beginners - Foundations, Packs, Nests, and Accessories "
+"| Myrmecology"
+
+#: .\templates\index.html:117
+msgid "Accessoires"
+msgstr "Accessories"
+
+#: .\templates\index.html:141
+msgid "déconnexion"
+msgstr "Logout"
+
+#: .\templates\index.html:149 .\user\templates\user\login.html:16
+#: .\user\templates\user\login.html:33
+msgid "Connexion"
+msgstr "Login"
+
+#: .\templates\index.html:156 .\user\templates\user\signup.html:13
+msgid "Inscription"
+msgstr "Sign Up"
+
+#: .\templates\index.html:183
+msgid "Télephone"
+msgstr "Phone"
+
+#: .\templates\index.html:303
+msgid "boutique française"
+msgstr "French store"
+
+#: .\templates\product.html:14
+msgid "tout"
+msgstr "all"
+
+#: .\user\forms.py:59
+msgid "Mot de passe"
+msgstr "Password"
+
+#: .\user\forms.py:67
+#, python-format
+msgid ""
+"Veuillez saisir un %(email)s et un mot de passe corrects. Notez que les deux "
+"peuvent être sensibles à la casse."
+msgstr ""
+"Please enter a valid %(email)s and password. Note that both may be case-"
+"sensitive."
+
+#: .\user\forms.py:69
+msgid "Ce compte est inactif."
+msgstr "This account is inactive."
+
+#: .\user\forms.py:168 .\user\forms.py:190
+msgid "Nouveau mot de passe"
+msgstr "New password"
+
+#: .\user\forms.py:174 .\user\forms.py:197
+msgid "Confirmation Nouveau mot de passe"
+msgstr "Confirm New Password"
+
+#: .\user\forms.py:180
+msgid "Encien mot de passe"
+msgstr "Old password"
+
+#: .\user\forms.py:212
+msgid "Pays/Région (ex : France)"
+msgstr "Country/Region (e.g., France)"
+
+#: .\user\forms.py:216
+msgid "Nom complet (ex : Bernard Weber)"
+msgstr "Full Name (e.g., Bernard Weber)"
+
+#: .\user\forms.py:220
+msgid "Numéro de téléphone (ex : 0660066006)"
+msgstr "Phone Number (e.g., 0660066006)"
+
+#: .\user\forms.py:224
+msgid "Adresse (ex : 6 sentier de la fourmis)"
+msgstr "Address (e.g., 6 Ant Trail)"
+
+#: .\user\forms.py:228
+#, fuzzy
+#| msgid "Détail (ex : bâtiment 2) *facultatif*"
+msgid "Détail (ex : batiment 2) *facultatif*"
+msgstr "Detail (e.g., Building 2) *optional*"
+
+#: .\user\forms.py:232
+msgid "Code postal (ex : 59610)"
+msgstr "Postal Code (e.g., 59610)"
+
+#: .\user\forms.py:236
+msgid "Ville (ex : Fourmies)"
+msgstr "City (e.g., Fourmies)"
+
+#: .\user\models.py:63
+msgid "The Email must be set"
+msgstr "The Email must be set"
+
+#: .\user\templates\user\login.html:20
+msgid "Email"
+msgstr "Email"
+
+#: .\user\templates\user\login.html:34
+msgid "mot de passe oublié"
+msgstr "Forgot password"
+
+#~ msgid "By card"
+#~ msgstr "By card"
+
+#~ msgid "Cardholder name"
+#~ msgstr "Cardholder name"
+
+#~ msgid "Card information"
+#~ msgstr "Card information"
+
+#~ msgid "Pay"
+#~ msgstr "Pay"

@@ -1,5 +1,4 @@
-{% extends "index.html" %}
-{% load static %}
+{% extends "index.html" %}{% load i18n %}
 
 {% block content %}
     <section id="portfolio" class="section portfolio-section">
@@ -11,7 +10,7 @@
     <div class="container">
         <div class="row mt-5">
          <div class="col-md-6 shipping-method">
-            <h6 class="section-secondary-title">Inscription</h6>
+            <h6 class="section-secondary-title">{% blocktrans %}Inscription{% endblocktrans %}</h6>
         <form action="" method="post">
         {% csrf_token %}
             <div class="mb-4 mt-2">

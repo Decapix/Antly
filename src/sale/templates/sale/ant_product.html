@@ -1,13 +1,12 @@
-{% extends "product.html" %}
-{% load static %}
+{% extends "product.html" %} {% load i18n %}{% load static %}
 
 {% block start %}
 
             <div class="row justify-content-between">
                 <div class="col-md-6 pr-md-5 mb-4 mb-md-0">
-                    <h6 class="section-title mb-0">Les fourmis</h6>
-                    <h6 class="section-subtitle mb-4">Les fourmis d'europe</h6>
-                    <p>Créez votre univers minuscule chez vous. Optez pour une fondation et introduisez les dans un environnement qui vous inspire, laissez-vous guider par votre imagination !</p>
+                    <h6 class="section-title mb-0">{% blocktrans %}Les fourmis{% endblocktrans %}</h6>
+                    <h6 class="section-subtitle mb-4">{% blocktrans %}Les fourmis d'europe{% endblocktrans %}</h6>
+                    <p>{% blocktrans %}Créez votre univers minuscule chez vous. Optez pour une fondation et introduisez les dans un environnement qui vous inspire, laissez-vous guider par votre imagination !{% endblocktrans %}</p>
                 </div>
                 <div class="col-md-6 pl-md-5">
                     <img src="{% static 'sale/imgs/about-ant.jpg' %}" alt="egor-kamelev" class="w-100 shadow-sm">
