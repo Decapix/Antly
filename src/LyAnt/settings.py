@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-4o949ijfccf)w8ll%(hgb#b%h29p#g69dljf*)af9pkd1f_iw5
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = os.environ.get('ENV') != 'PRODUCTION'
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ['antly.herokuapp.com', 'localhost', '127.0.0.1', 'antly.fr', 'www.antly.fr']
 
 
@@ -114,32 +114,8 @@ DATABASES = {
 }
 
 
-IN_CODE = os.environ.get('ENV') != 'PRODUCTION'
-if not IN_CODE :
-    #heroku
-    DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'antly-projectdata-base',
-        'USER': 'antly-projectuser',
-        'PASSWORD': ":)Solenops1s<$o",
-        'HOST': '35.205.253.192',
-        'PORT': '5432',
-    }
-    }
-    
-else:
-    #local
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'antlydatabase3',
-            'USER': 'postgres',
-            'PASSWORD': ':)solenopsIs<$o',
-            'HOST': 'localhost',
-            'PORT': '5432',
-        }
-    }
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
