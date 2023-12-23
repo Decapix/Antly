@@ -510,7 +510,7 @@ def checkout_vi(request):
         form = Address_fo(request.POST)
         if form.is_valid():
 
-            easypostcalcul()
+            # easypostcalcul()
 
             new_address = form.save(commit=False)
             new_address.save()
