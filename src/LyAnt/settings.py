@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-4o949ijfccf)w8ll%(hgb#b%h29p#g69dljf*)af9pkd1f_iw5'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = os.environ.get('ENV') != 'PRODUCTION'
@@ -180,9 +180,10 @@ MEDIA_ROOT = BASE_DIR / "media"
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': 'he8kyfyn7',
     'API_KEY': '131631381727338',
-    'API_SECRET': '582qD-SeI5Ni-oD-2P1fZclls1g',
+    'API_SECRET': os.environ.get('API_SECRET_CLOUDINARY_STORAGE')
 }
 cloudinary.config(**CLOUDINARY_STORAGE)
+
 
 MEDIA_URL = '/media/'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
@@ -207,7 +208,7 @@ EMAIL_USE_TLS = True
 
 # google sheets
 
-API_GOOGLE = "AIzaSyDzfwJz7M-oLbSFZwXoiXLL9kKblo_SSIE"
+API_GOOGLE = os.environ.get('API_GOOGLE')
 # cookies
 
 # SESSION_EXPIRE_AT_BR0WSER_CL0SE = True  # cookies delete themselves when the window is closed
