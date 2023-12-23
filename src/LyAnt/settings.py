@@ -113,7 +113,9 @@ DATABASES = {
     }
 }
 
-if not DEBUG :
+
+IN_CODE = os.environ.get('ENV') != 'PRODUCTION'
+if not IN_CODE :
     #heroku
     DATABASES = {
     'default': {

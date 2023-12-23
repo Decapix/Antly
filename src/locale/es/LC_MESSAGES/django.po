@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-18 13:56+0100\n"
+"POT-Creation-Date: 2023-12-23 16:12+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -327,8 +327,7 @@ msgstr "Ver las fundaciones"
 
 #: .\super\templates\super\homepage.html:42
 msgid ""
-"Commencer tout de suite et facilitez vous la vie ! Avec nos pack complets, "
-"élevez en outes tranqulité vos future fourmis."
+"Commencer tout de suite et facilitez vous la vie ! Avec nos pack complets, élevez en outes tranqulité vos future fourmis."
 msgstr ""
 "¡Comienza de inmediato y facilita tu vida! Con nuestros paquetes completos, "
 "cría tus futuras hormigas con total tranquilidad."
@@ -899,6 +898,11 @@ msgstr "Información sobre la especie de hormigas"
 msgid "Taille de l'espèce"
 msgstr "Tamaño de la especie"
 
+#: .\super\templates\super\specie_form.html:53
+#: .\super\templates\super\specie_form.html:148
+msgid "Grosse"
+msgstr "Grande"
+
 #: .\super\templates\super\specie_form.html:57
 #: .\super\templates\super\specie_form.html:152
 msgid "Petite"
@@ -981,10 +985,6 @@ msgstr "Actividad alta"
 #: .\super\templates\super\specie_form.html:136
 msgid "Basse activité"
 msgstr "Actividad baja"
-
-#: .\super\templates\super\specie_form.html:148
-msgid "Grosse"
-msgstr "Grande"
 
 #: .\super\templates\super\specie_form.html:179
 msgid "Type de nid"

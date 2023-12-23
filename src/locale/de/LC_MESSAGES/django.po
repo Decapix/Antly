@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-18 13:56+0100\n"
+"POT-Creation-Date: 2023-12-23 16:12+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -327,13 +327,8 @@ msgid "Voir les fondations"
 msgstr "Die Gründungen anzeigen"
 
 #: .\super\templates\super\homepage.html:42
-#, fuzzy
-#| msgid ""
-#| "Commencer tout de suite et facilitez vous la vie ! Avec nos pack "
-#| "complets, élevez en outes tranquillité vos future fourmis."
 msgid ""
-"Commencer tout de suite et facilitez vous la vie ! Avec nos pack complets, "
-"élevez en outes tranqulité vos future fourmis."
+"Commencer tout de suite et facilitez vous la vie ! Avec nos pack complets, élevez en outes tranqulité vos future fourmis."
 msgstr ""
 "Fangen Sie sofort an und erleichtern Sie sich das Leben! Mit unseren "
 "Komplettpaketen können Sie Ihre zukünftigen Ameisen ganz einfach züchten."
@@ -897,6 +892,11 @@ msgstr "Informationen zur Ameisenart"
 msgid "Taille de l'espèce"
 msgstr "Größe der Art"
 
+#: .\super\templates\super\specie_form.html:53
+#: .\super\templates\super\specie_form.html:148
+msgid "Grosse"
+msgstr "Groß"
+
 #: .\super\templates\super\specie_form.html:57
 #: .\super\templates\super\specie_form.html:152
 msgid "Petite"
@@ -979,10 +979,6 @@ msgstr "Hohe Aktivität"
 #: .\super\templates\super\specie_form.html:136
 msgid "Basse activité"
 msgstr "Niedrige Aktivität"
-
-#: .\super\templates\super\specie_form.html:148
-msgid "Grosse"
-msgstr "Groß"
 
 #: .\super\templates\super\specie_form.html:179
 msgid "Type de nid"

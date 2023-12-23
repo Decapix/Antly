@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-18 13:56+0100\n"
+"POT-Creation-Date: 2023-12-23 16:12+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -330,13 +330,8 @@ msgid "Voir les fondations"
 msgstr "See the Foundations"
 
 #: .\super\templates\super\homepage.html:42
-#, fuzzy
-#| msgid ""
-#| "Commencer tout de suite et facilitez vous la vie ! Avec nos pack "
-#| "complets, élevez en outes tranquillité vos future fourmis."
 msgid ""
-"Commencer tout de suite et facilitez vous la vie ! Avec nos pack complets, "
-"élevez en outes tranqulité vos future fourmis."
+"Commencer tout de suite et facilitez vous la vie ! Avec nos pack complets, élevez en outes tranqulité vos future fourmis."
 msgstr ""
 "Start right away and make your life easier! With our complete packs, "
 "peacefully raise your future ants."
@@ -894,6 +889,11 @@ msgstr "Ant Species Information"
 msgid "Taille de l'espèce"
 msgstr "Species Size"
 
+#: .\super\templates\super\specie_form.html:53
+#: .\super\templates\super\specie_form.html:148
+msgid "Grosse"
+msgstr "Large"
+
 #: .\super\templates\super\specie_form.html:57
 #: .\super\templates\super\specie_form.html:152
 msgid "Petite"
@@ -976,10 +976,6 @@ msgstr "High Activity"
 #: .\super\templates\super\specie_form.html:136
 msgid "Basse activité"
 msgstr "Low Activity"
-
-#: .\super\templates\super\specie_form.html:148
-msgid "Grosse"
-msgstr "Large"
 
 #: .\super\templates\super\specie_form.html:179
 msgid "Type de nid"
