@@ -4,169 +4,18 @@
 
 
 {% block home %}
- <!-- Page Header -->
-    <header class="header">
-        <div class="overlay">
-            <h1 class="subtitle">{% blocktrans %}La précision a l'état naturel{% endblocktrans %}</h1>
-            <h1 class="title">Antly</h1>
-        </div>
-        <div class="shape">
-            <svg viewBox="0 0 1500 200">
-                <path d="m 0,240 h 1500.4828 v -71.92164 c 0,0 -286.2763,-81.79324 -743.19024,-81.79324 C 300.37862,86.28512 0,168.07836 0,168.07836 Z"/>
-            </svg>
-        </div>
-        <div class="mouse-icon"><div class="wheel"></div></div>
-    </header>
-    <!-- End Of Page Header -->
-
-    <!-- Service Section -->
-<!--     <section  id="service" class="section pt-0">
-        <div class="container">
-            <h6 class="section-title text-center">{% blocktrans %}Nos domaines d'expertise{% endblocktrans %}</h6>
-            <h6 class="section-subtitle text-center mb-5 pb-3">{% blocktrans %}Optez pour les fourmis qui vous corespondent{% endblocktrans %}</h6>
-
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="card mb-4 mb-md-0">
-                        <div class="card-body">
-                            <h5 class="card-title mt-3">{% blocktrans %}Les fondations{% endblocktrans %}<h5>
-                            <p class="mb-0">{% blocktrans %}Crée votre univers minuscule chez vous. Optez pour une fondation et introduisez les dans un environnement qui vous inspire, vous être libres de votre imagination !{% endblocktrans %}</p>
-                            <a href="{% url 'ant_product_n' %}" class="mb-0 small" >{% blocktrans %}Voir les fondations{% endblocktrans %}</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card mb-4 mb-md-0">
-                        <div class="card-body">
-                            <h5 class="card-title mt-3">{% blocktrans %}Les packs{% endblocktrans %}<h5>
-                            <p class="mb-0">{% blocktrans %}Commencer tout de suite et facilitez vous la vie ! Avec nos pack complets, élevez en outes tranqulité vos future fourmis.{% endblocktrans %}</p>
-                            <a href="{% url 'pack_product_n' %}" class="mb-0 small">{% blocktrans %}Voir les packs{% endblocktrans %}</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> -->
-    <!-- End OF Service Section -->
+<p>home</p>
 
 {% endblock home %}
 
 {% block content %}
 
-<section class="section" id="">
-    <div class="container">
-        <a href="{% url 'specie_form_n' %}">
-            <div class="row justify-content-between">
-                <div class="col-md-6 pr-md-5 mb-4 mb-md-0">
-                    <h6 class="section-title mb-0">{% blocktrans %}Choisissez Votre Espèce de Fourmis Idéale{% endblocktrans %}</h6>
-                    <p>{% blocktrans %}Découvrez le fascinant monde de l'élevage de fourmis avec Antly ! Que vous soyez débutant ou expert, nous
-                avons l'espèce parfaite pour vous. <strong>Notre guide interactif</strong>  vous aidera à trouver l'espèce idéale adaptée
-                à vos préférences en matière de taille, de couleur, et bien plus encore. Plongez dans l'aventure dès
-                maintenant, votre colonie de fourmis vous attend !{% endblocktrans %}</p>
-                    <p class="text-info">{% blocktrans %}ici{% endblocktrans %}</p>
-                </div>
-                <div class="col-md-6 pl-md-5">
-                    <img src="{% static 'super/imgs/form.webp' %}" alt="" class="w-60 mt-3 ml-5 shadow-lg">
-                </div>
-            </div>
-        </a>
-    </div>
-</section>
+<p>content</p>
 
-<section class="section" id="about">
-    <div class="container">
-        <div class="row">
-            {% for varproduct in product %}   
-                {% include '_product_card.html' %}
-            {% endfor %}
-        </div>
-        </div>
-    </div>
-</section>
-
-
-
-
-<!-- Testmonial Section -->
-    <section class="section" id="testmonial">
-        <div class="container">
-            <h6 class="section-title text-center mb-0">{% blocktrans %}Retour clients{% endblocktrans %}</h6>
-            <h6 class="section-subtitle mb-5 text-center">{% blocktrans %}Ce que disent nos clients{% endblocktrans %}</h6>
-            <div class="row">
-                {% for co in comment %}
-                <div class="col-md-4 my-3 my-md-0">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="media align-items-center mb-3">
-                                <div class="media-body">
-                                    <h6 class="mt-1 mb-0">{{ co.shopper }}</h6>
-                                    <small class="text-muted mb-0" id="star">
-                                        {% for i in '12345'|make_list %}
-                                            {% with i|add:0 as int_i %}
-                                                {% if int_i <= co.star %}
-                                                    <span class="ti-star star-filled"></span>
-                                                {% else %}
-                                                    <span class="ti-star"></span>
-                                                {% endif %}
-                                            {% endwith %}
-                                        {% endfor %}
-                                    </small>
-                                </div>
-                            </div>
-                            <p class="comment-text">{{ co.text }}</p>
-                            <p class="mb-0 comment-text"> Sujet(s) : {{ co.sh_subject }} </p>
-
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-            <a href="{% url 'comment_n' %}" class="btn btn-primary mt-4 ml-4 rounded">{% blocktrans %}Faire un retour{% endblocktrans %}</a>
-        </div>
-    </section>
-    <!-- End of Testmonial Section -->
-
-<!-- About Section 
-    <section class="section" id="portfolio">
-        <div class="container">
-            <div class="row justify-content-between">
-                <div class="col-md-6 pr-md-5 mb-4 mb-md-0">
-                    <h6 class="section-title mb-0">À propos d'Antly</h6>
-                    <h6 class="section-subtitle mb-4">Qui sommes nous ?</h6>
-                    <p>Nous sommes deux frères passionés de fourmis et de nature. Notre objectif ? Rendre la myrmécologie sécurisée et accessible à tous.</p>
-                    <p>Chez Antly, nous vous assurons un travail de qualité avec un service client attentif pour rendre nos produits exceptionnels. Vous aussi, faites partie de la fratrie et rejoignez le début d'une aventure unique et minuscule.</p>
-                </div>
-                <div class="col-md-6 pl-md-5">
-                    <img src="{% static 'super/imgs/co.jpg' %}" alt="" class="w-100 mt-3 shadow-sm">
-                </div>
-            </div>
-        </div>
-    </section>
-   End OF About Section  -->
 
 {% endblock content %}
 
-<!-- {% block script %}
-<script>
-    function toggleCommentText(event, fullText) {
-        const element = event.target;
-        const shortText = fullText.substring(0, 100) + '...';
+{% block script %}
+<p>scripte</p>
 
-        if (element.innerHTML === shortText) {
-            element.innerHTML = fullText;
-        } else {
-            element.innerHTML = shortText;
-        }
-    }
-
-    document.querySelectorAll('.comment-text').forEach(element => {
-        const fullText = element.innerHTML;
-
-        if (fullText.length > 100) {
-            element.innerHTML = fullText.substring(0, 100) + '...';
-            element.style.cursor = 'pointer';
-            element.addEventListener('click', (event) => toggleCommentText(event, fullText));
-        }
-    });
-</script>
-{% endblock %} -->
+{% endblock %} 
