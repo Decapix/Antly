@@ -4,8 +4,50 @@
 
 
 {% block home %}
-<p>home</p>
+ <!-- Page Header -->
+ <header class="header">
+    <div class="overlay">
+        <h1 class="subtitle">{% blocktrans %}La précision a l'état naturel{% endblocktrans %}</h1>
+        <h1 class="title">Antly</h1>
+    </div>
+    <div class="shape">
+        <svg viewBox="0 0 1500 200">
+            <path d="m 0,240 h 1500.4828 v -71.92164 c 0,0 -286.2763,-81.79324 -743.19024,-81.79324 C 300.37862,86.28512 0,168.07836 0,168.07836 Z"/>
+        </svg>
+    </div>
+    <div class="mouse-icon"><div class="wheel"></div></div>
+</header>
+<!-- End Of Page Header -->
 
+<!-- Service Section -->
+<section  id="service" class="section pt-0">
+    <div class="container">
+        <h6 class="section-title text-center">{% blocktrans %}Nos domaines d'expertise{% endblocktrans %}</h6>
+        <h6 class="section-subtitle text-center mb-5 pb-3">{% blocktrans %}Optez pour les fourmis qui vous corespondent{% endblocktrans %}</h6>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card mb-4 mb-md-0">
+                    <div class="card-body">
+                        <h5 class="card-title mt-3">{% blocktrans %}Les fondations{% endblocktrans %}<h5>
+                        <p class="mb-0">{% blocktrans %}Crée votre univers minuscule chez vous. Optez pour une fondation et introduisez les dans un environnement qui vous inspire, vous être libres de votre imagination !{% endblocktrans %}</p>
+                        <a href="{% url 'ant_product_n' %}" class="mb-0 small" >{% blocktrans %}Voir les fondations{% endblocktrans %}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card mb-4 mb-md-0">
+                    <div class="card-body">
+                        <h5 class="card-title mt-3">{% blocktrans %}Les packs{% endblocktrans %}<h5>
+                        <p class="mb-0">{% blocktrans %}Commencer tout de suite et facilitez vous la vie ! Avec nos pack complets, élevez en outes tranqulité vos future fourmis.{% endblocktrans %}</p>
+                        <a href="{% url 'pack_product_n' %}" class="mb-0 small">{% blocktrans %}Voir les packs{% endblocktrans %}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End OF Service Section -->
 {% endblock home %}
 
 {% block content %}
