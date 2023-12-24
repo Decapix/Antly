@@ -73,12 +73,64 @@
     </div>
 </section>
 
+<section class="section" id="about">
+    <div class="container">
+        <div class="row">
+            <!-- {% for p in product %}
+            <div class="col-md-4">
+                <div class="card border-0 mb-4">
+                    <a class= "exemple" href="{{ p.get_absolute_url }}">
+                    <img src="{{ p.thumbnail_url }}" alt="" class="card-img-top w-100 limite-height">
+                    <div class="card-body">
+                        <h6 class="card-title">{{ p.sh_name }}</h6>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p>{{ p.sh_price }} €</p>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="{% url 'seller_n' p.show_supplier_id%}"><p class="text-muted">Vendeur : {{ p.sh_supplier }}</p></a>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            {% endfor %} -->
+
+            {% for varproduct in product %}   
+                {% include '_product_card.html' %}
+            {% endfor %}
+        </div>
+        </div>
+    </div>
+</section>
+
 
 
 
 {% endblock content %}
 
 {% block script %}
-<p>scripte</p>
+<script>
+    function toggleCommentText(event, fullText) {
+        const element = event.target;
+        const shortText = fullText.substring(0, 100) + '...';
 
+        if (element.innerHTML === shortText) {
+            element.innerHTML = fullText;
+        } else {
+            element.innerHTML = shortText;
+        }
+    }
+
+    document.querySelectorAll('.comment-text').forEach(element => {
+        const fullText = element.innerHTML;
+
+        if (fullText.length > 100) {
+            element.innerHTML = fullText.substring(0, 100) + '...';
+            element.style.cursor = 'pointer';
+            element.addEventListener('click', (event) => toggleCommentText(event, fullText));
+        }
+    });
+</script>
 {% endblock %} 
