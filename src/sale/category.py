@@ -1,5 +1,4 @@
 # file for available category
-from django.db import models
 
 # ("what appears", "which allows you to choose"),
 

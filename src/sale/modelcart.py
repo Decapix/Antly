@@ -292,8 +292,9 @@ class Transaction(models.Model):
         ordering = ['-timestamp']
 
 
-#@receiver(post_save, sender=OrderTrack_m)
-#def send_tracking_number(sender, instance, created, **kwargs):
-#    if created:  # Vérifie si le numéro de suivi n'est pas vide
-#        latest_order_track = OrderTrack_m.objects.filter(order=instance).last()
-#        send_tracking_number_email(instance, latest_order_track)
+
+
+class Delivery (models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    from_country = models.CharField(choices=GYNE_CHOICES, max_length=20, default="1")
+    
