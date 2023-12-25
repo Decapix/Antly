@@ -6,6 +6,8 @@ from PIL import Image
 from io import BytesIO
 from django.core.files import File
 from admin_supplier.models import Supplier_m
+from django.db import models
+
 
 
 class Product_m(models.Model):

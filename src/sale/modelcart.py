@@ -294,7 +294,5 @@ class Transaction(models.Model):
 
 
 
-class Delivery (models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    from_country = models.CharField(choices=GYNE_CHOICES, max_length=20, default="1")
+
     
