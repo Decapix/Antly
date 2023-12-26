@@ -168,9 +168,9 @@
 
         <!-- endstrip-->
         <!-- paypal -->
-      <h6 class="mb-4">Paypal</h4>
-      <div id="paypal-button-container">
-                {{paypal.render}}
+      <h6 class="mb-4">PayPal</h4>
+      <div id="paypal-form-container">
+                
       </div>
         
         <!--      endpaypal-->
@@ -288,6 +288,12 @@
           shippingCostElement.textContent = data.shipping_costs + ' €';
           totalElement.textContent = data.total + ' €';
           totalElement2.textContent = data.total + ' €';
+
+          // payapl button
+          if (data.paypal_form) {
+              const paypalFormContainer = document.getElementById('paypal-form-container');
+              paypalFormContainer.innerHTML = data.paypal_form;
+          }
 
       } else {
           alert("Une erreur s'est produite lors de la soumission du formulaire d'adresse.");

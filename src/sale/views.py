@@ -493,19 +493,6 @@ def checkout_vi(request):
 
     form = Address_fo()
 
-    paypal_checkout = {
-        'business': settings.PAYPAL_RECEIVER_EMAIL,
-        'amount': existing_order.get_cart_total(),
-        'item_name': request.user,
-        'invoice': uuid.uuid4(),
-        'currency_code': 'EUR',
-        'notify_url': f"http://{host}{reverse('paypal-ipn')}",
-        'return_url': f"http://{host}{'/produit/commande/success/'}{existing_order.id}",
-        'cancel_url': f"http://{host}{'/produit/commande/checkout/'}",
-    }
-
-    paypal_payment = PayPalPaymentsForm(initial=paypal_checkout)
-
     if request.method == "POST":
         form = Address_fo(request.POST)
         if form.is_valid():
@@ -519,13 +506,30 @@ def checkout_vi(request):
             shipping_costs = existing_order.shipping_costs()
             total = existing_order.get_cart_total()
             ze = "colis" 
+            
+            paypal_checkout = {
+                'business': settings.PAYPAL_RECEIVER_EMAIL,
+                'amount': existing_order.get_cart_total(),
+                'item_name': request.user,
+                'invoice': uuid.uuid4(),
+                'currency_code': 'EUR',
+                'notify_url': f"http://{host}{reverse('paypal-ipn')}",
+                'return_url': f"http://{host}{'/produit/commande/success/'}{existing_order.id}",
+                'cancel_url': f"http://{host}{'/produit/commande/checkout/'}",
+            }
+
+            paypal_payment = PayPalPaymentsForm(initial=paypal_checkout)
+            
+            
             address_json = {
                 "html": "\nPays : {}<br>\nNom complet : {}<br>\nNuméro de télephone : {}<br>\nAdresse : {}<br>\nDetails : {}<br>\nCode postal : {}<br>\nVille : {}<br>\n<hr>\n  Méthode de livraison : {}".format(
                     new_address.country, new_address.complete_name, new_address.phone_number, new_address.adress, new_address.postal_code, new_address.detail ,new_address.city, ze),
                 "address_id": new_address.id,
                 "total": total,
                 "shipping_costs" : shipping_costs,
+                "paypal_form": paypal_payment.render(),
             }
+        
             return JsonResponse(address_json)
         else:
             messages.error(request, "Le formulaire d'adresse est invalide.")
@@ -539,11 +543,9 @@ def checkout_vi(request):
         "STRIPE_PUBLIC_KEY": os.environ.get('STRIPE_PUBLISHABLE_KEY'),
         "user": request.user,
         "bread":bread,
-        'paypal': paypal_payment
     }
 
     return render(request, "sale/checkout.html", context)
-
 
 
 
