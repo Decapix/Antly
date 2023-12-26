@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-23 16:12+0100\n"
+"POT-Creation-Date: 2023-12-26 16:28+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\sale\modelcart.py:337
+#, python-brace-format
+msgid ""
+"<p>Le colis de <b>{supplier_name}</b> part de <b>{country}</b> avec "
+"<b>{service}</b> pour <b>{price}€</b>, il contient {items}.</p>"
+msgstr ""
+"<p>El paquete de <b>{supplier_name}</b> sale de <b>{country}</b> con "
+"<b>{service}</b> por <b>{price}€</b>, contiene {items}.</p>"
 
 #: .\sale\templates\sale\ant_detail.html:92 .\sale\templates\sale\cart.html:36
 #: .\sale\templates\sale\other_detail.html:89
@@ -65,35 +74,29 @@ msgstr "unidades"
 msgid "Adresse de livraison"
 msgstr "Dirección de envío"
 
-#: .\sale\templates\sale\checkout.html:45
-msgid "Méthode de livraison"
-msgstr "Método de envío"
-
-#: .\sale\templates\sale\checkout.html:48
-msgid "Lettre - 3€"
-msgstr "Carta - 3€"
-
-#: .\sale\templates\sale\checkout.html:49
-msgid "Colis - 5€"
-msgstr "Paquete - 5€"
-
-#: .\sale\templates\sale\checkout.html:67
+#: .\sale\templates\sale\checkout.html:54
 msgid "Résumé de la commande"
 msgstr "Resumen del pedido"
 
-#: .\sale\templates\sale\checkout.html:79
+#: .\sale\templates\sale\checkout.html:66
 msgid "Transport"
 msgstr "Transporte"
 
-#: .\sale\templates\sale\checkout.html:86
+#: .\sale\templates\sale\checkout.html:73
 msgid "Colonie offerte"
 msgstr "Colonia de regalo"
 
-#: .\sale\templates\sale\checkout.html:94
+#: .\sale\templates\sale\checkout.html:81
 msgid "Total de la commande"
 msgstr "Total del pedido"
 
-#: .\sale\templates\sale\checkout.html:106
+#: .\sale\templates\sale\checkout.html:89
+#, fuzzy
+#| msgid "Méthode de livraison"
+msgid " Coût de livraison"
+msgstr "Método de envío"
+
+#: .\sale\templates\sale\checkout.html:107
 msgid ""
 "La colonie offerte est une colonie, sélectionnée au hasard,\n"
 "                parmi tous nos stocks. Nous l’ajoutons à votre commande en "
@@ -104,23 +107,23 @@ msgstr ""
 "inventario. La agregamos a su pedido además de los artículos que haya "
 "elegido."
 
-#: .\sale\templates\sale\checkout.html:116
+#: .\sale\templates\sale\checkout.html:117
 msgid "Paiement, Par carte ou paypal"
 msgstr "Pago, con tarjeta o PayPal"
 
-#: .\sale\templates\sale\checkout.html:117
+#: .\sale\templates\sale\checkout.html:118
 msgid "Par carte"
 msgstr "Con tarjeta"
 
-#: .\sale\templates\sale\checkout.html:124
+#: .\sale\templates\sale\checkout.html:125
 msgid "Nom du titulaire de la carte"
 msgstr "Nombre del titular de la tarjeta"
 
-#: .\sale\templates\sale\checkout.html:134
+#: .\sale\templates\sale\checkout.html:135
 msgid "Informations de la carte"
 msgstr "Información de la tarjeta"
 
-#: .\sale\templates\sale\checkout.html:152
+#: .\sale\templates\sale\checkout.html:153
 msgid "Payer"
 msgstr "Pagar"
 
@@ -327,7 +330,8 @@ msgstr "Ver las fundaciones"
 
 #: .\super\templates\super\homepage.html:42
 msgid ""
-"Commencer tout de suite et facilitez vous la vie ! Avec nos pack complets, élevez en outes tranqulité vos future fourmis."
+"Commencer tout de suite et facilitez vous la vie ! Avec nos pack complets, "
+"élevez en outes tranqulité vos future fourmis."
 msgstr ""
 "¡Comienza de inmediato y facilita tu vida! Con nuestros paquetes completos, "
 "cría tus futuras hormigas con total tranquilidad."
@@ -1079,11 +1083,11 @@ msgstr "tienda francesa"
 msgid "tout"
 msgstr "todo"
 
-#: .\user\forms.py:59
+#: .\user\forms.py:62
 msgid "Mot de passe"
 msgstr "Contraseña"
 
-#: .\user\forms.py:67
+#: .\user\forms.py:70
 #, python-format
 msgid ""
 "Veuillez saisir un %(email)s et un mot de passe corrects. Notez que les deux "
@@ -1092,51 +1096,47 @@ msgstr ""
 "Por favor, introduzca un %(email)s y una contraseña válida. Tenga en cuenta "
 "que ambos pueden ser sensibles a mayúsculas y minúsculas."
 
-#: .\user\forms.py:69
+#: .\user\forms.py:72
 msgid "Ce compte est inactif."
 msgstr "Esta cuenta está inactiva."
 
-#: .\user\forms.py:168 .\user\forms.py:190
+#: .\user\forms.py:171 .\user\forms.py:193
 msgid "Nouveau mot de passe"
 msgstr "Nueva contraseña"
 
-#: .\user\forms.py:174 .\user\forms.py:197
+#: .\user\forms.py:177 .\user\forms.py:200
 msgid "Confirmation Nouveau mot de passe"
 msgstr "Confirmación de nueva contraseña"
 
-#: .\user\forms.py:180
+#: .\user\forms.py:183
 msgid "Encien mot de passe"
 msgstr "Contraseña anterior"
 
-#: .\user\forms.py:212
-msgid "Pays/Région (ex : France)"
-msgstr "País/Región (ejemplo: Francia)"
-
-#: .\user\forms.py:216
+#: .\user\forms.py:224
 msgid "Nom complet (ex : Bernard Weber)"
 msgstr "Nombre completo (ejemplo: Bernard Weber)"
 
-#: .\user\forms.py:220
+#: .\user\forms.py:228
 msgid "Numéro de téléphone (ex : 0660066006)"
 msgstr "Número de teléfono (ejemplo: 0660066006)"
 
-#: .\user\forms.py:224
+#: .\user\forms.py:232
 msgid "Adresse (ex : 6 sentier de la fourmis)"
 msgstr "Dirección (ejemplo: 6 sentier de la fourmis)"
 
-#: .\user\forms.py:228
+#: .\user\forms.py:236
 msgid "Détail (ex : batiment 2) *facultatif*"
 msgstr "Detalles (ejemplo: edificio 2) *opcional*"
 
-#: .\user\forms.py:232
+#: .\user\forms.py:240
 msgid "Code postal (ex : 59610)"
 msgstr "Código postal (ejemplo: 59610)"
 
-#: .\user\forms.py:236
+#: .\user\forms.py:244
 msgid "Ville (ex : Fourmies)"
 msgstr "Ciudad (ejemplo: Fourmies)"
 
-#: .\user\models.py:63
+#: .\user\models.py:64
 msgid "The Email must be set"
 msgstr "El correo electrónico debe estar configurado"
 
@@ -1147,6 +1147,15 @@ msgstr "Correo electrónico"
 #: .\user\templates\user\login.html:34
 msgid "mot de passe oublié"
 msgstr "Contraseña olvidada"
+
+#~ msgid "Lettre - 3€"
+#~ msgstr "Carta - 3€"
+
+#~ msgid "Colis - 5€"
+#~ msgstr "Paquete - 5€"
+
+#~ msgid "Pays/Région (ex : France)"
+#~ msgstr "País/Región (ejemplo: Francia)"
 
 #~ msgid ""
 #~ "Esperamos que quede completamente satisfecho(a) con su compra y que su "

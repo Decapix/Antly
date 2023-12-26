@@ -113,97 +113,46 @@ def get_products_for_supplier(supplier_id):
 
 
 
-def calculer_frais_envoi(adresse_acheteur, adresse_vendeur, poids, dimensions):
-    url = "https://onlinetools.ups.com/ship/v1/rating/Rate"
-    headers = {
-        "Content-Type": "application/json",
-        "Username": "VOTRE_NOM_UTILISATEUR_UPS",
-        "Password": "VOTRE_MOT_DE_PASSE_UPS",
-        "AccessLicenseNumber": "VOTRE_CLE_ACCESS_UPS"
+def get_shipping_options(from_country_code, to_country_code):
+    """
+    Renvoie les options de livraison et les tarifs correspondants.
+
+    Args:
+        from_country_code (str): Code du pays d'expédition.
+        to_country_code (str): Code du pays de destination.
+
+    Returns:
+        dict: Dictionnaire des options de livraison avec leurs tarifs.
+    """
+    # Dictionnaire des options de livraison par pays
+    shipping_options = {
+        'FR': [('UPS', 5), ('DPD', 5), ('La Poste', 5)],             # France
+        'DE': [('DPD', 5), ('UPS', 5), ('Hermès', 5)],               # Allemagne
+        'UK': [('UPS', 5), ('DPD', 5), ('Royal Mail', 3.50)],           # Royaume-Uni
+        'ES': [('Correos', 5), ('UPS', 5), ('DPD', 5)],              # Espagne
+        # Ajoutez d'autres pays et leurs services de livraison ici
     }
 
-    # Construire la requête en suivant la structure attendue par l'API UPS
-    # Notez que cette structure doit être adaptée en fonction de vos besoins spécifiques et des données disponibles
-    body = {
-        "RateRequest": {
-            "Shipment": {
-                "Shipper": {
-                    "Address": {
-                        "PostalCode": adresse_vendeur['code_postal'],
-                        "CountryCode": adresse_vendeur['pays']
-                    }
-                },
-                "ShipTo": {
-                    "Address": {
-                        "PostalCode": adresse_acheteur['code_postal'],
-                        "CountryCode": adresse_acheteur['pays']
-                    }
-                },
-                "ShipFrom": {
-                    "Address": {
-                        "PostalCode": adresse_vendeur['code_postal'],
-                        "CountryCode": adresse_vendeur['pays']
-                    }
-                },
-                "Package": {
-                    "PackagingType": {
-                        "Code": "02"
-                    },
-                    "Dimensions": dimensions,
-                    "PackageWeight": {
-                        "UnitOfMeasurement": {
-                            "Code": "KGS"
-                        },
-                        "Weight": poids
-                    }
-                }
-            }
-        }
-    }
+    # Envoi international hors Europe
+    international_non_europe = [('UPS', 25)]
 
-    response = requests.post(url, json=body, headers=headers)
-    if response.status_code == 200:
-        return response.json()
+    # Envoi entre pays européens
+    europe_to_europe = [('DPD', 12), ('UPS', 12)]
+
+    # Liste des codes de pays européens
+    european_country_codes = [
+        'FR', 'DE', 'UK', 'ES',
+        # Ajoutez d'autres codes de pays européens si nécessaire
+    ]
+
+    # Vérifie si l'envoi est international hors Europe
+    if from_country_code not in european_country_codes or to_country_code not in european_country_codes:
+        return international_non_europe
+
+    # Vérifie si l'envoi est entre pays européens différents
+    elif from_country_code in european_country_codes and to_country_code in european_country_codes and from_country_code != to_country_code:
+        return europe_to_europe
+
+    # Envoi national
     else:
-        return None
-
-
-
-def easypostcalcul ():
-
-    client = easypost.EasyPostClient(settings.EASYPOST_API_TEST)
-    print("clienttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt", client)
-
-    shipment_details = {
-    "to_address": {
-        "name": "Dr. Steve Brule",
-        "street1": "179 N Harbor Dr",
-        "city": "Redondo Beach",
-        "state": "CA",
-        "zip": "90277",
-        "country": "US",
-        "phone": "4153334444",
-        "email": "dr_steve_brule@gmail.com",
-    },
-    "from_address": {
-        "name": "EasyPost",
-        "street1": "417 Montgomery Street",
-        "street2": "5th Floor",
-        "city": "San Francisco",
-        "state": "CA",
-        "zip": "94104",
-        "country": "US",
-        "phone": "4153334444",
-        "email": "support@easypost.com",
-    },
-    "parcel": {
-        "length": 20.2,
-        "width": 10.9,
-        "height": 5,
-        "weight": 65.9,
-    },
-    }
-
-    rates = client.beta_rate.retrieve_stateless_rates(**shipment_details)
-
-    print("rates", rates)
+        return shipping_options.get(from_country_code, [])

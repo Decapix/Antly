@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-18 13:56+0100\n"
+"POT-Creation-Date: 2023-12-26 16:28+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: .\sale\modelcart.py:337
+#, python-brace-format
+msgid ""
+"<p>Le colis de <b>{supplier_name}</b> part de <b>{country}</b> avec "
+"<b>{service}</b> pour <b>{price}€</b>, il contient {items}.</p>"
+msgstr ""
 
 #: .\sale\templates\sale\ant_detail.html:92 .\sale\templates\sale\cart.html:36
 #: .\sale\templates\sale\other_detail.html:89
@@ -63,35 +70,27 @@ msgstr ""
 msgid "Adresse de livraison"
 msgstr ""
 
-#: .\sale\templates\sale\checkout.html:45
-msgid "Méthode de livraison"
-msgstr ""
-
-#: .\sale\templates\sale\checkout.html:48
-msgid "Lettre - 3€"
-msgstr ""
-
-#: .\sale\templates\sale\checkout.html:49
-msgid "Colis - 5€"
-msgstr ""
-
-#: .\sale\templates\sale\checkout.html:67
+#: .\sale\templates\sale\checkout.html:54
 msgid "Résumé de la commande"
 msgstr ""
 
-#: .\sale\templates\sale\checkout.html:79
+#: .\sale\templates\sale\checkout.html:66
 msgid "Transport"
 msgstr ""
 
-#: .\sale\templates\sale\checkout.html:86
+#: .\sale\templates\sale\checkout.html:73
 msgid "Colonie offerte"
 msgstr ""
 
-#: .\sale\templates\sale\checkout.html:94
+#: .\sale\templates\sale\checkout.html:81
 msgid "Total de la commande"
 msgstr ""
 
-#: .\sale\templates\sale\checkout.html:106
+#: .\sale\templates\sale\checkout.html:89
+msgid " Coût de livraison"
+msgstr ""
+
+#: .\sale\templates\sale\checkout.html:107
 msgid ""
 "La colonie offerte est une colonie, sélectionnée au hasard,\n"
 "                parmi tous nos stocks. Nous l’ajoutons à votre commande en "
@@ -99,23 +98,23 @@ msgid ""
 "                des articles que vous avez choisi."
 msgstr ""
 
-#: .\sale\templates\sale\checkout.html:116
+#: .\sale\templates\sale\checkout.html:117
 msgid "Paiement, Par carte ou paypal"
 msgstr ""
 
-#: .\sale\templates\sale\checkout.html:117
+#: .\sale\templates\sale\checkout.html:118
 msgid "Par carte"
 msgstr ""
 
-#: .\sale\templates\sale\checkout.html:124
+#: .\sale\templates\sale\checkout.html:125
 msgid "Nom du titulaire de la carte"
 msgstr ""
 
-#: .\sale\templates\sale\checkout.html:134
+#: .\sale\templates\sale\checkout.html:135
 msgid "Informations de la carte"
 msgstr ""
 
-#: .\sale\templates\sale\checkout.html:152
+#: .\sale\templates\sale\checkout.html:153
 msgid "Payer"
 msgstr ""
 
@@ -728,6 +727,11 @@ msgstr ""
 msgid "Taille de l'espèce"
 msgstr ""
 
+#: .\super\templates\super\specie_form.html:53
+#: .\super\templates\super\specie_form.html:148
+msgid "Grosse"
+msgstr ""
+
 #: .\super\templates\super\specie_form.html:57
 #: .\super\templates\super\specie_form.html:152
 msgid "Petite"
@@ -809,10 +813,6 @@ msgstr ""
 
 #: .\super\templates\super\specie_form.html:136
 msgid "Basse activité"
-msgstr ""
-
-#: .\super\templates\super\specie_form.html:148
-msgid "Grosse"
 msgstr ""
 
 #: .\super\templates\super\specie_form.html:179
@@ -906,62 +906,58 @@ msgstr ""
 msgid "tout"
 msgstr ""
 
-#: .\user\forms.py:59
+#: .\user\forms.py:62
 msgid "Mot de passe"
 msgstr ""
 
-#: .\user\forms.py:67
+#: .\user\forms.py:70
 #, python-format
 msgid ""
 "Veuillez saisir un %(email)s et un mot de passe corrects. Notez que les deux "
 "peuvent être sensibles à la casse."
 msgstr ""
 
-#: .\user\forms.py:69
+#: .\user\forms.py:72
 msgid "Ce compte est inactif."
 msgstr ""
 
-#: .\user\forms.py:168 .\user\forms.py:190
+#: .\user\forms.py:171 .\user\forms.py:193
 msgid "Nouveau mot de passe"
 msgstr ""
 
-#: .\user\forms.py:174 .\user\forms.py:197
+#: .\user\forms.py:177 .\user\forms.py:200
 msgid "Confirmation Nouveau mot de passe"
 msgstr ""
 
-#: .\user\forms.py:180
+#: .\user\forms.py:183
 msgid "Encien mot de passe"
 msgstr ""
 
-#: .\user\forms.py:212
-msgid "Pays/Région (ex : France)"
-msgstr ""
-
-#: .\user\forms.py:216
+#: .\user\forms.py:224
 msgid "Nom complet (ex : Bernard Weber)"
 msgstr ""
 
-#: .\user\forms.py:220
+#: .\user\forms.py:228
 msgid "Numéro de téléphone (ex : 0660066006)"
 msgstr ""
 
-#: .\user\forms.py:224
+#: .\user\forms.py:232
 msgid "Adresse (ex : 6 sentier de la fourmis)"
 msgstr ""
 
-#: .\user\forms.py:228
+#: .\user\forms.py:236
 msgid "Détail (ex : batiment 2) *facultatif*"
 msgstr ""
 
-#: .\user\forms.py:232
+#: .\user\forms.py:240
 msgid "Code postal (ex : 59610)"
 msgstr ""
 
-#: .\user\forms.py:236
+#: .\user\forms.py:244
 msgid "Ville (ex : Fourmies)"
 msgstr ""
 
-#: .\user\models.py:63
+#: .\user\models.py:64
 msgid "The Email must be set"
 msgstr ""
 

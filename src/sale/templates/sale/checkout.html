@@ -30,7 +30,7 @@
               <div class="form-group shipping-method">
                 <button class="circle btn btn-outline-primary mb-2">1</i></button>
                 <h4>{% blocktrans %}Adresse de livraison{% endblocktrans %}</h4>
-                <div>{{form.country}}</div>
+                <div class="form-group mb-0">{{form.country}}</div>
                 <div>{{form.complete_name}}</div>
                 <div>{{form.phone_number}}</div>
                 <div>{{form.adress}}</div>
@@ -38,19 +38,6 @@
                 <div>{{form.postal_code}}</div>
                 <div>{{form.city}}</div>
               </div>
-
-              {% if letter_shipping_possible %}
-              <div class="mt-5 mb-4 shipping-method">
-                  <button class="circle btn btn-outline-primary mb-2">1.5</i></button>
-                  <h4 class="mb-3 shipping-method__title">{% blocktrans %}Méthode de livraison{% endblocktrans %}</h4>
-                  <label for="shipping_type" class="shipping-method__label">Type d'envoi:</label>
-                  <select name="shipping_type" id="shipping_type" class="shipping-method__select">
-                      <option value="L">{% blocktrans %}Lettre - 3€{% endblocktrans %}</option>
-                      <option value="C">{% blocktrans %}Colis - 5€{% endblocktrans %}</option>
-                  </select>
-              </div>
-              {% endif %}
-
 
               <input class="btn btn-primary mr-4 rounded" type="submit" />
             </form>
@@ -98,6 +85,20 @@
               </tr>
             </tfoot>
           </table>
+          <button class="btn btn-info mb-2 my-4 rounded" type="button" data-toggle="collapse" data-target="#shipping-reasons" aria-expanded="false" aria-controls="shipping-reasons">
+            {% blocktrans %} Coût de livraison{% endblocktrans %}
+          </button>
+          
+          <!-- Conteneur pour les raisons des coûts de livraison -->
+          <div class="collapse" id="shipping-reasons">
+              <div class="card card-body">
+                  <div id="shipping-reasons-container">
+                      <!-- Le contenu sera défini par le script JavaScript -->
+                  </div>
+              </div>
+          </div>
+
+          
           {% if order.gift %}
           <button class="btn btn-outline-primary circle ml-5 affichtxt">
             <i class="ti-star"></i>
@@ -198,20 +199,6 @@
       }
   });
 
-  function disablePaypalButton() {
-  const paypalButtonContainer = document.getElementById('paypal-button-container');
-  // Désactiver tous les événements clic sur le conteneur, par exemple
-  paypalButtonContainer.style.pointerEvents = 'none';
-  // Vous pouvez également ajuster l'opacité pour indiquer visuellement que le bouton est désactivé
-  paypalButtonContainer.style.opacity = '0.5';
-};
-
-// Pour réactiver le bouton
-function enablePaypalButton() {
-  const paypalButtonContainer = document.getElementById('paypal-button-container');
-  paypalButtonContainer.style.pointerEvents = 'auto';
-  paypalButtonContainer.style.opacity = '1';
-};
 
   // Gérer la soumission du formulaire de paiement
   const paymentForm = document.getElementById('payment-form');
@@ -308,8 +295,12 @@ function enablePaypalButton() {
   });
 
 
-
-
+// show shipping_reasons
+document.addEventListener("DOMContentLoaded", function() {
+        // Utiliser directement la variable Django pour le contenu HTML
+        var shippingReasonsHtml = "{{ order.shipping_cost_reasons|escapejs }}";
+        document.getElementById('shipping-reasons-container').innerHTML = shippingReasonsHtml;
+    });
 </script>
 
 <script src="{% static 'vendors/bootstrap/bootstrap.bundle.min.js' %}"></script>

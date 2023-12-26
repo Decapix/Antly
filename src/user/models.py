@@ -12,6 +12,7 @@ from django.conf import settings
 from django.core.validators import MaxValueValidator, MinValueValidator
 from admin_supplier.models import Supplier_m
 from sale.models import Ant_m, Other_m, Pack_m
+from django_countries.fields import CountryField
 
 
 def sup(value):
@@ -139,7 +140,7 @@ class Shopper_m(AbstractUser):
 
 
 class Address_m(models.Model):
-    country = models.CharField(max_length=100)
+    country = CountryField()
     complete_name = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=30, validators=[validate_phone_number])
     adress = models.CharField(max_length=300)

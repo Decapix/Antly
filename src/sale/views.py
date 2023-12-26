@@ -510,23 +510,21 @@ def checkout_vi(request):
         form = Address_fo(request.POST)
         if form.is_valid():
 
-            # easypostcalcul()
-
             new_address = form.save(commit=False)
             new_address.save()
 
             existing_order.address = new_address
-            existing_order.shipping_type = request.POST.get('shipping_type', 'C')
             existing_order.save()
+            existing_order.set_delivery_methode()
             shipping_costs = existing_order.shipping_costs()
             total = existing_order.get_cart_total()
-            ze = "colis" if existing_order.shipping_type == "C" else "lettre"
+            ze = "colis" 
             address_json = {
                 "html": "\nPays : {}<br>\nNom complet : {}<br>\nNuméro de télephone : {}<br>\nAdresse : {}<br>\nDetails : {}<br>\nCode postal : {}<br>\nVille : {}<br>\n<hr>\n  Méthode de livraison : {}".format(
                     new_address.country, new_address.complete_name, new_address.phone_number, new_address.adress, new_address.postal_code, new_address.detail ,new_address.city, ze),
                 "address_id": new_address.id,
                 "total": total,
-                "shipping_costs" : shipping_costs
+                "shipping_costs" : shipping_costs,
             }
             return JsonResponse(address_json)
         else:
@@ -540,7 +538,6 @@ def checkout_vi(request):
         "form": form,
         "STRIPE_PUBLIC_KEY": os.environ.get('STRIPE_PUBLISHABLE_KEY'),
         "user": request.user,
-        "letter_shipping_possible": existing_order.shipping_possible(),
         "bread":bread,
         'paypal': paypal_payment
     }

@@ -22,13 +22,10 @@ from django.contrib.sitemaps.views import sitemap
 from .sitemaps import sitemaps
 
 
-urlpatterns = [
-    path('admin/', admin.site.urls),
-
-
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns = [] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += i18n_patterns(
+    path('admin/', admin.site.urls),
     path('', include("super.urls")),
     path('utilisateur/', include("user.urls")),
     path('produit/', include("sale.urls")),

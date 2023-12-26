@@ -4,6 +4,7 @@ from django.utils.translation import gettext_lazy as _
 from .models import Address_m
 
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm, SetPasswordForm
+from django_countries.widgets import CountrySelectWidget
 
 from .models import *
 from django import forms
@@ -201,16 +202,19 @@ class NewPassword_fo(SetPasswordForm):
     )
 
 
+class StylizedCountrySelectWidget(CountrySelectWidget):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.attrs.update({'class': 'form-control'})
+        
 class Address_fo(forms.ModelForm):
     class Meta:
         model = Address_m
         fields = ['country', 'complete_name', 'phone_number', 'adress', 'detail', 'postal_code', 'city', ]
 
         widgets = {
-            'country': forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': _('Pays/Région (ex : France)')
-            }),
+            
+            "country": StylizedCountrySelectWidget(),
             'complete_name': forms.TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': _('Nom complet (ex : Bernard Weber)')

@@ -3,12 +3,14 @@ from django.db import models
 from user.models import Shopper_m as Profile
 from user.models import Address_m as Address
 from .models import Ant_m, Pack_m, Other_m
-from .extras import send_tracking_number_email
+from .extras import send_tracking_number_email, get_shipping_options
 from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
+from django.utils.translation import gettext as _
+from django.db.models import JSONField
 
 
 # cart
@@ -169,44 +171,85 @@ class Order_m(models.Model):
     items = models.ManyToManyField(OrderItem_m)
     date_ordered = models.DateTimeField(auto_now=True)
     address = models.OneToOneField(Address, null=True, on_delete=models.SET_NULL)
-
-
-    SHIPPING_CHOICES = [
-        ('L', 'Lettre'),
-        ('C', 'Colis'),
-    ]
-    shipping_type = models.CharField(
-        max_length=2,
-        choices=SHIPPING_CHOICES,
-        default='C',
-    )
+    delivery_option = JSONField(null=True, blank=True)    
 
     def shipping_costs(self):
         if settings.FREE_SHIPPING_COSTE:
             return 0
         else:
-            return 3 if self.shipping_type == 'L' else 5
+            total_cost = 0
 
-    def shipping_possible(self):
-        """
-        true  → lettre possible
-        false → lettre impossible
+            # Vérification si delivery_option est vide ou None
+            if not self.delivery_option or not isinstance(self.delivery_option, dict):
+                return total_cost
 
-        + de 3 items dans la commande → False
-        frais de prt offert → False
-        au moins 1 item autre que ant → False
-        autrement → True
-        """
+            # Parcourir les options de livraison pour chaque fournisseur
+            for supplier_id, shipping_options in self.delivery_option.items():
+                if not shipping_options or not isinstance(shipping_options, list):
+                    continue  # Ignore si les options de livraison ne sont pas une liste valide
 
-        items = self.items.all()
-        nb = len(list(items))
-        if not settings.FREE_SHIPPING_COSTE and nb <= 3:
-            return all(i.sh_type() == "ant" for i in items)
-        else:
-            return False
+                # Extraire les prix des options de livraison et les convertir en float
+                try:
+                    prices = [float(option.split(' - ')[1]) for option in shipping_options if ' - ' in option]
+                except ValueError:
+                    continue  # Ignore si les prix ne peuvent pas être convertis en float
+
+                # Ajouter le prix le moins cher au coût total
+                if prices:
+                    total_cost += min(prices)
+
+            return total_cost
+
+    
+    def set_delivery_methode(self):
+        # all items 
+        ele= []
+        for i in self.items.all() :
+            ele.append(i)
+        # remove duplicate
+        elenv = []
+        for element in ele:
+            if element not in elenv:
+                elenv.append(element)
+        ele = elenv
+        # get seller 
+        seller = []
+        for element in ele:
+            seller.append(element.show_supplier_id())
+        # country 
+        country = []
+        for i in seller :
+            supplier = Supplier_m.objects.get(id=i)
+            terr = supplier.country
+            country.append((supplier, terr))
+        
+        # Code du pays de destination
+        to_country_code = self.address.country
+
+        # Dictionnaire pour stocker les options de livraison pour chaque fournisseur
+        delivery_options_per_supplier = {}
+
+        # Parcourir chaque couple fournisseur-destination
+        for supplier, from_country_code in country:
+            # Obtenir les options de livraison pour le couple fournisseur-destination
+            shipping_options = get_shipping_options(from_country_code.code, to_country_code)
+
+            # Convertir la liste des options en format lisible
+            shipping_options_list = [f"{service} - {price}" for service, price in shipping_options]
+
+            # Convertir supplier.id en chaîne de caractères
+            supplier_id_str = str(supplier.id)
+
+            # Ajouter les options de livraison pour ce fournisseur
+            delivery_options_per_supplier[supplier_id_str] = shipping_options_list
+
+        # Enregistrer les options de livraison dans le champ JSON
+        self.delivery_option = delivery_options_per_supplier
+        self.save()
 
 
-
+        
+    
     def gift(self):
         if settings.FREE_COLONIE:
             n = sum(item.quantity for item in self.items.all() if item.is_ordered == False)
@@ -262,7 +305,38 @@ class Order_m(models.Model):
             if i.show_supplier_id == supplier_id:
                 ele.append(i)
         return ele
+    
 
+    
+    def shipping_cost_reasons(self):
+        reasons_html = ""
+
+        if not self.delivery_option or not isinstance(self.delivery_option, dict):
+            return reasons_html
+
+        for supplier_id, shipping_options in self.delivery_option.items():
+            # Convertir l'UUID en string si nécessaire
+            supplier_id_str = str(supplier_id)
+
+            # Récupérer le fournisseur
+            supplier = Supplier_m.objects.get(id=supplier_id_str)
+
+            # Récupérer les articles associés au fournisseur
+            supplier_items = [item for item in self.items.all() if str(item.show_supplier_id()) == supplier_id_str]
+
+            # Construire une liste des noms des articles
+            item_names = [item.sh_name() for item in supplier_items]
+
+            if shipping_options:
+                # Trouver l'option la moins chère et son prix
+                cheapest_option, cheapest_price = min((opt.split(' - ') for opt in shipping_options), key=lambda x: float(x[1]))
+                country_from = supplier.country.name
+
+                # Ajouter au HTML, incluant le prix
+                reasons_html += _("<p>Le colis de <b>{supplier_name}</b> part de <b>{country}</b> avec <b>{service}</b> pour <b>{price}€</b>, il contient {items}.</p>").format(
+                    supplier_name=supplier.name, country=country_from, service=cheapest_option, price=cheapest_price, items=", ".join(item_names))
+
+        return reasons_html
     
 
 
