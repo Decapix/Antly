@@ -723,12 +723,14 @@ def order_ordered_vi(request, id):
         items = order.get_cart_items()
         order_contents = ", ".join([f"{item.sh_name()} de {item.sh_supplier()} x {item.quantity} ({item.price}€)" for item in items])
         address = order.address
-        address_info = f"{address.complete_name}, {address.adress}, {address.detail}, {address.postal_code} {address.city}, {address.country}"
+        address_info = f"{address.complete_name}, {address.adress}, {address.detail}, {address.postal_code} {address.city}, {address.country.name}"
         contact = f"{address.phone_number} | {request.user.email}"
-        to = sum(i.price for i in order.get_cart_items())
+        to = sum(Decimal(i.price) for i in order.get_cart_items())
         total = f"{to}"
-        total_ship = f"{to + order.shipping_costs()}"
-        order_data = [date_ordered, customer_name, order_contents, address_info, contact, total, total_ship]
+        shipping_cost = Decimal(order.shipping_costs())
+        total_ship = f"{to + shipping_cost}"
+        info_ship = f"{order.shipping_cost_reasons()}"
+        order_data = [date_ordered, customer_name, order_contents, address_info, contact, total, total_ship, info_ship]
 
         # Add the order information to the spreadsheet
         requeste = sheets.spreadsheets().values().append(
@@ -753,47 +755,56 @@ def order_ordered_vi(request, id):
             supplierl.append(supplier)
 
 
-        for i in supplierl :
-            id = i.id
-            iteml= []
-            for e in items :
-                if e.show_supplier_id() == id:
-                    iteml.append(e)
+        delivery_options = order.delivery_option
 
-            px = 0
-            for u in iteml :
-                px += u.price
+        for i in supplierl:
+            id = i.id
+            iteml = [e for e in items if e.show_supplier_id() == id]
+
+            # Calculer le prix total des articles pour ce fournisseur
+            px = sum(u.price for u in iteml)
+
+            # Récupérer les options de livraison et le coût le moins cher pour ce fournisseur
+            supplier_shipping_options = delivery_options.get(str(id), [])
+            cheapest_shipping = min(supplier_shipping_options, key=lambda x: float(x.split(' - ')[1]), default="Aucune option - 0")
+            shipping_service, shipping_cost = cheapest_shipping.split(' - ')
+
+            # Construire le message pour le fournisseur
             supplier = Supplier_m.objects.get(pk=id)
             user = supplier.user
             orderr = ", ".join([f"{item.sh_name()} x {item.quantity} ({item.price}€)" for item in iteml])
             message = f"""
-            passé le {date_ordered} 
-                    
-            Adresse du client {address_info} 
+            Placed on {date_ordered}
+
+            Customer's address: {address_info}
             
-            prix facturé au client : {px}
-            Pourcentage pris par Antly : {settings.PERCENT_ANTLY} %
-            Votre gain (les frais de port restent à votre charge) : {percentage(px)}
-            
-            Contenu de la commande :
+            contact : {contact}
+
+            Price charged to the customer: {px}
+            Percentage taken by Antly: {settings.PERCENT_ANTLY}%
+            Your earnings (shipping costs are your responsibility): {percentage(px)}
+
+            Order contents:
             {orderr}
 
-            contact : 
+            Shipping options: {supplier_shipping_options} 
+            You received {shipping_cost}€ for shipping
+
+            Contact:
             {contact}
-            
-            
-            Rappel :
-            
-            Vous devez envoyer le colis via La Poste. Ensuite, rendez-vous sur votre interface fournisseur à l'adresse "https://www.antly.fr/admin/" pour créer un "OrderTrack_m" et y renseigner votre numéro de suivi.
-            
-            Pour me contacter :
+
+
+            Reminder:
+            You must send the package using one of these shipping services: {supplier_shipping_options}.
+            The cheapest option is {shipping_service}, but you are free to choose. Then, go to your supplier interface at "https://www.antly.fr/admin/" to create an "OrderTrack_m" and enter your tracking number.
+
+            To contact me:
             06 51 33 61 58
             """
-            user.email_user(f"Antly - Nouvelle commande passée le {order.date_ordered}", message)
+            user.email_user(f"Antly - New order placed on {order.date_ordered}", message)
 
 
-
-                # Update the placed order
+            # Update the placed order
             order.is_ordered = True
             order.date_ordered = timezone.now().date()
             order.save()
