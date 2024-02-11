@@ -77,11 +77,16 @@ class SizeAdmin(admin.ModelAdmin):
         super().save_model(request, obj, form, change)
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if db_field.name == "product_base":  # Si le champ est product_base
+        if db_field.name == "product_base" and not request.user.is_superuser:
+            # Exécuté seulement si l'utilisateur n'est pas un superutilisateur
             supplier = Supplier_m.objects.filter(user=request.user).first()
             if supplier:
                 kwargs["queryset"] = Ant_m.objects.filter(supplier=supplier)
+        elif db_field.name == "product_base" and request.user.is_superuser:
+            # Exécuté si l'utilisateur est un superutilisateur
+            kwargs["queryset"] = Ant_m.objects.all()
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
 
 
 @admin.register(Other_m)
