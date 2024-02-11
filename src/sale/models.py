@@ -15,7 +15,7 @@ class Product_m(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=100)
     description = models.TextField(max_length=3000)
-    thumbnail = models.ImageField(upload_to="products", null=True, blank=True)
+    thumbnail = models.ImageField(upload_to="products")
     thumbnail_1 = models.ImageField(upload_to="products", null=True, blank=True)
     thumbnail_2 = models.ImageField(upload_to="products", null=True, blank=True)
     thumbnail_3 = models.ImageField(upload_to="products", null=True, blank=True)
