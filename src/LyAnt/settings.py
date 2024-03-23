@@ -37,7 +37,6 @@ ALLOWED_HOSTS = ['antly.fr', 'antly.herokuapp.com', 'localhost', '127.0.0.1', 'w
 # Application definition
 
 INSTALLED_APPS = [
-    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
