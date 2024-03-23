@@ -12,6 +12,7 @@ from datetime import timedelta
 from .models import Supplier_m, Ant_m, Other_m, Pack_m
 import requests
 import json
+from django.utils.translation import gettext as _
 
 
 
@@ -29,8 +30,7 @@ def send_tracking_number_email(order, latest_order_track):
         'shipping_date': current_date,  # À remplacer par la date d'expédition si différente
         'estimated_delivery_date': new_date,  # À remplacer par la date estimée de livraison
         'carrier_name': 'Colissimo',  # À remplacer par le nom du transporteur
-        'tracking_url': 'https://www.laposte.fr/outils/track-a-parcel',  # À remplacer par l'URL de suivi du colis
-        'customer_service_email': 'antly.fourmis@gmail.com',
+        'tracking_url': 'https://www.trackingmore.com/',  # À remplacer par l'URL de suivi du colis
     }
 
     message = render_to_string('sale/tracking_email_template.txt', context)
@@ -126,18 +126,18 @@ def get_shipping_options(from_country_code, to_country_code):
     """
     # Dictionnaire des options de livraison par pays
     shipping_options = {
-        'FR': [('UPS', 5), ('DPD', 5), ('La Poste', 5)],             # France
-        'DE': [('DPD', 5), ('UPS', 5), ('Hermès', 5)],               # Allemagne
-        'UK': [('UPS', 5), ('DPD', 5), ('Royal Mail', 3.50)],           # Royaume-Uni
-        'ES': [('Correos', 5), ('UPS', 5), ('DPD', 5)],              # Espagne
-        # Ajoutez d'autres pays et leurs services de livraison ici
+        'FR': [('UPS', 6.50), ('DPD', 6.50), ('La Poste', 6.50)],             # France
+        'DE': [('DPD', 6.50), ('UPS', 6.50), ('Hermès', 6.50)],               # Allemagne
+        'UK': [('UPS', 6.50), ('DPD', 6.50), ('Royal Mail', 6.50)],           # Royaume-Uni
+        'ES': [('Correos', 6.50), ('UPS', 6.50), ('DPD', 6.50)],              # Espagne
+        'PL': [('InPost', 6.50), ('DPD', 6.50), ('UPS', 6.50)],  # Pologne
     }
 
     # Envoi international hors Europe
     international_non_europe = [('UPS', 25)]
 
     # Envoi entre pays européens
-    europe_to_europe = [('DPD', 12), ('UPS', 12)]
+    europe_to_europe = [('DPD', 12), ('UPS', 12), ('InPost', 12)]
 
     # Liste des codes de pays européens
     european_country_codes = [
@@ -156,3 +156,51 @@ def get_shipping_options(from_country_code, to_country_code):
     # Envoi national
     else:
         return shipping_options.get(from_country_code, [])
+    
+
+
+
+from django.contrib import messages
+
+def verify_order_items(request, order):
+    """
+    Vérifie chaque article de la commande pour s'assurer qu'il répond aux critères suivants :
+    - Le fournisseur est disponible.
+    - Le produit n'a pas de problèmes.
+    - Il y a suffisamment de stock pour la quantité demandée.
+    
+    Args:
+        request: HttpRequest object.
+        order: L'instance de la commande à vérifier.
+        
+    Returns:
+        Un booléen indiquant si la commande est valide (True) ou si des modifications ont été nécessaires (False).
+    """
+    items = order.items.all()
+    order_is_valid = True
+    for item in items:
+        product = item.content_object
+        supplier = product.supplier
+        if not supplier.is_available():
+            messages.error(request, _(f"Le fournisseur du produit '{product.name}' n'est pas disponible actuellement."))
+            order_is_valid = False
+        
+        if product.problem:
+            messages.error(request, _(f"Le produit '{product.name}' rencontre actuellement un problème."))
+            order_is_valid = False
+        
+        stock_available = False
+        if hasattr(product, 'get_stock'):
+            if item.content_type.model == 'ant_m':
+                for size in product.get_sizes():
+                    if size.price == item.price and size.is_available() and size.stock >= item.quantity:
+                        stock_available = True
+                        break
+            else:
+                stock_available = product.get_stock() >= item.quantity
+        
+        if not stock_available:
+            messages.error(request, _(f"Stock insuffisant pour le produit '{product.name}'."))
+            order_is_valid = False
+    
+    return order_is_valid

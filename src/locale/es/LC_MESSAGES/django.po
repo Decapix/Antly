@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-26 16:28+0100\n"
+"POT-Creation-Date: 2024-03-23 08:23+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,25 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\sale\modelcart.py:337
+#: sale/extras.py:185
+#, python-brace-format
+msgid ""
+"Le fournisseur du produit '{product.name}' n'est pas disponible actuellement."
+msgstr ""
+"El proveedor del producto '{product.name}' no está disponible actualmente."
+
+#: sale/extras.py:189
+#, python-brace-format
+msgid "Le produit '{product.name}' rencontre actuellement un problème."
+msgstr ""
+"El producto '{product.name}' está experimentando un problema actualmente."
+
+#: sale/extras.py:203
+#, python-brace-format
+msgid "Stock insuffisant pour le produit '{product.name}'."
+msgstr "Stock insuficiente para el producto '{product.name}'."
+
+#: sale/modelcart.py:336
 #, python-brace-format
 msgid ""
 "<p>Le colis de <b>{supplier_name}</b> part de <b>{country}</b> avec "
@@ -27,29 +45,29 @@ msgstr ""
 "<p>El paquete de <b>{supplier_name}</b> sale de <b>{country}</b> con "
 "<b>{service}</b> por <b>{price}€</b>, contiene {items}.</p>"
 
-#: .\sale\templates\sale\ant_detail.html:92 .\sale\templates\sale\cart.html:36
-#: .\sale\templates\sale\other_detail.html:89
-#: .\sale\templates\sale\pack_detail.html:152
+#: sale/templates/sale/ant_detail.html:92 sale/templates/sale/cart.html:36
+#: sale/templates/sale/other_detail.html:89
+#: sale/templates/sale/pack_detail.html:152
 msgid "Vendeur"
 msgstr "Ventas"
 
-#: .\sale\templates\sale\ant_detail.html:114
+#: sale/templates/sale/ant_detail.html:114
 msgid "gyne"
 msgstr "gine"
 
-#: .\sale\templates\sale\ant_detail.html:114
+#: sale/templates/sale/ant_detail.html:114
 msgid "ouvrière"
 msgstr "obrera"
 
-#: .\sale\templates\sale\ant_product.html:7 .\templates\index.html:107
+#: sale/templates/sale/ant_product.html:7 templates/index.html:124
 msgid "Les fourmis"
 msgstr "Las hormigas"
 
-#: .\sale\templates\sale\ant_product.html:8
+#: sale/templates/sale/ant_product.html:8
 msgid "Les fourmis d'europe"
 msgstr "Las hormigas de Europa"
 
-#: .\sale\templates\sale\ant_product.html:9
+#: sale/templates/sale/ant_product.html:9
 msgid ""
 "Créez votre univers minuscule chez vous. Optez pour une fondation et "
 "introduisez les dans un environnement qui vous inspire, laissez-vous guider "
@@ -58,45 +76,43 @@ msgstr ""
 "Crea tu propio mundo diminuto en casa. Elige una fundación e introdúcelas en "
 "un entorno que te inspire, ¡deja volar tu imaginación!"
 
-#: .\sale\templates\sale\cart.html:9 .\templates\index.html:135
+#: sale/templates/sale/cart.html:9 templates/index.html:152
 msgid "Panier"
 msgstr "Carrito"
 
-#: .\sale\templates\sale\cart.html:10
+#: sale/templates/sale/cart.html:10
 msgid "Ma commande"
 msgstr "Mi pedido"
 
-#: .\sale\templates\sale\cart.html:42
+#: sale/templates/sale/cart.html:42
 msgid "unitées"
 msgstr "unidades"
 
-#: .\sale\templates\sale\checkout.html:32
+#: sale/templates/sale/checkout.html:32
 msgid "Adresse de livraison"
 msgstr "Dirección de envío"
 
-#: .\sale\templates\sale\checkout.html:54
+#: sale/templates/sale/checkout.html:54
 msgid "Résumé de la commande"
 msgstr "Resumen del pedido"
 
-#: .\sale\templates\sale\checkout.html:66
+#: sale/templates/sale/checkout.html:66
 msgid "Transport"
 msgstr "Transporte"
 
-#: .\sale\templates\sale\checkout.html:73
+#: sale/templates/sale/checkout.html:73
 msgid "Colonie offerte"
 msgstr "Colonia de regalo"
 
-#: .\sale\templates\sale\checkout.html:81
+#: sale/templates/sale/checkout.html:81
 msgid "Total de la commande"
 msgstr "Total del pedido"
 
-#: .\sale\templates\sale\checkout.html:89
-#, fuzzy
-#| msgid "Méthode de livraison"
+#: sale/templates/sale/checkout.html:89
 msgid " Coût de livraison"
-msgstr "Método de envío"
+msgstr "Gastos de envío"
 
-#: .\sale\templates\sale\checkout.html:107
+#: sale/templates/sale/checkout.html:107
 msgid ""
 "La colonie offerte est une colonie, sélectionnée au hasard,\n"
 "                parmi tous nos stocks. Nous l’ajoutons à votre commande en "
@@ -107,35 +123,35 @@ msgstr ""
 "inventario. La agregamos a su pedido además de los artículos que haya "
 "elegido."
 
-#: .\sale\templates\sale\checkout.html:117
+#: sale/templates/sale/checkout.html:117
 msgid "Paiement, Par carte ou paypal"
 msgstr "Pago, con tarjeta o PayPal"
 
-#: .\sale\templates\sale\checkout.html:118
+#: sale/templates/sale/checkout.html:118
 msgid "Par carte"
 msgstr "Con tarjeta"
 
-#: .\sale\templates\sale\checkout.html:125
+#: sale/templates/sale/checkout.html:125
 msgid "Nom du titulaire de la carte"
 msgstr "Nombre del titular de la tarjeta"
 
-#: .\sale\templates\sale\checkout.html:135
+#: sale/templates/sale/checkout.html:135
 msgid "Informations de la carte"
 msgstr "Información de la tarjeta"
 
-#: .\sale\templates\sale\checkout.html:153
+#: sale/templates/sale/checkout.html:153
 msgid "Payer"
 msgstr "Pagar"
 
-#: .\sale\templates\sale\other_product.html:7
+#: sale/templates/sale/other_product.html:7
 msgid "Les produits annexes"
 msgstr "Productos adicionales"
 
-#: .\sale\templates\sale\other_product.html:8
+#: sale/templates/sale/other_product.html:8
 msgid "Tout le nécessaire pour élever vos fourmis"
 msgstr "Todo lo necesario para criar tus hormigas"
 
-#: .\sale\templates\sale\other_product.html:9
+#: sale/templates/sale/other_product.html:9
 msgid ""
 "Équipez-vous comme un véritable myrmécologue avec notre sélection "
 "d'accessoires pour fourmis. Des nids de fourmis aux seringues, en passant "
@@ -150,36 +166,36 @@ msgstr ""
 "Ideales para principiantes, estos suministros te permitirán criar tus "
 "hormigas en condiciones óptimas."
 
-#: .\sale\templates\sale\pack_detail.html:169
+#: sale/templates/sale/pack_detail.html:169
 msgid "Espèce"
 msgstr "Especie"
 
-#: .\sale\templates\sale\pack_detail.html:171
+#: sale/templates/sale/pack_detail.html:171
 msgid "Localisation "
 msgstr "Ubicación"
 
-#: .\sale\templates\sale\pack_detail.html:173
+#: sale/templates/sale/pack_detail.html:173
 msgid "Nombre de gyne "
 msgstr "Número de gyne"
 
-#: .\sale\templates\sale\pack_detail.html:174
+#: sale/templates/sale/pack_detail.html:174
 msgid "Nombre d'ouvrière "
 msgstr "Número de obreras"
 
-#: .\sale\templates\sale\pack_detail.html:176
+#: sale/templates/sale/pack_detail.html:176
 msgid "Taille du nid "
 msgstr "Tamaño del nido"
 
-#: .\sale\templates\sale\pack_product.html:7
-#: .\super\templates\super\homepage.html:41 .\templates\index.html:112
+#: sale/templates/sale/pack_product.html:7
+#: super/templates/super/homepage.html:43 templates/index.html:129
 msgid "Les packs"
 msgstr "Los paquetes"
 
-#: .\sale\templates\sale\pack_product.html:8
+#: sale/templates/sale/pack_product.html:8
 msgid "Tout ce qu'il faut pour débuter"
 msgstr "Todo lo necesario para empezar"
 
-#: .\sale\templates\sale\pack_product.html:10
+#: sale/templates/sale/pack_product.html:10
 msgid ""
 "Commencez tout de suite et facilitez vous la vie ! Avec les packs complets, "
 "élevez en toute tranquilité vos futures fourmis."
@@ -187,15 +203,15 @@ msgstr ""
 "¡Empieza ahora mismo y facilita tu vida! Con los paquetes completos, cría "
 "tus futuras hormigas con total tranquilidad."
 
-#: .\sale\templates\sale\seller_all.html:11 .\templates\index.html:122
+#: sale/templates/sale/seller_all.html:11 templates/index.html:139
 msgid "Les vendeurs"
 msgstr "Los vendedores"
 
-#: .\sale\templates\sale\seller_all.html:12
+#: sale/templates/sale/seller_all.html:12
 msgid "Les vendeurs d'Antly"
 msgstr "Los vendedores de Antly"
 
-#: .\sale\templates\sale\seller_all.html:14
+#: sale/templates/sale/seller_all.html:14
 msgid ""
 "Antly réunit des vendeurs experts en myrmécologie, offrant une gamme de "
 "fourmis, d'accessoires et de packs pour tous les niveaux. Nos vendeurs, "
@@ -211,11 +227,11 @@ msgstr ""
 "una experiencia de compra confiable y especializada en el fascinante mundo "
 "de las hormigas."
 
-#: .\sale\templates\sale\success.html:7
+#: sale/templates/sale/success.html:9
 msgid "Merci pour votre commande !"
 msgstr "¡Gracias por su pedido!"
 
-#: .\sale\templates\sale\success.html:15
+#: sale/templates/sale/success.html:17
 #, python-format
 msgid ""
 "Toute l'équipe d'Antly vous remercie sincèrement pour votre commande (numéro "
@@ -228,19 +244,19 @@ msgstr ""
 "cliente y esperamos con ansias ayudarle a comenzar o expandir su cría de "
 "hormigas.\n"
 
-#: .\sale\templates\sale\success.html:17
+#: sale/templates/sale/success.html:19
 msgid "Voici un récapitulatif de votre commande :"
 msgstr "Aquí tienes un resumen de tu pedido:"
 
-#: .\sale\templates\sale\success.html:24
+#: sale/templates/sale/success.html:26
 msgid "Total "
 msgstr "Total"
 
-#: .\sale\templates\sale\success.html:26
+#: sale/templates/sale/success.html:28
 msgid "Adresse de livraison :"
 msgstr "Dirección de entrega:"
 
-#: .\sale\templates\sale\success.html:35
+#: sale/templates/sale/success.html:37
 msgid ""
 "Nous nous engageons à expédier votre commande dans les plus brefs délais. "
 "Vous recevrez un e-mail de confirmation avec les informations de suivi dès "
@@ -250,72 +266,213 @@ msgstr ""
 "electrónico de confirmación con la información de seguimiento tan pronto "
 "como su paquete esté en camino."
 
-#: .\sale\templates\sale\success.html:36
-#, fuzzy
-#| msgid ""
-#| "Si vous avez des questions concernant votre commande ou si vous avez "
-#| "besoin d'aide pour votre élevage de fourmis, n'hésitez pas à nous "
-#| "contacter à antly.fourmis@gmail.com o a través de nuestras redes sociales "
-#| "de contacto en nuestro sitio web. Nuestro equipo de especialistas está a "
-#| "su disposición para ayudarle y proporcionarle consejos personalizados."
+#: sale/templates/sale/success.html:38
 msgid ""
 "Si vous avez des questions concernant votre commande ou si vous avez besoin "
-"d'aide pour votre élevage de fourmis, n'hésitez pas à nous contacter à antly."
-"fourmis@gmail.com ou via les réseau sociaux de contact sur notre site web. "
+"d'aide pour votre élevage de fourmis, n'hésitez pas à nous contacter à "
+"contact@antly.fr ou via les réseau sociaux de contact sur notre site web. "
 "Notre équipe de spécialistes est à votre disposition pour vous assister et "
 "vous fournir des conseils personnalisés."
 msgstr ""
 "Si tiene alguna pregunta sobre su pedido o necesita ayuda con su cría de "
-"hormigas, no dude en ponerse en contacto con nosotros en antly.fourmis@gmail."
-"com o a través de nuestras redes sociales de contacto en nuestro sitio web. "
-"Nuestro equipo de especialistas está a su disposición para ayudarle y "
-"proporcionarle consejos personalizados."
+"hormigas, no dude en ponerse en contacto con nosotros en contact@antly.fr o "
+"a través de las redes sociales de contacto en nuestro sitio web. Nuestro "
+"equipo de especialistas está a su disposición para ayudarle y proporcionarle "
+"consejos personalizados."
 
-#: .\sale\templates\sale\success.html:37
+#: sale/templates/sale/success.html:39
 msgid ""
 "Nous espérons que vous serez pleinement satisfait(e) de votre achat et que "
 "votre expérience avec Antly sera agréable et enrichissante. N'hésitez pas à "
 "partager vos découvertes et vos réussites avec notre communauté sur les "
 "réseaux sociaux en utilisant le hashtag #Antly."
 msgstr ""
+"Esperamos que esté completamente satisfecho(a) con su compra y que su "
+"experiencia con Antly sea agradable y enriquecedora. No dude en compartir "
+"sus descubrimientos y éxitos con nuestra comunidad en las redes sociales "
+"utilizando el hashtag #Antly."
 
-#: .\sale\templates\sale\success.html:38
+#: sale/templates/sale/success.html:40
 msgid ""
 "Encore merci de votre confiance et bonne découverte du monde fascinant des "
 "fourmis !"
 msgstr ""
+"¡Gracias nuevamente por su confianza y disfrute del descubrimiento del "
+"fascinante mundo de las hormigas!"
 
-#: .\sale\templates\sale\success.html:39
+#: sale/templates/sale/success.html:41
 msgid "Cordialement,"
 msgstr "Atentamente,"
 
-#: .\sale\templates\sale\success.html:40
+#: sale/templates/sale/success.html:42
 msgid "L'équipe Antly"
 msgstr "El equipo de Antly"
 
-#: .\sale\templates\sale\success.html:42
+#: sale/templates/sale/success.html:44
 msgid "Récupérer ma facture"
 msgstr "Obtener mi factura"
 
-#: .\super\templates\super\homepage.html:10
-msgid "La précision a l'état naturel"
-msgstr "La precisión en estado natural"
+#: sale/views.py:70 sale/views.py:858
+msgid ""
+"Fondations de Fourmis pour Débutants - Achat et Vente de Colonies de Fourmis "
+"| Boutique en Ligne"
+msgstr ""
+"Fundamentos de Hormigas para Principiantes - Compra y Venta de Colonias de "
+"Hormigas | Tienda en Línea"
 
-#: .\super\templates\super\homepage.html:25
+#: sale/views.py:71 sale/views.py:859
+msgid ""
+"Explorez notre collection de fondations de fourmis pour débutants, avec une "
+"variété d'espèces et d'origines. Démarrez votre élevage de fourmis en toute "
+"simplicité et bénéficiez d'un support professionnel. Découvrez nos offres "
+"dès maintenant !"
+msgstr ""
+"Explore nuestra colección de fundamentos de hormigas para principiantes, con "
+"una variedad de especies y orígenes. Comience su cría de hormigas fácilmente "
+"y benefíciese de soporte profesional. ¡Descubra nuestras ofertas ahora!"
+
+#: sale/views.py:93
+msgid ""
+"Accessoires pour l'élevage de Fourmis - Nids, Outils et Plus | Boutique en "
+"Ligne"
+msgstr ""
+"Accesorios para la cría de hormigas - Nidos, Herramientas y Más | Tienda en "
+"Línea"
+
+#: sale/views.py:94
+msgid ""
+"Découvrez notre gamme complète d'accessoires pour l'élevage de fourmis, "
+"conçue pour les débutants. De la mise en place de votre nid à la maintenance "
+"de votre colonie, nos produits assurent une expérience optimale. Visitez "
+"notre boutique et découvrez nos offres !"
+msgstr ""
+"Descubra nuestra gama completa de accesorios para la cría de hormigas, "
+"diseñada para principiantes. Desde la instalación de su nido hasta el "
+"mantenimiento de su colonia, nuestros productos aseguran una experiencia "
+"óptima. Visite nuestra tienda y descubra nuestras ofertas."
+
+#: sale/views.py:115
+msgid ""
+"Packs pour Élevage de Fourmis Débutants - Achat et Vente de Packs Fourmis | "
+"Boutique en Ligne"
+msgstr ""
+"Packs para la Cría de Hormigas para Principiantes - Compra y Venta de Packs "
+"de Hormigas | Tienda en Línea"
+
+#: sale/views.py:116
+msgid ""
+"Découvrez notre sélection de packs pour débutants en élevage de fourmis, "
+"incluant des fondations de différentes espèces et nids adaptés. Profitez "
+"d'un support professionnel et lancez-vous facilement dans la Myrmécologie "
+"avec nos packs complets !"
+msgstr ""
+"Descubra nuestra selección de packs para principiantes en la cría de "
+"hormigas, incluyendo fundamentos de diferentes especies y nidos adecuados. "
+"Benefíciese de soporte profesional y comience fácilmente en la mirmecología "
+"con nuestros packs completos."
+
+#: sale/views.py:156
+msgid ""
+"Pack Fourmis {pack_product.complete_spece()} de {pack_product."
+"sh_localisation()} - Achat et Vente de Packs pour Élevage de Fourmis "
+"Débutants | Boutique en Ligne"
+msgstr ""
+"Pack de Hormigas {pack_product.complete_spece()} de {pack_product."
+"sh_localisation()} - Compra y Venta de Packs para Cría de Hormigas para "
+"Principiantes | Tienda en Línea"
+
+#: sale/views.py:157
+msgid ""
+"Découvrez nos packs pour débutants incluant une fondation de fourmis "
+"{pack_product.complete_spece()} de {pack_product.sh_localisation()} et un "
+"nid adapté. Lancez-vous facilement dans l'élevage de fourmis avec notre pack "
+"complet et bénéficiez d'un support professionnel. Commandez dès maintenant !"
+msgstr ""
+"Descubra nuestros packs para principiantes que incluyen una fundación de "
+"hormigas {pack_product.complete_spece()} de {pack_product.sh_localisation()} "
+"y un nido adecuado. Comience fácilmente la cría de hormigas con nuestro "
+"paquete completo y obtenga soporte profesional. ¡Ordene ahora!"
+
+#: sale/views.py:195 sale/views.py:204 sale/views.py:218
+#, python-brace-format
+msgid ""
+"désolée, nous n'avons plus assez d'unitées en stock, il nous en reste {res}"
+msgstr ""
+"Lo sentimos, no tenemos suficientes unidades en stock, nos quedan {res}"
+
+#: sale/views.py:240
+msgid ""
+"Achat Fourmis {ant_product.sh_spece()} {ant_product.under_spece} de "
+"{ant_product.sh_localisation()} - Vente Fondations et Colonies pour "
+"Débutants | Boutique en Ligne"
+msgstr ""
+"Compra de Hormigas {ant_product.sh_spece()} {ant_product.under_spece} de "
+"{ant_product.sh_localisation()} - Venta de Fundaciones y Colonias para "
+"Principiantes | Tienda en Línea"
+
+#: sale/views.py:241
+msgid ""
+"Achetez des fondations de fourmis {ant_product.sh_spece()} {ant_product."
+"under_spece} originaires de {ant_product.sh_localisation()} pour débutants. "
+"Parfait pour démarrer un élevage de fourmis. Livraison rapide et support "
+"professionnel. Rejoignez l'aventure de la Myrmécologie dès maintenant !"
+msgstr ""
+"Compre fundaciones de hormigas {ant_product.sh_spece()} {ant_product."
+"under_spece} originarias de {ant_product.sh_localisation()} para "
+"principiantes. Perfecto para comenzar la cría de hormigas. Entrega rápida y "
+"soporte profesional. ¡Únase a la aventura de la mirmecología ahora!"
+
+#: sale/views.py:329
+msgid ""
+"{other_product.type.capitalize()} pour élevage de Fourmis - {other_product."
+"sh_name()} | Boutique en Ligne"
+msgstr ""
+"{other_product.type.capitalize()} para la cría de Hormigas - {other_product."
+"sh_name()} | Tienda en Línea"
+
+#: sale/views.py:330
+msgid ""
+"Découvrez {other_product.sh_name()}, un {other_product.type} essentiel pour "
+"votre élevage de fourmis. Idéal pour les débutants, ce produit assure les "
+"meilleures conditions pour votre colonie. Explorez ses caractéristiques et "
+"profitez de nos offres exceptionnelles dès maintenant !"
+msgstr ""
+"Descubra {other_product.sh_name()}, un {other_product.type} esencial para su "
+"cría de hormigas. Ideal para principiantes, este producto asegura las "
+"mejores condiciones para su colonia. Explore sus características y aproveche "
+"nuestras ofertas excepcionales ahora mismo!"
+
+#: sale/views.py:543 super/views.py:46
+msgid ""
+"Attention, nous sommes en hiver : les décès dus au froid pendant la "
+"livraison ne sont plus remboursés. La livraison est effectuée avec une "
+"chaufferette."
+msgstr ""
+"Atención, estamos en invierno: las muertes debido al frío durante la entrega "
+"ya no se reembolsan. La entrega se realiza con una almohadilla térmica."
+
+#: super/templates/super/homepage.html:11
+msgid "La précision à l'état naturel"
+msgstr ""
+
+#: super/templates/super/homepage.html:13
+msgid ""
+"Acheter des fourmis sans risque : satisfaction garantie ou remboursement"
+msgstr "Comprar hormigas sin riesgo: satisfacción garantizada o reembolso"
+
+#: super/templates/super/homepage.html:27
 msgid "Nos domaines d'expertise"
 msgstr "Nuestras áreas de experiencia"
 
-#: .\super\templates\super\homepage.html:26
-#, fuzzy
-#| msgid "Les espèces qui pourraient vous correspondre"
+#: super/templates/super/homepage.html:28
 msgid "Optez pour les fourmis qui vous corespondent"
-msgstr "Las especies que podrían ser adecuadas para ti"
+msgstr "Elija las hormigas adecuadas para usted"
 
-#: .\super\templates\super\homepage.html:32
+#: super/templates/super/homepage.html:34
 msgid "Les fondations"
 msgstr "Las fundaciones"
 
-#: .\super\templates\super\homepage.html:33
+#: super/templates/super/homepage.html:35
 msgid ""
 "Crée votre univers minuscule chez vous. Optez pour une fondation et "
 "introduisez les dans un environnement qui vous inspire, vous être libres de "
@@ -324,11 +481,11 @@ msgstr ""
 "Crea tu propio mundo diminuto en casa. Opta por una fundación e introdúcelas "
 "en un entorno que te inspire, ¡eres libre de tu imaginación!"
 
-#: .\super\templates\super\homepage.html:34
+#: super/templates/super/homepage.html:36
 msgid "Voir les fondations"
 msgstr "Ver las fundaciones"
 
-#: .\super\templates\super\homepage.html:42
+#: super/templates/super/homepage.html:44
 msgid ""
 "Commencer tout de suite et facilitez vous la vie ! Avec nos pack complets, "
 "élevez en outes tranqulité vos future fourmis."
@@ -336,16 +493,16 @@ msgstr ""
 "¡Comienza de inmediato y facilita tu vida! Con nuestros paquetes completos, "
 "cría tus futuras hormigas con total tranquilidad."
 
-#: .\super\templates\super\homepage.html:43
+#: super/templates/super/homepage.html:45
 msgid "Voir les packs"
 msgstr "Ver los paquetes"
 
-#: .\super\templates\super\homepage.html:61
-#: .\super\templates\super\specie_form.html:11
+#: super/templates/super/homepage.html:63
+#: super/templates/super/specie_form.html:11
 msgid "Choisissez Votre Espèce de Fourmis Idéale"
 msgstr "Elija su especie de hormigas ideal"
 
-#: .\super\templates\super\homepage.html:62
+#: super/templates/super/homepage.html:64
 msgid ""
 "Découvrez le fascinant monde de l'élevage de fourmis avec Antly ! Que vous "
 "soyez débutant ou expert, nous\n"
@@ -361,176 +518,185 @@ msgstr ""
 "ideal que se adapte a sus preferencias en términos de tamaño, color y mucho "
 "más. ¡Sumérjase en la aventura ahora mismo, su colonia de hormigas le espera!"
 
-#: .\super\templates\super\homepage.html:66
+#: super/templates/super/homepage.html:68
 msgid "ici"
 msgstr "aquí"
 
-#: .\super\templates\super\homepage.html:114 .\templates\comment.html:5
+#: super/templates/super/homepage.html:93 templates/comment.html:5
 msgid "Retour clients"
 msgstr "Comentarios de los clientes"
 
-#: .\super\templates\super\homepage.html:115 .\templates\comment.html:6
+#: super/templates/super/homepage.html:94 templates/comment.html:6
 msgid "Ce que disent nos clients"
 msgstr "Lo que dicen nuestros clientes"
 
-#: .\super\templates\super\homepage.html:145
+#: super/templates/super/homepage.html:124
 msgid "Faire un retour"
 msgstr "Dejar un comentario"
 
-#: .\super\templates\super\information.html:8
+#: super/templates/super/information.html:8
 msgid "Information"
 msgstr "Información"
 
-#: .\super\templates\super\information.html:10
+#: super/templates/super/information.html:10
 msgid "Toutes les informations de la boutique"
 msgstr "Toda la información de la tienda"
 
-#: .\super\templates\super\information.html:15 .\templates\index.html:201
+#: super/templates/super/information.html:15 templates/index.html:218
 msgid "Livraison"
 msgstr "Envío"
 
-#: .\super\templates\super\information.html:19
-#: .\super\templates\super\information.html:89 .\templates\index.html:208
+#: super/templates/super/information.html:19
+#: super/templates/super/information.html:93 templates/index.html:225
 msgid "Modes de paiement"
 msgstr "Métodos de pago"
 
-#: .\super\templates\super\information.html:24
-#: .\super\templates\super\information.html:108 .\templates\index.html:215
+#: super/templates/super/information.html:24
+#: super/templates/super/information.html:105 templates/index.html:232
 msgid "Conditions d'utilisation"
 msgstr "Condiciones de uso"
 
-#: .\super\templates\super\information.html:29
-#: .\super\templates\super\information.html:126 .\templates\index.html:222
+#: super/templates/super/information.html:29
+#: super/templates/super/information.html:123 templates/index.html:239
 msgid "Confidentialité"
 msgstr "Privacidad"
 
-#: .\super\templates\super\information.html:33
-#: .\super\templates\super\information.html:141
+#: super/templates/super/information.html:33
+#: super/templates/super/information.html:142
 msgid "Cookies"
 msgstr "Cookies"
 
-#: .\super\templates\super\information.html:37
-#: .\super\templates\super\information.html:161 .\templates\index.html:257
+#: super/templates/super/information.html:37
+#: super/templates/super/information.html:162 templates/index.html:274
 msgid "Mention légale"
 msgstr "Aviso legal"
 
-#: .\super\templates\super\information.html:42
-#: .\super\templates\super\information.html:207 .\templates\index.html:240
-msgid "Expédition et retours"
-msgstr "Envío y devoluciones"
+#: super/templates/super/information.html:42
+#: super/templates/super/information.html:208 templates/index.html:257
+msgid "Problème de livraison et retours"
+msgstr "Problemas de entrega y devoluciones"
 
-#: .\super\templates\super\information.html:46
-#: .\super\templates\super\information.html:238 .\templates\index.html:245
+#: super/templates/super/information.html:46
+#: super/templates/super/information.html:233 templates/index.html:262
 msgid "Qui sommes nous"
 msgstr "Quiénes somos"
 
-#: .\super\templates\super\information.html:49 .\templates\index.html:264
+#: super/templates/super/information.html:49 templates/index.html:281
 msgid "Nos offres"
 msgstr "Nuestras ofertas"
 
-#: .\super\templates\super\information.html:52
-#: .\super\templates\super\information.html:271 .\templates\index.html:250
+#: super/templates/super/information.html:52
+#: super/templates/super/information.html:266 templates/index.html:267
 msgid "Contact"
 msgstr "Contacto"
 
-#: .\super\templates\super\information.html:65
+#: super/templates/super/information.html:65
 msgid "La livraison"
 msgstr "El envío"
 
-#: .\super\templates\super\information.html:67
+#: super/templates/super/information.html:67
 #, fuzzy
 #| msgid ""
-#| "Nous sommes heureux de vous informer que tous les articles\n"
-#| "                commandés sur notre boutique seront envoyés avec soin et\n"
-#| "                rapidité. Pour assurer une livraison sûre et rapide, "
-#| "nous\n"
-#| "                proposons deux options d'envoi : UPS o La Poste."
+#| "La livraison de nos produits est assurée par des services de messagerie "
+#| "externes, incluant UPS, DPD, La Poste, Hermes, Royal Mail, Correos, et "
+#| "LnPost. Le choix du prestataire est déterminé par le vendeur responsable "
+#| "de votre commande, en fonction des tarifs des différents services de "
+#| "livraison. Il est important de noter que nous ne réalisons aucun bénéfice "
+#| "sur les frais de livraison."
 msgid ""
-"Nous sommes heureux de vous informer que tous les articles\n"
-"                commandés sur notre boutique seront envoyés avec soin et\n"
-"                rapidité. Pour assurer une livraison sûre et rapide, nous\n"
-"                proposons deux options d'envoi : UPS ou La Poste."
+"La livraison de nos produits est assurée par des services de messagerie "
+"externes,\n"
+"                 incluant UPS, DPD, La Poste, Hermes, Royal Mail, Correos, "
+"et LnPost. Le choix du prestataire est \n"
+"                 déterminé par le vendeur responsable de votre commande, en "
+"fonction des tarifs des différents services\n"
+"                 de livraison. Il est important de noter que nous ne "
+"réalisons aucun bénéfice sur les frais de livraison.\n"
+"                 "
 msgstr ""
-"Nos complace informarle que todos los artículos\n"
-"                pedidos en nuestra tienda serán enviados con cuidado y\n"
-"                rapidez. Para garantizar un envío seguro y rápido, "
-"ofrecemos\n"
-"                dos opciones de envío: UPS o La Poste."
+"La entrega de nuestros productos está asegurada por servicios de mensajería "
+"externos, incluyendo UPS, DPD, La Poste, Hermes, Royal Mail, Correos, y "
+"LnPost. La elección del proveedor está determinada por el vendedor "
+"responsable de su pedido, según las tarifas de los distintos servicios de "
+"entrega. Es importante destacar que no obtenemos ningún beneficio de los "
+"costos de envío."
 
-#: .\super\templates\super\information.html:73
+#: super/templates/super/information.html:74
 #, fuzzy
 #| msgid ""
-#| "Selon votre préférence, vous pouvez choisir l'option qui vous\n"
-#| "                convient le mieux lors de votre commande. Si vous "
-#| "habitez\n"
-#| "                dans\n"
-#| "                une zone où il fait froid, nous vous proposons également\n"
-#| "                l'option de l'envoi avec une chaufferette pour protéger "
-#| "vos\n"
-#| "                fourmis durant le voyage."
+#| "Pour les fourmis sensibles au froid, notamment durant les mois d'hiver, "
+#| "nous utilisons des chaufferettes pour garantir leur bien-être durant le "
+#| "transport. Le coût de ces chaufferettes est inclus soit dans le prix de "
+#| "l'article, soit dans les frais de livraison."
 msgid ""
-"Selon votre préférence, vous pouvez choisir l'option qui vous\n"
-"                convient le mieux lors de votre commande. Si vous habitez "
-"dans\n"
-"                une zone où il fait froid, nous vous proposons également\n"
-"                l'option de l'envoi avec une chaufferette pour protéger vos\n"
-"                fourmis durant le voyage."
+"Pour les fourmis sensibles au froid, notamment durant les mois \n"
+"                d'hiver, nous utilisons des chaufferettes pour garantir leur "
+"bien-être durant le \n"
+"                transport. Le coût de ces chaufferettes est inclus soit dans "
+"le prix de l'article, \n"
+"                soit dans les frais de livraison."
 msgstr ""
-"Según su preferencia, puede elegir la opción que mejor le\n"
-"                convenga al realizar su pedido. Si vive en una zona donde "
-"hace\n"
-"                frío, también ofrecemos la opción de envío con una "
-"almohadilla térmica\n"
-"                para proteger sus hormigas durante el viaje."
+"Para las hormigas sensibles al frío, especialmente durante los meses de "
+"invierno, utilizamos almohadillas térmicas para garantizar su bienestar "
+"durante el transporte. El costo de estas almohadillas térmicas está incluido "
+"en el precio del artículo o en los gastos de envío."
 
-#: .\super\templates\super\information.html:80
+#: super/templates/super/information.html:80
+#, fuzzy
+#| msgid ""
+#| "Un courriel de confirmation est envoyé dès l'expédition de votre "
+#| "commande. Si vous n'avez pas reçu ce courriel dans la semaine suivant "
+#| "votre commande, veuillez nous contacter."
 msgid ""
-"Nous espérons que ces informations vous seront utiles et nous\n"
-"                sommes impatients de vous envoyer votre commande dès que\n"
-"                possible. Si vous avez des questions supplémentaires, "
-"n'hésitez\n"
-"                pas à nous contacter. Nous sommes là pour vous aider."
+"Un courriel de confirmation est envoyé dès l'expédition de votre commande. "
+"Si vous n'avez pas reçu ce \n"
+"                courriel dans la semaine suivant votre commande, veuillez "
+"nous contacter."
 msgstr ""
-"Esperamos que esta información le sea útil y esperamos\n"
-"                enviar su pedido lo antes posible. Si tiene preguntas "
-"adicionales,\n"
-"                no dude en ponerse en contacto con nosotros. Estamos aquí "
-"para\n"
-"                ayudarle."
+"Se envía un correo electrónico de confirmación tan pronto como se envía su "
+"pedido. Si no ha recibido este correo electrónico dentro de la semana "
+"siguiente a su pedido, por favor contáctenos."
 
-#: .\super\templates\super\information.html:91
+#: super/templates/super/information.html:84
+#, fuzzy
+#| msgid ""
+#| "Nous privilégions l'envoi des commandes en début de semaine pour éviter "
+#| "que les colis ne restent dans les entrepôts durant le weekend, réduisant "
+#| "ainsi le risque de mortalité pour les espèces les plus fragiles."
 msgid ""
-"Notre boutique accepte plusieurs méthodes de paiement afin de\n"
-"                vous offrir un maximum de flexibilité et de convenance. "
-"Vous\n"
-"                pouvez régler vos achats par carte de crédit ou de débit, "
-"par\n"
-"                virement bancaire ou encore par portefeuille électronique. "
-"Nous\n"
-"                acceptons toutes les cartes de crédit et de débit courantes, "
-"y\n"
-"                compris Visa, Mastercard et American Express. Si vous "
-"préférez\n"
-"                utiliser un portefeuille électronique, nous acceptons "
-"également\n"
-"                les paiements par PayPal et Apple Pay. Nous offrons "
-"également la\n"
-"                possibilité de régler par virement bancaire pour ceux qui\n"
-"                préfèrent cette méthode de paiement. N'hésitez pas à nous\n"
-"                contacter si vous avez des questions sur les méthodes de\n"
-"                paiement acceptées dans notre boutique."
+"\n"
+"              Nous privilégions l'envoi des commandes en début de semaine "
+"pour éviter que les \n"
+"              colis ne restent dans les entrepôts durant le weekend, "
+"réduisant ainsi le risque \n"
+"              de mortalité pour les espèces les plus fragiles."
 msgstr ""
-"Nuestra tienda acepta varios métodos de pago para brindarle la máxima "
-"flexibilidad y comodidad. Puede pagar sus compras con tarjeta de crédito o "
-"débito, transferencia bancaria o billetera electrónica. Aceptamos todas las "
-"tarjetas de crédito y débito comunes, incluidas Visa, Mastercard y American "
-"Express. Si prefiere utilizar una billetera electrónica, también aceptamos "
-"pagos con PayPal y Apple Pay. También ofrecemos la posibilidad de pagar "
-"mediante transferencia bancaria para aquellos que prefieren este método de "
-"pago. No dude en ponerse en contacto con nosotros si tiene alguna pregunta "
-"sobre los métodos de pago aceptados en nuestra tienda."
+"Preferimos enviar los pedidos al inicio de la semana para evitar que los "
+"paquetes permanezcan en los almacenes durante el fin de semana, reduciendo "
+"así el riesgo de mortalidad para las especies más frágiles."
 
-#: .\super\templates\super\information.html:110
+#: super/templates/super/information.html:95
+#, fuzzy
+#| msgid ""
+#| "Nous acceptons une large gamme de cartes de crédit et de débit, incluant "
+#| "Visa, Mastercard, et American Express. Les transactions par carte sont "
+#| "sécurisées via Stripe. Pour ceux qui favorisent l'usage de portefeuilles "
+#| "électroniques, le paiement par PayPal est également pris en charge."
+msgid ""
+"Nous acceptons une large gamme de cartes de crédit et de débit,\n"
+"                 incluant Visa, Mastercard, et American Express. Les "
+"transactions par carte sont\n"
+"                  sécurisées via Stripe. Pour ceux qui favorisent l'usage de "
+"portefeuilles électroniques,\n"
+"                  le paiement par PayPal est également pris en charge.\n"
+"                "
+msgstr ""
+"Aceptamos una amplia gama de tarjetas de crédito y débito, incluyendo Visa, "
+"Mastercard y American Express. Las transacciones con tarjeta están "
+"aseguradas a través de Stripe. Para aquellos que prefieren el uso de "
+"billeteras electrónicas, también se admite el pago por PayPal."
+
+#: super/templates/super/information.html:107
 msgid ""
 "En accédant à notre site et en utilisant nos services, vous\n"
 "                acceptez les conditions d'utilisation suivantes. Nous nous\n"
@@ -559,38 +725,70 @@ msgstr ""
 "pregunta sobre las condiciones de uso de nuestro sitio, no dude en ponerse "
 "en contacto con nosotros."
 
-#: .\super\templates\super\information.html:128
+#: super/templates/super/information.html:125
+#, fuzzy
+#| msgid ""
+#| "Nous accordons une importance primordiale à la confidentialité de nos "
+#| "clients, en prenant des mesures rigoureuses pour assurer la protection de "
+#| "vos données personnelles. Vos informations ne seront jamais divulguées à "
+#| "des tiers sans votre autorisation claire, et nous employons des "
+#| "technologies de chiffrement avancées pour sécuriser vos données lors des "
+#| "transmissions. Les informations que nous recueillons sont strictement "
+#| "celles nécessaires à la gestion de votre commande et à la fourniture d'un "
+#| "service de qualité."
 msgid ""
-"Nous sommes conscients de l'importance de la confidentialité\n"
-"                pour nos clients et c'est pour cette raison que nous "
-"prenons\n"
-"                toutes les mesures nécessaires pour protéger vos données\n"
-"                personnelles. Nous ne partagerons jamais vos informations "
-"avec\n"
-"                des tiers sans votre consentement explicite et nous "
-"utilisons\n"
-"                des méthodes de chiffrement pour protéger vos données "
-"pendant\n"
-"                leur transmission. Nous vous demandons seulement les\n"
-"                informations nécessaires pour traiter votre commande et "
-"vous\n"
-"                offrir un service de qualité. Si vous avez des questions sur "
-"la\n"
-"                façon dont nous traitons vos données, n'hésitez pas à nous\n"
-"                contacter. Nous sommes toujours à votre disposition pour\n"
-"                répondre à vos préoccupations en matière de confidentialité."
+"Nous accordons une importance primordiale à la confidentialité de nos "
+"clients,\n"
+"                 en prenant des mesures rigoureuses pour assurer la "
+"protection de vos données personnelles. \n"
+"                 Vos informations ne seront jamais divulguées à des tiers "
+"sans votre autorisation claire, et \n"
+"                 nous employons des technologies de chiffrement avancées "
+"pour sécuriser vos données lors des \n"
+"                 transmissions. Les informations que nous recueillons sont "
+"strictement celles nécessaires à la \n"
+"                 gestion de votre commande et à la fourniture d'un service "
+"de qualité.\n"
+"                "
 msgstr ""
-"Somos conscientes de la importancia de la privacidad para nuestros clientes, "
-"y por eso tomamos todas las medidas necesarias para proteger sus datos "
-"personales. Nunca compartiremos su información con terceros sin su "
-"consentimiento explícito y utilizamos métodos de cifrado para proteger sus "
-"datos durante su transmisión. Solo le pedimos la información necesaria para "
-"procesar su pedido y ofrecerle un servicio de calidad. Si tiene alguna "
-"pregunta sobre cómo tratamos sus datos, no dude en ponerse en contacto con "
-"nosotros. Siempre estamos disponibles para abordar sus preocupaciones sobre "
-"la privacidad."
+"Otorgamos una importancia primordial a la confidencialidad de nuestros "
+"clientes, tomando medidas rigurosas para asegurar la protección de sus datos "
+"personales. Su información nunca será divulgada a terceros sin su "
+"autorización clara, y utilizamos tecnologías de cifrado avanzadas para "
+"proteger sus datos durante las transmisiones. La información que recopilamos "
+"es estrictamente la necesaria para la gestión de su pedido y la provisión de "
+"un servicio de calidad."
 
-#: .\super\templates\super\information.html:143
+#: super/templates/super/information.html:134
+#, fuzzy
+#| msgid ""
+#| "Les transactions bancaires sont sécurisées par Stripe, notre prestataire "
+#| "de services de paiement en ligne."
+msgid ""
+"Les transactions bancaires sont sécurisées par Stripe, notre prestataire de\n"
+"                 services de paiement en ligne."
+msgstr ""
+"Las transacciones bancarias están aseguradas por Stripe, nuestro proveedor "
+"de servicios de pago en línea."
+
+#: super/templates/super/information.html:138
+#, fuzzy
+#| msgid ""
+#| "Pour toute question relative à la gestion de vos données personnelles, "
+#| "nous restons à votre entière disposition. N'hésitez pas à nous contacter "
+#| "pour toute préoccupation concernant votre confidentialité."
+msgid ""
+"Pour toute question relative à la gestion de vos données personnelles, nous "
+"restons \n"
+"                à votre entière disposition. N'hésitez pas à nous contacter "
+"pour toute préoccupation concernant \n"
+"                votre confidentialité."
+msgstr ""
+"Para cualquier pregunta relacionada con la gestión de sus datos personales, "
+"estamos a su entera disposición. No dude en contactarnos para cualquier "
+"preocupación sobre su privacidad."
+
+#: super/templates/super/information.html:144
 msgid ""
 "Nous ne récoltons aucune de vos données sans votre accord. Nous\n"
 "                guarentissons la protection de vos appareils en ne mettant "
@@ -601,11 +799,11 @@ msgstr ""
 "protección de sus dispositivos al no utilizar ninguna cookie en nuestro "
 "sitio."
 
-#: .\super\templates\super\information.html:151 .\templates\index.html:229
+#: super/templates/super/information.html:152 templates/index.html:246
 msgid "Devenir vendeur"
 msgstr "Convertirse en vendedor"
 
-#: .\super\templates\super\information.html:153
+#: super/templates/super/information.html:154
 msgid ""
 "Rejoignez-nous en tant que vendeur chez Antly et mettez en avant vos "
 "colonies,\n"
@@ -619,19 +817,19 @@ msgstr ""
 "información y registrarse como vendedor, no dude en ponerse en contacto con "
 "nosotros al 06 51 33 61 58."
 
-#: .\super\templates\super\information.html:162
+#: super/templates/super/information.html:163
 msgid "Identité de l'entreprise :"
 msgstr "Identidad de la empresa:"
 
-#: .\super\templates\super\information.html:164
+#: super/templates/super/information.html:165
 msgid "Nom de l'entreprise : Antly"
 msgstr "Nombre de la empresa: Antly"
 
-#: .\super\templates\super\information.html:165
+#: super/templates/super/information.html:166
 msgid "Forme juridique : Micro entreprise"
 msgstr "Forma jurídica: Micro empresa"
 
-#: .\super\templates\super\information.html:167
+#: super/templates/super/information.html:168
 msgid ""
 "Adresse du siège social : 8 chemin des maraîchers Tresserve\n"
 "                  73100 France"
@@ -639,39 +837,39 @@ msgstr ""
 "Dirección de la sede social: 8 chemin des maraîchers Tresserve\n"
 "                  73100 Francia"
 
-#: .\super\templates\super\information.html:170
+#: super/templates/super/information.html:171
 msgid "Numéro de téléphone : 06 51 33 61 58"
 msgstr "Número de teléfono: 06 51 33 61 58"
 
-#: .\super\templates\super\information.html:171
-msgid "Adresse e-mail : antly.fourmis@gmail.com"
-msgstr "Correo electrónico: antly.fourmis@gmail.com"
+#: super/templates/super/information.html:172
+msgid "Adresse e-mail : contact@antly.fr"
+msgstr "Correo electrónico: contact@antly.fr"
 
-#: .\super\templates\super\information.html:172
+#: super/templates/super/information.html:173
 msgid "Numéro d'immatriculation : 914 939 004 00018"
 msgstr "Número de registro: 914 939 004 00018"
 
-#: .\super\templates\super\information.html:175
+#: super/templates/super/information.html:176
 msgid "Responsable de la publication :"
 msgstr "Responsable de la publicación:"
 
-#: .\super\templates\super\information.html:176
+#: super/templates/super/information.html:177
 msgid "Nom et prénom du responsable : Louka Pesic"
 msgstr "Nombre y apellidos del responsable: Louka Pesic"
 
-#: .\super\templates\super\information.html:178
+#: super/templates/super/information.html:179
 msgid "Hébergement du site :"
 msgstr "Hospedaje del sitio:"
 
-#: .\super\templates\super\information.html:180
-msgid "Nom de l'hébergeur : Google cloud"
-msgstr "Nombre del proveedor de alojamiento: Google cloud"
+#: super/templates/super/information.html:181
+msgid "Nom de l'hébergeur : Heroku"
+msgstr "Nombre del proveedor de alojamiento : Heroku"
 
-#: .\super\templates\super\information.html:182
+#: super/templates/super/information.html:183
 msgid "Propriété intellectuelle :"
 msgstr "Propiedad intelectual:"
 
-#: .\super\templates\super\information.html:184
+#: super/templates/super/information.html:185
 msgid ""
 "Le contenu de ce site internet (textes, images, vidéos, etc.)\n"
 "                est la propriété exclusive de Antly et est protégé par les "
@@ -688,27 +886,27 @@ msgstr ""
 "distribución, modificación o explotación de este contenido sin la "
 "autorización por escrito de Antly."
 
-#: .\super\templates\super\information.html:191
+#: super/templates/super/information.html:192
 msgid "TVA :"
 msgstr "IVA:"
 
-#: .\super\templates\super\information.html:192
+#: super/templates/super/information.html:193
 msgid "Numéro de TVA intracommunautaire :"
 msgstr "Número de IVA intracomunitario:"
 
-#: .\super\templates\super\information.html:194
+#: super/templates/super/information.html:195
 msgid "SIRET :"
 msgstr "SIRET:"
 
-#: .\super\templates\super\information.html:195
+#: super/templates/super/information.html:196
 msgid "Numéro SIRET : 914 939 004"
 msgstr "Número SIRET: 914 939 004"
 
-#: .\super\templates\super\information.html:197
+#: super/templates/super/information.html:198
 msgid "Conditions générales de vente :"
 msgstr "Condiciones generales de venta:"
 
-#: .\super\templates\super\information.html:199
+#: super/templates/super/information.html:200
 msgid ""
 "Les conditions générales de vente de Antly sont consultables sur\n"
 "                la page suivante : "
@@ -716,7 +914,7 @@ msgstr ""
 "Las condiciones generales de venta de Antly se pueden consultar en la "
 "siguiente página:"
 
-#: .\super\templates\super\information.html:200
+#: super/templates/super/information.html:201
 msgid ""
 " En passant commande sur ce site internet,\n"
 "                vous acceptez ces conditions générales de vente."
@@ -724,65 +922,66 @@ msgstr ""
 "Al realizar un pedido en este sitio web, acepta estas condiciones generales "
 "de venta."
 
-#: .\super\templates\super\information.html:209
+#: super/templates/super/information.html:211
 msgid ""
-"Pour les expéditions, nous travaillons avec plusieurs\n"
-"                transporteurs afin de vous offrir le meilleur service "
-"possible.\n"
-"                Nous mettons un soin particulier à l'emballage de nos "
-"produits\n"
-"                pour assurer leur sécurité pendant le transport. Cependant, "
-"nous\n"
-"                ne sommes pas responsables des dommages causés par le\n"
-"                transporteur durant le voyage. Si vous recevez un produit\n"
-"                endommagé, veuillez nous le signaler dans les plus brefs "
-"délais\n"
-"                et nous ferons le nécessaire pour vous rembourser ou vous\n"
-"                envoyer un nouveau produit."
+"En cas de décès partiel des fourmis durant le transport, aucun remboursement "
+"n'est accordé si des ouvrières survivent."
 msgstr ""
-"Para los envíos, trabajamos con varios transportistas para ofrecerle el "
-"mejor servicio posible. Ponemos especial atención en el embalaje de nuestros "
-"productos para garantizar su seguridad durante el transporte. Sin embargo, "
-"no somos responsables de los daños causados por el transportista durante el "
-"viaje. Si recibe un producto dañado, notifíquenoslo lo antes posible y "
-"tomaremos las medidas necesarias para reembolsarle o enviarle un nuevo "
-"producto."
+"En caso de muerte parcial de las hormigas durante el transporte, no se "
+"otorga reembolso si alguna de las obreras sobrevive."
 
-#: .\super\templates\super\information.html:221
+#: super/templates/super/information.html:212
 msgid ""
-"Malheureusement, nous ne faisons pas de retours pour des raisons\n"
-"                éthiques. En effet, nos fourmis sont des êtres vivants et "
-"il\n"
-"                serait trop dangereux pour elles de les renvoyer en "
-"arrière.\n"
-"                Cependant, si votre colonie de fourmis vient à décéder "
-"pendant\n"
-"                le transport, nous vous rembourserons la moitié de sa "
-"valeur.\n"
-"                Pour cela, vous devrez nous fournir des preuves (photos) de "
-"la\n"
-"                mortalité de la colonie. Pour les produits matériels, si "
-"vous ne\n"
-"                recevez pas votre commande en raison d'un problème avec le\n"
-"                transporteur, nous vous rembourserons la totalité de la "
-"valeur\n"
-"                de votre commande. Si vous avez des questions ou des "
-"inquiétudes\n"
-"                concernant l'expédition ou les retours, n'hésitez pas à "
-"nous\n"
-"                contacter. Nous serons heureux de vous aider."
+"Un remboursement partiel de la moitié de la valeur de la colonie est "
+"possible si la ou les reines sont vivantes tandis que toutes les ouvrières "
+"sont décédées."
 msgstr ""
-"Desafortunadamente, no aceptamos devoluciones por razones éticas. Nuestras "
-"hormigas son seres vivos y sería peligroso devolverlas. Sin embargo, si su "
-"colonia de hormigas muere durante el transporte, le reembolsaremos la mitad "
-"de su valor. Para ello, deberá proporcionarnos pruebas (fotos) de la muerte "
-"de la colonia. Para productos materiales, si no recibe su pedido debido a un "
-"problema con la empresa de transporte, le reembolsaremos el valor total de "
-"su pedido. Si tiene preguntas o inquietudes sobre el envío o las "
-"devoluciones, no dude en ponerse en contacto con nosotros. Estaremos "
-"encantados de ayudarle."
+"Es posible un reembolso parcial del 50% si la o las reinas están vivas "
+"mientras que todas las obreras han muerto."
 
-#: .\super\templates\super\information.html:240
+#: super/templates/super/information.html:213
+msgid ""
+"Un remboursement intégral, incluant les frais de port si la colonie était le "
+"seul produit commandé, est prévu uniquement en cas de décès total de la "
+"colonie."
+msgstr ""
+"Se prevé un reembolso total, incluyendo los gastos de envío si la colonia "
+"fue el único producto pedido, solo en caso de muerte total de la colonia."
+
+#: super/templates/super/information.html:217
+#, fuzzy
+#| msgid ""
+#| "Pour chaque situation, une preuve sous forme d'image sera exigée. Ces "
+#| "politiques de remboursement s'appliquent uniquement durant la période "
+#| "estivale; aucun remboursement pour les colonies décédées n'est effectué "
+#| "en hiver, conformément aux avertissements publiés sur notre site."
+msgid ""
+"Pour chaque situation, une preuve sous forme d'image sera exigée. Ces "
+"politiques \n"
+"                de remboursement s'appliquent uniquement durant la période "
+"estivale ; aucun remboursement pour \n"
+"                les colonies décédées n'est effectué en hiver, conformément "
+"aux avertissements publiés sur notre \n"
+"                site."
+msgstr ""
+"Para cada situación, se requerirá una prueba en forma de imagen. Estas "
+"políticas de reembolso se aplican solo durante el período estival; no se "
+"efectúan reembolsos por colonias fallecidas en invierno, de acuerdo con las "
+"advertencias publicadas en nuestro sitio."
+
+#: super/templates/super/information.html:224
+#, fuzzy
+#| msgid ""
+#| "Nous ne procédons à aucun remboursement pour les colonies décédées après "
+#| "les jours suivant la réception du colis."
+msgid ""
+"Nous ne procédons à aucun remboursement pour les colonies décédées \n"
+"                après les jours suivant la réception du colis."
+msgstr ""
+"No procedemos con ningún reembolso por las colonias fallecidas después de "
+"los días siguientes a la recepción del paquete."
+
+#: super/templates/super/information.html:235
 msgid ""
 "Notre boutique en ligne est spécialisée dans les fourmis pour\n"
 "                débutants. Nous sommes une équipe passionnée par ces petits\n"
@@ -810,22 +1009,22 @@ msgstr ""
 "nuestros productos y servicios. ¡Esperamos darle la bienvenida a nuestra "
 "tienda en línea!"
 
-#: .\super\templates\super\information.html:258
+#: super/templates/super/information.html:253
 msgid "Voici nos offres du moment :"
 msgstr "Estas son nuestras ofertas actuales:"
 
-#: .\super\templates\super\information.html:265
+#: super/templates/super/information.html:260
 msgid "Nous n'avons pas d'offre disponible pour le moment"
 msgstr "No tenemos ninguna oferta disponible en este momento"
 
-#: .\super\templates\super\information.html:273
+#: super/templates/super/information.html:268
 msgid ""
 "Vous pouvez nous contacter en utilisant les informations\n"
 "                suivantes :"
 msgstr ""
 "Puede ponerse en contacto con nosotros utilizando la siguiente información:"
 
-#: .\super\templates\super\information.html:285
+#: super/templates/super/information.html:280
 msgid ""
 "Nous sommes actifs sur tous ces réseaux et vous pouvez nous\n"
 "                suivre pour rester informé de nos dernières vidéos et\n"
@@ -840,11 +1039,11 @@ msgstr ""
 "enviarnos un mensaje si tiene preguntas o necesita ayuda. Estamos aquí para "
 "ayudarle a encontrar la colonia de hormigas perfecta para usted."
 
-#: .\super\templates\super\specie_form.html:12
+#: super/templates/super/specie_form.html:12
 msgid "Guide d'Élevage de Fourmis pour Débutants et Experts"
 msgstr "Guía de cría de hormigas para principiantes y expertos"
 
-#: .\super\templates\super\specie_form.html:13
+#: super/templates/super/specie_form.html:13
 msgid ""
 "Bienvenue sur Antly, votre source de confiance pour l'élevage de fourmis. "
 "Que vous soyez un débutant\n"
@@ -876,177 +1075,141 @@ msgstr ""
 "hormigas. Comienza tu emocionante experiencia en la cría de hormigas hoy "
 "mismo."
 
-#: .\super\templates\super\specie_form.html:30
+#: super/templates/super/specie_form.html:30
 msgid "Niveau de connaissance"
 msgstr "Nivel de conocimiento"
 
-#: .\super\templates\super\specie_form.html:33
+#: super/templates/super/specie_form.html:33
 msgid "Débutant"
 msgstr "Principiante"
 
-#: .\super\templates\super\specie_form.html:37
+#: super/templates/super/specie_form.html:37
 msgid "Intermédiaire"
 msgstr "Intermedio"
 
-#: .\super\templates\super\specie_form.html:41
+#: super/templates/super/specie_form.html:41
 msgid "Expérimenté"
 msgstr "Experimentado"
 
-#: .\super\templates\super\specie_form.html:48
-#: .\super\templates\super\specie_form.html:125
+#: super/templates/super/specie_form.html:48
+#: super/templates/super/specie_form.html:125
 msgid "Informations sur l'espèce de fourmis"
 msgstr "Información sobre la especie de hormigas"
 
-#: .\super\templates\super\specie_form.html:50
-#: .\super\templates\super\specie_form.html:145
+#: super/templates/super/specie_form.html:50
+#: super/templates/super/specie_form.html:145
 msgid "Taille de l'espèce"
 msgstr "Tamaño de la especie"
 
-#: .\super\templates\super\specie_form.html:53
-#: .\super\templates\super\specie_form.html:148
+#: super/templates/super/specie_form.html:53
+#: super/templates/super/specie_form.html:148
 msgid "Grosse"
 msgstr "Grande"
 
-#: .\super\templates\super\specie_form.html:57
-#: .\super\templates\super\specie_form.html:152
+#: super/templates/super/specie_form.html:57
+#: super/templates/super/specie_form.html:152
 msgid "Petite"
 msgstr "Pequeña"
 
-#: .\super\templates\super\specie_form.html:61
-#: .\super\templates\super\specie_form.html:78
-#: .\super\templates\super\specie_form.html:116
-#: .\super\templates\super\specie_form.html:140
-#: .\super\templates\super\specie_form.html:156
-#: .\super\templates\super\specie_form.html:173
-#: .\super\templates\super\specie_form.html:190
-#: .\super\templates\super\specie_form.html:227
+#: super/templates/super/specie_form.html:61
+#: super/templates/super/specie_form.html:78
+#: super/templates/super/specie_form.html:116
+#: super/templates/super/specie_form.html:140
+#: super/templates/super/specie_form.html:156
+#: super/templates/super/specie_form.html:173
+#: super/templates/super/specie_form.html:190
+#: super/templates/super/specie_form.html:227
 msgid "Sans importance"
 msgstr "Sin importancia"
 
-#: .\super\templates\super\specie_form.html:67
-#: .\super\templates\super\specie_form.html:162
+#: super/templates/super/specie_form.html:67
+#: super/templates/super/specie_form.html:162
 msgid "Couleur de l'espèce"
 msgstr "Color de la especie"
 
-#: .\super\templates\super\specie_form.html:70
-#: .\super\templates\super\specie_form.html:165
+#: super/templates/super/specie_form.html:70
+#: super/templates/super/specie_form.html:165
 msgid "Coloré"
 msgstr "Colorido"
 
-#: .\super\templates\super\specie_form.html:74
-#: .\super\templates\super\specie_form.html:169
+#: super/templates/super/specie_form.html:74
+#: super/templates/super/specie_form.html:169
 msgid "Noir"
 msgstr "Negro"
 
-#: .\super\templates\super\specie_form.html:85
-#: .\super\templates\super\specie_form.html:196
+#: super/templates/super/specie_form.html:85
+#: super/templates/super/specie_form.html:196
 msgid "Localisation de l'espèce"
 msgstr "Ubicación de la especie"
 
-#: .\super\templates\super\specie_form.html:88
-#: .\super\templates\super\specie_form.html:199
+#: super/templates/super/specie_form.html:88
+#: super/templates/super/specie_form.html:199
 msgid "Europe du Sud"
 msgstr "Europa del Sur"
 
-#: .\super\templates\super\specie_form.html:92
-#: .\super\templates\super\specie_form.html:203
+#: super/templates/super/specie_form.html:92
+#: super/templates/super/specie_form.html:203
 msgid "Europe du Nord"
 msgstr "Europa del Norte"
 
-#: .\super\templates\super\specie_form.html:96
-#: .\super\templates\super\specie_form.html:207
+#: super/templates/super/specie_form.html:96
+#: super/templates/super/specie_form.html:207
 msgid "Asie"
 msgstr "Asia"
 
-#: .\super\templates\super\specie_form.html:100
-#: .\super\templates\super\specie_form.html:211
+#: super/templates/super/specie_form.html:100
+#: super/templates/super/specie_form.html:211
 msgid "Amérique du Sud"
 msgstr "América del Sur"
 
-#: .\super\templates\super\specie_form.html:104
-#: .\super\templates\super\specie_form.html:215
+#: super/templates/super/specie_form.html:104
+#: super/templates/super/specie_form.html:215
 msgid "Amérique du Nord"
 msgstr "América del Norte"
 
-#: .\super\templates\super\specie_form.html:108
-#: .\super\templates\super\specie_form.html:219
+#: super/templates/super/specie_form.html:108
+#: super/templates/super/specie_form.html:219
 msgid "Australie"
 msgstr "Australia"
 
-#: .\super\templates\super\specie_form.html:112
-#: .\super\templates\super\specie_form.html:223
+#: super/templates/super/specie_form.html:112
+#: super/templates/super/specie_form.html:223
 msgid "Afrique"
 msgstr "África"
 
-#: .\super\templates\super\specie_form.html:129
+#: super/templates/super/specie_form.html:129
 msgid "Activité de la colonie"
 msgstr "Actividad de la colonia"
 
-#: .\super\templates\super\specie_form.html:132
+#: super/templates/super/specie_form.html:132
 msgid "Forte activité"
 msgstr "Actividad alta"
 
-#: .\super\templates\super\specie_form.html:136
+#: super/templates/super/specie_form.html:136
 msgid "Basse activité"
 msgstr "Actividad baja"
 
-#: .\super\templates\super\specie_form.html:179
+#: super/templates/super/specie_form.html:179
 msgid "Type de nid"
 msgstr "Tipo de nido"
 
-#: .\super\templates\super\specie_form.html:182
+#: super/templates/super/specie_form.html:182
 msgid "Sec"
 msgstr "Seco"
 
-#: .\super\templates\super\specie_form.html:186
+#: super/templates/super/specie_form.html:186
 msgid "Humide"
 msgstr "Húmedo"
 
-#: .\super\templates\super\specie_form.html:236
+#: super/templates/super/specie_form.html:236
 msgid "Les espèces qui pourraient vous correspondre"
 msgstr "Las especies que podrían ser adecuadas para ti"
 
-#: .\super\templates\super\specie_form.html:240
+#: super/templates/super/specie_form.html:240
 msgid "Les espèces que nous avons en stock actuellement"
 msgstr "Las especies que tenemos en stock actualmente"
 
-#: .\templates\account.html:11 .\templates\index.html:131
-msgid "Mon compte"
-msgstr "Mi cuenta"
-
-#: .\templates\account.html:12
-msgid "Informations du compte"
-msgstr "Información de la cuenta"
-
-#: .\templates\account.html:18
-msgid "Tableau de bord"
-msgstr "Tablero de control"
-
-#: .\templates\account.html:19
-msgid "Mes commandes"
-msgstr "Mis pedidos"
-
-#: .\templates\account.html:20
-msgid "Mettre un commentaire"
-msgstr "Dejar un comentario"
-
-#: .\templates\account.html:21
-msgid "Information personnel"
-msgstr "Información personal"
-
-#: .\templates\account.html:22
-msgid "Ressources"
-msgstr "Recursos"
-
-#: .\templates\account.html:23
-msgid "Supprimer mon compte"
-msgstr "Eliminar mi cuenta"
-
-#: .\templates\account.html:24
-msgid "Déconnexion"
-msgstr "Desconexión"
-
-#: .\templates\index.html:39
+#: super/views.py:27 templates/index.html:39
 msgid ""
 "Boutique en Ligne de Fourmis pour Débutants - Fondations, Packs, Nids et "
 "Accessoires | Myrmécologie"
@@ -1054,40 +1217,144 @@ msgstr ""
 "Tienda en línea de hormigas para principiantes - Fundaciones, Paquetes, "
 "Nidos y Accesorios | Mirmecología"
 
-#: .\templates\index.html:117
+#: super/views.py:28
+msgid ""
+"Bienvenue sur notre boutique en ligne de fourmis pour débutants ! Découvrez "
+"notre sélection de fondations, packs, nids et accessoires pour commencer "
+"votre élevage de fourmis. Profitez de conseils d'experts et rejoignez la "
+"communauté des passionnés de Myrmécologie."
+msgstr ""
+"Bienvenido a nuestra tienda en línea de hormigas para principiantes. "
+"Descubre nuestra selección de fundaciones, paquetes, nidos y accesorios para "
+"empezar tu cría de hormigas. Disfruta de consejos de expertos y únete a la "
+"comunidad de apasionados por la mirmecología."
+
+#: super/views.py:57
+msgid "Informations | Boutique en Ligne de Fourmis Européennes pour Débutants"
+msgstr "Información | Tienda en Línea de Hormigas Europeas para Principiantes"
+
+#: super/views.py:58
+msgid ""
+"Découvrez toutes les informations importantes concernant notre boutique en "
+"ligne de fourmis européennes pour débutants. Informez-vous sur nos options "
+"de livraison, modes de paiement, conditions d'utilisation, politique de "
+"confidentialité, mentions légales, expédition et retours, qui nous sommes, "
+"cookies et comment nous contacter."
+msgstr ""
+"Descubre toda la información importante sobre nuestra tienda en línea de "
+"hormigas europeas para principiantes. Infórmate sobre nuestras opciones de "
+"envío, métodos de pago, condiciones de uso, política de privacidad, avisos "
+"legales, envíos y devoluciones, quiénes somos, cookies y cómo contactarnos."
+
+#: super/views.py:67
+msgid ""
+"Conditions Générales de Vente | Boutique en Ligne de Fourmis Européennes "
+"pour Débutants"
+msgstr ""
+"Términos y Condiciones de Venta | Tienda en Línea de Hormigas Europeas para "
+"Principiantes"
+
+#: super/views.py:68
+msgid ""
+"Consultez les conditions générales de vente de notre boutique en ligne de "
+"fourmis européennes pour débutants. Découvrez nos politiques concernant les "
+"commandes, les prix, les paiements, les livraisons, les retours et la "
+"responsabilité, ainsi que des informations sur les données personnelles et "
+"le service clientèle."
+msgstr ""
+"Consulta los términos y condiciones de venta de nuestra tienda en línea de "
+"hormigas europeas para principiantes. Descubre nuestras políticas sobre "
+"pedidos, precios, pagos, entregas, devoluciones y responsabilidad, así como "
+"información sobre datos personales y servicio al cliente."
+
+#: super/views.py:106
+msgid "Élevage de Fourmis - Guide Complet pour Débutants et Experts | Antly"
+msgstr "Cría de hormigas - Guía completa para principiantes y expertos | Antly"
+
+#: super/views.py:107
+msgid ""
+"Explorez le monde de l'élevage de fourmis avec Antly. Que vous soyez "
+"débutant ou expert, trouvez l'espèce idéale pour vous grâce à notre guide "
+"interactif. Commencez votre aventure avec nos fourmis aujourd'hui !"
+msgstr ""
+"Explore el mundo de la cría de hormigas con Antly. Ya sea que sea un "
+"principiante o un experto, encuentre la especie ideal para usted con nuestra "
+"guía interactiva. ¡Comience su aventura con nuestras hormigas hoy mismo!"
+
+#: templates/account.html:11 templates/index.html:148
+msgid "Mon compte"
+msgstr "Mi cuenta"
+
+#: templates/account.html:12
+msgid "Informations du compte"
+msgstr "Información de la cuenta"
+
+#: templates/account.html:18
+msgid "Tableau de bord"
+msgstr "Tablero de control"
+
+#: templates/account.html:19
+msgid "Mes commandes"
+msgstr "Mis pedidos"
+
+#: templates/account.html:20
+msgid "Mettre un commentaire"
+msgstr "Dejar un comentario"
+
+#: templates/account.html:21
+msgid "Information personnel"
+msgstr "Información personal"
+
+#: templates/account.html:22
+msgid "Ressources"
+msgstr "Recursos"
+
+#: templates/account.html:23
+msgid "Supprimer mon compte"
+msgstr "Eliminar mi cuenta"
+
+#: templates/account.html:24
+msgid "Déconnexion"
+msgstr "Desconexión"
+
+#: templates/index.html:112
+msgid "Langue"
+msgstr "Idioma"
+
+#: templates/index.html:134
 msgid "Accessoires"
 msgstr "Accesorios"
 
-#: .\templates\index.html:141
+#: templates/index.html:158
 msgid "déconnexion"
 msgstr "desconexión"
 
-#: .\templates\index.html:149 .\user\templates\user\login.html:16
-#: .\user\templates\user\login.html:33
+#: templates/index.html:166 user/templates/user/login.html:15
+#: user/templates/user/login.html:32
 msgid "Connexion"
 msgstr "Inicio de sesión"
 
-#: .\templates\index.html:156 .\user\templates\user\signup.html:13
+#: templates/index.html:173 user/templates/user/signup.html:13
 msgid "Inscription"
 msgstr "Inscripción"
 
-#: .\templates\index.html:183
+#: templates/index.html:200
 msgid "Télephone"
 msgstr "Teléfono"
 
-#: .\templates\index.html:303
+#: templates/index.html:307
 msgid "boutique française"
 msgstr "tienda francesa"
 
-#: .\templates\product.html:14
+#: templates/product.html:14
 msgid "tout"
 msgstr "todo"
 
-#: .\user\forms.py:62
+#: user/forms.py:60
 msgid "Mot de passe"
 msgstr "Contraseña"
 
-#: .\user\forms.py:70
+#: user/forms.py:68
 #, python-format
 msgid ""
 "Veuillez saisir un %(email)s et un mot de passe corrects. Notez que les deux "
@@ -1096,57 +1363,280 @@ msgstr ""
 "Por favor, introduzca un %(email)s y una contraseña válida. Tenga en cuenta "
 "que ambos pueden ser sensibles a mayúsculas y minúsculas."
 
-#: .\user\forms.py:72
+#: user/forms.py:70
 msgid "Ce compte est inactif."
 msgstr "Esta cuenta está inactiva."
 
-#: .\user\forms.py:171 .\user\forms.py:193
+#: user/forms.py:169 user/forms.py:191
 msgid "Nouveau mot de passe"
 msgstr "Nueva contraseña"
 
-#: .\user\forms.py:177 .\user\forms.py:200
+#: user/forms.py:175 user/forms.py:198
 msgid "Confirmation Nouveau mot de passe"
 msgstr "Confirmación de nueva contraseña"
 
-#: .\user\forms.py:183
+#: user/forms.py:181
 msgid "Encien mot de passe"
 msgstr "Contraseña anterior"
 
-#: .\user\forms.py:224
+#: user/forms.py:220
 msgid "Nom complet (ex : Bernard Weber)"
 msgstr "Nombre completo (ejemplo: Bernard Weber)"
 
-#: .\user\forms.py:228
+#: user/forms.py:224
 msgid "Numéro de téléphone (ex : 0660066006)"
 msgstr "Número de teléfono (ejemplo: 0660066006)"
 
-#: .\user\forms.py:232
+#: user/forms.py:228
 msgid "Adresse (ex : 6 sentier de la fourmis)"
 msgstr "Dirección (ejemplo: 6 sentier de la fourmis)"
 
-#: .\user\forms.py:236
+#: user/forms.py:232
 msgid "Détail (ex : batiment 2) *facultatif*"
 msgstr "Detalles (ejemplo: edificio 2) *opcional*"
 
-#: .\user\forms.py:240
+#: user/forms.py:236
 msgid "Code postal (ex : 59610)"
 msgstr "Código postal (ejemplo: 59610)"
 
-#: .\user\forms.py:244
+#: user/forms.py:240
 msgid "Ville (ex : Fourmies)"
 msgstr "Ciudad (ejemplo: Fourmies)"
 
-#: .\user\models.py:64
+#: user/models.py:64
 msgid "The Email must be set"
 msgstr "El correo electrónico debe estar configurado"
 
-#: .\user\templates\user\login.html:20
+#: user/templates/user/login.html:19
 msgid "Email"
 msgstr "Correo electrónico"
 
-#: .\user\templates\user\login.html:34
+#: user/templates/user/login.html:33
 msgid "mot de passe oublié"
 msgstr "Contraseña olvidada"
+
+#: user/views.py:108
+msgid ""
+"Inscription - Créez votre compte | Boutique en Ligne de Fourmis pour Débutant"
+msgstr ""
+"Registro - Cree su cuenta | Tienda en Línea de Hormigas para Principiantes"
+
+#: user/views.py:109
+msgid ""
+"Inscrivez-vous sur notre boutique en ligne de fourmis pour débutants et "
+"profitez d'offres exclusives, suivez vos commandes et gérez votre compte. "
+"Rejoignez la communauté des passionnés de Myrmécologie et démarrez votre "
+"élevage de fourmis dès aujourd'hui !"
+msgstr ""
+"Regístrese en nuestra tienda en línea de hormigas para principiantes y "
+"disfrute de ofertas exclusivas, haga seguimiento a sus pedidos y administre "
+"su cuenta. ¡Únase a la comunidad de apasionados por la mirmecología y "
+"comience su cría de hormigas hoy mismo!"
+
+#: user/views.py:152
+msgid ""
+"Connexion - Boutique en Ligne de Fourmis pour Débutants | Élevage de Fourmis "
+"et Accessoires"
+msgstr ""
+"Connexion - Tienda online de hormigas para principiantes | Cría de hormigas "
+"y Accesorios"
+
+#: user/views.py:153
+msgid ""
+"Connectez-vous à votre compte sur notre boutique en ligne de fourmis pour "
+"gérer vos commandes, suivre vos expéditions et accéder à des offres "
+"exclusives. Inscrivez-vous dès maintenant pour commencer votre aventure en "
+"Myrmécologie !"
+msgstr ""
+"Inicie sesión en su cuenta en nuestra tienda en línea de hormigas para "
+"administrar sus pedidos, hacer seguimiento a sus envíos y acceder a ofertas "
+"exclusivas. ¡Regístrese ahora para comenzar su aventura en la mirmecología!"
+
+#, fuzzy
+#~| msgid ""
+#~| "Nous sommes heureux de vous informer que tous les articles\n"
+#~| "                commandés sur notre boutique seront envoyés avec soin "
+#~| "et\n"
+#~| "                rapidité. Pour assurer une livraison sûre et rapide, "
+#~| "nous\n"
+#~| "                proposons deux options d'envoi : UPS o La Poste."
+#~ msgid ""
+#~ "Nous sommes heureux de vous informer que tous les articles\n"
+#~ "                commandés sur notre boutique seront envoyés avec soin et\n"
+#~ "                rapidité. Pour assurer une livraison sûre et rapide, "
+#~ "nous\n"
+#~ "                proposons deux options d'envoi : UPS ou La Poste."
+#~ msgstr ""
+#~ "Nos complace informarle que todos los artículos\n"
+#~ "                pedidos en nuestra tienda serán enviados con cuidado y\n"
+#~ "                rapidez. Para garantizar un envío seguro y rápido, "
+#~ "ofrecemos\n"
+#~ "                dos opciones de envío: UPS o La Poste."
+
+#, fuzzy
+#~| msgid ""
+#~| "Selon votre préférence, vous pouvez choisir l'option qui vous\n"
+#~| "                convient le mieux lors de votre commande. Si vous "
+#~| "habitez\n"
+#~| "                dans\n"
+#~| "                une zone où il fait froid, nous vous proposons "
+#~| "également\n"
+#~| "                l'option de l'envoi avec une chaufferette pour protéger "
+#~| "vos\n"
+#~| "                fourmis durant le voyage."
+#~ msgid ""
+#~ "Selon votre préférence, vous pouvez choisir l'option qui vous\n"
+#~ "                convient le mieux lors de votre commande. Si vous habitez "
+#~ "dans\n"
+#~ "                une zone où il fait froid, nous vous proposons également\n"
+#~ "                l'option de l'envoi avec une chaufferette pour protéger "
+#~ "vos\n"
+#~ "                fourmis durant le voyage."
+#~ msgstr ""
+#~ "Según su preferencia, puede elegir la opción que mejor le\n"
+#~ "                convenga al realizar su pedido. Si vive en una zona donde "
+#~ "hace\n"
+#~ "                frío, también ofrecemos la opción de envío con una "
+#~ "almohadilla térmica\n"
+#~ "                para proteger sus hormigas durante el viaje."
+
+#~ msgid ""
+#~ "Nous espérons que ces informations vous seront utiles et nous\n"
+#~ "                sommes impatients de vous envoyer votre commande dès que\n"
+#~ "                possible. Si vous avez des questions supplémentaires, "
+#~ "n'hésitez\n"
+#~ "                pas à nous contacter. Nous sommes là pour vous aider."
+#~ msgstr ""
+#~ "Esperamos que esta información le sea útil y esperamos\n"
+#~ "                enviar su pedido lo antes posible. Si tiene preguntas "
+#~ "adicionales,\n"
+#~ "                no dude en ponerse en contacto con nosotros. Estamos aquí "
+#~ "para\n"
+#~ "                ayudarle."
+
+#~ msgid ""
+#~ "Notre boutique accepte plusieurs méthodes de paiement afin de\n"
+#~ "                vous offrir un maximum de flexibilité et de convenance. "
+#~ "Vous\n"
+#~ "                pouvez régler vos achats par carte de crédit ou de débit, "
+#~ "par\n"
+#~ "                virement bancaire ou encore par portefeuille "
+#~ "électronique. Nous\n"
+#~ "                acceptons toutes les cartes de crédit et de débit "
+#~ "courantes, y\n"
+#~ "                compris Visa, Mastercard et American Express. Si vous "
+#~ "préférez\n"
+#~ "                utiliser un portefeuille électronique, nous acceptons "
+#~ "également\n"
+#~ "                les paiements par PayPal et Apple Pay. Nous offrons "
+#~ "également la\n"
+#~ "                possibilité de régler par virement bancaire pour ceux "
+#~ "qui\n"
+#~ "                préfèrent cette méthode de paiement. N'hésitez pas à "
+#~ "nous\n"
+#~ "                contacter si vous avez des questions sur les méthodes de\n"
+#~ "                paiement acceptées dans notre boutique."
+#~ msgstr ""
+#~ "Nuestra tienda acepta varios métodos de pago para brindarle la máxima "
+#~ "flexibilidad y comodidad. Puede pagar sus compras con tarjeta de crédito "
+#~ "o débito, transferencia bancaria o billetera electrónica. Aceptamos todas "
+#~ "las tarjetas de crédito y débito comunes, incluidas Visa, Mastercard y "
+#~ "American Express. Si prefiere utilizar una billetera electrónica, también "
+#~ "aceptamos pagos con PayPal y Apple Pay. También ofrecemos la posibilidad "
+#~ "de pagar mediante transferencia bancaria para aquellos que prefieren este "
+#~ "método de pago. No dude en ponerse en contacto con nosotros si tiene "
+#~ "alguna pregunta sobre los métodos de pago aceptados en nuestra tienda."
+
+#~ msgid ""
+#~ "Nous sommes conscients de l'importance de la confidentialité\n"
+#~ "                pour nos clients et c'est pour cette raison que nous "
+#~ "prenons\n"
+#~ "                toutes les mesures nécessaires pour protéger vos données\n"
+#~ "                personnelles. Nous ne partagerons jamais vos informations "
+#~ "avec\n"
+#~ "                des tiers sans votre consentement explicite et nous "
+#~ "utilisons\n"
+#~ "                des méthodes de chiffrement pour protéger vos données "
+#~ "pendant\n"
+#~ "                leur transmission. Nous vous demandons seulement les\n"
+#~ "                informations nécessaires pour traiter votre commande et "
+#~ "vous\n"
+#~ "                offrir un service de qualité. Si vous avez des questions "
+#~ "sur la\n"
+#~ "                façon dont nous traitons vos données, n'hésitez pas à "
+#~ "nous\n"
+#~ "                contacter. Nous sommes toujours à votre disposition pour\n"
+#~ "                répondre à vos préoccupations en matière de "
+#~ "confidentialité."
+#~ msgstr ""
+#~ "Somos conscientes de la importancia de la privacidad para nuestros "
+#~ "clientes, y por eso tomamos todas las medidas necesarias para proteger "
+#~ "sus datos personales. Nunca compartiremos su información con terceros sin "
+#~ "su consentimiento explícito y utilizamos métodos de cifrado para proteger "
+#~ "sus datos durante su transmisión. Solo le pedimos la información "
+#~ "necesaria para procesar su pedido y ofrecerle un servicio de calidad. Si "
+#~ "tiene alguna pregunta sobre cómo tratamos sus datos, no dude en ponerse "
+#~ "en contacto con nosotros. Siempre estamos disponibles para abordar sus "
+#~ "preocupaciones sobre la privacidad."
+
+#~ msgid ""
+#~ "Pour les expéditions, nous travaillons avec plusieurs\n"
+#~ "                transporteurs afin de vous offrir le meilleur service "
+#~ "possible.\n"
+#~ "                Nous mettons un soin particulier à l'emballage de nos "
+#~ "produits\n"
+#~ "                pour assurer leur sécurité pendant le transport. "
+#~ "Cependant, nous\n"
+#~ "                ne sommes pas responsables des dommages causés par le\n"
+#~ "                transporteur durant le voyage. Si vous recevez un "
+#~ "produit\n"
+#~ "                endommagé, veuillez nous le signaler dans les plus brefs "
+#~ "délais\n"
+#~ "                et nous ferons le nécessaire pour vous rembourser ou "
+#~ "vous\n"
+#~ "                envoyer un nouveau produit."
+#~ msgstr ""
+#~ "Para los envíos, trabajamos con varios transportistas para ofrecerle el "
+#~ "mejor servicio posible. Ponemos especial atención en el embalaje de "
+#~ "nuestros productos para garantizar su seguridad durante el transporte. "
+#~ "Sin embargo, no somos responsables de los daños causados por el "
+#~ "transportista durante el viaje. Si recibe un producto dañado, "
+#~ "notifíquenoslo lo antes posible y tomaremos las medidas necesarias para "
+#~ "reembolsarle o enviarle un nuevo producto."
+
+#~ msgid ""
+#~ "Malheureusement, nous ne faisons pas de retours pour des raisons\n"
+#~ "                éthiques. En effet, nos fourmis sont des êtres vivants et "
+#~ "il\n"
+#~ "                serait trop dangereux pour elles de les renvoyer en "
+#~ "arrière.\n"
+#~ "                Cependant, si votre colonie de fourmis vient à décéder "
+#~ "pendant\n"
+#~ "                le transport, nous vous rembourserons la moitié de sa "
+#~ "valeur.\n"
+#~ "                Pour cela, vous devrez nous fournir des preuves (photos) "
+#~ "de la\n"
+#~ "                mortalité de la colonie. Pour les produits matériels, si "
+#~ "vous ne\n"
+#~ "                recevez pas votre commande en raison d'un problème avec "
+#~ "le\n"
+#~ "                transporteur, nous vous rembourserons la totalité de la "
+#~ "valeur\n"
+#~ "                de votre commande. Si vous avez des questions ou des "
+#~ "inquiétudes\n"
+#~ "                concernant l'expédition ou les retours, n'hésitez pas à "
+#~ "nous\n"
+#~ "                contacter. Nous serons heureux de vous aider."
+#~ msgstr ""
+#~ "Desafortunadamente, no aceptamos devoluciones por razones éticas. "
+#~ "Nuestras hormigas son seres vivos y sería peligroso devolverlas. Sin "
+#~ "embargo, si su colonia de hormigas muere durante el transporte, le "
+#~ "reembolsaremos la mitad de su valor. Para ello, deberá proporcionarnos "
+#~ "pruebas (fotos) de la muerte de la colonia. Para productos materiales, si "
+#~ "no recibe su pedido debido a un problema con la empresa de transporte, le "
+#~ "reembolsaremos el valor total de su pedido. Si tiene preguntas o "
+#~ "inquietudes sobre el envío o las devoluciones, no dude en ponerse en "
+#~ "contacto con nosotros. Estaremos encantados de ayudarle."
 
 #~ msgid "Lettre - 3€"
 #~ msgstr "Carta - 3€"

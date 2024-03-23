@@ -24,8 +24,8 @@ def random_three_elements(input_list):
 
 def homepage_vi(request):
     """view for homepage"""
-    metat = MetaTemplate("Boutique en Ligne de Fourmis pour Débutants - Fondations, Packs, Nids et Accessoires | Myrmécologie",
-                         "Bienvenue sur notre boutique en ligne de fourmis pour débutants ! Découvrez notre sélection de fondations, packs, nids et accessoires pour commencer votre élevage de fourmis. Profitez de conseils d'experts et rejoignez la communauté des passionnés de Myrmécologie.")
+    metat = MetaTemplate(_("Boutique en Ligne de Fourmis pour Débutants - Fondations, Packs, Nids et Accessoires | Myrmécologie"),
+                         _("Bienvenue sur notre boutique en ligne de fourmis pour débutants ! Découvrez notre sélection de fondations, packs, nids et accessoires pour commencer votre élevage de fourmis. Profitez de conseils d'experts et rejoignez la communauté des passionnés de Myrmécologie."))
     bread = [pageAccueil]
     ant = Ant_m.objects.filter(sizes__stock__gt=0, supplier__currently_available = True).distinct()
     pack = Pack_m.objects.filter(size__stock__gt=0, size__supplier__currently_available = True).distinct()
@@ -43,7 +43,7 @@ def homepage_vi(request):
         request.session['offer_shown'] = True
         request.session.modified = True
     if settings.WINTER :
-        messages.success(request, "Attention, nous sommes en hiver : les décès dus au froid pendant la livraison ne sont plus remboursés. La livraison est effectuée avec une chaufferette.")
+        messages.success(request, _("Attention, nous sommes en hiver : les décès dus au froid pendant la livraison ne sont plus remboursés. La livraison est effectuée avec une chaufferette."))
     return render(request, 'super/homepage.html', context={"product": product, "meta": metat, "comment": comment, "offers": offers, "bread": bread})
 
 
@@ -54,8 +54,8 @@ def information_vi(request):
     """view for information"""
     bread = [pageAccueil, pageInformation]
     metat = MetaTemplate(
-        "Informations | Boutique en Ligne de Fourmis Européennes pour Débutants",
-        "Découvrez toutes les informations importantes concernant notre boutique en ligne de fourmis européennes pour débutants. Informez-vous sur nos options de livraison, modes de paiement, conditions d'utilisation, politique de confidentialité, mentions légales, expédition et retours, qui nous sommes, cookies et comment nous contacter.")
+        _("Informations | Boutique en Ligne de Fourmis Européennes pour Débutants"),
+        _("Découvrez toutes les informations importantes concernant notre boutique en ligne de fourmis européennes pour débutants. Informez-vous sur nos options de livraison, modes de paiement, conditions d'utilisation, politique de confidentialité, mentions légales, expédition et retours, qui nous sommes, cookies et comment nous contacter."))
     offers = Offer_m.objects.filter(active=True)
     return render(request, 'super/information.html', context={"meta": metat, "offers": offers, "bread": bread})
 
@@ -64,8 +64,8 @@ def cgv_vi(request):
     """view for cgv"""
     bread = [pageAccueil, pageInformation, pageCvg]
     metat = MetaTemplate(
-        "Conditions Générales de Vente | Boutique en Ligne de Fourmis Européennes pour Débutants",
-        "Consultez les conditions générales de vente de notre boutique en ligne de fourmis européennes pour débutants. Découvrez nos politiques concernant les commandes, les prix, les paiements, les livraisons, les retours et la responsabilité, ainsi que des informations sur les données personnelles et le service clientèle.")
+        _("Conditions Générales de Vente | Boutique en Ligne de Fourmis Européennes pour Débutants"),
+        _("Consultez les conditions générales de vente de notre boutique en ligne de fourmis européennes pour débutants. Découvrez nos politiques concernant les commandes, les prix, les paiements, les livraisons, les retours et la responsabilité, ainsi que des informations sur les données personnelles et le service clientèle."))
     return render(request, 'super/cgv.html', context={"meta": metat, "bread": bread})
 
 
@@ -103,9 +103,9 @@ def superfeed_xml_view(request):
 def specie_form(request):
     """view for the form specie"""
     metat = MetaTemplate(
-        "Élevage de Fourmis - Guide Complet pour Débutants et Experts | Antly",
-        "Explorez le monde de l'élevage de fourmis avec Antly. Que vous soyez débutant ou expert, trouvez l'espèce " 
-        "idéale pour vous grâce à notre guide interactif. Commencez votre aventure avec nos fourmis aujourd'hui !", )
+        _("Élevage de Fourmis - Guide Complet pour Débutants et Experts | Antly"),
+        _("Explorez le monde de l'élevage de fourmis avec Antly. Que vous soyez débutant ou expert, trouvez l'espèce "
+        "idéale pour vous grâce à notre guide interactif. Commencez votre aventure avec nos fourmis aujourd'hui !"))
 
     bread = [pageAccueil, pageChoisir]
 
@@ -211,7 +211,7 @@ def specie_form(request):
             def process_string(input_string):
                 return input_string.replace(" ", "").lower()
 
-            ant_stock = Ant_m.objects.filter(sizes__stock__gt=0).distinct()
+            ant_stock = Ant_m.objects.filter(sizes__stock__gt=0, supplier__currently_available=True).distinct()
 
             def filter_stock(filtered_species, ant_stock):
                 dispo = []

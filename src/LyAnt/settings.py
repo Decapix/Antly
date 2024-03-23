@@ -30,13 +30,14 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = os.environ.get('ENV') != 'PRODUCTION'
 DEBUG = False
-ALLOWED_HOSTS = ['antly.herokuapp.com', 'localhost', '127.0.0.1', 'antly.fr', 'www.antly.fr']
+ALLOWED_HOSTS = ['antly.fr', 'antly.herokuapp.com', 'localhost', '127.0.0.1', 'www.antly.fr']
 
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

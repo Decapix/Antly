@@ -39,7 +39,7 @@
           </li>
           <li>
             <a class="" href="{% url 'information_n' %}#shipping"
-              >{% blocktrans %}Expédition et retours{% endblocktrans %}</a
+              >{% blocktrans %}Problème de livraison et retours{% endblocktrans %}</a
             >
           </li>
           <li>
@@ -64,42 +64,39 @@
             <div class="">
               <h5>{% blocktrans %}La livraison{% endblocktrans %}</h5>
               <p class="mb-2">
-                {% blocktrans %}Nous sommes heureux de vous informer que tous les articles
-                commandés sur notre boutique seront envoyés avec soin et
-                rapidité. Pour assurer une livraison sûre et rapide, nous
-                proposons deux options d'envoi : UPS ou La Poste.{% endblocktrans %}
+                {% blocktrans %}La livraison de nos produits est assurée par des services de messagerie externes,
+                 incluant UPS, DPD, La Poste, Hermes, Royal Mail, Correos, et LnPost. Le choix du prestataire est 
+                 déterminé par le vendeur responsable de votre commande, en fonction des tarifs des différents services
+                 de livraison. Il est important de noter que nous ne réalisons aucun bénéfice sur les frais de livraison.
+                 {% endblocktrans %}
               </p>
               <p class="mb-2">
-                {% blocktrans %}Selon votre préférence, vous pouvez choisir l'option qui vous
-                convient le mieux lors de votre commande. Si vous habitez dans
-                une zone où il fait froid, nous vous proposons également
-                l'option de l'envoi avec une chaufferette pour protéger vos
-                fourmis durant le voyage.{% endblocktrans %}
+                {% blocktrans %}Pour les fourmis sensibles au froid, notamment durant les mois 
+                d'hiver, nous utilisons des chaufferettes pour garantir leur bien-être durant le 
+                transport. Le coût de ces chaufferettes est inclus soit dans le prix de l'article, 
+                soit dans les frais de livraison.{% endblocktrans %}
               </p>
               <p>
-                {% blocktrans %}Nous espérons que ces informations vous seront utiles et nous
-                sommes impatients de vous envoyer votre commande dès que
-                possible. Si vous avez des questions supplémentaires, n'hésitez
-                pas à nous contacter. Nous sommes là pour vous aider.{% endblocktrans %}
+                {% blocktrans %}Un courriel de confirmation est envoyé dès l'expédition de votre commande. Si vous n'avez pas reçu ce 
+                courriel dans la semaine suivant votre commande, veuillez nous contacter.{% endblocktrans %}
               </p>
+              <p>
+              {% blocktrans %}
+              Nous privilégions l'envoi des commandes en début de semaine pour éviter que les 
+              colis ne restent dans les entrepôts durant le weekend, réduisant ainsi le risque 
+              de mortalité pour les espèces les plus fragiles.{% endblocktrans %}
+            </p>
             </div>
             <a name="paymentmethod"></a>
             {% include "space.html" %}
             <div class="">
               <h5>{% blocktrans %}Modes de paiement{% endblocktrans %}</h5>
               <p>
-                {% blocktrans %}Notre boutique accepte plusieurs méthodes de paiement afin de
-                vous offrir un maximum de flexibilité et de convenance. Vous
-                pouvez régler vos achats par carte de crédit ou de débit, par
-                virement bancaire ou encore par portefeuille électronique. Nous
-                acceptons toutes les cartes de crédit et de débit courantes, y
-                compris Visa, Mastercard et American Express. Si vous préférez
-                utiliser un portefeuille électronique, nous acceptons également
-                les paiements par PayPal et Apple Pay. Nous offrons également la
-                possibilité de régler par virement bancaire pour ceux qui
-                préfèrent cette méthode de paiement. N'hésitez pas à nous
-                contacter si vous avez des questions sur les méthodes de
-                paiement acceptées dans notre boutique.{% endblocktrans %}
+                {% blocktrans %}Nous acceptons une large gamme de cartes de crédit et de débit,
+                 incluant Visa, Mastercard, et American Express. Les transactions par carte sont
+                  sécurisées via Stripe. Pour ceux qui favorisent l'usage de portefeuilles électroniques,
+                  le paiement par PayPal est également pris en charge.
+                {% endblocktrans %}
               </p>
             </div>
             <a name="termsofuse"></a>
@@ -125,18 +122,22 @@
             <div class="">
               <h5>{% blocktrans %}Confidentialité{% endblocktrans %}</h5>
               <p>
-                {% blocktrans %}Nous sommes conscients de l'importance de la confidentialité
-                pour nos clients et c'est pour cette raison que nous prenons
-                toutes les mesures nécessaires pour protéger vos données
-                personnelles. Nous ne partagerons jamais vos informations avec
-                des tiers sans votre consentement explicite et nous utilisons
-                des méthodes de chiffrement pour protéger vos données pendant
-                leur transmission. Nous vous demandons seulement les
-                informations nécessaires pour traiter votre commande et vous
-                offrir un service de qualité. Si vous avez des questions sur la
-                façon dont nous traitons vos données, n'hésitez pas à nous
-                contacter. Nous sommes toujours à votre disposition pour
-                répondre à vos préoccupations en matière de confidentialité.{% endblocktrans %}
+                {% blocktrans %}Nous accordons une importance primordiale à la confidentialité de nos clients,
+                 en prenant des mesures rigoureuses pour assurer la protection de vos données personnelles. 
+                 Vos informations ne seront jamais divulguées à des tiers sans votre autorisation claire, et 
+                 nous employons des technologies de chiffrement avancées pour sécuriser vos données lors des 
+                 transmissions. Les informations que nous recueillons sont strictement celles nécessaires à la 
+                 gestion de votre commande et à la fourniture d'un service de qualité.
+                {% endblocktrans %}
+              </p>
+              <p>
+                {% blocktrans %}Les transactions bancaires sont sécurisées par Stripe, notre prestataire de
+                 services de paiement en ligne.{% endblocktrans %}
+              </p>
+              <p>
+                {% blocktrans %}Pour toute question relative à la gestion de vos données personnelles, nous restons 
+                à votre entière disposition. N'hésitez pas à nous contacter pour toute préoccupation concernant 
+                votre confidentialité.{% endblocktrans %}
               </p>
               <h6>{% blocktrans %}Cookies{% endblocktrans %}</h6>
               <p>
@@ -168,7 +169,7 @@
                   73100 France{% endblocktrans %}
                 </li>
                 <li>{% blocktrans %}Numéro de téléphone : 06 51 33 61 58{% endblocktrans %}</li>
-                <li>{% blocktrans %}Adresse e-mail : antly.fourmis@gmail.com{% endblocktrans %}</li>
+                <li>{% blocktrans %}Adresse e-mail : contact@antly.fr{% endblocktrans %}</li>
                 <li>{% blocktrans %}Numéro d'immatriculation : 914 939 004 00018{% endblocktrans %}</li>
               </ul>
 
@@ -177,7 +178,7 @@
 
               <h6>{% blocktrans %}Hébergement du site :{% endblocktrans %}</h6>
               <ul>
-                <li>{% blocktrans %}Nom de l'hébergeur : Google cloud{% endblocktrans %}</li>
+                <li>{% blocktrans %}Nom de l'hébergeur : Heroku{% endblocktrans %}</li>
               </ul>
               <h6>{% blocktrans %}Propriété intellectuelle :{% endblocktrans %}</h6>
               <p>
@@ -204,33 +205,27 @@
             <a name="shipping"></a>
             {% include "space.html" %}
             <div class="">
-              <h5>{% blocktrans %}Expédition et retours{% endblocktrans %}</h5>
-              <p class="mb-2">
-                {% blocktrans %}Pour les expéditions, nous travaillons avec plusieurs
-                transporteurs afin de vous offrir le meilleur service possible.
-                Nous mettons un soin particulier à l'emballage de nos produits
-                pour assurer leur sécurité pendant le transport. Cependant, nous
-                ne sommes pas responsables des dommages causés par le
-                transporteur durant le voyage. Si vous recevez un produit
-                endommagé, veuillez nous le signaler dans les plus brefs délais
-                et nous ferons le nécessaire pour vous rembourser ou vous
-                envoyer un nouveau produit.{% endblocktrans %}
+              <h5>{% blocktrans %}Problème de livraison et retours{% endblocktrans %}</h5>
+             
+              <ul>
+                <li>{% blocktrans %}En cas de décès partiel des fourmis durant le transport, aucun remboursement n'est accordé si des ouvrières survivent.{% endblocktrans %}</li>
+                <li>{% blocktrans %}Un remboursement partiel de la moitié de la valeur de la colonie est possible si la ou les reines sont vivantes tandis que toutes les ouvrières sont décédées.{% endblocktrans %}</li>
+                <li>{% blocktrans %}Un remboursement intégral, incluant les frais de port si la colonie était le seul produit commandé, est prévu uniquement en cas de décès total de la colonie.{% endblocktrans %}</li>
+              </ul>
+
+              <p>
+                {% blocktrans %}Pour chaque situation, une preuve sous forme d'image sera exigée. Ces politiques 
+                de remboursement s'appliquent uniquement durant la période estivale ; aucun remboursement pour 
+                les colonies décédées n'est effectué en hiver, conformément aux avertissements publiés sur notre 
+                site.{% endblocktrans %}
               </p>
 
               <p>
-                {% blocktrans %}Malheureusement, nous ne faisons pas de retours pour des raisons
-                éthiques. En effet, nos fourmis sont des êtres vivants et il
-                serait trop dangereux pour elles de les renvoyer en arrière.
-                Cependant, si votre colonie de fourmis vient à décéder pendant
-                le transport, nous vous rembourserons la moitié de sa valeur.
-                Pour cela, vous devrez nous fournir des preuves (photos) de la
-                mortalité de la colonie. Pour les produits matériels, si vous ne
-                recevez pas votre commande en raison d'un problème avec le
-                transporteur, nous vous rembourserons la totalité de la valeur
-                de votre commande. Si vous avez des questions ou des inquiétudes
-                concernant l'expédition ou les retours, n'hésitez pas à nous
-                contacter. Nous serons heureux de vous aider.{% endblocktrans %}
+                {% blocktrans %}Nous ne procédons à aucun remboursement pour les colonies décédées 
+                après les jours suivant la réception du colis.{% endblocktrans %}
               </p>
+
+
             </div>
             <a name="who"></a>
             {% include "space.html" %}
@@ -275,7 +270,7 @@
               </p>
               <ul>
                 <li>Numéro de téléphone : 06 51 33 61 58</li>
-                <li>Adresse email : antly.fourmis@gmail.com</li>
+                <li>Adresse email : contact@antly.fr</li>
                 <li>Instagram : @antly</li>
                 <li>TikTok : @antly</li>
                 <li>Facebook : @antly</li>

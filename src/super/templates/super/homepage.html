@@ -6,9 +6,11 @@
 {% block home %}
  <!-- Page Header -->
  <header class="header">
+    <img src="{% static 'imgs/header.jpg' %}" alt="Background" class="mobile-background">
     <div class="overlay">
-        <h1 class="subtitle">{% blocktrans %}La précision a l'état naturel{% endblocktrans %}</h1>
+        <h1 class="subtitle">{% blocktrans %}La précision à l'état naturel{% endblocktrans %}</h1>
         <h1 class="title">Antly</h1>
+        <h1 class="undertitle mt-4">{% blocktrans %}Acheter des fourmis sans risque : satisfaction garantie ou remboursement{% endblocktrans %}</h1>
     </div>
     <div class="shape">
         <svg viewBox="0 0 1500 200">
@@ -149,5 +151,20 @@
             element.addEventListener('click', (event) => toggleCommentText(event, fullText));
         }
     });
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  // Vérifie si la largeur de l'écran est de 768px ou moins
+  if (window.innerWidth <= 768) {
+    var header = document.querySelector('.header');
+    var img = document.createElement('img');
+    img.src = "{% static 'imgs/header.jpg' %}"; // Mettez ici le chemin de votre image JPG
+    img.alt = 'Background';
+    img.style = 'width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; z-index: -1;';
+    header.insertBefore(img, header.firstChild); // Insère l'image comme premier enfant de .header
+  }
+});
+
 </script>
 {% endblock %} 

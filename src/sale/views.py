@@ -33,6 +33,7 @@ from admin_supplier.models import Supplier_m
 from user.models import Feedback_m
 from decimal import Decimal
 from paypal.standard.forms import PayPalPaymentsForm
+from django.utils.translation import gettext as _
 
 
 
@@ -66,8 +67,8 @@ def ant_product_vi(request):
         The rendered ant product view with context data.
     """
     metat = MetaTemplate(
-        "Fondations de Fourmis pour Débutants - Achat et Vente de Colonies de Fourmis | Boutique en Ligne",
-        "Explorez notre collection de fondations de fourmis pour débutants, avec une variété d'espèces et d'origines. Démarrez votre élevage de fourmis en toute simplicité et bénéficiez d'un support professionnel. Découvrez nos offres dès maintenant !")
+        _("Fondations de Fourmis pour Débutants - Achat et Vente de Colonies de Fourmis | Boutique en Ligne"),
+        _("Explorez notre collection de fondations de fourmis pour débutants, avec une variété d'espèces et d'origines. Démarrez votre élevage de fourmis en toute simplicité et bénéficiez d'un support professionnel. Découvrez nos offres dès maintenant !"))
 
     bread = [pageAccueil, pageFourmis]
     ant_product = Ant_m.objects.filter(sizes__stock__gt=0, supplier__currently_available = True).distinct()
@@ -89,8 +90,8 @@ def other_product_vi(request):
         The rendered ant product view with context data.
     """
     metat = MetaTemplate(
-        "Accessoires pour l'élevage de Fourmis - Nids, Outils et Plus | Boutique en Ligne",
-"Découvrez notre gamme complète d'accessoires pour l'élevage de fourmis, conçue pour les débutants. De la mise en place de votre nid à la maintenance de votre colonie, nos produits assurent une expérience optimale. Visitez notre boutique et découvrez nos offres !")
+        _("Accessoires pour l'élevage de Fourmis - Nids, Outils et Plus | Boutique en Ligne"),
+_("Découvrez notre gamme complète d'accessoires pour l'élevage de fourmis, conçue pour les débutants. De la mise en place de votre nid à la maintenance de votre colonie, nos produits assurent une expérience optimale. Visitez notre boutique et découvrez nos offres !"))
     bread = [pageAccueil, pageOther]
     other_product = Other_m.objects.filter(stock__gt=0, supplier__currently_available = True).distinct()
     country = []
@@ -111,8 +112,8 @@ def pack_product_vi(request):
         The rendered pack product view with context data.
     """
     metat = MetaTemplate(
-        "Packs pour Élevage de Fourmis Débutants - Achat et Vente de Packs Fourmis | Boutique en Ligne",
-        "Découvrez notre sélection de packs pour débutants en élevage de fourmis, incluant des fondations de différentes espèces et nids adaptés. Profitez d'un support professionnel et lancez-vous facilement dans la Myrmécologie avec nos packs complets !")
+        _("Packs pour Élevage de Fourmis Débutants - Achat et Vente de Packs Fourmis | Boutique en Ligne"),
+        _("Découvrez notre sélection de packs pour débutants en élevage de fourmis, incluant des fondations de différentes espèces et nids adaptés. Profitez d'un support professionnel et lancez-vous facilement dans la Myrmécologie avec nos packs complets !"))
 
     bread = [pageAccueil, pagePack]
     pack_product = Pack_m.objects.filter(size__stock__gt=0, size__supplier__currently_available = True).distinct()
@@ -152,8 +153,8 @@ def product_pack_detail_vi(request, id):
     )
 
     metat = MetaTemplate(
-        f"Pack Fourmis {pack_product.complete_spece()} de {pack_product.sh_localisation()} - Achat et Vente de Packs pour Élevage de Fourmis Débutants | Boutique en Ligne",
-        f"Découvrez nos packs pour débutants incluant une fondation de fourmis {pack_product.complete_spece()} de {pack_product.sh_localisation()} et un nid adapté. Lancez-vous facilement dans l'élevage de fourmis avec notre pack complet et bénéficiez d'un support professionnel. Commandez dès maintenant !")
+        _(f"Pack Fourmis {pack_product.complete_spece()} de {pack_product.sh_localisation()} - Achat et Vente de Packs pour Élevage de Fourmis Débutants | Boutique en Ligne"),
+        _(f"Découvrez nos packs pour débutants incluant une fondation de fourmis {pack_product.complete_spece()} de {pack_product.sh_localisation()} et un nid adapté. Lancez-vous facilement dans l'élevage de fourmis avec notre pack complet et bénéficiez d'un support professionnel. Commandez dès maintenant !"))
 
     pagePackDetails = Page("Pack détailles", '/produit/packs', 3, id)
     bread = [pageAccueil, pagePack, pagePackDetails]
@@ -163,8 +164,8 @@ def product_pack_detail_vi(request, id):
         messages.error(request, "désolée, nous avons un problème avec ce produit, nous travaillons dessus")
         return redirect("homepage_n")
     # List for offer ant, bottom
-    offer_ant = offer_ant_func(pack_product, list(Ant_m.objects.filter(sizes__stock__gt=0).distinct()),
-                               list(Pack_m.objects.filter(size__stock__gt=0).distinct()), list(Other_m.objects.filter(stock__gt=0).distinct()) )
+    offer_ant = offer_ant_func(pack_product, list(Ant_m.objects.filter(sizes__stock__gt=0, supplier__currently_available = True).distinct()),
+                               list(Pack_m.objects.filter(size__stock__gt=0, size__supplier__currently_available = True).distinct()), list(Other_m.objects.filter(stock__gt=0, supplier__currently_available = True).distinct()) )
 
     context = {"pack": pack_product, "price": price, "ant": ant_product, "offer_ant": offer_ant, 'meta': metat,
                "nest": nest, "bread": bread, "comment":comment}
@@ -191,7 +192,7 @@ def product_pack_detail_vi(request, id):
                             cart_item.save()
                         else:
                             messages.error(request,
-                                           f"désolée, nous n'avons plus assez d'unitées en stock, il nous en reste {res}")
+                                           _(f"désolée, nous n'avons plus assez d'unitées en stock, il nous en reste {res}"))
                             return render(request, 'sale/pack_detail.html', context)
                     case _:
                         res = pack_product.check_stock(int(quantity)+cart_item.quantity)
@@ -200,7 +201,7 @@ def product_pack_detail_vi(request, id):
                             cart_item.save()
                         else:
                             messages.error(request,
-                                           f"désolée, nous n'avons plus assez d'unitées en stock, il nous en reste {res}")
+                                           _(f"désolée, nous n'avons plus assez d'unitées en stock, il nous en reste {res}"))
                             return render(request, 'sale/pack_detail.html', context)
 
                 user_order, status = Order_m.objects.get_or_create(owner=user, is_ordered=False)
@@ -214,7 +215,7 @@ def product_pack_detail_vi(request, id):
                 return redirect("login_n")
         else:
             messages.error(request,
-                           f"désolée, nous n'avons plus assez d'unitées en stock, il nous en reste {res}")
+                           _(f"désolée, nous n'avons plus assez d'unitées en stock, il nous en reste {res}"))
     return render(request, 'sale/pack_detail.html',context)
 
 
@@ -236,8 +237,8 @@ def product_ant_detail_vi(request, id):
         Q(supplier=ant_product.supplier)  # Assurez-vous que votre modèle Product a un champ 'supplier'
     )
     metat = MetaTemplate(
-        f"Achat Fourmis {ant_product.sh_spece()} {ant_product.under_spece} de {ant_product.sh_localisation()} - Vente Fondations et Colonies pour Débutants | Boutique en Ligne",
-        f"Achetez des fondations de fourmis {ant_product.sh_spece()} {ant_product.under_spece} originaires de {ant_product.sh_localisation()} pour débutants. Parfait pour démarrer un élevage de fourmis. Livraison rapide et support professionnel. Rejoignez l'aventure de la Myrmécologie dès maintenant !")
+        _(f"Achat Fourmis {ant_product.sh_spece()} {ant_product.under_spece} de {ant_product.sh_localisation()} - Vente Fondations et Colonies pour Débutants | Boutique en Ligne"),
+        _(f"Achetez des fondations de fourmis {ant_product.sh_spece()} {ant_product.under_spece} originaires de {ant_product.sh_localisation()} pour débutants. Parfait pour démarrer un élevage de fourmis. Livraison rapide et support professionnel. Rejoignez l'aventure de la Myrmécologie dès maintenant !"))
 
     pageFourmisDetails = Page("Fourmis détailles", '/produit/fourmis', 3, id)
     bread = [pageAccueil, pageFourmis, pageFourmisDetails]
@@ -247,8 +248,8 @@ def product_ant_detail_vi(request, id):
                        f"désolée, nous avons un problème avec ce produit, nous travaillons dessus")
         return redirect("homepage_n")
     # List for offer ant, bottom
-    offer_ant = offer_ant_func(ant_product, list(Ant_m.objects.filter(sizes__stock__gt=0).distinct()),
-                               list(Pack_m.objects.filter(size__stock__gt=0).distinct()), list(Other_m.objects.filter(stock__gt=0).distinct()) )
+    offer_ant = offer_ant_func(ant_product, list(Ant_m.objects.filter(sizes__stock__gt=0, supplier__currently_available = True).distinct()),
+                               list(Pack_m.objects.filter(size__stock__gt=0, size__supplier__currently_available = True).distinct()), list(Other_m.objects.filter(stock__gt=0, supplier__currently_available = True).distinct()) )
 
     context = {"ant": ant_product, "offer_ant": offer_ant, 'meta': metat, "bread": bread, "comment": comment}
 
@@ -325,8 +326,8 @@ def product_other_detail_vi(request, id):
         Q(supplier=other_product.supplier)  # Assurez-vous que votre modèle Product a un champ 'supplier'
     )
     metat = MetaTemplate(
-        f"{other_product.type.capitalize()} pour élevage de Fourmis - {other_product.sh_name()} | Boutique en Ligne",
-        f"Découvrez {other_product.sh_name()}, un {other_product.type} essentiel pour votre élevage de fourmis. Idéal pour les débutants, ce produit assure les meilleures conditions pour votre colonie. Explorez ses caractéristiques et profitez de nos offres exceptionnelles dès maintenant !"
+        _(f"{other_product.type.capitalize()} pour élevage de Fourmis - {other_product.sh_name()} | Boutique en Ligne"),
+        _(f"Découvrez {other_product.sh_name()}, un {other_product.type} essentiel pour votre élevage de fourmis. Idéal pour les débutants, ce produit assure les meilleures conditions pour votre colonie. Explorez ses caractéristiques et profitez de nos offres exceptionnelles dès maintenant !")
     )
 
     pageOtherDetails = Page("Accessoires détailles", '/produit/accessoire', 3, id)
@@ -338,8 +339,8 @@ def product_other_detail_vi(request, id):
                        f"désolée, nous avons un problème avec ce produit, nous travaillons dessus")
         return redirect("homepage_n")
     # List for offer ant, bottom
-    offer_ant = offer_other_func(other_product, list(Ant_m.objects.filter(sizes__stock__gt=0).distinct()),
-                               list(Pack_m.objects.filter(size__stock__gt=0).distinct()), list(Other_m.objects.filter(stock__gt=0).distinct()) )
+    offer_ant = offer_other_func(other_product, list(Ant_m.objects.filter(sizes__stock__gt=0, supplier__currently_available = True).distinct()),
+                               list(Pack_m.objects.filter(size__stock__gt=0, size__supplier__currently_available = True).distinct()), list(Other_m.objects.filter(stock__gt=0, supplier__currently_available = True).distinct()) )
 
     context = {"other": other_product, "offer_ant": offer_ant, 'meta': metat, "bread": bread, "comment": comment}
     if request.method == 'POST':
@@ -407,6 +408,7 @@ def cart_vi(request):
     """
     bread = [pageAccueil, pagePanier]
     existing_order = get_user_pending_order(request)
+    verify_order_items(request, existing_order)
     match existing_order:
         case 0:
             return render(request, "sale/vacuum_cart.html")
@@ -489,6 +491,9 @@ def checkout_vi(request):
     host = request.get_host()
 
     existing_order = get_user_pending_order(request)
+    if not verify_order_items(request, existing_order):
+        return redirect("cart_n")
+    
     existing_order.shipping_type = "C"
 
     form = Address_fo()
@@ -535,7 +540,7 @@ def checkout_vi(request):
             messages.error(request, "Le formulaire d'adresse est invalide.")
             
     if settings.WINTER :
-        messages.success(request, "Attention, nous sommes en hiver : les décès dus au froid pendant la livraison ne sont plus remboursés. La livraison est effectuée avec une chaufferette.")
+        messages.success(request, _("Attention, nous sommes en hiver : les décès dus au froid pendant la livraison ne sont plus remboursés. La livraison est effectuée avec une chaufferette."))
 
     context = {
         'order': existing_order,
@@ -850,8 +855,8 @@ def seller_vi(request, id):
 def seller_all_vi(request):
 
     metat = MetaTemplate(
-        "Fondations de Fourmis pour Débutants - Achat et Vente de Colonies de Fourmis | Boutique en Ligne",
-        "Explorez notre collection de fondations de fourmis pour débutants, avec une variété d'espèces et d'origines. Démarrez votre élevage de fourmis en toute simplicité et bénéficiez d'un support professionnel. Découvrez nos offres dès maintenant !")
+        _("Fondations de Fourmis pour Débutants - Achat et Vente de Colonies de Fourmis | Boutique en Ligne"),
+        _("Explorez notre collection de fondations de fourmis pour débutants, avec une variété d'espèces et d'origines. Démarrez votre élevage de fourmis en toute simplicité et bénéficiez d'un support professionnel. Découvrez nos offres dès maintenant !"))
 
     bread = [pageVendeur]
     available_suppliers = Supplier_m.objects.filter(currently_available=True)

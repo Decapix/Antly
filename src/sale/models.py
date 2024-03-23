@@ -7,10 +7,38 @@ from io import BytesIO
 from django.core.files import File
 from admin_supplier.models import Supplier_m
 from django.db import models
+from django.db import models
+from django.core.files.base import ContentFile
 
 
 
-class Product_m(models.Model):
+# Mixin pour la conversion d'image
+class ImageConversionMixin:
+    def convert_image_to_webp(self, image_field):
+        if image_field and not image_field.name.endswith('.webp'):
+            # Ouvrir l'image originale
+            pil_image = Image.open(image_field)
+            # Convertir l'image en WebP
+            if pil_image.mode in ("RGBA", "P"):
+                pil_image = pil_image.convert("RGB")
+            output_io_stream = BytesIO()
+            pil_image.save(output_io_stream, format='WEBP', quality=90)
+            webp_image = ContentFile(output_io_stream.getvalue(), os.path.splitext(image_field.name)[0] + '.webp')
+            
+            # Sauvegarder l'image WebP
+            image_field.save(webp_image.name, webp_image, save=False)
+
+    def save(self, *args, **kwargs):
+        # Convertir toutes les images en WebP
+        self.convert_image_to_webp(self.thumbnail)
+        for i in range(1, 5):
+            thumbnail_field = getattr(self, f'thumbnail_{i}', None)
+            if thumbnail_field:
+                self.convert_image_to_webp(thumbnail_field)
+        
+        super().save(*args, **kwargs)  # Appeler la méthode save() du parent
+
+class Product_m(ImageConversionMixin, models.Model):
     """The model base for any product"""
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=100)
@@ -201,7 +229,7 @@ class Other_m(Product_m):
 
 
 
-class Pack_m(models.Model):
+class Pack_m(ImageConversionMixin, models.Model):
     """The model base for ant pack""" 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     nest = models.ForeignKey(Other_m, on_delete=models.CASCADE, related_name='pack', null=True, default=None)
