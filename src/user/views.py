@@ -18,6 +18,7 @@ from django.http import FileResponse, Http404
 import os
 from django.conf import settings
 from super.breadcrumbs import *
+from django.utils.translation import gettext as _
 
 
 
@@ -104,8 +105,8 @@ def changepasswordEmail(request, user, to_email):
 def signup_vi(request):
     """view for signup"""
     metat = MetaTemplate(
-        f"Inscription - Créez votre compte | Boutique en Ligne de Fourmis pour Débutant",
-        f"Inscrivez-vous sur notre boutique en ligne de fourmis pour débutants et profitez d'offres exclusives, suivez vos commandes et gérez votre compte. Rejoignez la communauté des passionnés de Myrmécologie et démarrez votre élevage de fourmis dès aujourd'hui !")
+        _(f"Inscription - Créez votre compte | Boutique en Ligne de Fourmis pour Débutant"),
+        _(f"Inscrivez-vous sur notre boutique en ligne de fourmis pour débutants et profitez d'offres exclusives, suivez vos commandes et gérez votre compte. Rejoignez la communauté des passionnés de Myrmécologie et démarrez votre élevage de fourmis dès aujourd'hui !"))
 
     if request.method == "POST":
         form = Signup_fo(request.POST)
@@ -148,8 +149,8 @@ def delete_user_vi(request, pk):
 def login_vi(request):
     """login"""
     metat = MetaTemplate(
-        f"Connexion - Boutique en Ligne de Fourmis pour Débutants | Élevage de Fourmis et Accessoires",
-        f"Connectez-vous à votre compte sur notre boutique en ligne de fourmis pour gérer vos commandes, suivre vos expéditions et accéder à des offres exclusives. Inscrivez-vous dès maintenant pour commencer votre aventure en Myrmécologie !")
+        _(f"Connexion - Boutique en Ligne de Fourmis pour Débutants | Élevage de Fourmis et Accessoires"),
+        _(f"Connectez-vous à votre compte sur notre boutique en ligne de fourmis pour gérer vos commandes, suivre vos expéditions et accéder à des offres exclusives. Inscrivez-vous dès maintenant pour commencer votre aventure en Myrmécologie !"))
 
     if request.method == "POST":
         email = request.POST.get("email")

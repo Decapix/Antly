@@ -1,28 +1,28 @@
 Cher(e) {{ user.user_name }},
 
-Nous sommes ravis de vous informer que votre commande {{ order.ref_code }} chez Antly a été expédiée avec succès !
+We are thrilled to inform you / Nous sommes ravis de vous informer que votre commande {{ order.ref_code }} at / chez Antly has been successfully shipped / a été expédiée avec succès !
 
-Voici les détails de l'expédition de votre colis :
+Voici les détails de l'expédition de votre colis / Here are the shipping details of your package:
 
-Numéro de suivi : {{ tracking_number }}
-Transporteur : {{ carrier_name }}
-Date d'expédition : {{ shipping_date|date:"d F Y" }}
-Estimation de la date de livraison : {{ estimated_delivery_date|date:"d F Y" }}
-Pour suivre l'acheminement de votre colis, veuillez cliquer sur le lien ci-dessous ou copiez-le dans la barre d'adresse de votre navigateur et entrez votre numéro de suivi :
+- Numéro de suivi / Tracking number: {{ tracking_number }}
+- Transporteur / Carrier: {{ carrier_name }}
+- Date d'expédition / Shipping date: {{ shipping_date|date:"d F Y" }}
+- Estimation de la date de livraison / Estimated delivery date: {{ estimated_delivery_date|date:"d F Y" }}
+
+Pour suivre l'acheminement de votre colis / To track your package, please click on the link below or copy it into your browser's address bar and enter your tracking number:
 
 {{ tracking_url }}
 
-Nous vous remercions de votre confiance et de votre achat chez Antly. Si vous avez des questions ou si vous rencontrez des problèmes avec votre commande, n'hésitez pas à nous contacter.
+We thank you for your trust and your purchase at / Nous vous remercions de votre confiance et de votre achat chez Antly. If you have any questions or if you encounter any problems with your order, please do not hesitate to contact us / Si vous avez des questions ou si vous rencontrez des problèmes avec votre commande, n'hésitez pas à nous contacter.
 
-Nous espérons que vous serez satisfait de votre achat et que vous apprécierez vos nouvelles fourmis. N'hésitez pas à partager votre expérience avec Antly sur les réseaux sociaux et à nous recommander à vos amis et à votre famille.
+We hope you will be satisfied with your purchase and enjoy your new ants / Nous espérons que vous serez satisfait de votre achat et que vous apprécierez vos nouvelles fourmis. Feel free to share your experience with Antly on social media and recommend us to your friends and family / N'hésitez pas à partager votre expérience avec Antly sur les réseaux sociaux et à nous recommander à vos amis et à votre famille.
 
-Encore merci de votre confiance et à bientôt sur Antly !
+Again, thank you for your trust, and see you soon at / Encore merci de votre confiance et à bientôt sur Antly!
 
-Cordialement,
+Sincerely / Cordialement,
 
+The Antly Team / L'équipe Antly
 
-L'équipe Antly
+tel: 06 51 33 61 58
+email: contact@antly.fr
 
-tel : 06 51 33 61 58
-email : antly.fourmis@gmail.com
-instagram : @antly.fourmis 
