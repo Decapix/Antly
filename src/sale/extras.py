@@ -180,13 +180,14 @@ def verify_order_items(request, order):
     order_is_valid = True
     for item in items:
         product = item.content_object
-        supplier = product.supplier
+        supplier_id = product.show_supplier_id()
+        supplier = Supplier_m.objects.get(id=supplier_id)
         if not supplier.is_available():
-            messages.error(request, _(f"Le fournisseur du produit '{product.name}' n'est pas disponible actuellement."))
+            messages.error(request, _(f"Le fournisseur du produit '{product.sh_name()}' n'est pas disponible actuellement."))
             order_is_valid = False
         
-        if product.problem:
-            messages.error(request, _(f"Le produit '{product.name}' rencontre actuellement un problème."))
+        if product.sh_problem():
+            messages.error(request, _(f"Le produit '{product.sh_name()}' rencontre actuellement un problème."))
             order_is_valid = False
         
         stock_available = False
@@ -200,7 +201,7 @@ def verify_order_items(request, order):
                 stock_available = product.get_stock() >= item.quantity
         
         if not stock_available:
-            messages.error(request, _(f"Stock insuffisant pour le produit '{product.name}'."))
+            messages.error(request, _(f"Stock insuffisant pour le produit '{product.sh_name()}'."))
             order_is_valid = False
     
     return order_is_valid
