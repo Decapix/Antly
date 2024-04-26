@@ -105,8 +105,8 @@ WSGI_APPLICATION = 'LyAnt.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'antly-projectdata-base',
+        'ENGINE': 'django.db.backends.oracle',
+        'NAME': 'YM1ZRDXI5RD4TU8H',
         'USER': 'antly-projectuser',
         'PASSWORD': ":)Solenops1s<$o",
         'HOST': '35.205.253.192',
@@ -171,7 +171,6 @@ STATICFILES_DIRS = [
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
 
 SITE_ID = 1
 

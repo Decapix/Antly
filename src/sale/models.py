@@ -235,10 +235,10 @@ class Pack_m(ImageConversionMixin, models.Model):
     nest = models.ForeignKey(Other_m, on_delete=models.CASCADE, related_name='pack', null=True, default=None)
     price = models.DecimalField(max_digits=6, decimal_places=2, default=20)
     size = models.OneToOneField(Size_m, null=True, on_delete=models.CASCADE)
-    thumbnail = models.ImageField(upload_to="products", null=True, blank=True)
     thumbnail_1 = models.ImageField(upload_to="products", null=True, blank=True)
     thumbnail_2 = models.ImageField(upload_to="products", null=True, blank=True)
     thumbnail_3 = models.ImageField(upload_to="products", null=True, blank=True)
+    thumbnail_4 = models.ImageField(upload_to="products", null=True, blank=True)
 
 
     def __str__(self):
