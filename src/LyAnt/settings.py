@@ -103,7 +103,7 @@ WSGI_APPLICATION = 'LyAnt.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
+DATABASES_distance = {
     'default': {
         'ENGINE': 'django.db.backends.oracle',
         'NAME': 'YM1ZRDXI5RD4TU8H',
@@ -114,6 +114,17 @@ DATABASES = {
     }
 }
 
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'antlydb',
+        'USER': 'antlydbuser',
+        'PASSWORD': ':)Solenops1s<$o',
+        'HOST': '127.0.0.1',  # Utilisez le nom du service db défini dans docker-compose.yml       
+        'PORT': '5432',  # Le port par défaut pour PostgreSQL
+    }
+}
 
 
 # Password validation
