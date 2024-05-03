@@ -13,8 +13,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 import os
 from pathlib import Path
 import dj_database_url
-import cloudinary
-import cloudinary_storage
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
 
@@ -188,16 +187,9 @@ SITE_ID = 1
 # media
 
 MEDIA_ROOT = BASE_DIR / "media"
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'he8kyfyn7',
-    'API_KEY': '131631381727338',
-    'API_SECRET': os.environ.get('API_SECRET_CLOUDINARY_STORAGE')
-}
-cloudinary.config(**CLOUDINARY_STORAGE)
 
 
 MEDIA_URL = '/media/'
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
