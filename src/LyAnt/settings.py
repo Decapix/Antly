@@ -121,7 +121,7 @@ DATABASES = {
         'USER': 'antlydbuser',
         'PASSWORD': ':)Solenops1s<$o',
         'HOST': '127.0.0.1',  # Utilisez le nom du service db défini dans docker-compose.yml       
-        'PORT': '5432',  # Le port par défaut pour PostgreSQL
+        'PORT': '',  # Le port par défaut pour PostgreSQL
     }
 }
 
